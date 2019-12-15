@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DensityGenerator : MonoBehaviour
+public class DensityGenerator
 {
     public static FastNoise noise = new FastNoise();
 
     //density function
     public static float density(float k, float x, float y, float z)
     {
-
         return k + noise.GetPerlin(x * 2, y * 2, z * 2) - (noise.GetPerlin(x * 4, y * 4, z * 4) * 0.5f) - (noise.GetPerlin(x * 8, y * 8, z * 8) * 0.25f);
     }
 
