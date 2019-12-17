@@ -9,6 +9,12 @@ public class DensityGenerator
     //density function
     public static float density(float k, float x, float y, float z)
     {
+
+        if (y > 100)
+            return 1;
+        if (y < -100)
+            return 1;
+
         return k + noise.GetPerlin(x * 2, y * 2, z * 2) - (noise.GetPerlin(x * 4, y * 4, z * 4) * 0.5f) - (noise.GetPerlin(x * 8, y * 8, z * 8) * 0.25f);
     }
 

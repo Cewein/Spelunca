@@ -154,8 +154,6 @@ public class MeshData
         //this.triangles.AddRange(meshData.triangles);
     }
 
-
-
     public Mesh createMesh()
     {
         Mesh mesh = new Mesh();

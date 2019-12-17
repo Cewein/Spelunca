@@ -5,19 +5,34 @@ using UnityEngine;
 public class ChunkManager : MonoBehaviour
 {
 
+    //Config
     public Transform player;
-    public int chunkSize;
+    public uint chunkSize;
+    public uint viewRange = 5;
+    public GameObject chunk;
 
-    public Transform chunkDebug;
-    public MarchingCubeMaster chunkMarchingDebug;
-
-    private Vector3[,,] chunkCoords;
+    //chunk data
     private Vector3 playerChunk;
+    private GameObject[,,] chunks;
 
     private void Awake()
     {
-        chunkCoords = new Vector3[5,5,5];
         playerChunk = new Vector3();
+        chunks = new GameObject[viewRange,viewRange,viewRange];
+
+        int half = (int)viewRange / 2;
+
+        for (int x = 0; x < viewRange; x++)
+        {
+            for (int y = 0; y < viewRange; y++)
+            {
+                for (int z = 0; z < viewRange; z++)
+                {
+                    chunks[x, y, z] = Instantiate(chunk,new Vector3(x-half,y-half,z-half) * chunkSize, new Quaternion());
+                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
+                }
+            }
+        }
     }
 
     void Start()
@@ -25,6 +40,7 @@ public class ChunkManager : MonoBehaviour
         playerChunk.x = Mathf.Floor(player.position.x / chunkSize);
         playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
+
     }
 
     void Update()
@@ -39,9 +55,16 @@ public class ChunkManager : MonoBehaviour
             print("in a new chunk");
             print("new chunk is : " + playerChunk.ToString());
             playerChunk = temp;
-
-            chunkDebug.position = playerChunk * 16;
-            chunkMarchingDebug.createMarchingBlock();
         }
+    }
+
+    void generateChunks()
+    {
+
+    }
+
+    void updateChunks()
+    {
+
     }
 }
