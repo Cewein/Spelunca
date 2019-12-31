@@ -420,8 +420,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 596538679}
-  chunkSize: 32
-  viewRange: 7
+  chunkSize: 16
+  viewRange: 5
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
 --- !u!4 &1869160575
 Transform:
