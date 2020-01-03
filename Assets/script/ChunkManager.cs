@@ -15,12 +15,12 @@ public class ChunkManager : MonoBehaviour
     private Vector3 playerChunk;
     private GameObject[,,] chunks;
 
+    //frustum cull of the chunks
+    Plane[] planes;
+
     private void Awake()
     {
-        playerChunk = new Vector3();
         chunks = new GameObject[viewRange,viewRange,viewRange];
-
-        generateChunks();
     }
 
     void Start()
@@ -29,6 +29,9 @@ public class ChunkManager : MonoBehaviour
         playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
 
+        generateChunks();
+
+        planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
     }
 
     void Update()
@@ -46,6 +49,30 @@ public class ChunkManager : MonoBehaviour
             playerChunk = temp;
             updateChunks(direction);
         }
+
+        frustumCulling();
+
+    }
+
+    void frustumCulling()
+    {
+        planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+
+        for (int x = 0; x < viewRange; x++)
+        {
+            for (int y = 0; y < viewRange; y++)
+            {
+                for (int z = 0; z < viewRange; z++)
+                {
+                    chunks[x, y, z].SetActive(false);
+                    if (GeometryUtility.TestPlanesAABB(planes, chunks[x, y, z].GetComponent<Collider>().bounds))
+                        chunks[x, y, z].SetActive(true);
+                    else if (aroundMiddle(x, y, z)) ;
+                        //chunks[x, y, z].SetActive(true);
+                        
+                }
+            }
+        }
     }
 
     void generateChunks()
@@ -58,7 +85,8 @@ public class ChunkManager : MonoBehaviour
             {
                 for (int z = 0; z < viewRange; z++)
                 {
-                    chunks[x, y, z] = Instantiate(chunk, new Vector3(x - half, y - half, z - half) * chunkSize, new Quaternion());
+                    Vector3 arr = new Vector3(x - half, y - half, z - half);
+                    chunks[x, y, z] = Instantiate(chunk, (arr) * chunkSize + playerChunk * chunkSize, new Quaternion());
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
                 }
             }
@@ -103,6 +131,25 @@ public class ChunkManager : MonoBehaviour
             return false;
         if (x >= viewRange || y >= viewRange || z >= viewRange)
             return false;
+
+        return false;
+    }
+
+    bool aroundMiddle(int x, int y, int z)
+    {
+        int half = (int)viewRange / 2;
+
+        x -= half;
+        if (x >= -1 && x <= 1)
+            return true;
+
+        y -= half;
+        if (y >= -1 && y <= 1)
+            return true;
+
+        z -= half;
+        if (z >= -1 && z <= 1)
+            return true;
 
         return false;
     }
