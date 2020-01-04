@@ -64,12 +64,13 @@ public class ChunkManager : MonoBehaviour
             {
                 for (int z = 0; z < viewRange; z++)
                 {
-                    chunks[x, y, z].SetActive(false);
+
                     if (GeometryUtility.TestPlanesAABB(planes, chunks[x, y, z].GetComponent<Collider>().bounds))
-                        chunks[x, y, z].SetActive(true);
-                    else if (aroundMiddle(x, y, z)) ;
-                        //chunks[x, y, z].SetActive(true);
-                        
+                        chunks[x, y, z].GetComponent<MeshRenderer>().enabled = true;
+                    else if (aroundMiddle(x, y, z))
+                        chunks[x, y, z].GetComponent<MeshRenderer>().enabled = true;
+                    else
+                        chunks[x, y, z].GetComponent<MeshRenderer>().enabled = false;
                 }
             }
         }
@@ -140,16 +141,13 @@ public class ChunkManager : MonoBehaviour
         int half = (int)viewRange / 2;
 
         x -= half;
-        if (x >= -1 && x <= 1)
-            return true;
-
         y -= half;
-        if (y >= -1 && y <= 1)
-            return true;
-
         z -= half;
-        if (z >= -1 && z <= 1)
-            return true;
+
+        if (x >= -1 && x <= 1)
+            if (y >= -1 && y <= 1)
+                if (z >= -1 && z <= 1)
+                    return true;
 
         return false;
     }
