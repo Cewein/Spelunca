@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Antoine\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Antoine\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Unity.99716440.00" t="ExcludeRecursive" />
+    <e p="D:\0-Workspace\Unity\Projects\Spelunca\Unity" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Camera" t="Include">
+            <e p="Shaker.cs" t="Include" />
+            <e p="ShakeTransform.cs" t="Include" />
+            <e p="ShakeTransformEventData.cs" t="Include" />
+            <e p="SimpleCameraController.cs" t="Include" />
+          </e>
+          <e p="Entities" t="Include">
+            <e p="EnemyComponent.cs" t="Include" />
+            <e p="entityGenerator.cs" t="Include" />
+            <e p="SurfaceWalkingComponent.cs" t="Include" />
+          </e>
+          <e p="Player" t="Include">
+            <e p="PlayerLook.cs" t="Include" />
+            <e p="PlayerMove.cs" t="Include" />
+          </e>
+          <e p="Utils" t="Include">
+            <e p="AutoDestroy.cs" t="Include" />
+          </e>
+          <e p="Weapons" t="Include">
+            <e p="GrenadeComponent.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="Unity.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

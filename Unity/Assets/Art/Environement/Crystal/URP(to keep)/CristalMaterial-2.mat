@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CristalMaterial-2
+  m_Shader: {fileID: -6465566751694194690, guid: aa7d59394df84b842bb09d27dcedad4e,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_1BF606BB:
+        m_Texture: {fileID: 2800000, guid: 4048899d77036de4aa14b85bb70ea9da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_2DF7B84F:
+        m_Texture: {fileID: 2800000, guid: 4048899d77036de4aa14b85bb70ea9da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_4364316E:
+        m_Texture: {fileID: 2800000, guid: 88bcebf6a166bd84e9c073167e185274, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_6733C388:
+        m_Texture: {fileID: 2800000, guid: a112032649e8fe842820f8f826201b79, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_9E15F452:
+        m_Texture: {fileID: 2800000, guid: 88bcebf6a166bd84e9c073167e185274, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_AB392DD1:
+        m_Texture: {fileID: 2800000, guid: 4048899d77036de4aa14b85bb70ea9da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_CB0E0F57:
+        m_Texture: {fileID: 2800000, guid: 4048899d77036de4aa14b85bb70ea9da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_123082EC: 0
+    - Vector1_2C5746D8: 5
+    - Vector1_3A75410: 0.5
+    - Vector1_42A6707D: 0.5
+    - Vector1_4573C81A: 0.2
+    - Vector1_47F15C47: 0.5
+    - Vector1_8157C933: 0.75
+    - Vector1_87EC4808: 0.2
+    - Vector1_9D5090E5: 1.38
+    - Vector1_B34DA7F3: 0.5
+    - Vector1_B88F22D5: 0.8
+    - Vector1_BCA6B46D: 0.5
+    - Vector1_C4C9929A: 1
+    - Vector1_CC3741F1: 0.8
+    m_Colors:
+    - Color_375AFC56: {r: 1, g: 0.65787435, b: 0, a: 0}
+    - Color_8023F5F8: {r: 0.990566, g: 0.35978103, b: 0.87932944, a: 0}
+    - Color_F34FF595: {r: 0, g: 0, b: 0, a: 0}
