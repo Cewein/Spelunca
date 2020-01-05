@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Antoine\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Antoine\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Unity.99716440.00" t="ExcludeRecursive" />
-    <e p="D:\0-Workspace\Unity\Projects\Spelunca\Unity" t="IncludeRecursive">
+    <e p="C:\Users\tahin\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\tahin\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Unity.1785504871.00" t="ExcludeRecursive" />
+    <e p="D:\Game dev\Projet annuel\Prog\Spelunca\Unity" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
@@ -27,6 +27,9 @@
           </e>
           <e p="Weapons" t="Include">
             <e p="GrenadeComponent.cs" t="Include" />
+            <e p="GunAimingTranslation.cs" t="Include" />
+            <e p="GunController.cs" t="Include" />
+            <e p="Raycast.cs" t="Include" />
           </e>
         </e>
       </e>
