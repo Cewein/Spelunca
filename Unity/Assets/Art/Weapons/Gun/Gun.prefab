@@ -527,6 +527,9 @@ MonoBehaviour:
   muzzleFlashEffect: {fileID: 8205363541968128123, guid: 6379d61c0638c4e43b3437e4d0ebf875,
     type: 3}
   muzzleFlashTransform: {fileID: 5937488517529757499}
+  raycastReticle: {fileID: 7054590590905156988}
+  damageEffect: {fileID: 6950693079315367904, guid: e82f24cec82f9af4aa751a77fafbe52a,
+    type: 3}
 --- !u!114 &5883835535419758632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1298,25 +1301,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &7009421326500711691
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8559768933555008150}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7062002653622344630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1459,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &7009421326500711691
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559768933555008150}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &7054590588910214185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1596,6 +1599,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2038012245, guid: 5f375096c4ef3e34ead34b033a17ea9b, type: 3}
+      propertyPath: scope
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f375096c4ef3e34ead34b033a17ea9b, type: 3}
 --- !u!1 &8559768933555008150 stripped
@@ -1610,3 +1617,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7054590588910214185}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7054590590905156988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2038012245, guid: 5f375096c4ef3e34ead34b033a17ea9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7054590588910214185}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30f9305785d5e84a91ee9aeaffd9887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

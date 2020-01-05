@@ -10,16 +10,13 @@ public class Raycast : MonoBehaviour
     [Tooltip("The camera used to perform raycast.")] [SerializeField]
     private Camera cam = null;
 
-    [Tooltip("The targets layer mask name.")] [SerializeField]
-    private string layerMaskName = "Enemy";
+    [Tooltip("The raycast scope.")] [SerializeField]
+    private int scope = 100;
 
     [Header("Debug")] 
     
     [Tooltip("Show raycast.")]
     public bool showRaycast = true;
-    
-    [Tooltip("Raycast length.")]
-    public int rayLenght = 1000;
     
     [Tooltip("Raycast color when the ray is hitting a target.")]
     public Color onTargetColor = Color.red;
@@ -27,29 +24,32 @@ public class Raycast : MonoBehaviour
     [Tooltip("Raycast color when the ray is hitting nothing.")]
     public Color outTargetColor = Color.yellow;
    
-   #endregion ==========
+    #endregion ==========
 
-   #region Fields ==========
+    #region Fields ==========
 
-   private RaycastHit hit;
-   private Ray ray;
+    private RaycastHit hit;
+
+    public RaycastHit Hit;
+ 
+    private Ray ray;
    
-   #endregion ==========
+    #endregion ==========
 
     #region  Methodes ==========
-
    
     private void Update()
     {
         Ray ray = cam.ScreenPointToRay(transform.position);
 
-        if (Physics.Raycast(ray,  out hit, Mathf.Infinity, LayerMask.GetMask(layerMaskName)))
+        if (Physics.Raycast(ray,  out hit, scope))
         {
-            if (showRaycast) Debug.DrawRay(ray.origin, ray.direction*rayLenght, onTargetColor);
+            if (showRaycast) Debug.DrawRay(ray.origin, ray.direction*scope, onTargetColor);
+            Hit = hit;
         }
         else
         {
-            if (showRaycast) Debug.DrawRay(ray.origin, ray.direction*rayLenght, outTargetColor);
+            if (showRaycast) Debug.DrawRay(ray.origin, ray.direction*scope, outTargetColor);
         }
     }
 

@@ -3,28 +3,15 @@ using System.Globalization;
 using UnityEngine;
 
 [RequireComponent(typeof(GunController))]
-public class GunAimingTranslation : MonoBehaviour
+public class GunAnimationObserver : MonoBehaviour
 {
-    #region SerializeFields ==========
-
     [Header("Configuration")] [Tooltip("The gun animator.")] [SerializeField]
-    private Animator animator;
-
-    private GunController gunController;
-
-    #endregion ==========
-    
-    #region  Methodes ==========
-
+    private Animator animator = null;
+    private GunController gunController = null;
     private void Awake()
     {
         gunController = GetComponent<GunController>();
         gunController.aim += isAiming => {animator.SetBool("isAiming", isAiming);};
     }
-
-   
-   
-
-    #endregion ==========
 
 }
