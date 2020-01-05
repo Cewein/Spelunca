@@ -607,8 +607,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7ef9ebc50765d468fd00b80b5c6063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffect: {fileID: 6950693079315367904, guid: e82f24cec82f9af4aa751a77fafbe52a,
-    type: 3}
 --- !u!1001 &1529221651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -644,17 +642,17 @@ PrefabInstance:
     - target: {fileID: 8519211979527597079, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8519211979527597079, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.71
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8519211979527597079, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8519211979527597079, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
@@ -724,22 +722,22 @@ PrefabInstance:
     - target: {fileID: 8519211979904055882, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8519211979904055882, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 7.1e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8519211979904055882, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 7.1e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8519211979904055882, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -2.3045832e-10
+      value: 6.833e-42
       objectReference: {fileID: 0}
     - target: {fileID: 4930740335107660897, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}

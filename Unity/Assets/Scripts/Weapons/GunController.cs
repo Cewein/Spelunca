@@ -1,7 +1,5 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GunController : MonoBehaviour
 {
@@ -14,6 +12,9 @@ public class GunController : MonoBehaviour
     
     [Tooltip("The aim input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private String aimInputName = "Aim";
+    
+    [Tooltip("The reload input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    private String reloadInputName = "Reload";
     
     [Header("Effects")]
     
@@ -33,8 +34,9 @@ public class GunController : MonoBehaviour
     
     #region Action ==========
 
-    public event Action shoot;
+    public event Action<bool> shoot;
     public event Action<bool> aim;
+    public event Action<bool> reload;
 
     #endregion ==========
     
@@ -44,32 +46,54 @@ public class GunController : MonoBehaviour
     {
         muzzleFlashEffect = Instantiate(muzzleFlashEffect, muzzleFlashTransform.position, transform.rotation, transform);
         Cursor.visible = false;
+        shoot += isShooting => fire(isShooting);
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown(fireInputName)) isShooting();
-        if (Input.GetButton(aimInputName)) isAiming(true);
-        else isAiming(false);
-
+        isShooting(Input.GetButtonDown(fireInputName));
+        isAiming(Input.GetButton(aimInputName));
+        isReloading(Input.GetButtonDown(reloadInputName));
     }
 
-    private void isShooting()
+    private bool isShooting(bool isShooting)
     {
-        shoot?.Invoke();
-        muzzleFlashEffect.Play();
-        try
-        {
-            raycastReticle.Hit.transform.gameObject.GetComponent<IDamageable>().setDamage(raycastReticle.Hit, damageEffect);
-        }
-        catch (NullReferenceException e)
-        {}
+        shoot?.Invoke(isShooting);
+        return isShooting;
     }
 
-    private void isAiming(bool isAiming)
+    private bool isAiming(bool isAiming)
     {
         aim?.Invoke(isAiming);
+        return isAiming;
     }
+    
+    private bool isReloading(bool isReloading)
+    {
+        reload?.Invoke(isReloading);
+        return isReloading;
+    }
+
+    private bool fire(bool isShooting)
+    {
+        if (isShooting && GetComponent<Animator>().GetBool("canAttack"))
+        {
+            muzzleFlashEffect.Play();
+            try
+            {
+                raycastReticle.Hit.transform.gameObject.GetComponent<IDamageable>().setDamage(raycastReticle.Hit, damageEffect);
+            }
+            catch (NullReferenceException e){}
+        }
+
+        return isShooting && GetComponent<Animator>().GetBool("canAttack");
+    }
+
+    private void onIdle()
+    {
+        GetComponent<Animator>().SetBool("canAttack",true);
+    }
+   
     
     #endregion ==========
 }

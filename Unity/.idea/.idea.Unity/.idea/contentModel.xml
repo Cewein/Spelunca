@@ -20,6 +20,7 @@
             <e p="SurfaceWalkingComponent.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
+            <e p="PlayerController.cs" t="Include" />
             <e p="PlayerLook.cs" t="Include" />
             <e p="PlayerMove.cs" t="Include" />
           </e>

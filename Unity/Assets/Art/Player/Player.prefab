@@ -320,7 +320,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1, z: 1, w: 6e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -448,11 +448,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8519211980811994773}
     m_Modifications:
-    - target: {fileID: 2545470235819367702, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
-        type: 3}
-      propertyPath: m_Name
-      value: Gun
-      objectReference: {fileID: 0}
     - target: {fileID: 1515472722975600389, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -508,6 +503,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2545470235819367702, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
+        type: 3}
+      propertyPath: m_Name
+      value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859373047832399209, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016637866083492969, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054590590905156988, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 8519211980811994772}
+    - target: {fileID: 7031127342820892711, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2488860961136472920, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
         type: 3}
       propertyPath: cam
@@ -528,16 +548,6 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5859373047832399209, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7054590590905156988, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
-        type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 8519211980811994772}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3b48f56a63db0e47bcf71eb6911ceaa, type: 3}
 --- !u!4 &3873489327176308442 stripped
