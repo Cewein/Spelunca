@@ -442,6 +442,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: shake
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a112792d4c3e964a84446c25017ffac,
+        type: 2}
     - target: {fileID: 8519211979527597075, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_Name
@@ -512,6 +517,11 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8519211979527597081, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: m_Mass
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 8519211980811994773, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -557,11 +567,6 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.w
       value: -2.3045832e-10
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: shake
-      value: 
-      objectReference: {fileID: 11400000, guid: 6a112792d4c3e964a84446c25017ffac,
-        type: 2}
     - target: {fileID: 4930740335107660897, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_LocalRotation.z

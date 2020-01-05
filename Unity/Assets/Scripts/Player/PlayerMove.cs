@@ -25,12 +25,7 @@ public class PlayerMove : MonoBehaviour
     {
         float xMov = Input.GetAxisRaw("Horizontal");
         float zMov = Input.GetAxisRaw("Vertical");
-        if (Input.GetAxis("Jump") > 0 )
-        {
-            isJump = true;
-            rb.AddForce(Vector3.up * jumpForce);
-        }
-
+        
         if (zMov != 0 || xMov != 0)
         {
             cameraAnimation.SetBool("isRunning", true);
@@ -39,6 +34,17 @@ public class PlayerMove : MonoBehaviour
         {
             cameraAnimation.SetBool("isRunning", false);
         }
+        if (Input.GetAxis("Jump") > 0 )
+        {
+            isJump = true;
+            rb.AddForce(Vector3.up * jumpForce);
+            cameraAnimation.SetBool("isJumping", true);
+        }
+        else
+        {
+            cameraAnimation.SetBool("isJumping", false);
+        }
+
         
         Vector3 moveHorizontal = transform.right * xMov;
         Vector3 moveVertical = transform.forward * zMov;
