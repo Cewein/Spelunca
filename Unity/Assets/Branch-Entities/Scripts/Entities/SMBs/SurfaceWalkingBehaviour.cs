@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
 
-public class SurfaceWalkingComponent : MonoBehaviour
-{
-    
-    public Collider col;
+public class SurfaceWalkingBehaviour : StateMachineBehaviour
+{  
     public float detectionDistance = 1f;
     public float movingSpeed = 3f;
     [Range(0f,1f)]
@@ -16,60 +12,29 @@ public class SurfaceWalkingComponent : MonoBehaviour
     public float coeffAvoid = 0.1f;
     public float positionHeightOffset = 0.2f;
     public GameObject target;
-
     private Vector3 currentNormal;
     
-    private bool isGrounded = false;
-
-    private void Start()
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        RaycastHit hit;
-        if (Physics.SphereCast(transform.position, positionHeightOffset, Vector3.up, out hit, 0,
-            LayerMask.NameToLayer("Ground")))
-        {
-            transform.up = hit.normal;
-        }
-    }
-
-    void Update()
-    {
-        isGrounded = false;
-        wallClimbBehaviour();
-        if (!isGrounded)
-        {
-            transform.position = transform.position - Vector3.up * 9.81f * Time.deltaTime;
-            transform.up = Vector3.up;
-        }
-        else
-        {
-            move();    
-        }
         
+        wallClimbBehaviour(animator.transform);
+        move(animator.transform);   
     }
-
-    private void LateUpdate()
-    {
-        if (transform.position.y < -6f)
-        {
-            //Destroy(gameObject);
-        }
-    }
-
-    private void wallClimbBehaviour()
+    
+    private void wallClimbBehaviour(Transform transform)
     {
         //if (Physics.SphereCast(transform.position, positionHeightOffset*1.2f, Vector3.up, out hit, 0, 1 << LayerMask.NameToLayer("Ground"))) //Doesnt Work
         //if (Physics.Raycast(transform.position + transform.up*0.1f, -transform.up, out hit, detectionDistance, 1 << LayerMask.NameToLayer("Ground")))
         RaycastHit hit;
         
         if (Physics.Raycast(transform.position + transform.up*0.1f, -transform.up, out hit, detectionDistance, 1 << LayerMask.NameToLayer("Ground"))){
-            isGrounded = true;
             transform.up = Vector3.Lerp(transform.up,hit.normal, lerpCoeff);
             transform.position = hit.point + hit.normal * positionHeightOffset;
             currentNormal = hit.normal;
         }
     }
 
-    private void move()
+    private void move(Transform transform)
     {
         Vector3 direction = Vector3.zero;
         if (target != null)
@@ -79,10 +44,10 @@ public class SurfaceWalkingComponent : MonoBehaviour
             transform.LookAt(target.transform);
             transform.up = currentNormal; //FIXME: Il faut réussir à le faire tourner autour de l'axe de la normale sans fournir de degrés genre avec un Look At
         }
-        Vector3 avoid = avoidanceBehaviourPosition();
+        Vector3 avoid = avoidanceBehaviourPosition(transform);
         transform.position += Vector3.ClampMagnitude(Time.deltaTime * movingSpeed* (direction*(1-coeffAvoid) + avoid*coeffAvoid),movingSpeed);
     }
-    private Vector3 avoidanceBehaviourPosition()
+    private Vector3 avoidanceBehaviourPosition(Transform transform)
     {
         Vector3 avoidanceMove = Vector3.zero;
         int nAvoid = 0;
@@ -125,5 +90,4 @@ public class SurfaceWalkingComponent : MonoBehaviour
         */
         return avoidanceMove;
     }
-
 }
