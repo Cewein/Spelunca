@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3054500387336894512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.83, y: -0.11, z: -2.66}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   lerpCoeff: 0.5
   avoidDistance: 0.3
   coeffAvoid: 0.5
-  positionHeightOffset: 0.2
+  positionHeightOffset: 0.1
   target: {fileID: 0}
 --- !u!65 &3287149528649557215
 BoxCollider:

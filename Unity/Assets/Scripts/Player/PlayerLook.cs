@@ -10,12 +10,12 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private Transform playerBody;
     public GameObject projectile;
     public float shootVelocity = 10f;
-    private float xAxisClamp;
+    private float yAxisClamp;
 
     private void Awake()
     {
         LockCursor();
-        xAxisClamp = 0.0f;
+        yAxisClamp = 0.0f;
     }
 
     private void LockCursor()
@@ -38,16 +38,16 @@ public class PlayerLook : MonoBehaviour
         float mouseX = Input.GetAxis(mouseXInputName) * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis(mouseYInputName) * mouseSensitivity * Time.deltaTime;
 
-        xAxisClamp += mouseY;
+        yAxisClamp += mouseY;
         
-        if (xAxisClamp > 90.0f)
+        if (yAxisClamp > 90.0f)
         {
-            xAxisClamp = 90.0f;
+            yAxisClamp = 90.0f;
             mouseY = 0f;
             ClampXAxisRotationToValue(270f);
-        }else if (xAxisClamp < -90.0f)
+        }else if (yAxisClamp < -90.0f)
         {
-            xAxisClamp = -90.0f;
+            yAxisClamp = -90.0f;
             mouseY = 0f;
             ClampXAxisRotationToValue(90f);
         }

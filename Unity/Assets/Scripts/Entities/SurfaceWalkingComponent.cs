@@ -54,8 +54,13 @@ public class SurfaceWalkingComponent : MonoBehaviour
 
     private void move()
     {
+        Vector3 direction = Vector3.zero;
+        if (target != null)
+        {
+            direction = Vector3.ClampMagnitude(target.transform.position - transform.position, 1) * Time.deltaTime * moovingSpeed;
+            transform.LookAt(target.transform);
+        }
         Vector3 avoid = avoidanceBehaviourPosition() * Time.deltaTime;
-        Vector3 direction = Vector3.ClampMagnitude(target.transform.position - transform.position, 1) * Time.deltaTime * moovingSpeed;
         transform.position += Vector3.ClampMagnitude(moovingSpeed* (direction*(1-coeffAvoid) + avoid*coeffAvoid),moovingSpeed);
     }
     private Vector3 avoidanceBehaviourPosition()
@@ -101,4 +106,5 @@ public class SurfaceWalkingComponent : MonoBehaviour
         */
         return avoidanceMove;
     }
+
 }

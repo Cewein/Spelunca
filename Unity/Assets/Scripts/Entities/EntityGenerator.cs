@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class entityGenerator : MonoBehaviour
+public class EntityGenerator : MonoBehaviour
 {
     public GameObject prefabToSpawn;
     public int amount = 100;
@@ -43,13 +43,19 @@ public class entityGenerator : MonoBehaviour
             
         }
     }
-
-    // Update is called once per frame
-    private void FixedUpdate()
+    
+    private void Update()
     {
-       // GameObject obj = Instantiate(prefabToSpawn, Random.insideUnitSphere * radius + transform.position,
-       // Quaternion.Euler(0, Random.Range(0, 360), 0),transform);
-        
+        Debug.Log("TEST TARGET");
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, Vector3.up, 0, LayerMask.NameToLayer("Player"));
+        foreach (var hit in hits)
+        {
+            Debug.Log("TARGET DETECTED");
+            foreach (var enemy in this.GetComponentsInChildren<SurfaceWalkingComponent>())
+            {
+                enemy.target = hit.collider.gameObject;
+            }
+        }
     }
 
     private void OnDrawGizmos()

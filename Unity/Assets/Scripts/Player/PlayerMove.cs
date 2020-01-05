@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float maxSpeed = 10f;
     public float acceleration = 10f;
     public float jumpForce = 10f;
+    public Animator cameraAnimation;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -27,10 +28,18 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetAxis("Jump") > 0 )
         {
             isJump = true;
-            Debug.Log("jump");
             rb.AddForce(Vector3.up * jumpForce);
         }
 
+        if (zMov != 0 || xMov != 0)
+        {
+            cameraAnimation.SetBool("isRunning", true);
+        }
+        else
+        {
+            cameraAnimation.SetBool("isRunning", false);
+        }
+        
         Vector3 moveHorizontal = transform.right * xMov;
         Vector3 moveVertical = transform.forward * zMov;
         //      On conserve l'ancienne accélération verticale   
@@ -52,7 +61,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (isJump && other.gameObject.layer == 8)
+        if (isJump && other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             Debug.Log("reset");
             isJump = false;
