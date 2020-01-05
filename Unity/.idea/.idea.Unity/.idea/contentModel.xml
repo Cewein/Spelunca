@@ -18,6 +18,7 @@
             <e p="entityGenerator.cs" t="Include" />
             <e p="SurfaceWalkingComponent.cs" t="Include" />
           </e>
+          <e p="EntityDestroyer.cs" t="Include" />
           <e p="Player" t="Include">
             <e p="PlayerLook.cs" t="Include" />
             <e p="PlayerMove.cs" t="Include" />

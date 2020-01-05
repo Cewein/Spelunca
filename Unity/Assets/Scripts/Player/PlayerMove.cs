@@ -25,16 +25,7 @@ public class PlayerMove : MonoBehaviour
     {
         float xMov = Input.GetAxisRaw("Horizontal");
         float zMov = Input.GetAxisRaw("Vertical");
-        
-        if (zMov != 0 || xMov != 0)
-        {
-            cameraAnimation.SetBool("isRunning", true);
-        }
-        else
-        {
-            cameraAnimation.SetBool("isRunning", false);
-        }
-        if (Input.GetAxis("Jump") > 0 )
+        if (Input.GetAxis("Jump") > 0 && !isJump)
         {
             isJump = true;
             rb.AddForce(Vector3.up * jumpForce);
@@ -44,6 +35,15 @@ public class PlayerMove : MonoBehaviour
         {
             cameraAnimation.SetBool("isJumping", false);
         }
+        if (zMov != 0 || xMov != 0 && !isJump)
+        {
+            cameraAnimation.SetBool("isRunning", true);
+        }
+        else
+        {
+            cameraAnimation.SetBool("isRunning", false);
+        }
+        
 
         
         Vector3 moveHorizontal = transform.right * xMov;
@@ -69,7 +69,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (isJump && other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("reset");
             isJump = false;
         }
     }
