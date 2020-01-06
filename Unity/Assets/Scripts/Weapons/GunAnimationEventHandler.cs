@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(GunController))]
-public class GunAnimationObserver : MonoBehaviour
+public class GunAnimationEventHandler : MonoBehaviour
 {
     [Header("Configuration")] [Tooltip("The gun animator.")] [SerializeField]
     private Animator animator = null;

@@ -9,6 +9,7 @@
         <e p="DRAFT_enemy.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Camera" t="Include">
+            <e p="CameraAnimationEventHandler.cs" t="Include" />
             <e p="Shaker.cs" t="Include" />
             <e p="ShakeTransform.cs" t="Include" />
             <e p="ShakeTransformEventData.cs" t="Include" />
@@ -22,7 +23,7 @@
           <e p="Player" t="Include">
             <e p="PlayerController.cs" t="Include" />
             <e p="PlayerLook.cs" t="Include" />
-            <e p="PlayerMove.cs" t="Include" />
+            <e p="PlayerPhysic.cs" t="Include" />
           </e>
           <e p="Utils" t="Include">
             <e p="AutoDestroy.cs" t="Include" />
@@ -31,7 +32,7 @@
           </e>
           <e p="Weapons" t="Include">
             <e p="GrenadeComponent.cs" t="Include" />
-            <e p="GunAnimationObserver.cs" t="Include" />
+            <e p="GunAnimationEventHandler.cs" t="Include" />
             <e p="GunController.cs" t="Include" />
             <e p="Raycast.cs" t="Include" />
           </e>
