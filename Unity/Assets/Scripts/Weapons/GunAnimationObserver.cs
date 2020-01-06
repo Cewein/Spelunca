@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(GunController))]
 public class GunAnimationObserver : MonoBehaviour
@@ -14,12 +12,23 @@ public class GunAnimationObserver : MonoBehaviour
         gunController = GetComponent<GunController>();
         playerController = GetComponentInParent<PlayerController>();
         gunController.aim += isAiming => {animator.SetBool("isAiming", isAiming);};
-        gunController.aim += isAiming => { if (isAiming) animator.SetBool("canAttack", true);};
+        gunController.aim += _ =>
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Aim")) animator.SetBool("canAttack", true);
+        };
 
         gunController.reload += isReloading => {animator.SetBool("isReloading",isReloading);};
-        gunController.reload += isReloading => {if (isReloading) animator.SetBool("canAttack", false);};
+        gunController.reload += _ =>
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Reload")) animator.SetBool("canAttack", false);
+        };
 
         playerController.run += isRunning => { animator.SetBool("isRunning", isRunning); };
+        playerController.run += _ =>
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Run")) animator.SetBool("canAttack", false);
+        };
+
     }
 
 }

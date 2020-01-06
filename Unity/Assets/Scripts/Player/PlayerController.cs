@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        isRunning(Input.GetButtonDown("Run"));
+        isRunning(Input.GetButton("Run"));
     }
 
     private bool isRunning(bool isRunning)
