@@ -139,8 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5e63916b441b64c93dc0cb21b8d9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yawInputName: Mouse X
-  pitchInputName: Mouse Y
+  controller: {fileID: 557466975}
   horizontalMouseSensitivity: 100
   verticalMouseSensitivity: 100
   clampVerticalRotation: 1
@@ -379,6 +378,8 @@ MonoBehaviour:
   runInputName: Run
   horizontalInputName: Horizontal
   verticalInputName: Vertical
+  azimuthInputName: Mouse X
+  elevationInputName: Mouse Y
   jumpInputName: Jump
 --- !u!1001 &669920524
 PrefabInstance:
@@ -912,7 +913,7 @@ PrefabInstance:
     - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: showAxes
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
@@ -984,6 +985,11 @@ PrefabInstance:
       propertyPath: verticalMouseSensitivity
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 557466975}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48044ff0a2402c546a47f7a0a42b4d38, type: 3}
 --- !u!114 &1599076278 stripped

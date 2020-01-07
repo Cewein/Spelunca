@@ -1,18 +1,14 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 public class OrientationController : MonoBehaviour
 {
+    [Header("Configuration")]
     
+    [Tooltip("The controller that send order to execute rotation.")][SerializeField]
+    private PlayerController controller = null;
+
     [Header("Inputs")]
     
-    [Tooltip("The horizontal orientation input name as it defined in Edit > Project Settings > Inputs Manager.")][SerializeField]
-    private string yawInputName = "Mouse X";
-
-    [Tooltip("The horizontal orientation input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField] 
-    private string pitchInputName = "Mouse Y";
-   
     [Tooltip("The horizontal mouse sensitivity.")][SerializeField]
     private float horizontalMouseSensitivity = 150f; 
     
@@ -46,7 +42,6 @@ public class OrientationController : MonoBehaviour
     
     private float yaw;
     private float pitch;
-    private float row;
     
     public float Yaw
     {
@@ -57,16 +52,15 @@ public class OrientationController : MonoBehaviour
     {
         set => pitch = value;
     }
-
-    public float Row
+    
+    private void Awake()
     {
-        set => row = value;
+        controller.rotate += setRotation;
     }
 
-  public void Update()
+    public void Update()
     {
        rotate();
-       setRotation();
     }
 
     private void rotate()
@@ -86,9 +80,9 @@ public class OrientationController : MonoBehaviour
         }
     }
 
-    private void setRotation()
+    private void setRotation(float x, float y)
     {
-         yaw += Input.GetAxis(yawInputName) * horizontalMouseSensitivity * Time.deltaTime;
-         pitch -= Input.GetAxis(pitchInputName) * verticalMouseSensitivity * Time.deltaTime;
+         yaw += x * horizontalMouseSensitivity * Time.deltaTime;
+         pitch -= y * verticalMouseSensitivity * Time.deltaTime;
     }
 }
