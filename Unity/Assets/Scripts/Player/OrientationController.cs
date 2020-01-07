@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class OrientationController : MonoBehaviour
 {
-    [Header("Configuration")]
+    [Header("Controls")]
     
     [Tooltip("The controller that send order to execute rotation.")][SerializeField]
-    private PlayerController controller = null;
-
-    [Header("Inputs")]
+    private MinerController controller = null;
     
     [Tooltip("The horizontal mouse sensitivity.")][SerializeField]
-    private float horizontalMouseSensitivity = 150f; 
+    private float horizontalSensitivity = 150f; 
     
     [Tooltip("The vertical mouse sensitivity.")][SerializeField]
-    private float verticalMouseSensitivity = 150f;
+    private float verticalSensitivity = 150f;
 
     [Header("Configurations")] 
     
@@ -82,7 +81,7 @@ public class OrientationController : MonoBehaviour
 
     private void setRotation(float x, float y)
     {
-         yaw += x * horizontalMouseSensitivity * Time.deltaTime;
-         pitch -= y * verticalMouseSensitivity * Time.deltaTime;
+         yaw += x * horizontalSensitivity * Time.deltaTime;
+         pitch -= y * verticalSensitivity * Time.deltaTime;
     }
 }

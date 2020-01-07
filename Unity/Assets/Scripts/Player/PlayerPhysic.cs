@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(MinerController))]
 public class PlayerPhysic : MonoBehaviour
 {
     #region SerializeFields ==========
@@ -20,7 +20,7 @@ public class PlayerPhysic : MonoBehaviour
     
     #region Fields ==========
 
-    private PlayerController playerController = null;
+    private MinerController minerController = null;
     private Vector3 newVelocity = Vector3.zero;
     private Vector3 jumpVelocity = Vector3.zero;
     private float currentSpeed = 0;
@@ -30,12 +30,12 @@ public class PlayerPhysic : MonoBehaviour
     
     public void Awake()
     {
-        playerController = GetComponent<PlayerController>();
+        minerController = GetComponent<MinerController>();
         rb = gameObject.GetComponent<Rigidbody>();
 
-        playerController.move += move;
-        playerController.jump += isJumping => { jump(isJumping);};
-        playerController.run += isRunning => { run(isRunning);};
+        minerController.move += move;
+        minerController.jump += isJumping => { jump(isJumping);};
+        minerController.run += isRunning => { run(isRunning);};
     }
     
     void FixedUpdate(){setVelocity();}

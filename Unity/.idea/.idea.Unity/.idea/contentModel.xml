@@ -21,6 +21,7 @@
             <e p="SurfaceWalkingComponent.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
+            <e p="MinerController.cs" t="Include" />
             <e p="OrientationController.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="PlayerPhysic.cs" t="Include" />
