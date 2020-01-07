@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController : MinerController
 {
@@ -32,4 +33,5 @@ public class PlayerController : MinerController
         isRunning(Input.GetButton(runInputName));
         isJumping(Input.GetButtonDown(jumpInputName));
     }
+    
 }
