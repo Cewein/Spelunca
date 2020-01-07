@@ -121,6 +121,34 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &110917589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7402683652810544434, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+    type: 3}
+  m_PrefabInstance: {fileID: 1529221651}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &110917591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110917589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5e63916b441b64c93dc0cb21b8d9e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yawInputName: Mouse X
+  pitchInputName: Mouse Y
+  horizontalMouseSensitivity: 100
+  verticalMouseSensitivity: 100
+  clampVerticalRotation: 1
+  clampHorizontalRotation: 1
+  yawAmplitude: {x: 0, y: 0}
+  pitchAmplitude: {x: -45, y: 90}
+  showAxes: 1
+  axeLength: 2
 --- !u!1 &232120457
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +358,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319b2b2a5d69e8748af9b999344b9d61, type: 3}
+--- !u!1 &557466968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8519211979527597075, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+    type: 3}
+  m_PrefabInstance: {fileID: 1529221651}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &557466975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557466968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed5f902c8c28cb46bb21f87785a64ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runInputName: Run
+  horizontalInputName: Horizontal
+  verticalInputName: Vertical
+  jumpInputName: Jump
 --- !u!1001 &669920524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -607,6 +657,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7ef9ebc50765d468fd00b80b5c6063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1274016530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7893938335553429003, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+    type: 3}
+  m_PrefabInstance: {fileID: 1529221651}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1274016533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274016530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cccf291d0798914cb848090d9da0d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1001 &1529221651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -619,6 +688,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6a112792d4c3e964a84446c25017ffac,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: mouseXInputName
+      value: Mouse X
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: mouseYInputName
+      value: Mouse Y
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: shootVelocity
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8519211980811994772, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
       propertyPath: m_ClearFlags
@@ -703,6 +792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mass
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519211979527597081, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8519211980811994773, guid: 48044ff0a2402c546a47f7a0a42b4d38,
         type: 3}
@@ -794,6 +888,101 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425394588936331167, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 557466975}
+    - target: {fileID: 8425394588936331167, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: jumpForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425394588936331167, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: speed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425394588936331167, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: showAxes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: axeLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: mouseXInputName
+      value: Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: mouseYInputName
+      value: Vertical
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: yawInputName
+      value: Mouse X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: pitchInputName
+      value: Mouse Y
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: rowInputName
+      value: Mouse Y
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: yawAmplitude.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: yawAmplitude.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: pitchAmplitude.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: pitchAmplitude.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: clampVerticalRotation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: clampHorizontalRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: horizontalMouseSensitivity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645140175247097404, guid: 48044ff0a2402c546a47f7a0a42b4d38,
+        type: 3}
+      propertyPath: verticalMouseSensitivity
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48044ff0a2402c546a47f7a0a42b4d38, type: 3}

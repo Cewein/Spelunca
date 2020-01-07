@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 100153246440767462}
-  - component: {fileID: 1497819721991946142}
   m_Layer: 0
   m_Name: CameraRootPosition
   m_TagString: Untagged
@@ -34,25 +33,6 @@ Transform:
   m_Father: {fileID: 8519211979527597079}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1497819721991946142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7402683652810544434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5e63916b441b64c93dc0cb21b8d9e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseXInputName: Mouse X
-  mouseYInputName: Mouse Y
-  mouseSensitivity: 150
-  playerBody: {fileID: 8519211979527597079}
-  projectile: {fileID: 1021750343826612538, guid: 6de3e4d9b8c826345ad134b1b5bbe05a,
-    type: 3}
-  shootVelocity: 100
 --- !u!1 &7893938335553429003
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +98,7 @@ GameObject:
   - component: {fileID: 8519211979527597081}
   - component: {fileID: 6421671270565775192}
   - component: {fileID: 8425394588936331167}
+  - component: {fileID: 1645140175247097404}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -229,10 +210,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9b7f453eb4b314f9bfbe4e2dd397f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 500
-  acceleration: 500
+  walkSpeed: 10
+  runSpeed: 500
   jumpForce: 100
-  cameraAnimation: {fileID: 7112939816325493953}
+--- !u!114 &1645140175247097404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8519211979527597075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5e63916b441b64c93dc0cb21b8d9e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseXInputName: Mouse X
+  mouseYInputName: Mouse Y
+  mouseSensitivity: 150
+  playerBody: {fileID: 0}
+  projectile: {fileID: 1021750343826612538, guid: 6de3e4d9b8c826345ad134b1b5bbe05a,
+    type: 3}
+  shootVelocity: 3
 --- !u!1 &8519211979904055881
 GameObject:
   m_ObjectHideFlags: 0
