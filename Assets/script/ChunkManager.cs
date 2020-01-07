@@ -14,6 +14,7 @@ public class ChunkManager : MonoBehaviour
     //chunk data
     private Vector3 playerChunk;
     private GameObject[,,] chunks;
+    private Dictionary<Vector3, ChunkData> chunkDictionary;
 
     //frustum cull of the chunks
     Plane[] planes;
@@ -21,6 +22,7 @@ public class ChunkManager : MonoBehaviour
     private void Awake()
     {
         chunks = new GameObject[viewRange,viewRange,viewRange];
+        chunkDictionary = new Dictionary<Vector3, ChunkData>();
     }
 
     void Start()
@@ -30,8 +32,6 @@ public class ChunkManager : MonoBehaviour
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
 
         generateChunks();
-
-        planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
     }
 
     void Update()
@@ -86,9 +86,11 @@ public class ChunkManager : MonoBehaviour
             {
                 for (int z = 0; z < viewRange; z++)
                 {
+                    print("gen chunk : " + x + " " + y + " " + z);
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
-                    chunks[x, y, z] = Instantiate(chunk, (arr) * chunkSize + playerChunk * chunkSize, new Quaternion());
+                    chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
+                    chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
         }
