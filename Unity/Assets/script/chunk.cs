@@ -10,17 +10,20 @@ public class chunk : MonoBehaviour
     public MeshRenderer meshRenderer;
     public MeshCollider meshCollider;
 
+    //Create a the chunk with a given size
     public void createMarchingBlock(uint size)
     {
-
-        chunkData.density = new float[size + 1, size + 1, size + 1];
+        //init
         chunkData.meshData = new MeshData();
-
         MeshData masterMeshData = new MeshData();
-
         Vector3 pos = GetComponent<Transform>().position;
 
-        chunkData.density = DensityGenerator.find(chunkData.density, 0, size + 1, pos);
+        //create denstiy 
+        //TODO make it a compute shader
+        chunkData.density = DensityGenerator.find(0, size + 1, pos);
+
+        //loop for creating the mesh
+        //TODO make it a compute shader
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
@@ -32,6 +35,12 @@ public class chunk : MonoBehaviour
             }
         }
 
+        makeMeshFromChunkData();
+    }
+
+    //Make a mesh and then put it in a MeshFilter and a MeshCollider
+    public void makeMeshFromChunkData()
+    {
         Mesh mesh = chunkData.meshData.createMesh();
         meshFilter.sharedMesh = mesh;
         meshCollider.sharedMesh = mesh;
@@ -39,7 +48,10 @@ public class chunk : MonoBehaviour
 }
 
 public struct ChunkData
-{ 
+{
+    //to use when make the world editable
+    //bool update;
+
     public float[,,] density;
     public MeshData meshData;
 }

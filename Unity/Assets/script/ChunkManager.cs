@@ -43,8 +43,8 @@ public class ChunkManager : MonoBehaviour
 
         if(playerChunk != temp)
         {
-            print("in a new chunk");
-            print("new chunk is : " + playerChunk.ToString());
+            //print("in a new chunk");
+            //print("new chunk is : " + playerChunk.ToString());
             Vector3 direction = (temp - playerChunk);
             playerChunk = temp;
             updateChunks(direction);
@@ -64,7 +64,6 @@ public class ChunkManager : MonoBehaviour
             {
                 for (int z = 0; z < viewRange; z++)
                 {
-
                     if (GeometryUtility.TestPlanesAABB(planes, chunks[x, y, z].GetComponent<Collider>().bounds))
                         chunks[x, y, z].GetComponent<MeshRenderer>().enabled = true;
                     else if (aroundMiddle(x, y, z))
@@ -86,7 +85,7 @@ public class ChunkManager : MonoBehaviour
             {
                 for (int z = 0; z < viewRange; z++)
                 {
-                    print("gen chunk : " + x + " " + y + " " + z);
+                    //print("gen chunk : " + x + " " + y + " " + z);
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
@@ -104,20 +103,20 @@ public class ChunkManager : MonoBehaviour
             {
                 for (int z = 0; z < viewRange; z++)
                 {
-                    Vector3 chunkArrayPosition = new Vector3(x, y, z);
+                    Vector3 chunkPos = chunks[x, y, z].transform.position / chunkSize;
+                    ChunkData tempData;
 
-                    if (inArray(chunkArrayPosition + direction))
+                    if (chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
                     {
-                        int xb = (int)direction.x;
-                        int yb = (int)direction.y;
-                        int zb = (int)direction.z;
-
-                        chunks[x, y, z] = chunks[x + xb, y + yb, z + zb];
+                        chunks[x, y, z].transform.position += direction * chunkSize;
+                        chunks[x, y, z].GetComponent<chunk>().chunkData = tempData;
+                        chunks[x, y, z].GetComponent<chunk>().makeMeshFromChunkData();
                     }
                     else
                     {
                         chunks[x, y, z].transform.position += direction * chunkSize;
                         chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
+                        chunkDictionary.Add(chunks[x, y, z].transform.position / chunkSize, chunks[x, y, z].GetComponent<chunk>().chunkData);
                     }
                 }
             }
@@ -126,14 +125,13 @@ public class ChunkManager : MonoBehaviour
 
     bool inArray(Vector3 newChunkArrayPosition)
     {
+        print(newChunkArrayPosition);
         int x = (int)newChunkArrayPosition.x;
         int y = (int)newChunkArrayPosition.y;
         int z = (int)newChunkArrayPosition.z;
 
-        if (x < 0 || y < 0 || z < 0)
-            return false;
-        if (x >= viewRange || y >= viewRange || z >= viewRange)
-            return false;
+        if (x > 0 && y > 0 && z > 0 && x <= viewRange && y <= viewRange && z <= viewRange)
+            return true;
 
         return false;
     }

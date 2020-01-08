@@ -9,9 +9,8 @@ public class DensityGenerator
     //density function
     public static float density(float k, float x, float y, float z)
     {
-
         if (y > 100)
-            return 1;
+            return 0;
         if (y < -100)
             return 1;
 
@@ -19,8 +18,9 @@ public class DensityGenerator
     }
 
     //marching algorithm
-    public static float [,,] find(float[,,] block, float floor, float size, Vector3 chunkPos)
+    public static float [,,] find(float floor, float size, Vector3 chunkPos)
     {
+        float[,,] block = new float[(int)size, (int)size, (int)size];
         noise.SetNoiseType(FastNoise.NoiseType.Perlin);
 
         for(int x = 0; x < size; x++)
