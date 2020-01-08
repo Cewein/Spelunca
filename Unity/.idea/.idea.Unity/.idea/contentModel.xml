@@ -7,6 +7,12 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Branch-Entities" t="Include">
+          <e p="ECS Tuto" t="Include">
+            <e p="Boot.cs" t="Include" />
+            <e p="ElevateSystem.cs" t="Include" />
+            <e p="MoveSpeedComponent.cs" t="Include" />
+            <e p="RotateComponent.cs" t="Include" />
+          </e>
           <e p="Scripts" t="Include">
             <e p="Camera" t="Include">
               <e p="Shaker.cs" t="Include" />
@@ -24,7 +30,6 @@
                 <e p="SurfaceWalkingBehaviour.cs" t="Include" />
                 <e p="WeavingBehaviour.cs" t="Include" />
               </e>
-              <e p="SurfaceWalkingComponent.cs" t="Include" />
             </e>
             <e p="Player" t="Include">
               <e p="PlayerLook.cs" t="Include" />

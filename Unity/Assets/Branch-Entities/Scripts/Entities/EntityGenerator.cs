@@ -29,7 +29,7 @@ public class EntityGenerator : MonoBehaviour
                         Quaternion.Euler(0, 0, 0),transform);
                     obj.transform.up = hit.normal;
                     obj.name = "cube " + i;
-                    obj.GetComponent<SurfaceWalkingComponent>().target = target;
+                    obj.GetComponent<EnemyComponent>().target = target;
                 }
             }
             else
@@ -37,7 +37,7 @@ public class EntityGenerator : MonoBehaviour
                 GameObject obj = Instantiate(prefabToSpawn, Random.insideUnitSphere * radius + transform.position,
                     Quaternion.Euler(0, Random.Range(0, 360), 0),transform);
                 obj.name = "cube " + i;
-                obj.GetComponent<SurfaceWalkingComponent>().target = target;
+                obj.GetComponent<EnemyComponent>().target = target;
 
             }
             
@@ -51,7 +51,7 @@ public class EntityGenerator : MonoBehaviour
         foreach (var hit in hits)
         {
             Debug.Log("TARGET DETECTED");
-            foreach (var enemy in this.GetComponentsInChildren<SurfaceWalkingComponent>())
+            foreach (var enemy in this.GetComponentsInChildren<EnemyComponent>())
             {
                 enemy.target = hit.collider.gameObject;
             }
