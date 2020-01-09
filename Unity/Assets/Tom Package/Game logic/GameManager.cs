@@ -11,13 +11,13 @@ public class GameManager : MonoBehaviour
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-        InitGame();
+        initRun();
     }
 
-    //Initializes the game for each level.
-    void InitGame()
+    //Initializes the game for each run.
+    void initRun()
     {
-        Debug.Log(ResourcesStock.instance);
+       // do global var initialisation for the current run.
     }
 
 }
