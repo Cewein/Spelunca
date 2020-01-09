@@ -1,25 +1,20 @@
 ﻿using System.Collections.Generic;
 using System;
-using System.Globalization;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 
-public class ResourcesStock : MonoBehaviour
+[CreateAssetMenu(fileName = "ResourcesStock", menuName = "ScriptableObjects/Resources/ResourcesStock", order = 1)]
+
+public class ResourcesStock : ScriptableSingleton<ResourcesStock>
 {
-    public static ResourcesStock instance = null;
-
-
-    private static Dictionary<Resource, float> stock;
-
-    public static Dictionary<Resource, float> Stock{get => stock;}
+    private  Dictionary<Resource, float> stock; 
+    public  Dictionary<Resource, float> Stock{get => stock;}
     
 
     private void Awake()
     {
-        if (instance == null) instance = this;
-        else if (instance != this) Destroy(gameObject);
-        
         stock = new Dictionary<Resource, float>();
         foreach (Resource resourceType in Enum.GetValues(typeof(Resource)))
         {
@@ -28,7 +23,7 @@ public class ResourcesStock : MonoBehaviour
     }
 
     
-    public static float takeResource(Resource resource, float quantity)
+    public float takeResource(Resource resource, float quantity)
     {
         float resourceTaken = ((stock[resource] - quantity )> 0) ? quantity  : stock[resource];
         stock[resource] -= resourceTaken;
@@ -36,7 +31,7 @@ public class ResourcesStock : MonoBehaviour
         return resourceTaken;
     }
     
-    public static void setResource(Resource resource, float quantity)
+    public void setResource(Resource resource, float quantity)
     {
         stock[resource] += quantity;
     }

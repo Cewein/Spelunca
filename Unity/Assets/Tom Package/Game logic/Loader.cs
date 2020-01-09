@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(GameManager), typeof(ResourcesStock))]
+[RequireComponent(typeof(GameManager))]
 
 /// <summary>
 ///  This loader instantiate persistent singletons at each scenes beginning.
@@ -9,12 +9,12 @@ public class Loader : MonoBehaviour
 {
     private GameManager gameManager;
     private ResourcesStock resourcesStock;
+
     private void Awake()
     {
         gameManager = GetComponent<GameManager>();
-        resourcesStock = GetComponent<ResourcesStock>();
-        
-        if (GameManager.instance == null)Instantiate(gameManager);
-        if (ResourcesStock.instance == null)Instantiate(resourcesStock);
+
+        if (GameManager.instance == null) Instantiate(gameManager);
+        if (ResourcesStock.instance == null) resourcesStock = ScriptableObject.CreateInstance<ResourcesStock>();
     }
 }

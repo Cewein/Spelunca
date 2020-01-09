@@ -51,6 +51,9 @@ public class GunLoader : MonoBehaviour
     private void Awake()
     {
         GunController gun = GetComponent<GunController>();
+
+        currentResourceQuantity = 1;
+        currentResource = Resource.fire;
         
         gun.shoot += isShooting =>
         {
@@ -62,7 +65,7 @@ public class GunLoader : MonoBehaviour
         {
             if (!isGunReloading ) return;
             if (currentResourceQuantity < capacity && (currentResource != Resource.normal)) 
-                isReloading(isGunReloading, currentResource, ResourcesStock.takeResource(currentResource, capacity));
+                isReloading(isGunReloading, currentResource, ResourcesStock.instance.takeResource(currentResource, capacity));
             if (printDebug) Debug.Log(this);
         };
 
@@ -78,7 +81,7 @@ public class GunLoader : MonoBehaviour
     private void isLoaderEmpty(bool isGaugeEmpty)
     {
         isEmpty?.Invoke(isGaugeEmpty);
-        if( currentResource != Resource.normal && (ResourcesStock.Stock[currentResource] <= 0)) 
+        if( currentResource != Resource.normal && (ResourcesStock.instance.Stock[currentResource] <= 0)) 
             currentResource = Resource.normal; 
         
     }
