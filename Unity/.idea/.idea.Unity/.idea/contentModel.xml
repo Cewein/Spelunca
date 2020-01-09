@@ -6,40 +6,48 @@
     <e p="D:\Game dev\Projet annuel\Prog\Spelunca\Unity" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Camera" t="Include">
-          <e p="Scripts" t="Include">
-            <e p="CameraAnimationEventHandler.cs" t="Include" />
-            <e p="Shaker.cs" t="Include" />
-            <e p="ShakeTransform.cs" t="Include" />
-            <e p="ShakeTransformEventData.cs" t="Include" />
-            <e p="SimpleCameraController.cs" t="Include" />
-          </e>
-        </e>
-        <e p="Player" t="Include">
-          <e p="Scripts" t="Include">
-            <e p="MinerController.cs" t="Include" />
-            <e p="OrientationController.cs" t="Include" />
-            <e p="PlayerController.cs" t="Include" />
-            <e p="PlayerPhysic.cs" t="Include" />
-          </e>
-        </e>
-        <e p="Ressources" t="Include">
-          <e p="Ressource.cs" t="Include" />
-        </e>
-        <e p="Sandbox" t="Include">
-          <e p="DRAFT_enemy.cs" t="Include" />
-        </e>
-        <e p="Utils" t="Include">
-          <e p="IDamageable.cs" t="Include" />
-          <e p="ParticleSystemAutoDestroy.cs" t="Include" />
-        </e>
-        <e p="Weapons" t="Include">
-          <e p="Gun" t="Include">
+        <e p="Tom Package" t="Include">
+          <e p="Camera" t="Include">
             <e p="Scripts" t="Include">
-              <e p="GunAnimationEventHandler.cs" t="Include" />
-              <e p="GunController.cs" t="Include" />
-              <e p="GunGauge.cs" t="Include" />
-              <e p="Raycast.cs" t="Include" />
+              <e p="CameraAnimationEventHandler.cs" t="Include" />
+              <e p="Shaker.cs" t="Include" />
+              <e p="ShakeTransform.cs" t="Include" />
+              <e p="ShakeTransformEventData.cs" t="Include" />
+              <e p="SimpleCameraController.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Game logic" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="Loader.cs" t="Include" />
+          </e>
+          <e p="Player" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="MinerController.cs" t="Include" />
+              <e p="OrientationController.cs" t="Include" />
+              <e p="PlayerController.cs" t="Include" />
+              <e p="PlayerPhysic.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Ressources" t="Include">
+            <e p="ResourcesStock.cs" t="Include" />
+            <e p="Ressource.cs" t="Include" />
+          </e>
+          <e p="Sandbox" t="Include">
+            <e p="DRAFT_enemy.cs" t="Include" />
+          </e>
+          <e p="Utils" t="Include">
+            <e p="IDamageable.cs" t="Include" />
+            <e p="ParticleSystemAutoDestroy.cs" t="Include" />
+          </e>
+          <e p="Weapons" t="Include">
+            <e p="Gun" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Gauge.cs" t="Include" />
+                <e p="GunAnimationEventHandler.cs" t="Include" />
+                <e p="GunController.cs" t="Include" />
+                <e p="GunLoader.cs" t="Include" />
+                <e p="Raycast.cs" t="Include" />
+              </e>
             </e>
           </e>
         </e>
