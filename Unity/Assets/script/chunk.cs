@@ -34,24 +34,30 @@ public class chunk : MonoBehaviour
                 }
             }
         }
-
+        chunkData.update = true;
         makeMeshFromChunkData();
     }
 
     //Make a mesh and then put it in a MeshFilter and a MeshCollider
     public void makeMeshFromChunkData()
     {
-        Mesh mesh = chunkData.meshData.createMesh();
-        meshFilter.sharedMesh = mesh;
-        meshCollider.sharedMesh = mesh;
+        if (chunkData.update)
+        {
+            chunkData.mesh = chunkData.meshData.createMesh();
+            chunkData.update = false;
+        }
+
+        meshFilter.sharedMesh = chunkData.mesh;
+        meshCollider.sharedMesh = chunkData.mesh;
     }
 }
 
 public struct ChunkData
 {
     //to use when make the world editable
-    //bool update;
+    public bool update;
 
+    public Mesh mesh;
     public float[,,] density;
     public MeshData meshData;
 }
