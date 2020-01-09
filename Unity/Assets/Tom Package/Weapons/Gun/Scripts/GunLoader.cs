@@ -65,7 +65,7 @@ public class GunLoader : MonoBehaviour
         {
             if (!isGunReloading ) return;
             if (currentResourceQuantity < capacity && (currentResource != Resource.normal)) 
-                isReloading(isGunReloading, currentResource, ResourcesStock.instance.takeResource(currentResource, capacity));
+                isReloading(isGunReloading, currentResource, ResourcesStock.Instance.takeResource(currentResource, capacity));
             if (printDebug) Debug.Log(this);
         };
 
@@ -81,7 +81,7 @@ public class GunLoader : MonoBehaviour
     private void isLoaderEmpty(bool isGaugeEmpty)
     {
         isEmpty?.Invoke(isGaugeEmpty);
-        if( currentResource != Resource.normal && (ResourcesStock.instance.Stock[currentResource] <= 0)) 
+        if( currentResource != Resource.normal && (ResourcesStock.Instance.Stock[currentResource] <= 0)) 
             currentResource = Resource.normal; 
         
     }
@@ -106,7 +106,7 @@ public class GunLoader : MonoBehaviour
         str += "    - Resources quantity in loader : "+currentResourceQuantity+"\n";
         str += "    - Loader capacity : "+capacity+"\n";
 
-        str += ResourcesStock.instance;
+        str += ResourcesStock.Instance;
         return str;  
     }
 }

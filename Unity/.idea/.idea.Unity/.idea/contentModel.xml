@@ -28,16 +28,17 @@
               <e p="PlayerPhysic.cs" t="Include" />
             </e>
           </e>
-          <e p="Ressources" t="Include">
+          <e p="Resources (types)" t="Include">
             <e p="ResourcesStock.cs" t="Include" />
             <e p="Ressource.cs" t="Include" />
           </e>
           <e p="Sandbox" t="Include">
             <e p="DRAFT_enemy.cs" t="Include" />
           </e>
-          <e p="Utils" t="Include">
+          <e p="Utilities" t="Include">
             <e p="IDamageable.cs" t="Include" />
             <e p="ParticleSystemAutoDestroy.cs" t="Include" />
+            <e p="SingletonScriptableObject.cs" t="Include" />
           </e>
           <e p="Weapons" t="Include">
             <e p="Gun" t="Include">

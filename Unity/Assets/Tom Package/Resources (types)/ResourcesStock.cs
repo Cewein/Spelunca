@@ -7,13 +7,14 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "ResourcesStock", menuName = "ScriptableObjects/Resources/ResourcesStock", order = 1)]
 
-public class ResourcesStock : ScriptableSingleton<ResourcesStock>
+public class ResourcesStock : SingletonScriptableObject<ResourcesStock>
 {
-    private  Dictionary<Resource, float> stock; 
+    private  Dictionary<Resource, float> stock;
     public  Dictionary<Resource, float> Stock{get => stock;}
     
+    
 
-    private void Awake()
+    private ResourcesStock()
     {
         stock = new Dictionary<Resource, float>();
         foreach (Resource resourceType in Enum.GetValues(typeof(Resource)))
