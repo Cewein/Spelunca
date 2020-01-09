@@ -10,7 +10,9 @@ public class ResourcesStock : MonoBehaviour
     public static ResourcesStock instance = null;
 
 
-    private static Dictionary<Resource, int> stock;
+    private static Dictionary<Resource, float> stock;
+
+    public static Dictionary<Resource, float> Stock{get => stock;}
     
 
     private void Awake()
@@ -18,23 +20,23 @@ public class ResourcesStock : MonoBehaviour
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
         
-        stock = new Dictionary<Resource, int>();
+        stock = new Dictionary<Resource, float>();
         foreach (Resource resourceType in Enum.GetValues(typeof(Resource)))
         {
-            stock.Add(resourceType, 54 );
+            if(resourceType != Resource.normal) stock.Add(resourceType, 54 );
         }
     }
 
     
-    public static int takeResource(Resource resource, int quantity)
+    public static float takeResource(Resource resource, float quantity)
     {
-        int resourceTaken = ((stock[resource] - quantity )> 0) ? quantity  : stock[resource];
+        float resourceTaken = ((stock[resource] - quantity )> 0) ? quantity  : stock[resource];
         stock[resource] -= resourceTaken;
 
         return resourceTaken;
     }
     
-    public static void setResource(Resource resource, int quantity)
+    public static void setResource(Resource resource, float quantity)
     {
         stock[resource] += quantity;
     }
