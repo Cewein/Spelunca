@@ -21,6 +21,11 @@
               <e p="SimpleCameraController.cs" t="Include" />
             </e>
             <e p="Entities" t="Include">
+              <e p="ECS" t="Include">
+                <e p="EntitiesGenerator.cs" t="Include" />
+                <e p="SpiderComponent.cs" t="Include" />
+                <e p="SpidersYSTEM.cs" t="Include" />
+              </e>
               <e p="EnemyComponent.cs" t="Include" />
               <e p="EntityDestroyer.cs" t="Include" />
               <e p="entityGenerator.cs" t="Include" />
