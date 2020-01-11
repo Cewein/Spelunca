@@ -14,32 +14,22 @@ public class SpiderSystem : ComponentSystem
     protected override void OnUpdate()
     {
         //Entities.ForEach((LevelComponent levelComponent) => { });
-        Entities.ForEach((ref SpiderComponent spiderComponent,ref Translation translation, ref Rotation rotation, ref LocalToWorld localToWorld) =>
+        Entities.ForEach((ref SpiderComponent spiderComponent,ref Translation translation, ref Rotation rotation, ref Scale scale, ref LocalToWorld localToWorld) =>
         {
-            RaycastHit hit;
-            //-transform.up
-            Vector3 direction = translation.Value - translation.Value * 0.5f;
-            if (Physics.Raycast(translation.Value, direction, out hit, detectionDistance, 1 << LayerMask.NameToLayer("Ground")))
-            {
-                //transform.up = Vector3.Lerp(transform.up,hit.normal, 0.5f);
-                translation.Value = hit.point + hit.normal * spiderComponent.heightOffset;
-            }
-            else
-            {
-                SpiderComponent.state = SpiderState.Falling;
-            }
-
-            switch (SpiderComponent.state)
+            
+            switch (spiderComponent.state)
             {
                 case SpiderState.Falling:
                 {
-                    translation.Value += (float3)(Vector3.down * 9.81f * Time.deltaTime);
+                    translation.Value += (float3)(Vector3.down * 9.81f * Time.DeltaTime);
                     break;
                 }
                 case SpiderState.Chasing:
                 {
-                    direction = (float3)target - translation.Value;
+                    WalkClimbComponent(ref spiderComponent, ref translation, ref rotation, ref localToWorld);
+                    Vector3 direction = (float3)target - translation.Value;
                     direction.Normalize();
+                    translation.Value = translation.Value + (float3)direction * spiderComponent.movingSpeed * Time.DeltaTime;
 //                    Transform t = new Transform();
 //                    t.position = translation.Value;
 //                    t.LookAt(target);
@@ -48,6 +38,22 @@ public class SpiderSystem : ComponentSystem
                 }
             }
         });
+    }
+
+    private void WalkClimbComponent(ref SpiderComponent spiderComponent, ref Translation translation,
+        ref Rotation rotation, ref LocalToWorld localToWorld)
+    {
+        float3 direction = -localToWorld.Up;
+
+        RaycastHit hit;
+        if (Physics.Raycast(translation.Value, direction, out hit, 1f, 1 << LayerMask.NameToLayer("Ground")))
+        {
+            translation.Value = hit.point + hit.normal * spiderComponent.heightOffset;
+        }
+        else
+        {
+            spiderComponent.state = SpiderState.Falling;
+        }
     }
     
 }

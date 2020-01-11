@@ -12,7 +12,7 @@ public class ElevateSystem : ComponentSystem
         //Entities.ForEach((LevelComponent levelComponent) => { });
         Entities.ForEach((ref Translation translation, ref MoveSpeedComponent moveSpeedComponent) =>
         {
-            translation.Value.y += moveSpeedComponent.Value * Time.deltaTime;
+            translation.Value.y += moveSpeedComponent.Value * Time.DeltaTime;
             if (translation.Value.y < -10f)
             {
                 moveSpeedComponent.Value = math.abs(moveSpeedComponent.Value);
