@@ -486,7 +486,6 @@ GameObject:
   - component: {fileID: 5553213710861233139}
   - component: {fileID: 5883835535419758632}
   - component: {fileID: 8150451824890549534}
-  - component: {fileID: 8730949140773800753}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -508,7 +507,6 @@ Transform:
   - {fileID: 5937488517529757499}
   - {fileID: 1050263002767457672}
   - {fileID: 5859373047832399209}
-  - {fileID: 1628211441961460782}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -526,13 +524,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireInputName: Fire
   aimInputName: Aim
-  reloadInputName: Reload
-  damageEffect: {fileID: 6950693079315367904, guid: e82f24cec82f9af4aa751a77fafbe52a,
-    type: 3}
   muzzleFlashEffect: {fileID: 8205363541968128123, guid: 6379d61c0638c4e43b3437e4d0ebf875,
     type: 3}
   muzzleFlashTransform: {fileID: 5937488517529757499}
   raycastReticle: {fileID: 7054590590905156988}
+  damageEffect: {fileID: 6950693079315367904, guid: e82f24cec82f9af4aa751a77fafbe52a,
+    type: 3}
 --- !u!114 &5883835535419758632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,20 +562,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8730949140773800753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2545470235819367702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6efc359a1fa9bfd45bad5d28f44a2c04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  capacity: 50
-  gauge: {fileID: 5224208090919702}
 --- !u!1 &2824396245644390916
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,49 +981,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &4335044584658014327
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1628211441961460782}
-  - component: {fileID: 5224208090919702}
-  m_Layer: 0
-  m_Name: ResourceGauge
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1628211441961460782
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4335044584658014327}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1515472722975600389}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5224208090919702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4335044584658014327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 452677b8b21d7394ba877dbcb0c25939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5173229965618849867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,11 +1485,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5859373047832399209}
     m_Modifications:
-    - target: {fileID: 1669877502924222143, guid: 5f375096c4ef3e34ead34b033a17ea9b,
-        type: 3}
-      propertyPath: m_Name
-      value: Crosshair
-      objectReference: {fileID: 0}
     - target: {fileID: 2348257884050246959, guid: 5f375096c4ef3e34ead34b033a17ea9b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1654,6 +1589,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669877502924222143, guid: 5f375096c4ef3e34ead34b033a17ea9b,
+        type: 3}
+      propertyPath: m_Name
+      value: Crosshair
       objectReference: {fileID: 0}
     - target: {fileID: 2038012245, guid: 5f375096c4ef3e34ead34b033a17ea9b, type: 3}
       propertyPath: cam

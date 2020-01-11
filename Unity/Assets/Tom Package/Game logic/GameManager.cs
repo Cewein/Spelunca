@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
+    
+    private ResourcesStock resourcesStock;
 
     void Awake()
     {
@@ -15,9 +17,12 @@ public class GameManager : MonoBehaviour
     }
 
     //Initializes the game for each run.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     void initRun()
     {
        // do global var initialisation for the current run.
+       
+       if (ResourcesStock.Instance == null) resourcesStock = ScriptableObject.CreateInstance<ResourcesStock>();
     }
 
 }

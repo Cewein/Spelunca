@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.Design.Serialization;
-using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿        using UnityEngine;
 
 [RequireComponent(typeof(GameManager))]
 
@@ -10,7 +8,6 @@ using UnityEngine;
 public class Loader : MonoBehaviour
 {
     private GameManager gameManager;
-    private ResourcesStock resourcesStock;
 
 
 
@@ -18,7 +15,6 @@ public class Loader : MonoBehaviour
     {
         gameManager = GetComponent<GameManager>();
         if (GameManager.instance == null) Instantiate(gameManager);
-        if (ResourcesStock.Instance == null)resourcesStock = ScriptableObject.CreateInstance<ResourcesStock>();
         
       
     }

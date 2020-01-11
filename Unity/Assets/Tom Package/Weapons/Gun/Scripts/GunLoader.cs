@@ -11,11 +11,6 @@ public class GunLoader : MonoBehaviour
     [Tooltip("The maximum amount of resource the loader can take.")][SerializeField]
     private float capacity = 50;
     
-    [Header("Linked objects")]
-    
-    [Tooltip("The resource gauge prefabs.")][SerializeField]
-    private Gauge gauge = null;
-    
     #endregion
 
     #region Fields ==========
@@ -38,7 +33,11 @@ public class GunLoader : MonoBehaviour
 
       
   }
-  
+
+  public float CurrentResourceQuantity => currentResourceQuantity;
+
+  public float Capacity => capacity;
+
   #endregion
     #region Actions ==========
     

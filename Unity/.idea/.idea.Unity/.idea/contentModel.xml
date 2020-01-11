@@ -35,6 +35,13 @@
           <e p="Sandbox" t="Include">
             <e p="DRAFT_enemy.cs" t="Include" />
           </e>
+          <e p="UI" t="Include">
+            <e p="HUD" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Gauge.cs" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="Utilities" t="Include">
             <e p="IDamageable.cs" t="Include" />
             <e p="ParticleSystemAutoDestroy.cs" t="Include" />
@@ -43,7 +50,6 @@
           <e p="Weapons" t="Include">
             <e p="Gun" t="Include">
               <e p="Scripts" t="Include">
-                <e p="Gauge.cs" t="Include" />
                 <e p="GunAnimationEventHandler.cs" t="Include" />
                 <e p="GunController.cs" t="Include" />
                 <e p="GunLoader.cs" t="Include" />
