@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,10 @@ public class ChunkManager : MonoBehaviour
     //frustum cull of the chunks
     Plane[] planes;
 
+    //Chunk Density
+    [SerializeField] private float[] octaveScale;
+    [SerializeField] private float[] octaveIntensity;
+    
     private void Awake()
     {
         chunks = new GameObject[viewRange,viewRange,viewRange];
@@ -30,7 +35,8 @@ public class ChunkManager : MonoBehaviour
         playerChunk.x = Mathf.Floor(player.position.x / chunkSize);
         playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
-
+        DensityGenerator.octaveScale = octaveScale;
+        DensityGenerator.octaveIntensity = octaveIntensity;
         generateChunks();
     }
 

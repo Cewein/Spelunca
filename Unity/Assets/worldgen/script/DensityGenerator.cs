@@ -1,21 +1,35 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DensityGenerator
 {
     public static FastNoise noise = new FastNoise();
-
+    
+    public static float[] octaveScale;
+    public static float[] octaveIntensity;
+    
     //density function
     public static float density(float k, float x, float y, float z)
     {
+        if (octaveScale.Length != octaveIntensity.Length)
+        {
+            return k;
+        }
         if (y > 100)
             return 0;
         if (y < -100)
             return 1;
-
-        return k + noise.GetPerlin(x * 2, y * 2, z * 2) - (noise.GetPerlin(x * 4, y * 4, z * 4) * 0.5f) - (noise.GetPerlin(x * 8, y * 8, z * 8) * 0.25f);
-    }
+        float densityValue = k;
+        for (int i = 0; i < octaveScale.Length; i++)
+        {
+            densityValue += noise.GetPerlin(x * octaveScale[i], y * octaveScale[i], z * octaveScale[i]) *
+                            octaveIntensity[i];
+        }
+        
+        return densityValue;
+        }
 
     //marching algorithm
     public static float [,,] find(float floor, float size, Vector3 chunkPos)
