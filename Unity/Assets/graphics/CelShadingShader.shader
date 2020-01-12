@@ -71,24 +71,23 @@ Shader "Hidden/CelShadingShader"
 				return sqrt((x*x) + (y*y));
 			}
 
-			float space = 1.0;
-
-			float4 mainImage(in float2 uv)
+			float3 mainImage(in float2 uv)
 			{
-				float magnitude = mag(uv, float2(space/iResolution.x, space/iResolution.y));
+				float space = 0.003;
+				float magnitude = mag(uv, float2(0.001, 0.002));
 
 				float3 col = magnitude;
 
-				return float4(col, 1.);
+				return float3(col);
 			}
 
 			float4 frag (v2f i) : SV_Target
             {
-				float4 col = fixed4(i.uv.x,i.uv.y,0,0);
+				float3 magnitude = mainImage(i.uv);
 
-				col = tex2D(_MainTex,i.uv);
+				float3 col = tex2D(_MainTex, i.uv).rgb * (1. - magnitude);
 
-                return col;
+                return float4(col.x, col.y, col.z,1.);
             }
             ENDCG
         }
