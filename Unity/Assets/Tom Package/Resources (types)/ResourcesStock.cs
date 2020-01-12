@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 
@@ -9,22 +8,22 @@ using UnityEngine;
 
 public class ResourcesStock : SingletonScriptableObject<ResourcesStock>
 {
-    private  Dictionary<Resource, float> stock;
-    public  Dictionary<Resource, float> Stock{get => stock;}
+    private  Dictionary<ResourceType, float> stock;
+    public  Dictionary<ResourceType, float> Stock{get => stock;}
     
     
 
     private ResourcesStock()
     {
-        stock = new Dictionary<Resource, float>();
-        foreach (Resource resourceType in Enum.GetValues(typeof(Resource)))
+        stock = new Dictionary<ResourceType, float>();
+        foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
         {
-            if(resourceType != Resource.normal) stock.Add(resourceType, 54 );
+            if(resourceType != ResourceType.normal) stock.Add(resourceType, 54 );
         }
     }
 
     
-    public float takeResource(Resource resource, float quantity)
+    public float takeResource(ResourceType resource, float quantity)
     {
         float resourceTaken = ((stock[resource] - quantity )> 0) ? quantity  : stock[resource];
         stock[resource] -= resourceTaken;
@@ -32,7 +31,7 @@ public class ResourcesStock : SingletonScriptableObject<ResourcesStock>
         return resourceTaken;
     }
     
-    public void setResource(Resource resource, float quantity)
+    public void setResource(ResourceType resource, float quantity)
     {
         stock[resource] += quantity;
     }

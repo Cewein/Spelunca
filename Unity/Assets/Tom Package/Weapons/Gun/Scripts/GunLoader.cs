@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(GunController))]
@@ -15,7 +16,8 @@ public class GunLoader : MonoBehaviour
 
     #region Fields ==========
 
-    private Resource currentResource = Resource.normal;
+    private Resource currentResource;
+    private Resource normalResource;
     private float currentResourceQuantity = 0;
     public bool printDebug = false;
 
@@ -27,7 +29,12 @@ public class GunLoader : MonoBehaviour
   {
       get
       {
-          if (currentResource == null) currentResource = Resource.normal;
+          if (currentResource == null)
+          {
+              Resource[] list = Resources.FindObjectsOfTypeAll<Resource>();
+              normalResource = list.First(item => item.Type == ResourceType.normal);
+              currentResource = normalResource;
+          }
           return currentResource;
       }
 
@@ -52,8 +59,6 @@ public class GunLoader : MonoBehaviour
         GunController gun = GetComponent<GunController>();
 
         currentResourceQuantity = 1;
-        currentResource = Resource.fire;
-        
         gun.shoot += isShooting =>
         {
             if (!isShooting) return;
@@ -63,8 +68,13 @@ public class GunLoader : MonoBehaviour
         gun.reload += isGunReloading =>
         {
             if (!isGunReloading ) return;
-            if (currentResourceQuantity < capacity && (currentResource != Resource.normal)) 
-                isReloading(isGunReloading, currentResource, ResourcesStock.Instance.takeResource(currentResource, capacity));
+            if (currentResourceQuantity < capacity)
+            {
+                if (currentResource == normalResource)
+                    isReloading(isGunReloading, currentResource, 0);
+                else isReloading(isGunReloading, currentResource, ResourcesStock.Instance.takeResource(currentResource.Type, capacity));
+
+            }
             if (printDebug) Debug.Log(this);
         };
 
@@ -80,8 +90,8 @@ public class GunLoader : MonoBehaviour
     private void isLoaderEmpty(bool isGaugeEmpty)
     {
         isEmpty?.Invoke(isGaugeEmpty);
-        if( currentResource != Resource.normal && (ResourcesStock.Instance.Stock[currentResource] <= 0)) 
-            currentResource = Resource.normal; 
+        if( currentResource != normalResource && (ResourcesStock.Instance.Stock[currentResource.Type] <= 0)) 
+            currentResource = normalResource; 
         
     }
 

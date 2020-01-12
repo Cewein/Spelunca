@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     
     private ResourcesStock resourcesStock;
 
+
     void Awake()
     {
         if (instance == null) instance = this;

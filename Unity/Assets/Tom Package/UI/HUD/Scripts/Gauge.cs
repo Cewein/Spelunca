@@ -1,27 +1,47 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class Gauge : MonoBehaviour
 {
-    [SerializeField] private GunLoader gunLoader = null;
-    [SerializeField] private float emptyFillAmount = .14f;
-  
-
+    [Tooltip("The gun loader this gauge ui displayed content.")][SerializeField] 
+    private GunLoader gunLoader = null;
+    
+    private Resource currentResource;
     private Image gaugeUI;
+    
 
     private void Awake()
     {
         gaugeUI = GetComponent<Image>();
-        gaugeUI.fillAmount = emptyFillAmount;
-        gunLoader.isConsuming += (consuming, quantity) => { gaugeUI.fillAmount -= quantity / gunLoader.Capacity; };
-        gunLoader.reload += (reloading, resourceType, quantity) =>
+        gaugeUI.fillAmount = 0;
+        currentResource = gunLoader.CurrentResource;
+
+        if (currentResource.Type == ResourceType.normal) setGaugeToNormalResource();
+
+        
+        gunLoader.isConsuming += (consuming, quantity) =>
         {
-            // if (resourceType != currentResourceType) gaugeUI.Color = resourceType.GaugeColor
-            gaugeUI.fillAmount += quantity / gunLoader.Capacity;
+            if (currentResource.Type == ResourceType.normal) setGaugeToNormalResource();
+            else gaugeUI.fillAmount -= quantity / gunLoader.Capacity;
+        };
+        gunLoader.reload += (reloading, resource, quantity) =>
+        {
+            if (resource != currentResource)
+            {
+                currentResource = resource;
+                gaugeUI.color = currentResource.Color;
+            }
+
+            if (currentResource.Type == ResourceType.normal) setGaugeToNormalResource();
+            else gaugeUI.fillAmount += quantity / gunLoader.Capacity;
         }; 
     }
 
+    private void setGaugeToNormalResource()
+    {
+        gaugeUI.color = currentResource.Color;
+        gaugeUI.fillAmount = 1;
+    }
     
 }

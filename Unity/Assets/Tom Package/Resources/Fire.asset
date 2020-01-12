@@ -9,6 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58c3bef2c681034bb67f95a17e36281, type: 3}
-  m_Name: ResourcesStock
+  m_Script: {fileID: 11500000, guid: 99a8da0934bfdba418f467f532cf458f, type: 3}
+  m_Name: Resource 1
   m_EditorClassIdentifier: 
+  type: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  gaugeIcon: {fileID: 0}
+  inventoryIcon: {fileID: 0}

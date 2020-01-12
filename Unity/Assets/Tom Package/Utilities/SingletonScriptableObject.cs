@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SingletonScriptableObject<T> : ScriptableObject where T : ScriptableObject
 {

@@ -9,8 +9,6 @@ public class Loader : MonoBehaviour
 {
     private GameManager gameManager;
 
-
-
     private void Awake()
     {
         gameManager = GetComponent<GameManager>();
