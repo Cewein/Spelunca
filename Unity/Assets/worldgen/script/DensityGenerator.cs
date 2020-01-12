@@ -6,30 +6,30 @@ using UnityEngine;
 public class DensityGenerator
 {
     public static FastNoise noise = new FastNoise();
-    
-    public static float[] octaveScale;
-    public static float[] octaveIntensity;
+
+    public static uint octaveNumber;
     
     //density function
     public static float density(float k, float x, float y, float z)
     {
-        if (octaveScale.Length != octaveIntensity.Length)
-        {
-            return k;
-        }
         if (y > 100)
             return 0;
         if (y < -100)
             return 1;
+
         float densityValue = k;
-        for (int i = 0; i < octaveScale.Length; i++)
+        int octaveScale = 1;
+        float octaveIntensity = 1.0f;
+
+        for (int i = 0; i < octaveNumber; i++)
         {
-            densityValue += noise.GetPerlin(x * octaveScale[i], y * octaveScale[i], z * octaveScale[i]) *
-                            octaveIntensity[i];
+            densityValue += noise.GetPerlin(x * octaveScale, y * octaveScale, z * octaveScale) * octaveIntensity;
+            octaveIntensity *= 0.5f;
+            octaveScale *= 2;
         }
-        
+
         return densityValue;
-        }
+    }
 
     //marching algorithm
     public static float [,,] find(float floor, float size, Vector3 chunkPos)

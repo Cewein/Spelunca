@@ -7,12 +7,13 @@ public class ChunkManager : MonoBehaviour
 {
 
     //Config
+    [Header("Player vision setting")]
     public Transform player;
     public uint chunkSize;
     public uint viewRange = 5;
     public GameObject chunk;
 
-    //chunk data
+    //chunks 
     private Vector3 playerChunk;
     private GameObject[,,] chunks;
     private Dictionary<Vector3, ChunkData> chunkDictionary;
@@ -20,14 +21,15 @@ public class ChunkManager : MonoBehaviour
     //frustum cull of the chunks
     Plane[] planes;
 
-    //Chunk Density
-    [SerializeField] private float[] octaveScale;
-    [SerializeField] private float[] octaveIntensity;
+    [Header("Noise setting")]
+    public uint octaveNumber = 5;
+    
     
     private void Awake()
     {
         chunks = new GameObject[viewRange,viewRange,viewRange];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
+        DensityGenerator.octaveNumber = octaveNumber;
     }
 
     void Start()
@@ -35,8 +37,6 @@ public class ChunkManager : MonoBehaviour
         playerChunk.x = Mathf.Floor(player.position.x / chunkSize);
         playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
-        DensityGenerator.octaveScale = octaveScale;
-        DensityGenerator.octaveIntensity = octaveIntensity;
         generateChunks();
     }
 
@@ -49,8 +49,6 @@ public class ChunkManager : MonoBehaviour
 
         if(playerChunk != temp)
         {
-            //print("in a new chunk");
-            //print("new chunk is : " + playerChunk.ToString());
             Vector3 direction = (temp - playerChunk);
             playerChunk = temp;
             updateChunks(direction);
@@ -91,7 +89,6 @@ public class ChunkManager : MonoBehaviour
             {
                 for (int z = 0; z < viewRange; z++)
                 {
-                    //print("gen chunk : " + x + " " + y + " " + z);
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
