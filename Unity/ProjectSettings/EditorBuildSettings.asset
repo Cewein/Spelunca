@@ -4,6 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
+<<<<<<< HEAD
   m_Scenes:
   - enabled: 1
     path: Assets/Branch-Entities/Game/UI/TitleScreen.unity
@@ -15,3 +16,9 @@ EditorBuildSettings:
     path: Assets/Branch-Entities/Game/UI/Preload.unity
     guid: 9cd4664bc2ad4ae4db774ae90ee918f6
   m_configObjects: {}
+=======
+  m_Scenes: []
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 44800405c55d0b844acba54e73e1e9ce,
+      type: 2}
+>>>>>>> weapon
