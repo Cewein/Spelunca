@@ -189,12 +189,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328140353}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d0ed29743e15ff4f8d1ae3174708864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEntitiesCount: 3000
+  startEntitiesCount: 10000
   sizeZoneX: 25
   sizeZoneY: 10
   sizeZoneZ: 25
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328140353}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f2be9120c7d2d845a8673a20a750795, type: 3}
   m_Name: 

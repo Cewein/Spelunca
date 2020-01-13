@@ -42,6 +42,9 @@
               <e p="AutoDestroy.cs" t="Include" />
               <e p="ObjectDestroyer.cs" t="Include" />
             </e>
+            <e p="UI" t="Include">
+              <e p="MainMenu.cs" t="Include" />
+            </e>
           </e>
           <e p="Sounds" t="Include">
             <e p="removeMe.txt" t="Include" />
