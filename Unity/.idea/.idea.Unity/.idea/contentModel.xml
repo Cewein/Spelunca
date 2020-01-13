@@ -1,56 +1,157 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+<<<<<<< HEAD
     <e p="C:\Users\Antoine\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Antoine\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Unity.99716440.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Antoine\.Rider2019.2\system\resharper-host\Local\Transient\ReSharperHost\v192\SolutionCaches\_Unity.99716440.00" t="ExcludeRecursive" />
     <e p="D:\0-Workspace\Unity\Projects\Spelunca\Unity" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Branch-Entities" t="Include">
-          <e p="ECS Tuto" t="Include">
-            <e p="Boot.cs" t="Include" />
-            <e p="ElevateSystem.cs" t="Include" />
-            <e p="MoveSpeedComponent.cs" t="Include" />
-            <e p="RotateComponent.cs" t="Include" />
+          <e p="Game" t="Include">
+            <e p="Entities" t="Include">
+              <e p="old" t="Include">
+                <e p="EnemyComponent.cs" t="Include" />
+              </e>
+              <e p="Scripts" t="Include">
+                <e p="Components" t="Include">
+                  <e p="SpiderComponent.cs" t="Include" />
+                </e>
+                <e p="EntitiesGenerator.cs" t="Include" />
+                <e p="EntityGenerator.cs" t="Include" />
+                <e p="Systems" t="Include">
+                  <e p="SpiderSystem.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="player" t="Include">
+              <e p="Camera" t="Include">
+                <e p="Shaker.cs" t="Include" />
+                <e p="ShakeTransform.cs" t="Include" />
+                <e p="ShakeTransformEventData.cs" t="Include" />
+                <e p="SimpleCameraController.cs" t="Include" />
+              </e>
+              <e p="Scripts" t="Include">
+                <e p="PlayerLook.cs" t="Include" />
+                <e p="PlayerMove.cs" t="Include" />
+              </e>
+              <e p="Weapons" t="Include">
+                <e p="GrenadeComponent.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Script Utils" t="Include">
+              <e p="AutoDestroy.cs" t="Include" />
+              <e p="DDOL.cs" t="Include" />
+              <e p="ObjectDestroyer.cs" t="Include" />
+            </e>
+            <e p="UI" t="Include">
+              <e p="MainMenu.cs" t="Include" />
+              <e p="PreloadManager.cs" t="Include" />
+            </e>
           </e>
-          <e p="Scripts" t="Include">
-            <e p="Camera" t="Include">
+          <e p="Sounds" t="Include">
+            <e p="removeMe.txt" t="Include" />
+          </e>
+          <e p="Test" t="Include">
+            <e p="ECS Tuto" t="Include">
+              <e p="Boot.cs" t="Include" />
+              <e p="ElevateSystem.cs" t="Include" />
+              <e p="MoveSpeedComponent.cs" t="Include" />
+              <e p="RotateComponent.cs" t="Include" />
+            </e>
+            <e p="SMBs" t="Include">
+              <e p="FallingBehaviour.cs" t="Include" />
+              <e p="JumpingBehaviour.cs" t="Include" />
+              <e p="SurfaceWalkingBehaviour.cs" t="Include" />
+              <e p="WeavingBehaviour.cs" t="Include" />
+            </e>
+          </e>
+          <e p="truc.txt" t="Include" />
+          <e p="UI" t="Include">
+            <e p="removeMe.txt" t="Include" />
+          </e>
+        </e>
+        <e p="graphics" t="Include">
+          <e p="CelShadingMaster.cs" t="Include" />
+          <e p="CelShadingShader.shader" t="Include" />
+          <e p="GraphicsManager.cs" t="Include" />
+        </e>
+        <e p="worldgen" t="Include">
+          <e p="script" t="Include">
+            <e p="chunk.cs" t="Include" />
+            <e p="ChunkManager.cs" t="Include" />
+            <e p="DensityGenerator.cs" t="Include" />
+            <e p="FastNoise.cs" t="Include" />
+            <e p="LookUpTable.cs" t="Include" />
+            <e p="MeshGenerator.cs" t="Include" />
+            <e p="player" t="Include">
+              <e p="BodyMovement.cs" t="Include" />
+              <e p="Selector.cs" t="Include" />
+              <e p="SmoothMouseLook.cs" t="Include" />
+              <e p="switcher.cs" t="Include" />
+=======
+    <e p="C:\Users\tahin\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\tahin\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Unity.1785504871.00" t="ExcludeRecursive" />
+    <e p="D:\Game dev\Projet annuel\Prog\Spelunca\Unity" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Tom Package" t="Include">
+          <e p="Camera" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="CameraAnimationEventHandler.cs" t="Include" />
               <e p="Shaker.cs" t="Include" />
               <e p="ShakeTransform.cs" t="Include" />
               <e p="ShakeTransformEventData.cs" t="Include" />
               <e p="SimpleCameraController.cs" t="Include" />
             </e>
-            <e p="Entities" t="Include">
-              <e p="ECS" t="Include">
-                <e p="EntitiesGenerator.cs" t="Include" />
-                <e p="SpiderComponent.cs" t="Include" />
-                <e p="SpidersYSTEM.cs" t="Include" />
+          </e>
+          <e p="Game logic" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="Loader.cs" t="Include" />
+          </e>
+          <e p="Player" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="MinerController.cs" t="Include" />
+              <e p="OrientationController.cs" t="Include" />
+              <e p="PlayerController.cs" t="Include" />
+              <e p="PlayerPhysic.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Resources (types)" t="Include">
+            <e p="Resource.cs" t="Include" />
+            <e p="ResourcesStock.cs" t="Include" />
+            <e p="ResourceType.cs" t="Include" />
+          </e>
+          <e p="Sandbox" t="Include">
+            <e p="DRAFT_enemy.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="HUD" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Gauge.cs" t="Include" />
               </e>
-              <e p="EnemyComponent.cs" t="Include" />
-              <e p="EntityDestroyer.cs" t="Include" />
-              <e p="entityGenerator.cs" t="Include" />
-              <e p="SMBs" t="Include">
-                <e p="FallingBehaviour.cs" t="Include" />
-                <e p="JumpingBehaviour.cs" t="Include" />
-                <e p="SurfaceWalkingBehaviour.cs" t="Include" />
-                <e p="WeavingBehaviour.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Utilities" t="Include">
+            <e p="IDamageable.cs" t="Include" />
+            <e p="ParticleSystemAutoDestroy.cs" t="Include" />
+            <e p="SingletonScriptableObject.cs" t="Include" />
+          </e>
+          <e p="Weapons" t="Include">
+            <e p="Gun" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="GunAnimationEventHandler.cs" t="Include" />
+                <e p="GunController.cs" t="Include" />
+                <e p="GunLoader.cs" t="Include" />
+                <e p="Raycast.cs" t="Include" />
               </e>
-            </e>
-            <e p="Player" t="Include">
-              <e p="PlayerLook.cs" t="Include" />
-              <e p="PlayerMove.cs" t="Include" />
-            </e>
-            <e p="Utils" t="Include">
-              <e p="AutoDestroy.cs" t="Include" />
-            </e>
-            <e p="Weapons" t="Include">
-              <e p="GrenadeComponent.cs" t="Include" />
+>>>>>>> weapon
             </e>
           </e>
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
-      <e p="Packages" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="Unity.sln" t="IncludeFlat" />
     </e>

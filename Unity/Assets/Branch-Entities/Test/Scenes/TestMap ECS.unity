@@ -150,12 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5f288995455ff49bb0e4ddf286ac5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 7034728755823007180, guid: 8e0e44a6381a64a47b4e4af34d362212,
-    type: 3}
-  amount: 1000
-  radius: 10.39
-  onSurface: 1
-  target: {fileID: 1852445543}
 --- !u!4 &232120459
 Transform:
   m_ObjectHideFlags: 0
@@ -180,6 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 328140355}
   - component: {fileID: 328140354}
+  - component: {fileID: 328140356}
   m_Layer: 0
   m_Name: BootingGameObject
   m_TagString: Untagged
@@ -199,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0ed29743e15ff4f8d1ae3174708864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEntitiesCount: 3000
+  startEntitiesCount: 10000
   sizeZoneX: 25
   sizeZoneY: 10
   sizeZoneZ: 25
@@ -219,6 +214,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &328140356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328140353}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2be9120c7d2d845a8673a20a750795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEntitiesCount: 2000
+  sizeZoneX: 25
+  sizeZoneY: 25
+  sizeZoneZ: 10
+  mesh: {fileID: 7284390433541794911, guid: 1cc4ea8319e64f74bb9a5a1a842c6d84, type: 3}
+  material: {fileID: 2895064947943234598, guid: 1cc4ea8319e64f74bb9a5a1a842c6d84,
+    type: 3}
 --- !u!1001 &373152915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1018,12 +1032,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -462981019419857548, guid: 51265a08452d94c4dacfe76664eac438, type: 3}
---- !u!1 &1852445543 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8519211979527597075, guid: 48044ff0a2402c546a47f7a0a42b4d38,
-    type: 3}
-  m_PrefabInstance: {fileID: 1529221651}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2023539979
 PrefabInstance:
   m_ObjectHideFlags: 0

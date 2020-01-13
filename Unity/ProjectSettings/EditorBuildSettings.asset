@@ -4,5 +4,21 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+<<<<<<< HEAD
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Branch-Entities/Game/UI/TitleScreen.unity
+    guid: 4a1c404ef44b88943914bce19f652e2b
+  - enabled: 1
+    path: Assets/worldgen/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Branch-Entities/Game/UI/Preload.unity
+    guid: 9cd4664bc2ad4ae4db774ae90ee918f6
   m_configObjects: {}
+=======
+  m_Scenes: []
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 44800405c55d0b844acba54e73e1e9ce,
+      type: 2}
+>>>>>>> weapon
