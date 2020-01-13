@@ -40,10 +40,12 @@
             </e>
             <e p="Script Utils" t="Include">
               <e p="AutoDestroy.cs" t="Include" />
+              <e p="DDOL.cs" t="Include" />
               <e p="ObjectDestroyer.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
               <e p="MainMenu.cs" t="Include" />
+              <e p="PreloadManager.cs" t="Include" />
             </e>
           </e>
           <e p="Sounds" t="Include">
@@ -66,6 +68,27 @@
           <e p="truc.txt" t="Include" />
           <e p="UI" t="Include">
             <e p="removeMe.txt" t="Include" />
+          </e>
+        </e>
+        <e p="graphics" t="Include">
+          <e p="CelShadingMaster.cs" t="Include" />
+          <e p="CelShadingShader.shader" t="Include" />
+          <e p="GraphicsManager.cs" t="Include" />
+        </e>
+        <e p="worldgen" t="Include">
+          <e p="script" t="Include">
+            <e p="chunk.cs" t="Include" />
+            <e p="ChunkManager.cs" t="Include" />
+            <e p="DensityGenerator.cs" t="Include" />
+            <e p="FastNoise.cs" t="Include" />
+            <e p="LookUpTable.cs" t="Include" />
+            <e p="MeshGenerator.cs" t="Include" />
+            <e p="player" t="Include">
+              <e p="BodyMovement.cs" t="Include" />
+              <e p="Selector.cs" t="Include" />
+              <e p="SmoothMouseLook.cs" t="Include" />
+              <e p="switcher.cs" t="Include" />
+            </e>
           </e>
         </e>
       </e>
