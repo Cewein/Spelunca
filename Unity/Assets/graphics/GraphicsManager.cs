@@ -12,19 +12,21 @@ public class GraphicsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float distance = chunkManager.chunkSize * chunkManager.viewRange;
-        RenderSettings.fog = true;
-        RenderSettings.fogMode = FogMode.Linear;
-        RenderSettings.fogColor = fogColor;
-        RenderSettings.fogEndDistance = endFogDistance;
-        RenderSettings.fogStartDistance = startFogDistance;
-        mainCamera.backgroundColor = fogColor;
-
+        setFog();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        setFog();
     }
+    
+    void setFog(){
+        float distance = chunkManager.chunkSize * chunkManager.viewRange/2;
+        RenderSettings.fog = true;
+        RenderSettings.fogMode = FogMode.Linear;
+        RenderSettings.fogColor = fogColor;
+        RenderSettings.fogEndDistance = distance;
+        RenderSettings.fogStartDistance = startFogDistance;
+        mainCamera.backgroundColor = fogColor;}
 }
