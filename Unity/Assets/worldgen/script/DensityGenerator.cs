@@ -8,6 +8,7 @@ public class DensityGenerator
     public static FastNoise noise = new FastNoise();
 
     public static uint octaveNumber;
+    public static float floor;
     
     //density function
     public static float density(float k, float x, float y, float z)
@@ -32,7 +33,7 @@ public class DensityGenerator
     }
 
     //marching algorithm
-    public static float [,,] find(float floor, float size, Vector3 chunkPos)
+    public static float [,,] find(float size, Vector3 chunkPos)
     {
         float[,,] block = new float[(int)size, (int)size, (int)size];
         noise.SetNoiseType(FastNoise.NoiseType.Perlin);

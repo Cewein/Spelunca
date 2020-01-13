@@ -20,7 +20,7 @@ public class chunk : MonoBehaviour
 
         //create denstiy 
         //TODO make it a compute shader
-        chunkData.density = DensityGenerator.find(0, size + 1, pos);
+        chunkData.density = DensityGenerator.find(size + 1, pos);
 
         //loop for creating the mesh
         //TODO make it a compute shader

@@ -11,6 +11,7 @@ public class ChunkManager : MonoBehaviour
     public Transform player;
     public uint chunkSize;
     public uint viewRange = 5;
+    [SerializeField] private float floor = 0;
     public GameObject chunk;
 
     //chunks 
@@ -30,6 +31,7 @@ public class ChunkManager : MonoBehaviour
         chunks = new GameObject[viewRange,viewRange,viewRange];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
         DensityGenerator.octaveNumber = octaveNumber;
+        DensityGenerator.floor = floor;
     }
 
     void Start()
