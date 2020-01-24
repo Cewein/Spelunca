@@ -8,6 +8,7 @@ public class MeshGenerator
     public struct gridcell
     {
         public Vector3[] p;
+        public Vector3[] n;
         public float[] val;
     }
 
@@ -17,6 +18,7 @@ public class MeshGenerator
         gridcell grid = new gridcell();
         grid.p = new Vector3[8];
         grid.val = new float[8];
+        grid.n = new Vector3[8];
 
         //add to the gridcell the value of each point in the grid
         grid.val[0] = block[x, y, z];
@@ -28,6 +30,16 @@ public class MeshGenerator
         grid.val[5] = block[x + 1, y + 1, z];
         grid.val[6] = block[x + 1, y + 1, z + 1];
         grid.val[7] = block[x, y + 1, z + 1];
+
+        //add to the gridcell the value of each point in the grid
+        grid.n[0] = latticeNormal(x, y, z, block);
+        grid.n[1] = latticeNormal(x + 1, y, z, block);
+        grid.n[2] = latticeNormal(x + 1, y, z + 1, block);
+        grid.n[3] = latticeNormal(x, y, z + 1, block);
+        grid.n[4] = latticeNormal(x, y + 1, z, block);
+        grid.n[5] = latticeNormal(x + 1, y + 1, z, block);
+        grid.n[6] = latticeNormal(x + 1, y + 1, z + 1, block);
+        grid.n[7] = latticeNormal(x, y + 1, z + 1, block);
 
         //add to the gridcell the position of each point in the grid
         grid.p[0] = new Vector3(x, y, z);
@@ -141,11 +153,15 @@ public class MeshGenerator
         return p;
     }
 
-    private static Vector3 VextexNormal(Vector3 p)
+    private static Vector3 latticeNormal(int x, int y, int z, float[,,] block)
     {
-        Vector3 normal = new Vector3();
+        Vector3 normal;
 
-        return normal;
+        normal.x = (block[x + 1, y, z] - block[x - 1, y, z]) / 2*x;
+        normal.y = (block[x, y + 1, z] - block[x, y - 1, z]) / 2*y;
+        normal.z = (block[x, y, z + 1] - block[x, y, z - 1]) / 2*z;
+
+        return normal.normalized;
     }
 }
 

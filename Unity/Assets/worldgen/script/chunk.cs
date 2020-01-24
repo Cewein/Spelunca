@@ -20,7 +20,8 @@ public class chunk : MonoBehaviour
 
         //create denstiy 
         //TODO make it a compute shader
-        chunkData.density = DensityGenerator.find(size + 1, pos);
+        //we make it size + 3 because it's for the normals
+        chunkData.density = DensityGenerator.find(size + 3, pos - Vector3.one);
 
         //loop for creating the mesh
         //TODO make it a compute shader
@@ -30,7 +31,7 @@ public class chunk : MonoBehaviour
             {
                 for (int z = 0; z < size; z++)
                 {
-                    chunkData.meshData.mergeMeshData(MeshGenerator.generateMesh(chunkData.density, x, y, z, size, 0, masterMeshData.tcount));
+                    chunkData.meshData.mergeMeshData(MeshGenerator.generateMesh(chunkData.density, x + 1, y + 1, z + 1, size, 0, masterMeshData.tcount));
                 }
             }
         }
