@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
@@ -14,9 +15,10 @@ public class Gauge : MonoBehaviour
     private void Awake()
     {
         gaugeUI = GetComponent<Image>();
-        gaugeUI.fillAmount = 0;
+        gaugeUI.fillAmount = gunLoader.CurrentResourceQuantity / gunLoader.Capacity;
         currentResource = gunLoader.CurrentResource;
-
+        gaugeUI.color = gunLoader.CurrentResource.Color;
+        
         if (currentResource.Type == ResourceType.normal) setGaugeToNormalResource();
 
         
@@ -27,7 +29,7 @@ public class Gauge : MonoBehaviour
         };
         gunLoader.reload += (reloading, resource, quantity) =>
         {
-            if (resource != currentResource)
+            if (resource.Type != currentResource.Type)
             {
                 currentResource = resource;
                 gaugeUI.color = currentResource.Color;
@@ -42,6 +44,7 @@ public class Gauge : MonoBehaviour
     {
         gaugeUI.color = currentResource.Color;
         gaugeUI.fillAmount = 1;
+        
     }
-    
+
 }

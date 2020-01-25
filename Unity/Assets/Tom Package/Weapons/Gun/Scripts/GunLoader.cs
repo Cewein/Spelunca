@@ -29,12 +29,10 @@ public class GunLoader : MonoBehaviour
   {
       get
       {
-          if (currentResource == null)
-          {
-              Resource[] list = Resources.FindObjectsOfTypeAll<Resource>();
-              normalResource = list.First(item => item.Type == ResourceType.normal);
-              currentResource = normalResource;
-          }
+          if (currentResource != null) return currentResource;
+          Resource[] list = Resources.FindObjectsOfTypeAll<Resource>();
+          normalResource = list.First(item => item.Type == ResourceType.normal);
+          currentResource = normalResource;
           return currentResource;
       }
 
@@ -70,7 +68,7 @@ public class GunLoader : MonoBehaviour
             if (!isGunReloading ) return;
             if (currentResourceQuantity < capacity)
             {
-                if (currentResource == normalResource)
+                if (currentResource.Type == ResourceType.normal)
                     isReloading(isGunReloading, currentResource, 0);
                 else isReloading(isGunReloading, currentResource, ResourcesStock.Instance.takeResource(currentResource.Type, capacity));
 
@@ -90,7 +88,7 @@ public class GunLoader : MonoBehaviour
     private void isLoaderEmpty(bool isGaugeEmpty)
     {
         isEmpty?.Invoke(isGaugeEmpty);
-        if( currentResource != normalResource && (ResourcesStock.Instance.Stock[currentResource.Type] <= 0)) 
+        if( currentResource.Type != ResourceType.normal && (ResourcesStock.Instance.Stock[currentResource.Type] <= 0)) 
             currentResource = normalResource; 
         
     }

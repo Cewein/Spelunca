@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +21,12 @@ public class GameManager : MonoBehaviour
     void initRun()
     {
        // do global var initialisation for the current run.
-       
-       if (ResourcesStock.Instance == null) resourcesStock = ScriptableObject.CreateInstance<ResourcesStock>();
+
+       if (ResourcesStock.Instance == null)
+       {
+           resourcesStock = ScriptableObject.CreateInstance<ResourcesStock>();
+       }
+
     }
 
 }

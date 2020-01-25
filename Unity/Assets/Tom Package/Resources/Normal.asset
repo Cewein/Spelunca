@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99a8da0934bfdba418f467f532cf458f, type: 3}
-  m_Name: Resource
+  m_Name: Normal
   m_EditorClassIdentifier: 
-  type: 
-  color: {r: 0, g: 0, b: 0, a: 0}
+  type: 0
+  color: {r: 0.8000001, g: 0.8000001, b: 1, a: 1}
   gaugeIcon: {fileID: 0}
   inventoryIcon: {fileID: 0}
