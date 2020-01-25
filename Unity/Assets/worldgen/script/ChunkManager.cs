@@ -24,6 +24,9 @@ public class ChunkManager : MonoBehaviour
 
     [Header("Noise setting")]
     public uint octaveNumber = 5;
+
+    [Header("Debug setting")]
+    public bool debugNormals = false;
     
     
     private void Awake()
@@ -94,6 +97,10 @@ public class ChunkManager : MonoBehaviour
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
+                    if(debugNormals)
+                    {
+
+                    }
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }

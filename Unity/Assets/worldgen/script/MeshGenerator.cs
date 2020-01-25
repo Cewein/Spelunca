@@ -60,6 +60,7 @@ public class MeshGenerator
     {
         int cubeindex;
         Vector3[] vertlist = new Vector3[12];
+        Vector3[] normlist = new Vector3[12];
 
         // with cube index we manipulate
         // each bit of the int variable
@@ -81,41 +82,89 @@ public class MeshGenerator
         //we look into the edge table and if the bit is flip on
         //if it is we add to a vertlist a new vertex
         if ((LookUpTable.edgeTable[cubeindex] & 1) != 0)
+        {
             vertlist[0] =
                VertexInterp(isolevel, grid.p[0], grid.p[1], grid.val[0], grid.val[1]);
+            normlist[0] =
+               VertexInterp(isolevel, grid.n[0], grid.n[1], grid.val[0], grid.val[1]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 2) != 0)
+        {
             vertlist[1] =
                VertexInterp(isolevel, grid.p[1], grid.p[2], grid.val[1], grid.val[2]);
+            normlist[1] =
+               VertexInterp(isolevel, grid.n[1], grid.n[2], grid.val[1], grid.val[2]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 4) != 0)
+        {
             vertlist[2] =
                VertexInterp(isolevel, grid.p[2], grid.p[3], grid.val[2], grid.val[3]);
+            normlist[2] =
+               VertexInterp(isolevel, grid.n[2], grid.n[3], grid.val[2], grid.val[3]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 8) != 0)
+        {
             vertlist[3] =
                VertexInterp(isolevel, grid.p[3], grid.p[0], grid.val[3], grid.val[0]);
+            normlist[3] =
+               VertexInterp(isolevel, grid.n[3], grid.n[0], grid.val[3], grid.val[0]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 16) != 0)
+        {
             vertlist[4] =
                VertexInterp(isolevel, grid.p[4], grid.p[5], grid.val[4], grid.val[5]);
+            normlist[4] =
+               VertexInterp(isolevel, grid.n[4], grid.n[5], grid.val[4], grid.val[5]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 32) != 0)
+        {
             vertlist[5] =
                VertexInterp(isolevel, grid.p[5], grid.p[6], grid.val[5], grid.val[6]);
+            normlist[5] =
+               VertexInterp(isolevel, grid.n[5], grid.n[6], grid.val[5], grid.val[6]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 64) != 0)
+        {
             vertlist[6] =
                VertexInterp(isolevel, grid.p[6], grid.p[7], grid.val[6], grid.val[7]);
+            normlist[6] =
+               VertexInterp(isolevel, grid.n[6], grid.n[7], grid.val[6], grid.val[7]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 128) != 0)
+        {
             vertlist[7] =
                VertexInterp(isolevel, grid.p[7], grid.p[4], grid.val[7], grid.val[4]);
+            normlist[7] =
+               VertexInterp(isolevel, grid.n[7], grid.n[4], grid.val[7], grid.val[4]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 256) != 0)
+        {
             vertlist[8] =
                VertexInterp(isolevel, grid.p[0], grid.p[4], grid.val[0], grid.val[4]);
+            normlist[8] =
+               VertexInterp(isolevel, grid.n[0], grid.n[4], grid.val[0], grid.val[4]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 512) != 0)
+        {
             vertlist[9] =
                VertexInterp(isolevel, grid.p[1], grid.p[5], grid.val[1], grid.val[5]);
+            normlist[9] =
+               VertexInterp(isolevel, grid.n[1], grid.n[5], grid.val[1], grid.val[5]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 1024) != 0)
+        {
             vertlist[10] =
                VertexInterp(isolevel, grid.p[2], grid.p[6], grid.val[2], grid.val[6]);
+            normlist[10] =
+               VertexInterp(isolevel, grid.n[2], grid.n[6], grid.val[2], grid.val[6]);
+        }
         if ((LookUpTable.edgeTable[cubeindex] & 2048) != 0)
+        {
             vertlist[11] =
                VertexInterp(isolevel, grid.p[3], grid.p[7], grid.val[3], grid.val[7]);
+            normlist[11] =
+               VertexInterp(isolevel, grid.n[3], grid.n[7], grid.val[3], grid.val[7]);
+        }
 
         List<Vector3> vertices = new List<Vector3>();
         List<Vector3> normals = new List<Vector3>();
@@ -128,6 +177,10 @@ public class MeshGenerator
             vertices.Add(vertlist[LookUpTable.triTable[cubeindex,i + 2]]);
             vertices.Add(vertlist[LookUpTable.triTable[cubeindex,i + 1]]);
             vertices.Add(vertlist[LookUpTable.triTable[cubeindex,i]]);
+
+            normals.Add(-normlist[LookUpTable.triTable[cubeindex, i + 2]].normalized);
+            normals.Add(-normlist[LookUpTable.triTable[cubeindex, i + 1]].normalized);
+            normals.Add(-normlist[LookUpTable.triTable[cubeindex, i]].normalized);
 
         }
 
@@ -157,11 +210,11 @@ public class MeshGenerator
     {
         Vector3 normal;
 
-        normal.x = (block[x + 1, y, z] - block[x - 1, y, z]) / 2*x;
-        normal.y = (block[x, y + 1, z] - block[x, y - 1, z]) / 2*y;
-        normal.z = (block[x, y, z + 1] - block[x, y, z - 1]) / 2*z;
+        normal.x = (block[x + 1, y, z] - block[x - 1, y, z]);
+        normal.y = (block[x, y + 1, z] - block[x, y - 1, z]);
+        normal.z = (block[x, y, z + 1] - block[x, y, z - 1]);
 
-        return normal.normalized;
+        return Vector3.Normalize(normal);
     }
 }
 
@@ -192,6 +245,7 @@ public class MeshData
     {
         this.tcount += meshData.tcount;
         this.vertices.AddRange(meshData.vertices);
+        this.normals.AddRange(meshData.normals);
         //this.triangles.AddRange(meshData.triangles);
     }
 
@@ -199,9 +253,9 @@ public class MeshData
     {
         Mesh mesh = new Mesh();
         mesh.vertices = vertices.ToArray();
-        //mesh.normals = normals.ToArray();
+        mesh.normals = normals.ToArray();
         mesh.triangles = Enumerable.Range(0, vertices.Count).ToArray();
-        mesh.RecalculateNormals();
+        //mesh.RecalculateNormals();
         return mesh;
     }
 }
