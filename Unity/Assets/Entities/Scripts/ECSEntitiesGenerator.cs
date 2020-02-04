@@ -9,7 +9,7 @@ using Unity.Transforms;
 using Unity.Rendering;
 using Random = UnityEngine.Random;
 
-public class EntitiesGenerator : MonoBehaviour
+public class ECSEntitiesGenerator : MonoBehaviour
 {
     [SerializeField] private int startEntitiesCount = 2000;
     [SerializeField] private int sizeZoneX = 25;

@@ -17,25 +17,13 @@ public class EnemyComponent : MonoBehaviour
     public float surfaceDetectionOffset = 1f; //Offset form which the detection raycast is casted (used if the center point is set at the bottom of the 3D model
     public float surfaceWalkingHeightOffset = 1f; //Offset used to make the 3D model touch the ground with its feet/lugs/paws etc
     public float avoidanceDistance = 0.1f; // Length of the raycasts casted in order to detect nearby fellow entities 
-    
-    
+
+    public bool isGrounded = false;
+
+    private Vector3 currentSurfaceNormal;
     //Private variables
     private float HP;
-    private Animator animator;
     
-    void Start()
-    {
-        HP = startHP;
-        animator = gameObject.GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        if (HP <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void hit(float damages)
     {
@@ -44,19 +32,19 @@ public class EnemyComponent : MonoBehaviour
     
     
 
-/*
     private void Start()
     {
-        RaycastHit hit;
-        if (Physics.SphereCast(transform.position, positionHeightOffset, Vector3.up, out hit, 0,
+        HP = startHP;
+        /*RaycastHit hit;
+        if (Physics.SphereCast(transform.position, surfaceWalkingHeightOffset, Vector3.up, out hit, 0,
             LayerMask.NameToLayer("Ground")))
         {
             transform.up = hit.normal;
-        }
+        }*/
     }
     void Update()
     {
-        isGrounded = false;
+        //isGrounded = false;
         wallClimbBehaviour();
         if (!isGrounded)
         {
@@ -67,8 +55,12 @@ public class EnemyComponent : MonoBehaviour
         {
             move();    
         }
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
         
-    }*/
+    }
 
     public void wallClimbBehaviour()
     {
@@ -78,13 +70,14 @@ public class EnemyComponent : MonoBehaviour
         
         if (Physics.Raycast(transform.position + transform.up*surfaceDetectionOffset, -transform.up, out hit, surfaceDetectionDistance, 1 << LayerMask.NameToLayer("Ground"))){
             
-            animator.SetBool("isFalling", false);
+            isGrounded = true;
             transform.up = Vector3.Lerp(transform.up,hit.normal, 0.5f);
             transform.position = hit.point + hit.normal * surfaceWalkingHeightOffset;
+            currentSurfaceNormal = hit.normal;
         }
         else
         {
-            animator.SetBool("isFalling", true);
+            isGrounded = false;
         }
     }
 
@@ -96,7 +89,7 @@ public class EnemyComponent : MonoBehaviour
             direction = target.transform.position - transform.position;
             direction.Normalize();
             transform.LookAt(target.transform);
-            //transform.up = currentNormal; //FIXME: Il faut réussir à le faire tourner autour de l'axe de la normale sans fournir de degrés genre avec un Look At
+            transform.up = currentSurfaceNormal; //FIXME: Il faut réussir à le faire tourner autour de l'axe de la normale sans fournir de degrés genre avec un Look At
         }
         Vector3 avoid = Vector3.zero;//avoidanceBehaviourPosition();
         transform.position += Vector3.ClampMagnitude(Time.deltaTime * movingSpeed* Vector3.Lerp(direction,avoid, 0.5f),movingSpeed);
@@ -140,14 +133,13 @@ public class EnemyComponent : MonoBehaviour
         {
             avoidanceMove = Vector3.zero;
         }
-        /*
-            Debug.DrawRay(transform.position,transform.forward,Color.red);
-            Debug.DrawRay(transform.position,-transform.forward,Color.red);
-            Debug.DrawRay(transform.position,transform.right,Color.red);
-            Debug.DrawRay(transform.position,-transform.right,Color.red);
-        */
         return avoidanceMove;
     }
-    
-    
+
+    private void OnDrawGizmosSelected()
+    {    
+        Gizmos.color=Color.red;
+        Gizmos.DrawRay(transform.position + transform.up*surfaceDetectionOffset,-transform.up*surfaceDetectionDistance);
+
+    }
 }
