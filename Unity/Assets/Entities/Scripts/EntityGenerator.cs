@@ -30,6 +30,7 @@ public class EntityGenerator : MonoBehaviour
         EnemyComponent ec = prefabToSpawn.GetComponent<EnemyComponent>();
         spawnDistance = ec.surfaceWalkingHeightOffset;
         spawnedPerSeconds = amount / spawnDuration;
+        Debug.Log(amount + " / " + spawnDuration + " = " + spawnedPerSeconds);
     }
 
     // Start is called before the first frame update
@@ -37,55 +38,71 @@ public class EntityGenerator : MonoBehaviour
     {
         if (!progressiveSpawn)
         {
+            Debug.Log("Start spawning " + amount);
             spawn(amount);
         }
         
     }
-    
+
     private void Update()
     {
-        if (progressiveSpawn)
+        if (spawnedAmount == 0)
         {
-            StartCoroutine(ProgressiveSpawn());
+            float rate = 1/spawnedPerSeconds;
+            Debug.Log("spawning rate : 1 for every " + rate + " seconds");
+            StartCoroutine(ProgressiveSpawning(rate));
+        }
+
+        foreach (var entity in pool)
+        {
+            if (entity.transform.position.y < -10)
+            {
+                entity.enabled = false;
+            }
         }
     }
 
-    IEnumerator ProgressiveSpawn()
+    IEnumerator ProgressiveSpawning(float rate)
+    {
+        WaitForSeconds wait = new WaitForSeconds(rate);
+        while (spawnedAmount < amount)
+        {
+            Debug.Log("spawning 1 every " + rate);
+            spawn(1);
+            yield return wait;
+        }
+    }
+    /*
+    private void FixedUpdate()
     {
         if (progressiveSpawn)
         {
-            WaitForSeconds wait = new  WaitForSeconds(1 / spawnedPerSeconds);
-            while (amount - spawnedAmount > 0)
+            Debug.Log("amount - spawnedAmount = " + (amount - spawnedAmount));
+            if ( amount - spawnedAmount > 0)
             {
-                Debug.Log("left to spawn : " + (amount - spawnedAmount));
-                spawn(1);
-                yield return wait;
-            }
-            
-        }else{
-            Debug.LogError("Inconsistency in code : progressiveSpawn called while progressiveSpawn = false");
-        }
-    }
-/*
- * if ( amount - spawnedAmount > 0)
-            {
-                int toSpawn = (int) (spawnedPerSeconds * Time.deltaTime);
+                int toSpawn = (int) (spawnedPerSeconds * Time.fixedDeltaTime);
                 print("gonna spawn " + toSpawn);
                 if (toSpawn > amount - spawnedAmount)
                 {
                     toSpawn = amount - spawnedAmount;
                 }
-            }
- */
+
+                Debug.Log("FixedUpdate spawning " + toSpawn);
+                spawn(toSpawn);
+            };
+        }
+    }*/
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position,radius);
     }
 
-    private void spawn(int amount)
+    private void spawn(int amountToSpawn)
     {
-        for (int i = spawnedAmount; i < amount; i++)
+        Debug.Log("Already spawned : " + spawnedAmount + " and amount to spawn : " + amountToSpawn);
+        for (int i = spawnedAmount; i < spawnedAmount+amountToSpawn; i++)
         {
             if (onSurface)
             {
@@ -97,6 +114,8 @@ public class EntityGenerator : MonoBehaviour
                         1 << LayerMask.NameToLayer("Ground")))
                     {
                         didHit = true;
+                        
+                        Debug.Log("Instantiating at index " + i);
                         pool[i] = Instantiate(prefabToSpawn, hit.point + hit.normal*spawnDistance,
                             Quaternion.Euler(0, 0, 0),transform).GetComponent<EnemyComponent>();;
                         pool[i].transform.up = hit.normal;
@@ -113,6 +132,6 @@ public class EntityGenerator : MonoBehaviour
                 pool[i].target = target;
             }
         }
-        spawnedAmount += amount;
+        spawnedAmount += amountToSpawn;
     }
 }
