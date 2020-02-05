@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/UI/TitleScreen/Scenes/TitleScreen.unity
     guid: 4a1c404ef44b88943914bce19f652e2b
-  - enabled: 1
-    path: Assets/WorldGen/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/UI/TitleScreen/Scenes/Preload.unity
     guid: 9cd4664bc2ad4ae4db774ae90ee918f6

@@ -38,7 +38,7 @@ public class EntityGenerator : MonoBehaviour
     {
         if (!progressiveSpawn)
         {
-            Debug.Log("Start spawning " + amount);
+            //Debug.Log("Start spawning " + amount);
             spawn(amount);
         }
         
@@ -49,10 +49,10 @@ public class EntityGenerator : MonoBehaviour
         if (spawnedAmount == 0)
         {
             float rate = 1/spawnedPerSeconds;
-            Debug.Log("spawning rate : 1 for every " + rate + " seconds");
+            //Debug.Log("spawning rate : 1 for every " + rate + " seconds");
             StartCoroutine(ProgressiveSpawning(rate));
         }
-
+/*
         foreach (var entity in pool)
         {
             if (entity.transform.position.y < -10)
@@ -60,6 +60,7 @@ public class EntityGenerator : MonoBehaviour
                 entity.enabled = false;
             }
         }
+        */
     }
 
     IEnumerator ProgressiveSpawning(float rate)
@@ -67,7 +68,7 @@ public class EntityGenerator : MonoBehaviour
         WaitForSeconds wait = new WaitForSeconds(rate);
         while (spawnedAmount < amount)
         {
-            Debug.Log("spawning 1 every " + rate);
+            //Debug.Log("spawning 1 every " + rate);
             spawn(1);
             yield return wait;
         }
@@ -101,7 +102,7 @@ public class EntityGenerator : MonoBehaviour
 
     private void spawn(int amountToSpawn)
     {
-        Debug.Log("Already spawned : " + spawnedAmount + " and amount to spawn : " + amountToSpawn);
+        //Debug.Log("Already spawned : " + spawnedAmount + " and amount to spawn : " + amountToSpawn);
         for (int i = spawnedAmount; i < spawnedAmount+amountToSpawn; i++)
         {
             if (onSurface)
@@ -115,7 +116,7 @@ public class EntityGenerator : MonoBehaviour
                     {
                         didHit = true;
                         
-                        Debug.Log("Instantiating at index " + i);
+                        //Debug.Log("Instantiating at index " + i);
                         pool[i] = Instantiate(prefabToSpawn, hit.point + hit.normal*spawnDistance,
                             Quaternion.Euler(0, 0, 0),transform).GetComponent<EnemyComponent>();;
                         pool[i].transform.up = hit.normal;
