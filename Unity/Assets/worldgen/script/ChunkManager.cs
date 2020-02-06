@@ -19,8 +19,12 @@ public class ChunkManager : MonoBehaviour
     private GameObject[,,] chunks;
     private Dictionary<Vector3, ChunkData> chunkDictionary;
 
+    //zone of spawn
+    private Vector3 playerSpawn;
+
     //frustum cull of the chunks
     Plane[] planes;
+    
 
     [Header("Noise setting")]
     public uint octaveNumber = 5;
@@ -42,6 +46,7 @@ public class ChunkManager : MonoBehaviour
         playerChunk.x = Mathf.Floor(player.position.x / chunkSize);
         playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
+        playerSpawn = player.position;
         generateChunks();
     }
 
@@ -96,11 +101,7 @@ public class ChunkManager : MonoBehaviour
                 {
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
-                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
-                    if(debugNormals)
-                    {
-
-                    }
+                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn);
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
@@ -127,7 +128,7 @@ public class ChunkManager : MonoBehaviour
                     else
                     {
                         chunks[x, y, z].transform.position += direction * chunkSize;
-                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize);
+                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn);
                         chunkDictionary.Add(chunks[x, y, z].transform.position / chunkSize, chunks[x, y, z].GetComponent<chunk>().chunkData);
                     }
                 }

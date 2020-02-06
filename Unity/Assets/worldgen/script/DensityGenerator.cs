@@ -11,12 +11,14 @@ public class DensityGenerator
     public static float floor;
     
     //density function
-    public static float density(float k, float x, float y, float z)
+    public static float density(float k, float x, float y, float z, Vector3 playerSpawn)
     {
         if (y > 100)
             return 0;
         if (y < -100)
             return 1;
+        if (Vector3.Distance(playerSpawn, new Vector3(x, y, z)) < 20)
+            return -1;
 
         float densityValue = k;
         int octaveScale = 1;
@@ -33,7 +35,7 @@ public class DensityGenerator
     }
 
     //marching algorithm
-    public static float [,,] find(float size, Vector3 chunkPos)
+    public static float [,,] find(float size, Vector3 chunkPos, Vector3 playerSpawn)
     {
         float[,,] block = new float[(int)size, (int)size, (int)size];
         noise.SetNoiseType(FastNoise.NoiseType.Perlin);
@@ -44,7 +46,7 @@ public class DensityGenerator
             {
                 for (int z = 0; z < size; z++)
                 {
-                    block[x, y, z] = density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z);
+                    block[x, y, z] = density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z, playerSpawn);
                 }
             }
         }
