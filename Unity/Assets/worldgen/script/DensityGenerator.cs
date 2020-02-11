@@ -20,6 +20,9 @@ public class DensityGenerator
         if (Vector3.Distance(playerSpawn, new Vector3(x, y, z)) < 20)
             return -1;
 
+        if (Vector3.Distance(new Vector3(x, y, z), new Vector3(Mathf.Sin(z/10) * 10 , Mathf.Cos(z / 10) * 10, z)) < 10)
+            return -1;
+
         float densityValue = k;
         int octaveScale = 1;
         float octaveIntensity = 1.0f;
