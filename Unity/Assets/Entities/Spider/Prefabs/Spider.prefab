@@ -1397,11 +1397,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 10
   baseDamage: 1
-  movingSpeed: 6
+  movingSpeed: 3
   target: {fileID: 0}
   surfaceDetectionDistance: 0.7
   surfaceDetectionOffset: 0
   surfaceWalkingHeightOffset: 0.05
+  groundLayer: Default
   avoidanceDistance: 0.1
   sineScale: 1
   sineOctaves: 3
