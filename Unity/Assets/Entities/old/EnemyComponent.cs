@@ -4,19 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
+public enum EnemyBehaviourState {Disabled,Idle,Jumping,Chasing,Waiting,Fighting,OOB}
 public class EnemyComponent : MonoBehaviour
 {
-    
     [Header("Base entity stats")]
     [SerializeField]private float startHP = 10f; //the entity's start health points
     public float baseDamage = 1f; //base damage dealed when attacking an other entiy (such as a player)
     public float movingSpeed = 3f; //Speed at which the entity is able to move
 
-    [Header("Behaviours parameters")]
+    [Header("Behaviours parameters")] 
+    public EnemyBehaviourState state;
     public GameObject target; //The target of the entity
     public float surfaceDetectionDistance = 1f; //Distance from the center point up to which the Enemy is able to detect the presence of a ground surface 
     public float surfaceDetectionOffset = 1f; //Offset form which the detection raycast is casted (used if the center point is set at the bottom of the 3D model
     public float surfaceWalkingHeightOffset = 1f; //Offset used to make the 3D model touch the ground with its feet/lugs/paws etc
+    public string groundLayer = "Default";
     public float avoidanceDistance = 0.1f; // Length of the raycasts casted in order to detect nearby fellow entities 
     
     public float sineScale = 1;
@@ -78,7 +80,7 @@ public class EnemyComponent : MonoBehaviour
         //if (Physics.Raycast(transform.position + transform.up*0.1f, -transform.up, out hit, detectionDistance, 1 << LayerMask.NameToLayer("Ground")))
         RaycastHit hit;
         
-        if (Physics.Raycast(transform.position + transform.up*surfaceDetectionOffset, -transform.up, out hit, surfaceDetectionDistance, 1 << LayerMask.NameToLayer("Ground"))){
+        if (Physics.Raycast(transform.position + transform.up*surfaceDetectionOffset, -transform.up, out hit, surfaceDetectionDistance, 1 << LayerMask.NameToLayer(groundLayer))){
             
             isGrounded = true;
             transform.position = hit.point + hit.normal * surfaceWalkingHeightOffset;

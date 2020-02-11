@@ -9,10 +9,12 @@ public class EntityGenerator : MonoBehaviour
 {
     public GameObject prefabToSpawn;
     public int amount = 500;
+    public string layerToSpawn = "Default";
 
     public float radius = 10f;
     public float spawnDuration = 10f;
 
+    public bool instantSpawn = false;
     public bool onSurface = true;
     public bool progressiveSpawn = true;
 
@@ -20,7 +22,10 @@ public class EntityGenerator : MonoBehaviour
 
     private float spawnDistance = 0.2f;
 
-    private EnemyComponent[] pool;
+    private EnemyComponent[] inactivePool; //the entities that are no longer available on the map
+    private EnemyComponent[] fightingPool; //the entities that are attacking the player
+    private EnemyComponent[] pool;         //the other entities on the map
+    
     private float spawnedPerSeconds;//the amount of entity to spawn for each seconds
     private int spawnedAmount; //the number of entities already spawned
 
@@ -36,30 +41,50 @@ public class EntityGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!progressiveSpawn)
+        if (instantSpawn)
         {
-            //Debug.Log("Start spawning " + amount);
-            spawn(amount);
+            if (!progressiveSpawn)
+            {
+                //Debug.Log("Start spawning " + amount);
+                spawn(amount);
+            }
         }
         
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown("space"))
+        {
+            Debug.Log("GOING TO SPAWN");
+            StartSpawning();
+        }
+    }
+
+    public void StartSpawning()
+    {
         if (spawnedAmount == 0)
         {
-            float rate = 1/spawnedPerSeconds;
-            //Debug.Log("spawning rate : 1 for every " + rate + " seconds");
-            StartCoroutine(ProgressiveSpawning(rate));
-        }
-/*
-        foreach (var entity in pool)
-        {
-            if (entity.transform.position.y < -10)
+            if (!progressiveSpawn)
             {
-                entity.enabled = false;
+                //Debug.Log("Start spawning " + amount);
+                spawn(amount);
+            }
+            else
+            {
+                float rate = 1/spawnedPerSeconds;
+                //Debug.Log("spawning rate : 1 for every " + rate + " seconds");
+                StartCoroutine(ProgressiveSpawning(rate));
             }
         }
+        /*
+            foreach (var entity in pool)
+            {
+                if (entity.transform.position.y < -10)
+                {
+                    entity.enabled = false;
+                }
+            }
         */
     }
 
@@ -112,7 +137,7 @@ public class EntityGenerator : MonoBehaviour
                 while (!didHit)
                 {
                     if (Physics.Raycast(transform.position, Random.insideUnitSphere, out hit, radius,
-                        1 << LayerMask.NameToLayer("Ground")))
+                        1 << LayerMask.NameToLayer(layerToSpawn)))
                     {
                         didHit = true;
                         
@@ -122,6 +147,7 @@ public class EntityGenerator : MonoBehaviour
                         pool[i].transform.up = hit.normal;
                         pool[i].name = "Entity " + i;
                         pool[i].target = target;
+                        pool[i].groundLayer = layerToSpawn;
                     } 
                 }
             }
