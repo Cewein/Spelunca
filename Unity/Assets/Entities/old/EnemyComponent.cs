@@ -32,7 +32,6 @@ public class EnemyComponent : MonoBehaviour
     private Vector3 movingDirection;
     //Private variables
     private float HP;
-
     private float walkingSeed;
     
 
@@ -47,6 +46,7 @@ public class EnemyComponent : MonoBehaviour
     {
         HP = startHP;
         walkingSeed = UnityEngine.Random.Range(0,1000);
+        state = EnemyBehaviourState.Idle;
         /*RaycastHit hit;
         if (Physics.SphereCast(transform.position, surfaceWalkingHeightOffset, Vector3.up, out hit, 0,
             LayerMask.NameToLayer("Ground")))
