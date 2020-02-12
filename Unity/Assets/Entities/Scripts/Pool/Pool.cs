@@ -26,7 +26,7 @@ public struct SpawnData
 public class Pool:MonoBehaviour
 {
     private EnemyComponent[] pool; //the entities on the map
-    public bool[] disabled;
+    public Dictionary<int,bool> disabled;
     public int poolSize = 200; //the number of entities in the pool
     public PoolSpawner poolSpawner;
     public EnemyComponent enemy;
@@ -37,7 +37,7 @@ public class Pool:MonoBehaviour
     void Start()
     {
         pool = new EnemyComponent[poolSize];
-        disabled = new bool[poolSize];
+        disabled = new Dictionary<int,bool>();
         for (int i = 0; i < poolSize; i++)
         {
             disabled[i] = true;
@@ -53,7 +53,7 @@ public class Pool:MonoBehaviour
             {
                 if (entity.state == EnemyBehaviourState.Disabled)
                 {
-                    if (disabled[i] == false)
+                    if (!disabled.ContainsKey(i))
                     {
                         disableEntity(i);
                     }
@@ -66,14 +66,21 @@ public class Pool:MonoBehaviour
     private void disableEntity(int index)
     {
         disabled[index] = true;
+        pool[index].meshRenderer.enabled = false;
         
     }
     
     public void spawnAll()
     {
-        for(int i = 0; i < poolSize; i++)
+        spawn(poolSize);
+    }
+
+    public void spawn(int amount)
+    {
+        int counter = 0;
+        foreach (var i in disabled.Keys.ToList())
         {
-            if (disabled[i] == true)
+            if (disabled.ContainsKey(i))
             {
                 var spawnPoint = poolSpawner.getNewSpawnPosition();
                 if (pool[i] == null)
@@ -85,13 +92,16 @@ public class Pool:MonoBehaviour
                 else
                 {
                     pool[i].transform.position = spawnPoint.position + spawnPoint.direction * spawnDistance;
+                    pool[i].meshRenderer.enabled = true;
                 }
                 pool[i].transform.up = spawnPoint.direction;
                 pool[i].state = EnemyBehaviourState.Idle;
-                disabled[i] = false;
+                disabled.Remove(i);
+                counter++;
                 //pool[i].target = target;
             }
         }
+        Debug.Log("Asked to spawn " + amount + " entities : " + counter + " entities spawned.");
     }
     
     /*

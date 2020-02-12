@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-public enum EnemyBehaviourState {Disabled,Idle,Jumping,Chasing,Waiting,Fighting,OOB}
+public enum EnemyBehaviourState {Disabled,Idle,Jumping,Chasing,Waiting,Fighting,Falling}
 public class EnemyComponent : MonoBehaviour
 {
     [Header("Base entity stats")]
@@ -33,7 +33,11 @@ public class EnemyComponent : MonoBehaviour
     //Private variables
     private float HP;
     private float walkingSeed;
-    
+
+    //Falling behaviour
+    private float fallBeginingTime = 0f;
+    public float timeBeforeOOB = 3f;
+    public SkinnedMeshRenderer meshRenderer;
 
     public void hit(float damages)
     {
@@ -56,21 +60,35 @@ public class EnemyComponent : MonoBehaviour
     }
     void Update()
     {
-        //isGrounded = false;
-        wallClimbBehaviour();
-        if (!isGrounded)
+        if (state != EnemyBehaviourState.Disabled)
         {
-            transform.position = transform.position - Vector3.up * 9.81f * Time.deltaTime;
-            transform.up = Vector3.up;
+            //isGrounded = false;
+            wallClimbBehaviour();
+            if (!isGrounded)
+            {
+                transform.position = transform.position - Vector3.up * 9.81f * Time.deltaTime;
+                transform.up = Vector3.up;
+                if (state != EnemyBehaviourState.Falling)
+                {
+                    fallBeginingTime = Time.time;
+                }
+                state = EnemyBehaviourState.Falling;
+                if ((Time.time - fallBeginingTime) > timeBeforeOOB)
+                {
+                    state = EnemyBehaviourState.Disabled;
+                }
+            }
+            else
+            {
+                move();
+            }
+
+            if (HP <= 0)
+            {
+                state = EnemyBehaviourState.Disabled;
+            }
         }
-        else
-        {
-            move();    
-        }
-        if (HP <= 0)
-        {
-            Destroy(gameObject);
-        }
+        
         
     }
 

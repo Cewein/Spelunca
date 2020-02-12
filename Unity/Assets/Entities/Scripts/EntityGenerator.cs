@@ -61,11 +61,12 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
                 SpawnData spawnData = new SpawnData(hit.point,hit.normal);
                 return spawnData;
             }
+            /*
             else
             {
                 counter++;
                 Debug.Log(counter + " attempts failed.");
-            }
+            }*/
         }
 
         throw new Exception("Error, trying to spawn entities in an empty space.");
