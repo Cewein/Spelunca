@@ -256,8 +256,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
-  m_Range: 25
+  m_Intensity: 3
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -720,8 +720,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 596538679}
   chunkSize: 16
-  viewRange: 8
-  floor: 0.75
+  viewRange: 5
+  floor: 0.5
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
   octaveNumber: 5
   debugNormals: 0
