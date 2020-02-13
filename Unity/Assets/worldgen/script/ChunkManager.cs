@@ -59,15 +59,26 @@ public class ChunkManager : MonoBehaviour
 
         if(playerChunk != temp)
         {
+            float timeScaleTemp = Time.timeScale;
+            float timeFixedScaleTemp = Time.fixedDeltaTime;
+            Time.fixedDeltaTime = 0;
+            Time.timeScale = 0;
+
             Vector3 direction = (temp - playerChunk);
             playerChunk = temp;
             updateChunks(direction);
+
+            Time.fixedDeltaTime = timeFixedScaleTemp;
+            Time.timeScale = timeScaleTemp;
         }
 
         frustumCulling();
 
     }
 
+    //with a AABB plane we can see if a mesh
+    //is inside the view frustum, if it not inside
+    //it's not rendered
     void frustumCulling()
     {
         planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
@@ -89,6 +100,9 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
+    //this generate the chunks
+    //for genertating chunk during runtime
+    //see updateChunks function
     void generateChunks()
     {
         int half = (int)viewRange / 2;
@@ -108,6 +122,8 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
+    //update the chunk during runtime, create new
+    //chunk if they are not inside the dictionnary
     void updateChunks(Vector3 direction)
     {
         for (int x = 0; x < viewRange; x++)
@@ -119,6 +135,8 @@ public class ChunkManager : MonoBehaviour
                     Vector3 chunkPos = chunks[x, y, z].transform.position / chunkSize;
                     ChunkData tempData;
 
+                    //look if it find the chunk into the dictionary
+                    //if not it create a new chunk
                     if (chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
                     {
                         chunks[x, y, z].transform.position += direction * chunkSize;
@@ -134,19 +152,6 @@ public class ChunkManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    bool inArray(Vector3 newChunkArrayPosition)
-    {
-        print(newChunkArrayPosition);
-        int x = (int)newChunkArrayPosition.x;
-        int y = (int)newChunkArrayPosition.y;
-        int z = (int)newChunkArrayPosition.z;
-
-        if (x > 0 && y > 0 && z > 0 && x <= viewRange && y <= viewRange && z <= viewRange)
-            return true;
-
-        return false;
     }
 
     bool aroundMiddle(int x, int y, int z)

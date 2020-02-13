@@ -11,17 +11,28 @@ public class DensityGenerator
     public static float floor;
     
     //density function
+    //this is out put a value who is going to be use
+    //in the mesh build procces
     public static float density(float k, float x, float y, float z, Vector3 playerSpawn)
     {
         if (y > 100)
             return 0;
         if (y < -100)
             return 1;
-        if (Vector3.Distance(playerSpawn, new Vector3(x, y, z)) < 20)
-            return -1;
 
-        if (Vector3.Distance(new Vector3(x, y, z), new Vector3(Mathf.Sin(z/10) * 10 , Mathf.Cos(z / 10) * 10, z)) < 10)
-            return -1;
+        float sphereStart = Vector3.Distance(playerSpawn, new Vector3(x, y, z));
+
+        if (sphereStart < 20)
+            return sphereStart - 20f;
+
+        float sphereEnd = Vector3.Distance(new Vector3(0,-100,300), new Vector3(x, y, z));
+
+        if (sphereEnd < 50)
+            return sphereEnd - 50f;
+
+        float tube1 = Vector3.Distance(new Vector3(x, y, z), new Vector3(Mathf.Sin(z / 10) * 6, Mathf.Cos(z / 10) * 6 - z / 6, z));
+        float tube2 = Vector3.Distance(new Vector3(x, y, z), new Vector3(Mathf.Cos(z / 10) * 6, Mathf.Sin(z / 10) * 6 - z / 6, z));
+
 
         float densityValue = k;
         int octaveScale = 1;
@@ -34,10 +45,18 @@ public class DensityGenerator
             octaveScale *= 2;
         }
 
+        if (tube1 < 9 && densityValue > tube1 - 9.0f)
+            return tube1 - 9.0f;
+        if (tube2 < 9 && densityValue > tube2 - 9.0f)
+            return tube2 - 9.0f;
+
         return densityValue;
     }
 
-    //marching algorithm
+    //denstity algorithm loop, this will output
+    //a 3D float array containing the density of the 
+    //chunk, this array is use in the mesh build procces
+    //and is  a crusial step in the marching algorithm
     public static float [,,] find(float size, Vector3 chunkPos, Vector3 playerSpawn)
     {
         float[,,] block = new float[(int)size, (int)size, (int)size];
