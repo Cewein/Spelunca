@@ -16,7 +16,7 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
     public bool   instantSpawn = false;
     public bool   onSurface = true;
     public bool   progressiveSpawn = true;
-    public GameObject target;
+    public GameObject player;
 
     private float spawnDistance = 0.2f;
     private Pool pool;         //the other entities on the map
@@ -37,6 +37,7 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
         pool.spawnDistance = spawnDistance;
         pool.name = "Araignée";
         pool.layerToSpawn = "Default";
+        pool.player = player;
     }
     
     private void OnDrawGizmosSelected()

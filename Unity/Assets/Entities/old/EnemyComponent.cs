@@ -14,7 +14,8 @@ public class EnemyComponent : MonoBehaviour
 
     [Header("Behaviours parameters")] 
     public EnemyBehaviourState state;
-    public GameObject target; //The target of the entity
+    public GameObject player; //The player
+    private Vector3 target = Vector3.zero; //The position the spider should head up to
     public float surfaceDetectionDistance = 1f; //Distance from the center point up to which the Enemy is able to detect the presence of a ground surface 
     public float surfaceDetectionOffset = 1f; //Offset form which the detection raycast is casted (used if the center point is set at the bottom of the 3D model
     public float surfaceWalkingHeightOffset = 1f; //Offset used to make the 3D model touch the ground with its feet/lugs/paws etc
@@ -24,6 +25,10 @@ public class EnemyComponent : MonoBehaviour
     public float sineScale = 1;
     public float sineOctaves = 1;
     public float directionErrorCoeff = 1;
+
+
+    public float enemyDetectionDistance = 7f;
+    public float outOfRangeDistance = 50f;
     
     private bool isGrounded = false;
 
@@ -39,13 +44,6 @@ public class EnemyComponent : MonoBehaviour
     public float timeBeforeOOB = 3f;
     public SkinnedMeshRenderer meshRenderer;
 
-    public void hit(float damages)
-    {
-        HP -= damages;
-    }
-    
-    
-
     private void Start()
     {
         HP = startHP;
@@ -60,6 +58,8 @@ public class EnemyComponent : MonoBehaviour
     }
     void Update()
     {
+        
+        checkDistanceFromPlayer();
         if (state != EnemyBehaviourState.Disabled)
         {
             //isGrounded = false;
@@ -78,11 +78,12 @@ public class EnemyComponent : MonoBehaviour
                     state = EnemyBehaviourState.Disabled;
                 }
             }
-            else
-            {
+            else if (state == EnemyBehaviourState.Chasing)
+            { 
+                target = player.transform.position;
+                checkDistanceFromPlayer();
                 move();
             }
-
             if (HP <= 0)
             {
                 state = EnemyBehaviourState.Disabled;
@@ -92,6 +93,35 @@ public class EnemyComponent : MonoBehaviour
         
     }
 
+    public void hit(float damages)
+    {
+        HP -= damages;
+    }
+
+
+    public void checkDistanceFromPlayer()
+    {
+        if (state != EnemyBehaviourState.Disabled)
+        {
+            Vector3 playerPos = player.transform.position;
+            float distance = Math.Abs((this.transform.position - playerPos).magnitude);
+            if (name == "Araignée1")
+            {
+                Debug.Log("Distance from player : " + distance);
+            }
+            if (distance < enemyDetectionDistance)
+            {
+                state = EnemyBehaviourState.Chasing;
+            }else if (distance > outOfRangeDistance)
+            {
+                Debug.Log("to disable");
+                state = EnemyBehaviourState.Disabled;
+            }else{
+                state = EnemyBehaviourState.Idle;
+            }
+        }
+    }
+    
     public void wallClimbBehaviour()
     {
         //if (Physics.SphereCast(transform.position, positionHeightOffset*1.2f, Vector3.up, out hit, 0, 1 << LayerMask.NameToLayer("Ground"))) //Doesnt Work
@@ -116,14 +146,14 @@ public class EnemyComponent : MonoBehaviour
         movingDirection = Vector3.zero;
         if (target != null)
         {
-            movingDirection = target.transform.position - transform.position;
+            movingDirection = target - transform.position;
             movingDirection.Normalize();
-            transform.LookAt(target.transform);
+            transform.LookAt(target);
             //transform.rotation =
-                    Quaternion.LookRotation(( transform.position-target.transform.position).normalized, currentSurfaceNormal);
+                    Quaternion.LookRotation(( transform.position-target).normalized, currentSurfaceNormal);
             //transform.up = currentSurfaceNormal;
             
-            var toTarget = target.transform.position - transform.position;
+            var toTarget = target - transform.position;
             var toUp = currentSurfaceNormal;
             float sine = 0f;
             for (int i = 1; i <= sineOctaves; i++)

@@ -1399,7 +1399,7 @@ MonoBehaviour:
   baseDamage: 1
   movingSpeed: 3
   state: 1
-  target: {fileID: 0}
+  player: {fileID: 0}
   surfaceDetectionDistance: 0.7
   surfaceDetectionOffset: 0
   surfaceWalkingHeightOffset: 0.05
@@ -1408,6 +1408,8 @@ MonoBehaviour:
   sineScale: 1
   sineOctaves: 3
   directionErrorCoeff: 1
+  enemyDetectionDistance: 7
+  outOfRangeDistance: 50
   timeBeforeOOB: 3
   meshRenderer: {fileID: 3365880456402187860}
 --- !u!1 &4827385143590811802

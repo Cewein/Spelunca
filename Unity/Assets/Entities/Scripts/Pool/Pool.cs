@@ -33,6 +33,7 @@ public class Pool:MonoBehaviour
     public string layerToSpawn;
     public string name;
     public float spawnDistance;
+    public GameObject player;
 
     void Start()
     {
@@ -96,6 +97,7 @@ public class Pool:MonoBehaviour
                 }
                 pool[i].transform.up = spawnPoint.direction;
                 pool[i].state = EnemyBehaviourState.Idle;
+                pool[i].player = player;
                 disabled.Remove(i);
                 counter++;
                 //pool[i].target = target;
