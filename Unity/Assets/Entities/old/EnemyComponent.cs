@@ -108,14 +108,14 @@ public class EnemyComponent : MonoBehaviour
             float distance = Math.Abs((this.transform.position - playerPos).magnitude);
             if (name == "Araignée1")
             {
-                Debug.Log("Distance from player : " + distance);
+                //Debug.Log("Distance from player : " + distance);
             }
             if (distance < enemyDetectionDistance)
             {
                 state = EnemyBehaviourState.Chasing;
             }else if (distance > outOfRangeDistance)
             {
-                Debug.Log("to disable");
+                //Debug.Log("to disable");
                 state = EnemyBehaviourState.Disabled;
             }else{
                 state = EnemyBehaviourState.Idle;
@@ -152,7 +152,7 @@ public class EnemyComponent : MonoBehaviour
             {
                 movingDirection.Normalize();
             }
-            Debug.DrawRay(transform.position,movingDirection);
+            //Debug.DrawRay(transform.position,movingDirection);
             transform.LookAt(target);
             //transform.rotation =
                     Quaternion.LookRotation(( transform.position-target).normalized, currentSurfaceNormal);

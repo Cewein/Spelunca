@@ -124,7 +124,7 @@ public class Pool:MonoBehaviour
                 //pool[i].target = target;
             }
         }
-        Debug.Log("Asked to spawn " + amount + " entities : " + counter + " entities spawned.");
+        //Debug.Log("Asked to spawn " + amount + " entities : " + counter + " entities spawned.");
     }
     
     /*

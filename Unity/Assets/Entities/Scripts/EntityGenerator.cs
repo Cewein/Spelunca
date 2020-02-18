@@ -25,7 +25,7 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
         EnemyComponent ec = prefabToSpawn.GetComponent<EnemyComponent>();
         spawnDistance = ec.surfaceWalkingHeightOffset;
         spawnedPerSeconds = amount / spawnDuration;
-        Debug.Log(amount + " / " + spawnDuration + " = " + spawnedPerSeconds);
+        //Debug.Log(amount + " / " + spawnDuration + " = " + spawnedPerSeconds);
         
         pool = this.gameObject.AddComponent<Pool>();
         pool.poolSize = amount;
@@ -73,9 +73,9 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
     
     private void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            Debug.Log("GOING TO SPAWN");
+            //Debug.Log("GOING TO SPAWN");
             pool.spawnAll();
         }
     }
