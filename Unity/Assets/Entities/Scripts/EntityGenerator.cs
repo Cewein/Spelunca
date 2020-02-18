@@ -13,9 +13,6 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
     public int    amount = 500;
     public float  radius = 10f;
     public float  spawnDuration = 10f;
-    public bool   instantSpawn = false;
-    public bool   onSurface = true;
-    public bool   progressiveSpawn = true;
     public GameObject player;
 
     private float spawnDistance = 0.2f;

@@ -1410,6 +1410,7 @@ MonoBehaviour:
   directionErrorCoeff: 1
   enemyDetectionDistance: 7
   outOfRangeDistance: 50
+  proximityOffset: 3
   timeBeforeOOB: 3
   meshRenderer: {fileID: 3365880456402187860}
 --- !u!1 &4827385143590811802

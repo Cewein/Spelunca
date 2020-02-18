@@ -26,12 +26,12 @@ public class EnemyComponent : MonoBehaviour
     public float sineOctaves = 1;
     public float directionErrorCoeff = 1;
 
-
     public float enemyDetectionDistance = 7f;
     public float outOfRangeDistance = 50f;
     
     private bool isGrounded = false;
 
+    public float proximityOffset = 1f;
     private Vector3 currentSurfaceNormal;
 
     private Vector3 movingDirection;
@@ -81,6 +81,7 @@ public class EnemyComponent : MonoBehaviour
             else if (state == EnemyBehaviourState.Chasing)
             { 
                 target = player.transform.position;
+                target -= (player.transform.position - transform.position).normalized*proximityOffset;//slight offset in order to let the spiders wait arround the player and not under hes feets
                 checkDistanceFromPlayer();
                 move();
             }
@@ -147,7 +148,11 @@ public class EnemyComponent : MonoBehaviour
         if (target != null)
         {
             movingDirection = target - transform.position;
-            movingDirection.Normalize();
+            if (movingDirection.magnitude > 1f)
+            {
+                movingDirection.Normalize();
+            }
+            Debug.DrawRay(transform.position,movingDirection);
             transform.LookAt(target);
             //transform.rotation =
                     Quaternion.LookRotation(( transform.position-target).normalized, currentSurfaceNormal);

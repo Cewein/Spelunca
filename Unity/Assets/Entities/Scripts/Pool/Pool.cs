@@ -25,8 +25,6 @@ public struct SpawnData
 }
 public class Pool:MonoBehaviour
 {
-    private EnemyComponent[] pool; //the entities on the map
-    public Dictionary<int,bool> disabled;
     public int poolSize = 200; //the number of entities in the pool
     public PoolSpawner poolSpawner;
     public EnemyComponent enemy;
@@ -34,11 +32,16 @@ public class Pool:MonoBehaviour
     public string name;
     public float spawnDistance;
     public GameObject player;
+    public int maxEntitiesAttacking = 10;
 
+    private EnemyComponent[] pool; //the entities on the map
+    private Dictionary<int,bool> disabled;
+    private Dictionary<int,bool> attacking;
     void Start()
     {
         pool = new EnemyComponent[poolSize];
         disabled = new Dictionary<int,bool>();
+        attacking = new Dictionary<int,bool>();
         for (int i = 0; i < poolSize; i++)
         {
             disabled[i] = true;
@@ -59,11 +62,29 @@ public class Pool:MonoBehaviour
                         disableEntity(i);
                     }
                 }
+                //Checking if entities are done attacking
+                if (attacking.ContainsKey(i) && entity.state != EnemyBehaviourState.Fighting)
+                {
+                    attacking.Remove(i);
+                }
             }
             
         }
     }
 
+    public bool EntityAttackRequest(int index)//Allow an entity to ask if it can attack the player
+    {
+        if (pool[index].state != EnemyBehaviourState.Disabled)
+        {
+            if (attacking.Count < maxEntitiesAttacking && pool[index].state != EnemyBehaviourState.Fighting)//there is at least 1 spot left as an attacker
+            {
+                attacking[index] = true;
+                pool[index].state = EnemyBehaviourState.Fighting;
+                return true;
+            }
+        }
+        return false;
+    }
     private void disableEntity(int index)
     {
         disabled[index] = true;
