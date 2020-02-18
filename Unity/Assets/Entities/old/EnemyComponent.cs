@@ -32,6 +32,10 @@ public class EnemyComponent : MonoBehaviour
     private bool isGrounded = false;
 
     public float proximityOffset = 1f;
+    public float proximityPrecision = 0.1f;
+    
+    public float attackProbability = 0.1f;
+
     private Vector3 currentSurfaceNormal;
 
     private Vector3 movingDirection;
@@ -81,9 +85,16 @@ public class EnemyComponent : MonoBehaviour
             else if (state == EnemyBehaviourState.Chasing)
             { 
                 target = player.transform.position;
-                target -= (player.transform.position - transform.position).normalized*proximityOffset;//slight offset in order to let the spiders wait arround the player and not under hes feets
+                target -= (player.transform.position - transform.position).normalized*proximityOffset; //slight offset in order to let the spiders wait arround the player and not under hes feets
+                
                 checkDistanceFromPlayer();
                 move();
+            }else if(state == EnemyBehaviourState.Fighting)
+            {
+                if (UnityEngine.Random.Range(0f, 1f) < attackProbability)
+                {
+                    Debug.Log(name + " is attacking the player !");
+                }
             }
             if (HP <= 0)
             {
@@ -161,9 +172,12 @@ public class EnemyComponent : MonoBehaviour
             var toTarget = target - transform.position;
             var toUp = currentSurfaceNormal;
             float sine = 0f;
-            for (int i = 1; i <= sineOctaves; i++)
+            if (state == EnemyBehaviourState.Chasing)
             {
-                sine += Mathf.PerlinNoise(walkingSeed+Time.time * (sineScale * i), i) * 2 - 1;
+                for (int i = 1; i <= sineOctaves; i++)
+                {
+                    sine += Mathf.PerlinNoise(walkingSeed+Time.time * (sineScale * i), i) * 2 - 1;
+                }
             }
             transform.rotation = Quaternion.LookRotation(toUp.normalized, -toTarget.normalized);
             transform.Rotate(Vector3.right, 90f, Space.Self);

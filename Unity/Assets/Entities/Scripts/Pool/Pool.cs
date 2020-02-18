@@ -67,6 +67,12 @@ public class Pool:MonoBehaviour
                 {
                     attacking.Remove(i);
                 }
+                Vector3 playerPos = player.transform.position;
+                float distance = Math.Abs((this.transform.position - playerPos).magnitude);
+                if (distance > entity.proximityOffset - entity.proximityPrecision && distance < entity.proximityOffset + entity.proximityPrecision)
+                {
+                    EntityAttackRequest(i);
+                }
             }
             
         }
