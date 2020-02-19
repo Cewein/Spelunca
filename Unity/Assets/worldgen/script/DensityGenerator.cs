@@ -9,6 +9,7 @@ public class DensityGenerator
 
     public static uint octaveNumber;
     public static float floor;
+    public static Vector3 endZone;
     
     //density function
     //this is out put a value who is going to be use
@@ -20,16 +21,17 @@ public class DensityGenerator
         if (y < -100)
             return 1;
 
+        //start zone
         float sphereStart = Vector3.Distance(playerSpawn, new Vector3(x, y, z));
-
         if (sphereStart < 20)
             return sphereStart - 20f;
 
-        float sphereEnd = Vector3.Distance(new Vector3(0,-100,300), new Vector3(x, y, z));
-
+        //end zone
+        float sphereEnd = Vector3.Distance(endZone, new Vector3(x, y, z));
         if (sphereEnd < 50)
             return sphereEnd - 50f;
 
+        //static tube need to be more flexible
         float tube1 = Vector3.Distance(new Vector3(x, y, z), new Vector3(Mathf.Sin(z / 10) * 6, Mathf.Cos(z / 10) * 6 - z / 6, z));
         float tube2 = Vector3.Distance(new Vector3(x, y, z), new Vector3(Mathf.Cos(z / 10) * 6, Mathf.Sin(z / 10) * 6 - z / 6, z));
 

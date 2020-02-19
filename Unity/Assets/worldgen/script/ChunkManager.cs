@@ -21,6 +21,9 @@ public class ChunkManager : MonoBehaviour
 
     //zone of spawn
     private Vector3 playerSpawn;
+    [Header("Boss position")]
+    //end zone
+    public Transform boss;
 
     //frustum cull of the chunks
     Plane[] planes;
@@ -28,10 +31,6 @@ public class ChunkManager : MonoBehaviour
 
     [Header("Noise setting")]
     public uint octaveNumber = 5;
-
-    [Header("Debug setting")]
-    public bool debugNormals = false;
-    
     
     private void Awake()
     {
@@ -39,6 +38,7 @@ public class ChunkManager : MonoBehaviour
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
         DensityGenerator.octaveNumber = octaveNumber;
         DensityGenerator.floor = floor;
+        DensityGenerator.endZone = boss.position;
     }
 
     void Start()

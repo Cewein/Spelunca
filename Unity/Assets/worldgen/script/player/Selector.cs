@@ -25,7 +25,8 @@ public class Selector : MonoBehaviour
                 Debug.DrawRay(position, front * hit.distance, Color.red);
                 Debug.Log("HIT AT : " + hit.distance + "m");
 
-                hit.transform.SendMessage("HitByRay");
+                hit.transform.SendMessage("Hit");
+   
 
             }
             else
