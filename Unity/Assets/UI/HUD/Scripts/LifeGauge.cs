@@ -12,17 +12,16 @@ public class LifeGauge : MonoBehaviour
     {
         gaugeLifeUI = GetComponent<Image>();
         gaugeLifeUI.fillAmount = player.Life / player.MaxLife;
-        //gaugeLifeUI.color = gunLoader.CurrentResource.Color;
-        
-
-        
+        gaugeLifeUI.color = Color.green;
         player.hurt += (damage,_,__) =>
         {
             gaugeLifeUI.fillAmount -= damage / player.MaxLife;
+            gaugeLifeUI.color = Color.Lerp(Color.red,Color.green, gaugeLifeUI.fillAmount);
         };
         player.heal += (hp) =>
         {
             gaugeLifeUI.fillAmount += hp / player.MaxLife;
+            gaugeLifeUI.color = Color.Lerp(Color.red,Color.green, gaugeLifeUI.fillAmount);
         }; 
     }
 
