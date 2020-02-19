@@ -215,6 +215,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7973881575092609525, guid: 35dafa8cf209d044b8d2c4af6080713b,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973881575092609525, guid: 35dafa8cf209d044b8d2c4af6080713b,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973881575092609525, guid: 35dafa8cf209d044b8d2c4af6080713b,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2032427203072994540, guid: 35dafa8cf209d044b8d2c4af6080713b,
         type: 3}
       propertyPath: m_Enabled
@@ -251,9 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4d630caa7d1ef4a8136ff25731a18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fogColor: {r: 0.15312387, g: 0.25862613, b: 0.3490566, a: 0}
-  startFogDistance: 10
-  endFogDistance: 35
+  fogColor: {r: 0, g: 0, b: 0, a: 0}
+  startFogDistance: 5
+  endFogDistance: 20
 --- !u!4 &826256055
 Transform:
   m_ObjectHideFlags: 0
@@ -300,7 +315,7 @@ MonoBehaviour:
   prefabToSpawn: {fileID: 4561861964029488193, guid: 3287f4f4f4d3e894891d7c1732865c18,
     type: 3}
   layerToSpawn: Default
-  amount: 1500
+  amount: 800
   radius: 15
   spawnDuration: 3
   player: {fileID: 481302127}

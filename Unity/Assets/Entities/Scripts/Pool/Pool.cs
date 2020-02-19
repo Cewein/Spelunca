@@ -32,7 +32,7 @@ public class Pool:MonoBehaviour
     public string name;
     public float spawnDistance;
     public GameObject player;
-    public int maxEntitiesAttacking = 10;
+    public int maxEntitiesAttacking = 3;
 
     private EnemyComponent[] pool; //the entities on the map
     private Dictionary<int,bool> disabled;
@@ -47,6 +47,8 @@ public class Pool:MonoBehaviour
             disabled[i] = true;
         }
     }
+
+  
 
     private void Update()
     {
@@ -68,8 +70,10 @@ public class Pool:MonoBehaviour
                     attacking.Remove(i);
                 }
                 Vector3 playerPos = player.transform.position;
-                float distance = Math.Abs((this.transform.position - playerPos).magnitude);
-                if (distance > entity.proximityOffset - entity.proximityPrecision && distance < entity.proximityOffset + entity.proximityPrecision)
+                float distance = Math.Abs((entity.transform.position - playerPos).magnitude);
+//                Debug.DrawLine(entity.transform.position,playerPos);
+//                Debug.Log("distance from entity n°" + i + " to player " + distance);
+                if (entity.state == EnemyBehaviourState.Chasing && distance > entity.proximityOffset - entity.proximityPrecision && distance < entity.proximityOffset + entity.proximityPrecision)
                 {
                     EntityAttackRequest(i);
                 }
@@ -80,10 +84,12 @@ public class Pool:MonoBehaviour
 
     public bool EntityAttackRequest(int index)//Allow an entity to ask if it can attack the player
     {
+        //Debug.Log("Attack request for entity n°" + index);
         if (pool[index].state != EnemyBehaviourState.Disabled)
         {
             if (attacking.Count < maxEntitiesAttacking && pool[index].state != EnemyBehaviourState.Fighting)//there is at least 1 spot left as an attacker
             {
+                Debug.Log("Entity n°" + index + " is ready to attack !");
                 attacking[index] = true;
                 pool[index].state = EnemyBehaviourState.Fighting;
                 return true;
