@@ -32,6 +32,10 @@ public class EnemyComponent : MonoBehaviour
     private bool isGrounded = false;
 
     public float proximityOffset = 1f;
+    public float proximityPrecision = 0.1f;
+    
+    public float attackProbability = 0.01f;
+
     private Vector3 currentSurfaceNormal;
 
     private Vector3 movingDirection;
@@ -81,14 +85,26 @@ public class EnemyComponent : MonoBehaviour
             else if (state == EnemyBehaviourState.Chasing)
             { 
                 target = player.transform.position;
-                target -= (player.transform.position - transform.position).normalized*proximityOffset;//slight offset in order to let the spiders wait arround the player and not under hes feets
+                target -= (player.transform.position - transform.position).normalized*proximityOffset; //slight offset in order to let the spiders wait arround the player and not under hes feets
+            
                 checkDistanceFromPlayer();
                 move();
+            }else if (state == EnemyBehaviourState.Fighting)
+            {
+                Debug.DrawLine(transform.position,player.transform.position);
+                //Debug.Log(name + " is in Fighting state");
+
+                if (UnityEngine.Random.Range(0f, 1f) < attackProbability)
+                {
+                    Debug.Log(name + " is attacking the player !");
+                }
             }
+
             if (HP <= 0)
             {
                 state = EnemyBehaviourState.Disabled;
             }
+           
         }
         
         
@@ -112,7 +128,10 @@ public class EnemyComponent : MonoBehaviour
             }
             if (distance < enemyDetectionDistance)
             {
-                state = EnemyBehaviourState.Chasing;
+                if (state != EnemyBehaviourState.Fighting)
+                {
+                    state = EnemyBehaviourState.Chasing;
+                }
             }else if (distance > outOfRangeDistance)
             {
                 //Debug.Log("to disable");
@@ -161,9 +180,12 @@ public class EnemyComponent : MonoBehaviour
             var toTarget = target - transform.position;
             var toUp = currentSurfaceNormal;
             float sine = 0f;
-            for (int i = 1; i <= sineOctaves; i++)
+            if (state == EnemyBehaviourState.Chasing)
             {
-                sine += Mathf.PerlinNoise(walkingSeed+Time.time * (sineScale * i), i) * 2 - 1;
+                for (int i = 1; i <= sineOctaves; i++)
+                {
+                    sine += Mathf.PerlinNoise(walkingSeed+Time.time * (sineScale * i), i) * 2 - 1;
+                }
             }
             transform.rotation = Quaternion.LookRotation(toUp.normalized, -toTarget.normalized);
             transform.Rotate(Vector3.right, 90f, Space.Self);
@@ -217,12 +239,20 @@ public class EnemyComponent : MonoBehaviour
         return avoidanceMove;
     }
 
+    
+    
     private void OnDrawGizmosSelected()
     {    
         Gizmos.color=Color.red;
         Gizmos.DrawRay(transform.position + transform.up*surfaceDetectionOffset,-transform.up*surfaceDetectionDistance);
         Gizmos.color=Color.green;
         Gizmos.DrawRay(transform.position,movingDirection);
-
+        Vector3 playerPos = player.transform.position;
+        float distance = Math.Abs((this.transform.position - playerPos).magnitude);
+        Debug.Log("distance from entity to player " + distance);
+        if (distance > this.proximityOffset - this.proximityPrecision && distance < this.proximityOffset + this.proximityPrecision)
+        {
+            Debug.Log("ASK FOR ATTACK ");
+        }
     }
 }
