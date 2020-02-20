@@ -194,7 +194,7 @@ public class ChunkManager : MonoBehaviour
     }
 
     //return a array, first value is the position and the second is the rotation !
-    Vector3[] getPositionOnChunks()
+    public Vector3[] getPositionOnChunks()
     {
         Vector3[] rez = new Vector3[2];
 
