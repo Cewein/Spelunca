@@ -1,18 +1,19 @@
-This is the file where each "hat" is put and who's wearing it.
+Team :
 
 Tom :
   - Gameplay programmer
   - UI programmer
   - Game designer
+  - Boss AI programmer
   
 Antoine :
-  - IA programmer
+  - Crowd programmer
+  - Entity AI programmer
   - Graphist
-  - crowd programmer
   - UI programmer
+  - Gameplay programmer
 
 Max :
   - Environnement programmer
   - graphics programmer
   - GPU programmer
-  
