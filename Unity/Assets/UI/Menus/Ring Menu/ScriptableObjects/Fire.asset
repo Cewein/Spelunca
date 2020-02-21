@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bd3bfc6d30faf439d75a2bd7aca2e6, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  Name: Fire
+  Type: 1
   Icon: {fileID: 21300000, guid: 43c51a0333f86194fa109ffd1651cfa0, type: 3}
-  NextRing: {fileID: 0}

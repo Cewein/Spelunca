@@ -28,11 +28,11 @@ public class Gauge : MonoBehaviour
         };
         gunLoader.reload += (reloading, resource, quantity) =>
         {
-            if (resource.Type != currentResource.Type)
-            {
+           /* if (resource.Type != currentResource.Type)
+            {*/
                 currentResource = resource;
                 gaugeUI.color = currentResource.Color;
-            }
+            /*}*/
 
             if (currentResource.Type == ResourceType.normal) setGaugeToNormalResource();
             else gaugeUI.fillAmount += quantity / gunLoader.Capacity;

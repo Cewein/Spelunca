@@ -7,9 +7,8 @@ namespace UI.Menu.RingMenu
     [CreateAssetMenu(fileName = "RingElement", menuName = "Menu/RingMenu/Element", order = 2)]
     public class RingElement : ScriptableObject
     {
-        public string Name;
+        public ResourceType Type;
         public Sprite Icon;
-        public Ring NextRing;
     }
 }
 

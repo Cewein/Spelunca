@@ -38,8 +38,24 @@ public class GunLoader : MonoBehaviour
           return currentResource;
       }
 
-      
+      set
+      {
+          Resource old = currentResource;
+          currentResource = value;
+          if (currentResource.Type == ResourceType.normal)
+          {
+              isReloading(true, currentResource, 0);
+          }
+          else
+          {
+              if (old.Type != ResourceType.normal) ResourcesStock.Instance.setResource(old.Type,currentResourceQuantity);
+              currentResourceQuantity = 0;
+              isReloading(true, currentResource, ResourcesStock.Instance.takeResource(currentResource.Type, capacity));
+          }
+      } 
   }
+
+  public Resource NormalResource => normalResource;
 
   public float CurrentResourceQuantity => currentResourceQuantity;
 

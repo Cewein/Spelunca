@@ -8,14 +8,14 @@ namespace UI.Menu.RingMenu
 public class RingMenu : MonoBehaviour
 {
    public Ring Data;
-    public RingPiece RingCakePiecePrefab;
-    public float GapWidthDegree = 1f;
-    public Action<string> callback;
-    protected RingPiece[] Pieces;
-    protected RingMenu Parent;
-    public string Path;
-
-    void Start()
+   public RingPiece RingCakePiecePrefab;
+   public float GapWidthDegree = 1f;
+   public Action<ResourceType> callback;
+   private RingPiece[] Pieces;
+   private RingMenu Parent;
+   private int activeElement;
+   private ResourceType choosenType;
+   void Start()
     {
         var stepLength = 360f / Data.Elements.Length;
         var iconDist = Vector3.Distance(RingCakePiecePrefab.Icon.transform.position, RingCakePiecePrefab.CakePiece.transform.position);
@@ -43,38 +43,21 @@ public class RingMenu : MonoBehaviour
         }
     }
 
+    public void SetActive(bool isActive)
+    {
+        callback?.Invoke(Data.Elements[activeElement].Type);
+        Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+        gameObject.SetActive(isActive);
+    }
     private void Update()
     {
+
         var stepLength = 360f / Data.Elements.Length;
         var mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - transform.position, Vector3.forward) + stepLength / 2f);
-        var activeElement = (int)(mouseAngle / stepLength);
+        activeElement = (int)(mouseAngle / stepLength);
         for (int i = 0; i < Data.Elements.Length; i++)
         {
-            if(i == activeElement)
-                Pieces[i].CakePiece.color = new Color(1f, 1f, 1f, 0.75f);
-            else
-                Pieces[i].CakePiece.color = new Color(1f, 1f, 1f, 0.5f);
-        }
-
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            var path = Path + "/" + Data.Elements[activeElement].Name;
-            if (Data.Elements[activeElement].NextRing != null)
-            {
-                var newSubRing = Instantiate(gameObject, transform.parent).GetComponent<RingMenu>();
-                newSubRing.Parent = this;
-                for (var j = 0; j < newSubRing.transform.childCount; j++)
-                    Destroy(newSubRing.transform.GetChild(j).gameObject);
-                newSubRing.Data = Data.Elements[activeElement].NextRing;
-                newSubRing.Path = path;
-                newSubRing.callback = callback;
-            }
-            else
-            {
-                callback?.Invoke(path);
-            }
-            gameObject.SetActive(false);
+            Pieces[i].CakePiece.color = i == activeElement+1  ? new Color(1f, 1f, 1f, 0.75f) : new Color(1f, 1f, 1f, 0.5f);
         }
     }
 

@@ -27,17 +27,8 @@ public class PlayerStats : MonoBehaviour
         hurt?.Invoke(damage, direction, damageType);
         life -= damage;
         if (life <= 0) isPlayerDie(true);
-
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SetDamage(5, new Vector3(15,20+Time.deltaTime,0));
-        }
-    }
-    
     public void RestoreLife(int hp)
     {
         heal?.Invoke(hp);

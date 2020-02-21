@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         DebugResourcesStockNotLoading();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private IEnumerator DebugResourcesStockNotLoading()

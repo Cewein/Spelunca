@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1247ff52454b03a428b07271769e02c2, type: 3}
-  m_Name: MainRing
+  m_Name: ResourcesSelectionMenu
   m_EditorClassIdentifier: 
   Elements:
   - {fileID: 11400000, guid: f8fea1167ada1324dae15cb5905cb40c, type: 2}
   - {fileID: 11400000, guid: 18ef8ea0ec3ceed4dbeaa923f708ea1f, type: 2}
   - {fileID: 11400000, guid: a4171f671e85eb742adf4c97893f209f, type: 2}
+  - {fileID: 11400000, guid: d19e061ddc05e684a849eb4b094f1978, type: 2}

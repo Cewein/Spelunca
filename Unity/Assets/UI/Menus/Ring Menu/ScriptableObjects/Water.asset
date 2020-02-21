@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58bd3bfc6d30faf439d75a2bd7aca2e6, type: 3}
-  m_Name: Plant
+  m_Name: Water
   m_EditorClassIdentifier: 
-  Type: 3
-  Icon: {fileID: 21300000, guid: 6d0ef07c8d878844f8f1bf732dc9f807, type: 3}
+  Type: 2
+  Icon: {fileID: 21300000, guid: c3dc8ff64545b7d4a98669335a518fee, type: 3}
