@@ -38,7 +38,7 @@ public class Raycast : MonoBehaviour
 
     #region  Methodes ==========
    
-    private void Update()
+    public void PerformRaycast()
     {
         Ray ray = cam.ScreenPointToRay(transform.position);
 
