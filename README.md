@@ -9,7 +9,7 @@ Developpement roadmap for this part :
 - [x] Resource types
 - [ ] Resources stock in a scriptable object singleton automatically created from existing resource types(work but there's some bugs)
 - [X] Resources selection menu to charge the gun
-- [x] Gun resource gauge
+- [ ] Gun resource gauge (There's some bugs to fix)
 - [x] Player life gauge
 - [x] Player hit direction marker
 - [ ] Player statistics (life, stamina)

@@ -928,6 +928,11 @@ PrefabInstance:
       propertyPath: raycastReticle
       value: 
       objectReference: {fileID: 1290708355}
+    - target: {fileID: 7818172667129510142, guid: 35dafa8cf209d044b8d2c4af6080713b,
+        type: 3}
+      propertyPath: jumpForce
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35dafa8cf209d044b8d2c4af6080713b, type: 3}
 --- !u!114 &2032945477 stripped
