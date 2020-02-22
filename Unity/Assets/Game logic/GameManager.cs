@@ -1,19 +1,28 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
-    
+    [SerializeField]
     private ResourcesStock resourcesStock;
 
 
     void Awake()
     {
+        DebugResourcesStockNotLoading();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private IEnumerator DebugResourcesStockNotLoading()
+    {
+        yield return new WaitForEndOfFrame();
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-        initRun();
+      //  initRun();
     }
 
     //Initializes the game for each run.

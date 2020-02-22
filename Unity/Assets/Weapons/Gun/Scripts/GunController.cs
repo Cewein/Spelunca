@@ -81,6 +81,7 @@ public class GunController : MonoBehaviour
             muzzleFlashEffect.Play();
             try
             {
+                raycastReticle.PerformRaycast();
                 raycastReticle.Hit.transform.gameObject.GetComponent<IDamageable>().setDamage(raycastReticle.Hit, damageEffect);
             }
             catch (NullReferenceException e){}
