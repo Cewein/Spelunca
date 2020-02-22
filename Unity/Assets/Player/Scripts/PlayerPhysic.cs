@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(MinerController))]
@@ -16,6 +17,9 @@ public class PlayerPhysic : MonoBehaviour
     [Tooltip("The player jump force in unit per frame.")][SerializeField]
     private float jumpForce = 500f;
     
+    [Tooltip("The number of jump the player can do before re-land.")][SerializeField]
+    private int additionnalJump = 1;
+
     #endregion
     
     #region Fields ==========
@@ -25,7 +29,7 @@ public class PlayerPhysic : MonoBehaviour
     private Vector3 jumpVelocity = Vector3.zero;
     private float currentSpeed = 0;
     private Rigidbody rb;
-    
+
     #endregion
     
     public void Awake()
@@ -55,7 +59,7 @@ public class PlayerPhysic : MonoBehaviour
 
     private bool jump(bool isJumping)
     {
-        if (isJumping)
+        if (isJumping && additionnalJump == 0)
         {
             jumpVelocity = transform.up * (jumpForce * rb.mass);
         }
@@ -66,5 +70,16 @@ public class PlayerPhysic : MonoBehaviour
     {
         rb.velocity = transform.up * rb.velocity.y + newVelocity * Time.fixedDeltaTime;
         rb.AddForce(jumpVelocity);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        additionnalJump--;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        additionnalJump++;
+        Debug.Log("ezdzef");
     }
 }
