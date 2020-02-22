@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   type: 1
-  color: {r: 0.86767596, g: 0.9056604, b: 0, a: 1}
+  color: {r: 1, g: 1, b: 0, a: 1}
   gaugeIcon: {fileID: 0}
   inventoryIcon: {fileID: 0}

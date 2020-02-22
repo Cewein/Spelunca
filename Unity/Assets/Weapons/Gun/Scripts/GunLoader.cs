@@ -11,13 +11,15 @@ public class GunLoader : MonoBehaviour
     
     [Tooltip("The maximum amount of resource the loader can take.")][SerializeField]
     private float capacity = 50;
+    [Tooltip("base resources")][SerializeField]
+    private Resource normalResource = null;
+
     
     #endregion
 
     #region Fields ==========
 
     private Resource currentResource;
-    private Resource normalResource;
     private float currentResourceQuantity = 0;
     public bool printDebug = false;
 
@@ -30,14 +32,30 @@ public class GunLoader : MonoBehaviour
       get
       {
           if (currentResource != null) return currentResource;
-          Resource[] list = Resources.FindObjectsOfTypeAll<Resource>();
-          normalResource = list.First(item => item.Type == ResourceType.normal);
-          currentResource = normalResource;
+          //Resource[] list = Resources.FindObjectsOfTypeAll<Resource>();
+         // normalResource = list.First(item => item.Type == ResourceType.normal)
+         currentResource = normalResource;
           return currentResource;
       }
 
-      
+      set
+      {
+          Resource old = currentResource;
+          currentResource = value;
+          if (currentResource.Type == ResourceType.normal)
+          {
+              isReloading(true, currentResource, 0);
+          }
+          else
+          {
+              if (old.Type != ResourceType.normal) ResourcesStock.Instance.setResource(old.Type,currentResourceQuantity);
+              currentResourceQuantity = 0;
+              isReloading(true, currentResource, ResourcesStock.Instance.takeResource(currentResource.Type, capacity));
+          }
+      } 
   }
+
+  public Resource NormalResource => normalResource;
 
   public float CurrentResourceQuantity => currentResourceQuantity;
 
