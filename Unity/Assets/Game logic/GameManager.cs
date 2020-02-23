@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         if (gameOverScreen != null) gameOverScreen.SetActive(false);
 
     }
+    
     private IEnumerator DebugResourcesStockNotLoading()
     {
         yield return new WaitForEndOfFrame();
@@ -28,10 +29,18 @@ public class GameManager : MonoBehaviour
         else if (instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
         //  initRun();
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        if (player != null) player.die += PlayerDie;
+        gameOverScreen.SetActive(false);
     }
 
     void PlayerDie(bool isDie)
     {
+
         gameOverScreen.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -42,6 +51,7 @@ public class GameManager : MonoBehaviour
     {          
         SceneManager.LoadScene(path);
     }
+    
 
     public void StartNewGame()
     {

@@ -682,7 +682,7 @@ MonoBehaviour:
   player: {fileID: 0}
   gameOverScreen: {fileID: 0}
   mainMenuPath: MainMenu
-  gameScenePath: MainGame
+  gameScenePath: MainGame 
 --- !u!1 &1034848140
 GameObject:
   m_ObjectHideFlags: 0
