@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   type: 2
-  color: {r: 0.0047169924, g: 0.9087961, b: 1, a: 0}
+  color: {r: 0.43867922, g: 0.71603775, b: 1, a: 1}
   gaugeIcon: {fileID: 0}
   inventoryIcon: {fileID: 0}

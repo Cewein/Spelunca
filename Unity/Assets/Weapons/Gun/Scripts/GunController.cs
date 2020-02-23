@@ -29,6 +29,8 @@ public class GunController : MonoBehaviour
     
     [Tooltip("The reticle that perform raycast.")] [SerializeField]
     private Raycast raycastReticle = null;
+
+    private GunLoader magazine;
     
     #endregion ==========
     
@@ -47,6 +49,7 @@ public class GunController : MonoBehaviour
         muzzleFlashEffect = Instantiate(muzzleFlashEffect, muzzleFlashTransform.position, transform.rotation, transform);
         Cursor.visible = false;
         shoot += isShooting => fire(isShooting);
+        magazine = GetComponentInChildren<GunLoader>();
     }
 
     private void Update()
@@ -82,7 +85,7 @@ public class GunController : MonoBehaviour
             try
             {
                 raycastReticle.PerformRaycast();
-                raycastReticle.Hit.transform.gameObject.GetComponent<IDamageable>().setDamage(raycastReticle.Hit, damageEffect);
+                raycastReticle.Hit.transform.gameObject.GetComponent<IDamageable>().setDamage(raycastReticle.Hit, damageEffect, 5, magazine.CurrentResource.Type);
             }
             catch (NullReferenceException e){}
         }

@@ -27,10 +27,6 @@ public class PlayerController : MinerController
     
     #endregion    
     
-    private void Start()
-    {
-       
-    }
     private void Update()
     {
         isMoving(Input.GetAxis(horizontalInputName),Input.GetAxis(verticalInputName));
