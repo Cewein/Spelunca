@@ -283,7 +283,7 @@ PrefabInstance:
     - target: {fileID: 6124700756449901937, guid: 35dafa8cf209d044b8d2c4af6080713b,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2556418526028217263, guid: 35dafa8cf209d044b8d2c4af6080713b,
         type: 3}
@@ -694,6 +694,7 @@ GameObject:
   - component: {fileID: 995748768}
   - component: {fileID: 995748767}
   - component: {fileID: 995748766}
+  - component: {fileID: 995748769}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -749,6 +750,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &995748769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995748765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eeada4ba08a65c43b83d1a119ec3d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 556588627}
+  gameOverScreen: {fileID: 1877893070}
+  mainMenuPath: MainMenu
+  gameScenePath: MainGame
 --- !u!1 &1037837887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,3 +1070,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1877893070 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5098348536009341408, guid: c44004625961625478756368f76061cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 562323341}
+  m_PrefabAsset: {fileID: 0}

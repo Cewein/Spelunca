@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5937488517529757499}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pt muzzle flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1050263002767457672}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: _Models
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 5883835535419758632}
   - component: {fileID: 8150451824890549534}
   - component: {fileID: 3481722832461890320}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,6 +177,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: gun
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a14e77a8490562e4b9e268590100ba40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a14e77a8490562e4b9e268590100ba40,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -231,6 +236,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -6.1860003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7116191835717204158, guid: a14e77a8490562e4b9e268590100ba40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515514942009816929, guid: a14e77a8490562e4b9e268590100ba40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a14e77a8490562e4b9e268590100ba40, type: 3}
