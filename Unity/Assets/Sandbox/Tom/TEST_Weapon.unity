@@ -490,27 +490,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &782438055 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1947955267319284648, guid: 35dafa8cf209d044b8d2c4af6080713b,
+--- !u!114 &782438060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 579351607850769838, guid: 35dafa8cf209d044b8d2c4af6080713b,
     type: 3}
   m_PrefabInstance: {fileID: 1923475387}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &782438060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782438055}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6efc359a1fa9bfd45bad5d28f44a2c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 50
-  normalResource: {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef, type: 2}
-  printDebug: 1
 --- !u!1 &809159091
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,11 +928,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7818172667129510142, guid: 35dafa8cf209d044b8d2c4af6080713b,
-        type: 3}
-      propertyPath: jumpForce
-      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3266199510643913147, guid: 35dafa8cf209d044b8d2c4af6080713b,
         type: 3}

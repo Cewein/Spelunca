@@ -80,6 +80,5 @@ public class PlayerPhysic : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         additionnalJump++;
-        Debug.Log("ezdzef");
     }
 }

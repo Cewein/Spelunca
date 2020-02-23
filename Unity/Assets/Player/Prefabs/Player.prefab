@@ -425,7 +425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 150
   runSpeed: 500
-  jumpForce: 300
+  jumpForce: 500
+  additionnalJump: 1
 --- !u!114 &1028526497837865309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6167ba28a232b444ba017189514e3be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 100
+  maxLife: 100
 --- !u!1 &8439286332515187050
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,15 +759,15 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1250353013552642470, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
-        type: 3}
-      propertyPath: m_Name
-      value: Gun
-      objectReference: {fileID: 0}
     - target: {fileID: 2545470235819367702, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250353013552642470, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
+        type: 3}
+      propertyPath: m_Name
+      value: Gun
       objectReference: {fileID: 0}
     - target: {fileID: 4190003048818061736, guid: a3b48f56a63db0e47bcf71eb6911ceaa,
         type: 3}

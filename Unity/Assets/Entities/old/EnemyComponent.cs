@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = System.Random;
 
 public enum EnemyBehaviourState {Disabled,Idle,Jumping,Chasing,Waiting,Fighting,Falling}
-public class EnemyComponent : MonoBehaviour
+public class EnemyComponent : MonoBehaviour, IDamageable
 {
     [Header("Base entity stats")]
     [SerializeField]private float startHP = 10f; //the entity's start health points
@@ -96,7 +96,9 @@ public class EnemyComponent : MonoBehaviour
 
                 if (UnityEngine.Random.Range(0f, 1f) < attackProbability)
                 {
-                    Debug.Log(name + " is attacking the player !");
+                    //Debug.Log(name + " is attacking the player !"); 
+                    // TODO : compute attack direction to display hit mark on the HUD
+                    player.GetComponent<PlayerStats>().SetDamage(10, Vector3.zero);
                 }
             }
 
@@ -254,5 +256,12 @@ public class EnemyComponent : MonoBehaviour
         {
             Debug.Log("ASK FOR ATTACK ");
         }
+    }
+
+    public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
+    {
+        HP -= damage; 
+        ParticleSystem d = Instantiate(damageEffect, hit.point, Quaternion.identity);
+        d.Play();
     }
 }
