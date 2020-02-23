@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private ResourcesStock resourcesStock;
 
     public static GameManager instance = null;
     [SerializeField] private PlayerStats player = null;
@@ -13,6 +15,20 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        DebugResourcesStockNotLoading();
+
+        if (player != null) player.die += PlayerDie;
+        if (gameOverScreen != null) gameOverScreen.SetActive(false);
+
+    }
+    
+    private IEnumerator DebugResourcesStockNotLoading()
+    {
+        yield return new WaitForEndOfFrame();
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+        //  initRun();
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
@@ -20,25 +36,14 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         if (player != null) player.die += PlayerDie;
         gameOverScreen.SetActive(false);
-
-    }
-
-    //Initializes the game for each run.
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    void initRun()
-    {
-      
-    }
-
-    IEnumerator SetTimer(float t)
-    {
-        yield return new WaitForSeconds(t);
     }
 
     void PlayerDie(bool isDie)
     {
+
         gameOverScreen.SetActive(true);
-        SetTimer(2f);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         LoadLevel(mainMenuPath);
     }
 
@@ -48,4 +53,8 @@ public class GameManager : MonoBehaviour
     }
     
 
+    public void StartNewGame()
+    {
+        LoadLevel(gameScenePath);
+    }
 }
