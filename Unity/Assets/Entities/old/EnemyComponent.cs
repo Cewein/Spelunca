@@ -4,47 +4,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
+public enum EnemyBehaviourState {Disabled,Idle,Jumping,Chasing,Waiting,Fighting,Falling}
 public class EnemyComponent : MonoBehaviour
 {
-    
     [Header("Base entity stats")]
     [SerializeField]private float startHP = 10f; //the entity's start health points
     public float baseDamage = 1f; //base damage dealed when attacking an other entiy (such as a player)
     public float movingSpeed = 3f; //Speed at which the entity is able to move
 
-    [Header("Behaviours parameters")]
-    public GameObject target; //The target of the entity
+    [Header("Behaviours parameters")] 
+    public EnemyBehaviourState state;
+    public GameObject player; //The player
+    private Vector3 target = Vector3.zero; //The position the spider should head up to
     public float surfaceDetectionDistance = 1f; //Distance from the center point up to which the Enemy is able to detect the presence of a ground surface 
     public float surfaceDetectionOffset = 1f; //Offset form which the detection raycast is casted (used if the center point is set at the bottom of the 3D model
     public float surfaceWalkingHeightOffset = 1f; //Offset used to make the 3D model touch the ground with its feet/lugs/paws etc
+    public string groundLayer = "Default";
     public float avoidanceDistance = 0.1f; // Length of the raycasts casted in order to detect nearby fellow entities 
     
     public float sineScale = 1;
     public float sineOctaves = 1;
     public float directionErrorCoeff = 1;
+
+    public float enemyDetectionDistance = 7f;
+    public float outOfRangeDistance = 50f;
     
     private bool isGrounded = false;
+
+    public float proximityOffset = 1f;
+    public float proximityPrecision = 0.1f;
+    
+    public float attackProbability = 0.01f;
 
     private Vector3 currentSurfaceNormal;
 
     private Vector3 movingDirection;
     //Private variables
     private float HP;
-
     private float walkingSeed;
-    
 
-    public void hit(float damages)
-    {
-        HP -= damages;
-    }
-    
-    
+    //Falling behaviour
+    private float fallBeginingTime = 0f;
+    public float timeBeforeOOB = 3f;
+    public SkinnedMeshRenderer meshRenderer;
 
     private void Start()
     {
         HP = startHP;
         walkingSeed = UnityEngine.Random.Range(0,1000);
+        state = EnemyBehaviourState.Idle;
         /*RaycastHit hit;
         if (Physics.SphereCast(transform.position, surfaceWalkingHeightOffset, Vector3.up, out hit, 0,
             LayerMask.NameToLayer("Ground")))
@@ -54,31 +62,93 @@ public class EnemyComponent : MonoBehaviour
     }
     void Update()
     {
-        //isGrounded = false;
-        wallClimbBehaviour();
-        if (!isGrounded)
+        
+        checkDistanceFromPlayer();
+        if (state != EnemyBehaviourState.Disabled)
         {
-            transform.position = transform.position - Vector3.up * 9.81f * Time.deltaTime;
-            transform.up = Vector3.up;
+            //isGrounded = false;
+            wallClimbBehaviour();
+            if (!isGrounded)
+            {
+                transform.position = transform.position - Vector3.up * 9.81f * Time.deltaTime;
+                transform.up = Vector3.up;
+                if (state != EnemyBehaviourState.Falling)
+                {
+                    fallBeginingTime = Time.time;
+                }
+                state = EnemyBehaviourState.Falling;
+                if ((Time.time - fallBeginingTime) > timeBeforeOOB)
+                {
+                    state = EnemyBehaviourState.Disabled;
+                }
+            }
+            else if (state == EnemyBehaviourState.Chasing)
+            { 
+                target = player.transform.position;
+                target -= (player.transform.position - transform.position).normalized*proximityOffset; //slight offset in order to let the spiders wait arround the player and not under hes feets
+            
+                checkDistanceFromPlayer();
+                move();
+            }else if (state == EnemyBehaviourState.Fighting)
+            {
+                Debug.DrawLine(transform.position,player.transform.position);
+                //Debug.Log(name + " is in Fighting state");
+
+                if (UnityEngine.Random.Range(0f, 1f) < attackProbability)
+                {
+                    Debug.Log(name + " is attacking the player !");
+                }
+            }
+
+            if (HP <= 0)
+            {
+                state = EnemyBehaviourState.Disabled;
+            }
+           
         }
-        else
-        {
-            move();    
-        }
-        if (HP <= 0)
-        {
-            Destroy(gameObject);
-        }
+        
         
     }
 
+    public void hit(float damages)
+    {
+        HP -= damages;
+    }
+
+
+    public void checkDistanceFromPlayer()
+    {
+        if (state != EnemyBehaviourState.Disabled)
+        {
+            Vector3 playerPos = player.transform.position;
+            float distance = Math.Abs((this.transform.position - playerPos).magnitude);
+            if (name == "Araignée1")
+            {
+                //Debug.Log("Distance from player : " + distance);
+            }
+            if (distance < enemyDetectionDistance)
+            {
+                if (state != EnemyBehaviourState.Fighting)
+                {
+                    state = EnemyBehaviourState.Chasing;
+                }
+            }else if (distance > outOfRangeDistance)
+            {
+                //Debug.Log("to disable");
+                state = EnemyBehaviourState.Disabled;
+            }else{
+                state = EnemyBehaviourState.Idle;
+            }
+        }
+    }
+    
     public void wallClimbBehaviour()
     {
         //if (Physics.SphereCast(transform.position, positionHeightOffset*1.2f, Vector3.up, out hit, 0, 1 << LayerMask.NameToLayer("Ground"))) //Doesnt Work
         //if (Physics.Raycast(transform.position + transform.up*0.1f, -transform.up, out hit, detectionDistance, 1 << LayerMask.NameToLayer("Ground")))
         RaycastHit hit;
         
-        if (Physics.Raycast(transform.position + transform.up*surfaceDetectionOffset, -transform.up, out hit, surfaceDetectionDistance, 1 << LayerMask.NameToLayer("Ground"))){
+        if (Physics.Raycast(transform.position + transform.up*surfaceDetectionOffset, -transform.up, out hit, surfaceDetectionDistance, 1 << LayerMask.NameToLayer(groundLayer))){
             
             isGrounded = true;
             transform.position = hit.point + hit.normal * surfaceWalkingHeightOffset;
@@ -96,19 +166,26 @@ public class EnemyComponent : MonoBehaviour
         movingDirection = Vector3.zero;
         if (target != null)
         {
-            movingDirection = target.transform.position - transform.position;
-            movingDirection.Normalize();
-            transform.LookAt(target.transform);
+            movingDirection = target - transform.position;
+            if (movingDirection.magnitude > 1f)
+            {
+                movingDirection.Normalize();
+            }
+            //Debug.DrawRay(transform.position,movingDirection);
+            transform.LookAt(target);
             //transform.rotation =
-                    Quaternion.LookRotation(( transform.position-target.transform.position).normalized, currentSurfaceNormal);
+                    Quaternion.LookRotation(( transform.position-target).normalized, currentSurfaceNormal);
             //transform.up = currentSurfaceNormal;
             
-            var toTarget = target.transform.position - transform.position;
+            var toTarget = target - transform.position;
             var toUp = currentSurfaceNormal;
             float sine = 0f;
-            for (int i = 1; i <= sineOctaves; i++)
+            if (state == EnemyBehaviourState.Chasing)
             {
-                sine += Mathf.PerlinNoise(walkingSeed+Time.time * (sineScale * i), i) * 2 - 1;
+                for (int i = 1; i <= sineOctaves; i++)
+                {
+                    sine += Mathf.PerlinNoise(walkingSeed+Time.time * (sineScale * i), i) * 2 - 1;
+                }
             }
             transform.rotation = Quaternion.LookRotation(toUp.normalized, -toTarget.normalized);
             transform.Rotate(Vector3.right, 90f, Space.Self);
@@ -162,12 +239,20 @@ public class EnemyComponent : MonoBehaviour
         return avoidanceMove;
     }
 
+    
+    
     private void OnDrawGizmosSelected()
     {    
         Gizmos.color=Color.red;
         Gizmos.DrawRay(transform.position + transform.up*surfaceDetectionOffset,-transform.up*surfaceDetectionDistance);
         Gizmos.color=Color.green;
         Gizmos.DrawRay(transform.position,movingDirection);
-
+        Vector3 playerPos = player.transform.position;
+        float distance = Math.Abs((this.transform.position - playerPos).magnitude);
+        Debug.Log("distance from entity to player " + distance);
+        if (distance > this.proximityOffset - this.proximityPrecision && distance < this.proximityOffset + this.proximityPrecision)
+        {
+            Debug.Log("ASK FOR ATTACK ");
+        }
     }
 }

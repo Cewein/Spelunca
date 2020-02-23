@@ -11,7 +11,7 @@ public class ChunkManager : MonoBehaviour
     public Transform player;
     public uint chunkSize;
     public uint viewRange = 5;
-    [SerializeField] private float floor = 0;
+    public float floor = 0;
     public GameObject chunk;
 
     //chunks 
@@ -21,6 +21,9 @@ public class ChunkManager : MonoBehaviour
 
     //zone of spawn
     private Vector3 playerSpawn;
+    [Header("Boss position")]
+    //end zone
+    public Transform boss;
 
     //frustum cull of the chunks
     Plane[] planes;
@@ -28,10 +31,6 @@ public class ChunkManager : MonoBehaviour
 
     [Header("Noise setting")]
     public uint octaveNumber = 5;
-
-    [Header("Debug setting")]
-    public bool debugNormals = false;
-    
     
     private void Awake()
     {
@@ -39,6 +38,7 @@ public class ChunkManager : MonoBehaviour
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
         DensityGenerator.octaveNumber = octaveNumber;
         DensityGenerator.floor = floor;
+        DensityGenerator.endZone = boss.position;
     }
 
     void Start()
@@ -48,6 +48,18 @@ public class ChunkManager : MonoBehaviour
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
         playerSpawn = player.position;
         generateChunks();
+
+        for(int i = 0; i < 1500; i++)
+        {
+            Vector3[] spawnPos = getPositionOnChunks();
+            if(spawnPos[0] != Vector3.zero)
+            {
+                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                cube.transform.position = spawnPos[0];
+                cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
+            }
+        }
+
     }
 
     void Update()
@@ -168,5 +180,44 @@ public class ChunkManager : MonoBehaviour
                     return true;
 
         return false;
+    }
+
+    //hash function, warning might collide a lot not tested properly
+    //because it the not the goal of the function we just need 
+    //value between zero and one
+    // TODO move function into static class
+    float hash(Vector3 vec)
+    {
+        double val = (1299689.0f * Math.Abs(vec.x) + 611953.0f * Math.Abs(vec.y)) / 898067 * Math.Abs(vec.z);
+        print((float)(val - Math.Truncate(val)) - 0.5f);
+        return (float)(val - Math.Truncate(val)) - 0.5f;
+    }
+
+    //return a array, first value is the position and the second is the rotation !
+    public Vector3[] getPositionOnChunks()
+    {
+        Vector3[] rez = new Vector3[2];
+
+        rez[0] = Vector3.zero;
+        rez[1] = Vector3.zero;
+
+        int x = (int)UnityEngine.Random.Range(0, viewRange - 1);
+        int y = (int)UnityEngine.Random.Range(0, viewRange - 1);
+        int z = (int)UnityEngine.Random.Range(0, viewRange - 1);
+
+        chunk ck = chunks[x, y, z].GetComponent<chunk>();
+        Vector3 pos = chunks[x, y, z].transform.position;
+
+        if (hash(pos) > 0)
+        {
+            int len = ck.chunkData.mesh.vertices.Length;
+            if (len > 0)
+            {
+                int v = (int)(UnityEngine.Random.Range(0, ck.chunkData.mesh.vertices.Length - 1));
+                rez[0] = ck.chunkData.mesh.vertices[v] + pos;
+                rez[1] = ck.chunkData.mesh.normals[v];
+            }
+        }
+        return  rez;
     }
 }
