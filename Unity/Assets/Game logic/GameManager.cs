@@ -1,41 +1,50 @@
-﻿using System.Collections;
+﻿using UnityEngine.SceneManagement;
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    public static GameManager instance = null;
     [SerializeField]
     private ResourcesStock resourcesStock;
 
+    public static GameManager instance = null;
+    [SerializeField] private PlayerStats player = null;
+    [SerializeField] private GameObject gameOverScreen = null;
+    public string mainMenuPath;
+    public string gameScenePath;
 
     void Awake()
     {
         DebugResourcesStockNotLoading();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
 
+        if (player != null) player.die += PlayerDie;
+        if (gameOverScreen != null) gameOverScreen.SetActive(false);
+
+    }
     private IEnumerator DebugResourcesStockNotLoading()
     {
         yield return new WaitForEndOfFrame();
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-      //  initRun();
+        //  initRun();
     }
 
-    //Initializes the game for each run.
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    void initRun()
+    void PlayerDie(bool isDie)
     {
-       // do global var initialisation for the current run.
-
-       if (ResourcesStock.Instance == null)
-       {
-           resourcesStock = ScriptableObject.CreateInstance<ResourcesStock>();
-       }
-
+        gameOverScreen.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        LoadLevel(mainMenuPath);
     }
 
+    void LoadLevel(string path)
+    {          
+        SceneManager.LoadScene(path);
+    }
+
+    public void StartNewGame()
+    {
+        LoadLevel(gameScenePath);
+    }
 }
