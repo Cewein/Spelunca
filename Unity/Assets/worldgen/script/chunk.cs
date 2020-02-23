@@ -11,7 +11,7 @@ public class chunk : MonoBehaviour
     public MeshCollider meshCollider;
 
     //Create a the chunk with a given size
-    public void createMarchingBlock(uint size)
+    public void createMarchingBlock(uint size, Vector3 playerSpawn)
     {
         //init
         chunkData.meshData = new MeshData();
@@ -21,7 +21,7 @@ public class chunk : MonoBehaviour
         //create denstiy 
         //TODO make it a compute shader
         //we make it size + 3 because it's for the normals
-        chunkData.density = DensityGenerator.find(size + 3, pos - Vector3.one);
+        chunkData.density = DensityGenerator.find(size + 3, pos - Vector3.one, playerSpawn);
 
         //loop for creating the mesh
         //TODO make it a compute shader

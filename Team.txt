@@ -1,0 +1,19 @@
+Team :
+
+Tom :
+  - Gameplay programmer
+  - UI programmer
+  - Game designer
+  - Boss AI programmer
+  
+Antoine :
+  - Crowd programmer
+  - Entity AI programmer
+  - Graphist
+  - UI programmer
+  - Gameplay programmer
+
+Max :
+  - Environnement programmer
+  - graphics programmer
+  - GPU programmer

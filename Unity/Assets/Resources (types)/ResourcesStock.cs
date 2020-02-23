@@ -22,7 +22,6 @@ public class ResourcesStock : SingletonScriptableObject<ResourcesStock>
         }
     }
 
-    
     public float takeResource(ResourceType resource, float quantity)
     {
         float resourceTaken = ((stock[resource] - quantity )> 0) ? quantity  : stock[resource];

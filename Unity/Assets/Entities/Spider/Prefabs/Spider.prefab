@@ -1397,15 +1397,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHP: 10
   baseDamage: 1
-  movingSpeed: 6
-  target: {fileID: 0}
+  movingSpeed: 3
+  state: 1
+  player: {fileID: 0}
   surfaceDetectionDistance: 0.7
   surfaceDetectionOffset: 0
   surfaceWalkingHeightOffset: 0.05
+  groundLayer: Default
   avoidanceDistance: 0.1
   sineScale: 1
   sineOctaves: 3
   directionErrorCoeff: 1
+  enemyDetectionDistance: 7
+  outOfRangeDistance: 50
+  proximityOffset: 2
+  proximityPrecision: 0.1
+  attackProbability: 0.01
+  timeBeforeOOB: 3
+  meshRenderer: {fileID: 3365880456402187860}
 --- !u!1 &4827385143590811802
 GameObject:
   m_ObjectHideFlags: 0

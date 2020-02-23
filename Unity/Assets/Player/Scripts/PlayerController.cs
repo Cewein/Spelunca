@@ -26,6 +26,7 @@ public class PlayerController : MinerController
     private string jumpInputName = "Jump";
     
     #endregion    
+    
     private void Update()
     {
         isMoving(Input.GetAxis(horizontalInputName),Input.GetAxis(verticalInputName));
