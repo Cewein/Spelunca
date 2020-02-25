@@ -84,6 +84,16 @@ public class ChunkManager : MonoBehaviour
             Time.timeScale = timeScaleTemp;
         }
 
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            player.position = playerSpawn;
+        }
+
+        if (Input.GetKeyUp(KeyCode.F2))
+        {
+            player.position = new Vector3(boss.position.x, boss.position.y + 30, boss.position.z);
+        }
+
         frustumCulling();
 
     }
