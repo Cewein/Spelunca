@@ -49,16 +49,16 @@ public class ChunkManager : MonoBehaviour
         playerSpawn = player.position;
         generateChunks();
 
-        for(int i = 0; i < 1500; i++)
-        {
-            Vector3[] spawnPos = getPositionOnChunks();
-            if(spawnPos[0] != Vector3.zero)
-            {
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                cube.transform.position = spawnPos[0];
-                cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
-            }
-        }
+        //for(int i = 0; i < 1500; i++)
+        //{
+        //    Vector3[] spawnPos = getPositionOnChunks();
+        //    if(spawnPos[0] != Vector3.zero)
+        //    {
+        //        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //        cube.transform.position = spawnPos[0];
+        //        cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
+        //    }
+        //}
 
     }
 
