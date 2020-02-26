@@ -12,17 +12,18 @@ This is a rogue-lite so death will come sooner than you think. <br>
 
 ![alt text](https://i.imgur.com/F5XwrFB.png)
 <hr>
+
 ## Controle
-up      : Z<hr>
-down    : S<hr>
-left    : Q<hr>
-right   : D<hr>
-Jump    : SPACE<hr>
+up      : Z<br>
+down    : S<br>
+left    : Q<br>
+right   : D<br>
+Jump    : SPACE<br>
 
 ## CHEAT
-F1 : TP TO SPAWN<hr>
-F2 : TP TO BOSS<hr>
-TAB : SPAWN SPIDER<hr>
+F1 : TP TO SPAWN<br>
+F2 : TP TO BOSS<br>
+TAB : SPAWN SPIDER<br>
 
 ## world generation
 the world generation plan (branch: worldgen):
