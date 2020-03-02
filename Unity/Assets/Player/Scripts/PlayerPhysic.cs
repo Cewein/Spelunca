@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
+public enum GrapplingHookState{Expanding,Pulling,Retracting,NotInUse}
+
 [RequireComponent(typeof(MinerController))]
 public class PlayerPhysic : MonoBehaviour
 {
@@ -20,6 +22,26 @@ public class PlayerPhysic : MonoBehaviour
     [Tooltip("The number of jump the player can do before re-land.")][SerializeField]
     private int additionnalJump = 1;
 
+    [Header("Grappling Hook parameters")]
+    [Tooltip("The origin of the grappling hook.")] [SerializeField]
+    private Transform GHOrigin;
+    [Tooltip("The player's camera.")][SerializeField]
+    private Camera GHCamera;
+    [Tooltip("The maximum distance of the grappling hook's range'.")][SerializeField]
+    private float GHMaxRangeDistance = 100f;
+    [Tooltip("The minimum distance of the grappling hook's acceleration.")][SerializeField]
+    private float GHMinDistance = 10f;
+    [Tooltip("The maximum distance of the grappling hook's acceleration.")][SerializeField]
+    private float GHMaxDistance = 40f;
+    [Tooltip("The base speed of the grappling's pull.")][SerializeField]
+    private float GHBasePullSpeed = 2f;
+    [Tooltip("The deploying speed of the grappling hook.")][SerializeField]
+    private float GHDeploySpeed = 5f;
+    [Tooltip("The retracting speed of the grappling hook.")][SerializeField]
+    private float GHRetractSpeed = 5f;
+    [Tooltip("A prefab to spawn at target's position when shooting'")][SerializeField]
+    private GameObject GHDebugTargetPrefab;
+    
     #endregion
     
     #region Fields ==========
@@ -29,7 +51,11 @@ public class PlayerPhysic : MonoBehaviour
     private Vector3 jumpVelocity = Vector3.zero;
     private float currentSpeed = 0;
     private Rigidbody rb;
-
+    
+    //Grappling hook variables
+    private bool previousGrappingInput = false;//The grappling hook's input during the previous state
+    private GrapplingHookState grapplingState = GrapplingHookState.NotInUse;
+    private Vector3 hookTarget;
     #endregion
     
     public void Awake()
@@ -66,6 +92,31 @@ public class PlayerPhysic : MonoBehaviour
         else jumpVelocity = Vector3.zero;
         return isJumping;
     }
+    
+    private bool grapplingHook(bool isGrappling)
+    {
+        if (previousGrappingInput == true && isGrappling == false)//Le joueur a relaché la touche, on doit arreter le grappin
+        {
+            grapplingState = GrapplingHookState.Retracting;
+            
+        }else if (previousGrappingInput == false && isGrappling == true)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(GHOrigin.position,GHCamera.transform.forward,out hit,GHMaxRangeDistance)){
+                hookTarget = hit.point;
+                GHDebugTargetPrefab.transform.position = hookTarget;
+                grapplingState = GrapplingHookState.Expanding;
+            }
+        }
+
+        if (grapplingState == GrapplingHookState.Expanding)
+        {
+            Vector3 direction = hookTarget - GHOrigin.position;
+            
+        }
+        return isGrappling;
+    }
+    
     void setVelocity()
     {
         rb.velocity = transform.up * rb.velocity.y + newVelocity * Time.fixedDeltaTime;

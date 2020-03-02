@@ -427,6 +427,15 @@ MonoBehaviour:
   runSpeed: 500
   jumpForce: 500
   additionnalJump: 1
+  GHOrigin: {fileID: 0}
+  GHCamera: {fileID: 0}
+  GHMaxRangeDistance: 100
+  GHMinDistance: 10
+  GHMaxDistance: 40
+  GHBasePullSpeed: 2
+  GHDeploySpeed: 5
+  GHRetractSpeed: 5
+  GHDebugTargetPrefab: {fileID: 0}
 --- !u!114 &1028526497837865309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +475,7 @@ MonoBehaviour:
   azimuthInputName: Mouse X
   elevationInputName: Mouse Y
   jumpInputName: Jump
+  grapplingInputName: Grappling
 --- !u!114 &1281445086180194677
 MonoBehaviour:
   m_ObjectHideFlags: 0
