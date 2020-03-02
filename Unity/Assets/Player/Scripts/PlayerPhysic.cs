@@ -65,6 +65,7 @@ public class PlayerPhysic : MonoBehaviour
 
         minerController.move += move;
         minerController.jump += isJumping => { jump(isJumping);};
+        minerController.grapplingHook += isGrappling => { grapplingHook(isGrappling);};
         minerController.run += isRunning => { run(isRunning);};
     }
     
@@ -95,6 +96,11 @@ public class PlayerPhysic : MonoBehaviour
     
     private bool grapplingHook(bool isGrappling)
     {
+        Debug.Log("grapplingHook");
+        if (isGrappling)
+        {
+            Debug.Log("Grappling input !");
+        }
         if (previousGrappingInput == true && isGrappling == false)//Le joueur a relaché la touche, on doit arreter le grappin
         {
             grapplingState = GrapplingHookState.Retracting;
@@ -114,6 +120,8 @@ public class PlayerPhysic : MonoBehaviour
             Vector3 direction = hookTarget - GHOrigin.position;
             
         }
+
+        previousGrappingInput = isGrappling;
         return isGrappling;
     }
     

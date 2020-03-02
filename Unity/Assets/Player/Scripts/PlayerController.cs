@@ -36,7 +36,8 @@ public class PlayerController : MinerController
         isRotating(Input.GetAxis(azimuthInputName),Input.GetAxis(elevationInputName));
         isRunning(Input.GetButton(runInputName));
         isJumping(Input.GetButtonDown(jumpInputName));
-        isGrappling(Input.GetButtonDown(grapplingInputName));
+        Debug.Log("Grappling button pressed : " + Input.GetButton(grapplingInputName));
+        isGrappling(Input.GetButton(grapplingInputName));
     }
     
 }
