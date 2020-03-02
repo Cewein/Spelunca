@@ -10,11 +10,12 @@ public class DensityGenerator
     public static uint octaveNumber;
     public static float floor;
     public static Vector3 endZone;
+    public static Vector3 playerSpawn;
     
     //density function
     //this is out put a value who is going to be use
     //in the mesh build procces
-    public static float density(float k, float x, float y, float z, Vector3 playerSpawn)
+    public static float density(float k, float x, float y, float z)
     {
         if (y > 100)
             return 0;
@@ -59,7 +60,7 @@ public class DensityGenerator
     //a 3D float array containing the density of the 
     //chunk, this array is use in the mesh build procces
     //and is  a crusial step in the marching algorithm
-    public static float [,,] find(float size, Vector3 chunkPos, Vector3 playerSpawn)
+    public static float [,,] find(float size, Vector3 chunkPos)
     {
         float[,,] block = new float[(int)size, (int)size, (int)size];
         noise.SetNoiseType(FastNoise.NoiseType.Perlin);
@@ -70,7 +71,7 @@ public class DensityGenerator
             {
                 for (int z = 0; z < size; z++)
                 {
-                    block[x, y, z] = density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z, playerSpawn);
+                    block[x, y, z] = density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z);
                 }
             }
         }

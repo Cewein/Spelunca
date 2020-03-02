@@ -21,7 +21,7 @@ public class chunk : MonoBehaviour
         //create denstiy 
         //TODO make it a compute shader
         //we make it size + 3 because it's for the normals
-        chunkData.density = DensityGenerator.find(size + 3, pos - Vector3.one, playerSpawn);
+        chunkData.density = DensityGenerator.find(size + 3, pos - Vector3.one);
 
         //loop for creating the mesh
         //TODO make it a compute shader
