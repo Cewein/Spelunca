@@ -2,8 +2,6 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public enum GrapplingHookState{Expanding,Pulling,Retracting,NotInUse}
-
 [RequireComponent(typeof(MinerController))]
 public class PlayerPhysic : MonoBehaviour
 {
@@ -23,6 +21,8 @@ public class PlayerPhysic : MonoBehaviour
     private int additionnalJump = 1;
 
     [Header("Grappling Hook parameters")]
+    [Tooltip("The hook.")] [SerializeField]
+    private Hook hook;
     [Tooltip("The origin of the grappling hook.")] [SerializeField]
     private Transform GHOrigin;
     [Tooltip("The player's camera.")][SerializeField]
@@ -54,8 +54,6 @@ public class PlayerPhysic : MonoBehaviour
     
     //Grappling hook variables
     private bool previousGrappingInput = false;//The grappling hook's input during the previous state
-    private GrapplingHookState grapplingState = GrapplingHookState.NotInUse;
-    private Vector3 hookTarget;
     #endregion
     
     public void Awake()
@@ -96,39 +94,36 @@ public class PlayerPhysic : MonoBehaviour
     
     private bool grapplingHook(bool isGrappling)
     {
-        Debug.Log("grapplingHook");
-        if (isGrappling)
-        {
-            Debug.Log("Grappling input !");
-        }
         if (previousGrappingInput == true && isGrappling == false)//Le joueur a relaché la touche, on doit arreter le grappin
         {
-            grapplingState = GrapplingHookState.Retracting;
+            hook.state = GrapplingHookState.Retracting;
             
         }else if (previousGrappingInput == false && isGrappling == true)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
         {
             RaycastHit hit;
             if(Physics.Raycast(GHOrigin.position,GHCamera.transform.forward,out hit,GHMaxRangeDistance)){
-                hookTarget = hit.point;
-                GHDebugTargetPrefab.transform.position = hookTarget;
-                grapplingState = GrapplingHookState.Expanding;
+                Debug.Log("target found ! Reseting the hook!");
+                hook.state = GrapplingHookState.Expanding;
+                hook.renderer.enabled = true;
+                hook.origin = GHOrigin;
+                hook.transform.position = hook.origin.position;
+                hook.target = hit.point;
+                hook.deploySpeed = GHDeploySpeed;
+                hook.retractSpeed = GHRetractSpeed;
+                hook.pullSpeed = GHBasePullSpeed;
             }
         }
-
-        if (grapplingState == GrapplingHookState.Expanding)
-        {
-            Vector3 direction = hookTarget - GHOrigin.position;
-            
-        }
-
         previousGrappingInput = isGrappling;
         return isGrappling;
     }
     
     void setVelocity()
     {
-        rb.velocity = transform.up * rb.velocity.y + newVelocity * Time.fixedDeltaTime;
-        rb.AddForce(jumpVelocity);
+        if (hook.state != GrapplingHookState.Pulling)
+        {
+            rb.velocity = transform.up * rb.velocity.y + newVelocity * Time.fixedDeltaTime;
+            rb.AddForce(jumpVelocity);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
