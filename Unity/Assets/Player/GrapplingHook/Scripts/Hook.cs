@@ -56,7 +56,7 @@ public class Hook : MonoBehaviour
                 Vector3 normDir = direction.normalized;
                 Vector3 force = normDir * pullSpeed;
                 print("direction.magnitude : " + direction.magnitude);
-                player.transform.position = player.transform.position + ((Vector3.down*9.81f + force) * Time.deltaTime); //player.AddForce(force);
+                player.velocity += force * Time.deltaTime; //player.AddForce(force);
                 if (direction.magnitude < 1f)
                 {
                     state = GrapplingHookState.Retracting;
