@@ -490,14 +490,7 @@ MonoBehaviour:
   additionnalJump: 1
   hook: {fileID: 0}
   GHOrigin: {fileID: 4702679601181366084}
-  GHCamera: {fileID: 7973881575092609525}
-  GHMaxRangeDistance: 100
-  GHMinDistance: 10
-  GHMaxDistance: 40
-  GHBasePullSpeed: 25
-  GHDeploySpeed: 10
-  GHRetractSpeed: 15
-  GHDebugTargetPrefab: {fileID: 0}
+  camera: {fileID: 7973881575092609525}
 --- !u!114 &1028526497837865309
 MonoBehaviour:
   m_ObjectHideFlags: 0

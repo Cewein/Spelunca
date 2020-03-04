@@ -1964,12 +1964,6 @@ Transform:
   m_Father: {fileID: 1274166665}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1133573402 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1746805392035771824, guid: b2d288cece5922049a8cac9ad28b969f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2834042255778120901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1197136372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4702679601181366084, guid: 35dafa8cf209d044b8d2c4af6080713b,
@@ -2923,12 +2917,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   celShadingShader: {fileID: 4800000, guid: 939e094cb57ff2d4c98351c80374a641, type: 3}
---- !u!120 &1988896633 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 1258301096582375898, guid: b2d288cece5922049a8cac9ad28b969f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2834042255778120901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2004395525
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,11 +3115,6 @@ PrefabInstance:
       propertyPath: pointA
       value: 
       objectReference: {fileID: 1197136372}
-    - target: {fileID: 6567995057824035653, guid: b2d288cece5922049a8cac9ad28b969f,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 1988896633}
     - target: {fileID: 6085884257702626639, guid: b2d288cece5922049a8cac9ad28b969f,
         type: 3}
       propertyPath: m_Name
@@ -3199,9 +3182,14 @@ PrefabInstance:
       objectReference: {fileID: 284777915}
     - target: {fileID: 8669081980456443542, guid: b2d288cece5922049a8cac9ad28b969f,
         type: 3}
-      propertyPath: hookPoint
-      value: 
-      objectReference: {fileID: 1133573402}
+      propertyPath: pullSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669081980456443542, guid: b2d288cece5922049a8cac9ad28b969f,
+        type: 3}
+      propertyPath: maxDeployDistance
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2d288cece5922049a8cac9ad28b969f, type: 3}
 --- !u!114 &8296172668992602507 stripped

@@ -97,15 +97,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c964b2ff83d2c498abd07a88bd6194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 3
-  origin: {fileID: 0}
-  target: {x: 0, y: 0, z: 0}
-  rope: {fileID: 6567995057824035653}
-  player: {fileID: 0}
-  deploySpeed: 0
-  retractSpeed: 0
-  pullSpeed: 0
   renderer: {fileID: 5497119916271333779}
+  hookPoint: {fileID: 1746805392035771824}
+  origin: {fileID: 0}
+  rope: {fileID: 6567995057824035653}
+  maxDeployDistance: 30
+  deploySpeed: 10
+  retractSpeed: 10
+  pullSpeed: 5
+  minPullClampDistance: 10
+  maxPullClampDistance: 40
+  rotationAngle: 90
+  state: 3
+  target: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
 --- !u!1 &6190597386128167679
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,9 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b420cfd0c6bf3541b71a591e0c126c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 0}
-  pointA: {fileID: 0}
-  pointB: {fileID: 1117771119950137086}
+  renderer: {fileID: 1258301096582375898}
+  origin: {fileID: 0}
+  hook: {fileID: 1117771119950137086}
 --- !u!120 &1258301096582375898
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -304,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9019196413351553382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0067}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7074660938793039708}

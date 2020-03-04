@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Reflection;
 using UnityEditor.UI;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -10,23 +11,33 @@ using Vector3 = UnityEngine.Vector3;
 public enum GrapplingHookState {Expanding,Pulling,Retracting,Inactive}
 public class Hook : MonoBehaviour
 {
-    public GrapplingHookState state = GrapplingHookState.Inactive;
-    public Transform origin;
+    public MeshRenderer renderer;
     public Transform hookPoint;
-    public Vector3 target;
+
+    public Transform origin;
     public Rope rope;
-    public Rigidbody player;
+    [Header("Behaviour parameters")]
+    public float maxDeployDistance = 30f;
     public float deploySpeed;
     public float retractSpeed;
     public float pullSpeed;
+    public float minPullClampDistance = 10f;
+    public float maxPullClampDistance = 40f;
     public float rotationAngle = 180f;
-    public MeshRenderer renderer;
+    //[System.NonSerialized]
+    public GrapplingHookState state = GrapplingHookState.Inactive;
+    //[System.NonSerialized]
+    public Vector3 target;
+    //[System.NonSerialized]
+    public Rigidbody player;
+    //[System.NonSerialized]
     private Vector3 direction;
 
     void Start()
     {
         renderer.enabled = false;
         rope.renderer.enabled = false;
+        rope.origin = this.origin;
         state = GrapplingHookState.Inactive;
     }
     // Update is called once per frame
@@ -44,7 +55,7 @@ public class Hook : MonoBehaviour
                 print("Hook : Expanding");
                 rope.renderer.enabled = true;
                 Vector3 direction = target - transform.position;
-                float magnitude = Mathf.Clamp(direction.magnitude,1f,20f);
+                float magnitude = Mathf.Clamp(direction.magnitude,10f,20f);
                 Vector3 normDir = direction.normalized;
                 transform.position += normDir * magnitude * deploySpeed * Time.deltaTime; //
                 transform.forward = normDir;
@@ -62,9 +73,9 @@ public class Hook : MonoBehaviour
             {
                 print("Hook : Pulling");
                 Vector3 direction = target - player.transform.position;
-                float magnitude = Mathf.Clamp(direction.magnitude,10f,40f);
+                float speed = Mathf.Clamp(direction.magnitude,minPullClampDistance,maxPullClampDistance);
                 Vector3 normDir = direction.normalized;
-                Vector3 force = normDir * pullSpeed;
+                Vector3 force = speed * normDir * pullSpeed;
                 print("direction.magnitude : " + direction.magnitude);
                 player.velocity += force * Time.deltaTime; //player.AddForce(force);
                 if (direction.magnitude < 1f)
@@ -79,7 +90,7 @@ public class Hook : MonoBehaviour
         if (state == GrapplingHookState.Retracting)
         {
             print("Hook : Retracting");
-            Vector3 direction = origin.position - transform.position;
+            Vector3 direction = rope.origin.position - transform.position;
             float magnitude = Mathf.Clamp(direction.magnitude,1f,20f);
             Vector3 normDir = direction.normalized;
             transform.position += normDir * magnitude * retractSpeed * Time.deltaTime;
@@ -94,5 +105,10 @@ public class Hook : MonoBehaviour
                 state = GrapplingHookState.Inactive;
             }
         }
+    }
+
+    public void setHookAnchor(Transform anchor)
+    {
+        this.rope.origin = anchor;
     }
 }

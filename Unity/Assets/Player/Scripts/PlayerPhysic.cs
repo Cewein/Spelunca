@@ -26,20 +26,7 @@ public class PlayerPhysic : MonoBehaviour
     [Tooltip("The origin of the grappling hook.")] [SerializeField]
     private Transform GHOrigin;
     [Tooltip("The player's camera.")][SerializeField]
-    private Camera GHCamera;
-    [Tooltip("The maximum distance of the grappling hook's range'.")][SerializeField]
-    private float GHMaxRangeDistance = 100f;
-    [Tooltip("The minimum distance of the grappling hook's acceleration.")][SerializeField]
-    private float GHMinDistance = 10f;
-    [Tooltip("The maximum distance of the grappling hook's acceleration.")][SerializeField]
-    private float GHMaxDistance = 40f;
-    [Tooltip("The base speed of the grappling's pull.")][SerializeField]
-    private float GHBasePullSpeed = 2f;
-    [Tooltip("The deploying speed of the grappling hook.")][SerializeField]
-    private float GHDeploySpeed = 5f;
-    [Tooltip("The retracting speed of the grappling hook.")][SerializeField]
-    private float GHRetractSpeed = 5f;
-    
+    private Camera camera;
     #endregion
     
     #region Fields ==========
@@ -58,6 +45,7 @@ public class PlayerPhysic : MonoBehaviour
     {
         minerController = GetComponent<MinerController>();
         rb = gameObject.GetComponent<Rigidbody>();
+        hook.origin = GHOrigin;
 
         minerController.move += move;
         minerController.jump += isJumping => { jump(isJumping);};
@@ -98,17 +86,17 @@ public class PlayerPhysic : MonoBehaviour
             
         }else if (previousGrappingInput == false && isGrappling == true && hook.state != GrapplingHookState.Retracting)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
         {
+            Debug.Log("Attempt to throw the hook");
             RaycastHit hit;
-            if(Physics.Raycast(GHOrigin.position,GHCamera.transform.forward,out hit,GHMaxRangeDistance)){
+            if(Physics.Raycast(GHOrigin.position,camera.transform.forward,out hit,hook.maxDeployDistance)){
                 Debug.Log("target found ! Reseting the hook!");
                 hook.state = GrapplingHookState.Expanding;
                 hook.renderer.enabled = true;
+                
                 hook.origin = GHOrigin;
-                hook.transform.position = hook.origin.position;
+                hook.transform.position = GHOrigin.position;
                 hook.target = hit.point;
-                hook.deploySpeed = GHDeploySpeed;
-                hook.retractSpeed = GHRetractSpeed;
-                hook.pullSpeed = GHBasePullSpeed;
+                hook.player = rb;
             }
         }
         previousGrappingInput = isGrappling;
