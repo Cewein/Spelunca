@@ -494,9 +494,9 @@ MonoBehaviour:
   GHMaxRangeDistance: 100
   GHMinDistance: 10
   GHMaxDistance: 40
-  GHBasePullSpeed: 50
+  GHBasePullSpeed: 25
   GHDeploySpeed: 10
-  GHRetractSpeed: 10
+  GHRetractSpeed: 15
   GHDebugTargetPrefab: {fileID: 0}
 --- !u!114 &1028526497837865309
 MonoBehaviour:

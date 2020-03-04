@@ -12,14 +12,23 @@ public class Hook : MonoBehaviour
 {
     public GrapplingHookState state = GrapplingHookState.Inactive;
     public Transform origin;
+    public Transform hookPoint;
     public Vector3 target;
+    public Rope rope;
     public Rigidbody player;
     public float deploySpeed;
     public float retractSpeed;
     public float pullSpeed;
+    public float rotationAngle = 180f;
     public MeshRenderer renderer;
     private Vector3 direction;
-    
+
+    void Start()
+    {
+        renderer.enabled = false;
+        rope.renderer.enabled = false;
+        state = GrapplingHookState.Inactive;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -33,24 +42,25 @@ public class Hook : MonoBehaviour
             if (state == GrapplingHookState.Expanding)
             {
                 print("Hook : Expanding");
+                rope.renderer.enabled = true;
                 Vector3 direction = target - transform.position;
                 float magnitude = Mathf.Clamp(direction.magnitude,1f,20f);
                 Vector3 normDir = direction.normalized;
                 transform.position += normDir * magnitude * deploySpeed * Time.deltaTime; //
+                transform.forward = normDir;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, normDir, out hit, deploySpeed * Time.deltaTime))
                 {
                     transform.position = hit.point;
                     target = hit.point;
-                    transform.up = hit.normal;
+                    transform.forward = hit.normal;
+                    transform.position -= hookPoint.position-transform.position;
                     state = GrapplingHookState.Pulling;
                 }
             }
             if (state == GrapplingHookState.Pulling)
             {
-                ///*
                 print("Hook : Pulling");
-                
                 Vector3 direction = target - player.transform.position;
                 float magnitude = Mathf.Clamp(direction.magnitude,10f,40f);
                 Vector3 normDir = direction.normalized;
@@ -59,10 +69,10 @@ public class Hook : MonoBehaviour
                 player.velocity += force * Time.deltaTime; //player.AddForce(force);
                 if (direction.magnitude < 1f)
                 {
-                    state = GrapplingHookState.Retracting;
+                    state = GrapplingHookState.Inactive;
+                    renderer.enabled = false;
+                    rope.renderer.enabled = false;
                 }
-                //*/
-
             }
         }
 
@@ -73,12 +83,14 @@ public class Hook : MonoBehaviour
             float magnitude = Mathf.Clamp(direction.magnitude,1f,20f);
             Vector3 normDir = direction.normalized;
             transform.position += normDir * magnitude * retractSpeed * Time.deltaTime;
+            transform.forward = normDir;
             RaycastHit hit;
             print("magnitude : " + direction.magnitude);
             if (direction.magnitude < 0.2)
             {
                 print("Disabling grappling hook.");
                 renderer.enabled = false;
+                rope.renderer.enabled = false;
                 state = GrapplingHookState.Inactive;
             }
         }

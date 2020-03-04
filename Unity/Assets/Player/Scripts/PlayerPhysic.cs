@@ -39,8 +39,6 @@ public class PlayerPhysic : MonoBehaviour
     private float GHDeploySpeed = 5f;
     [Tooltip("The retracting speed of the grappling hook.")][SerializeField]
     private float GHRetractSpeed = 5f;
-    [Tooltip("A prefab to spawn at target's position when shooting'")][SerializeField]
-    private GameObject GHDebugTargetPrefab;
     
     #endregion
     
@@ -98,7 +96,7 @@ public class PlayerPhysic : MonoBehaviour
         {
             hook.state = GrapplingHookState.Retracting;
             
-        }else if (previousGrappingInput == false && isGrappling == true)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
+        }else if (previousGrappingInput == false && isGrappling == true && hook.state != GrapplingHookState.Retracting)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
         {
             RaycastHit hit;
             if(Physics.Raycast(GHOrigin.position,GHCamera.transform.forward,out hit,GHMaxRangeDistance)){
