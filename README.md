@@ -9,9 +9,23 @@ This is a rogue-lite so death will come sooner than you think. <br>
 
 
 
-# world generation
+
 ![alt text](https://i.imgur.com/F5XwrFB.png)
 <hr>
+
+## Controle
+up      : Z<br>
+down    : S<br>
+left    : Q<br>
+right   : D<br>
+Jump    : SPACE<br>
+
+## CHEAT
+F1 : TP TO SPAWN<br>
+F2 : TP TO BOSS<br>
+TAB : SPAWN SPIDER<br>
+
+## world generation
 the world generation plan (branch: worldgen):
 
 - [x] Worldgen done with marching cube algorithm
