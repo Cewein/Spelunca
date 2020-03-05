@@ -91,10 +91,10 @@ public class PlayerPhysic : MonoBehaviour
             
         }else if (previousGrappingInput == false && grapplingControl == true && hook.state != GrapplingHookState.Retracting)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
         {
-            Debug.Log("Attempt to throw the hook");
+            //Debug.Log("Attempt to throw the hook");
             RaycastHit hit;
             if(Physics.Raycast(GrapplingOrigin.position,camera.transform.forward,out hit,hook.maxDeployDistance)){
-                Debug.Log("target found ! Reseting the hook!");
+                //Debug.Log("target found ! Reseting the hook!");
                 hook.state = GrapplingHookState.Expanding;
                 hook.renderer.enabled = true;
                 
