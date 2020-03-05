@@ -39,26 +39,33 @@ public class RingMenu : MonoBehaviour
             //set icon
             Pieces[i].Icon.transform.localPosition = Pieces[i].CakePiece.transform.localPosition + Quaternion.AngleAxis(i * stepLength, Vector3.forward) * Vector3.up * iconDist;
             Pieces[i].Icon.sprite = Data.Elements[i].Icon;
+            
+            //set data
+            Pieces[i].Data = Data.Elements[i];
+            
 
         }
     }
 
     public void SetActive(bool isActive)
     {
-        callback?.Invoke(Data.Elements[activeElement].Type);
+        callback?.Invoke(Pieces[activeElement].Data.Type);
         Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
         gameObject.SetActive(isActive);
     }
     private void Update()
     {
 
-        var stepLength = 360f / Data.Elements.Length;
+        var stepLength = 360f / Pieces.Length;
         var mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - transform.position, Vector3.forward) + stepLength / 2f);
         activeElement = (int)(mouseAngle / stepLength);
-        for (int i = 0; i < Data.Elements.Length; i++)
+        for (int i = 0; i < Pieces.Length; i++)
         {
-            Pieces[i].CakePiece.color = i == activeElement+1  ? new Color(1f, 1f, 1f, 0.75f) : new Color(1f, 1f, 1f, 0.5f);
+            int j = (i + 1) % Pieces.Length;
+            Pieces[j].CakePiece.color = i == activeElement  ? new Color(1f, 1f, 1f, 0.75f) : new Color(1f, 1f, 1f, 0.5f);
+    
         }
+
     }
 
     private float NormalizeAngle(float a) => (a + 360f) % 360f;
