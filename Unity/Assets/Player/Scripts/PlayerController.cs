@@ -25,6 +25,9 @@ public class PlayerController : MinerController
     [Tooltip("The jump input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string jumpInputName = "Jump";
     
+    [Tooltip("The grapping hook input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    private string grapplingInputName = "Grappling";
+
     #endregion    
     
     private void Update()
@@ -33,6 +36,7 @@ public class PlayerController : MinerController
         isRotating(Input.GetAxis(azimuthInputName),Input.GetAxis(elevationInputName));
         isRunning(Input.GetButton(runInputName));
         isJumping(Input.GetButtonDown(jumpInputName));
+        isGrappling(Input.GetButton(grapplingInputName));
     }
     
 }
