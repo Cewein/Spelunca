@@ -94,17 +94,17 @@ public class Hook : MonoBehaviour
 
         if (state == GrapplingHookState.Retracting)
         {
-            print("Hook : Retracting");
+            //print("Hook : Retracting");
             Vector3 direction = rope.origin.position - transform.position;
             float magnitude = Mathf.Clamp(direction.magnitude,1f,20f);
             Vector3 normDir = direction.normalized;
             transform.position += normDir * magnitude * retractSpeed * Time.deltaTime;
             transform.forward = normDir;
             RaycastHit hit;
-            print("magnitude : " + direction.magnitude);
+            //print("magnitude : " + direction.magnitude);
             if (direction.magnitude < 0.2)
             {
-                print("Disabling grappling hook.");
+                //print("Disabling grappling hook.");
                 renderer.enabled = false;
                 rope.renderer.enabled = false;
                 state = GrapplingHookState.Inactive;
