@@ -101,10 +101,10 @@ MonoBehaviour:
   hookPoint: {fileID: 1746805392035771824}
   origin: {fileID: 0}
   rope: {fileID: 6567995057824035653}
-  maxDeployDistance: 30
+  maxDeployDistance: 60
   deploySpeed: 10
   retractSpeed: 10
-  pullSpeed: 5
+  pullSpeed: 2
   minPullClampDistance: 10
   maxPullClampDistance: 40
   rotationAngle: 90

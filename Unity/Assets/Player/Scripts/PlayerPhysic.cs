@@ -21,10 +21,10 @@ public class PlayerPhysic : MonoBehaviour
     private int additionnalJump = 1;
 
     [Header("Grappling Hook parameters")]
-    [Tooltip("The hook.")] [SerializeField]
-    private Hook hook;
     [Tooltip("The origin of the grappling hook.")] [SerializeField]
-    private Transform GHOrigin;
+    private Hook HookPrefab;
+    [Tooltip("The origin of the grappling hook.")] [SerializeField]
+    private Transform GrapplingOrigin;
     [Tooltip("The player's camera.")][SerializeField]
     private Camera camera;
     #endregion
@@ -36,6 +36,7 @@ public class PlayerPhysic : MonoBehaviour
     private Vector3 jumpVelocity = Vector3.zero;
     private float currentSpeed = 0;
     private Rigidbody rb;
+    private Hook hook;
     
     //Grappling hook variables
     private bool previousGrappingInput = false;//The grappling hook's input during the previous state
@@ -45,12 +46,13 @@ public class PlayerPhysic : MonoBehaviour
     {
         minerController = GetComponent<MinerController>();
         rb = gameObject.GetComponent<Rigidbody>();
-        hook.origin = GHOrigin;
 
         minerController.move += move;
         minerController.jump += isJumping => { jump(isJumping);};
         minerController.grapplingHook += isGrappling => { grapplingHook(isGrappling);};
         minerController.run += isRunning => { run(isRunning);};
+        hook = Instantiate(HookPrefab, transform.position, transform.rotation, transform);
+        hook.origin = GrapplingOrigin;
     }
     
     void FixedUpdate(){setVelocity();}
@@ -88,13 +90,13 @@ public class PlayerPhysic : MonoBehaviour
         {
             Debug.Log("Attempt to throw the hook");
             RaycastHit hit;
-            if(Physics.Raycast(GHOrigin.position,camera.transform.forward,out hit,hook.maxDeployDistance)){
+            if(Physics.Raycast(GrapplingOrigin.position,camera.transform.forward,out hit,hook.maxDeployDistance)){
                 Debug.Log("target found ! Reseting the hook!");
                 hook.state = GrapplingHookState.Expanding;
                 hook.renderer.enabled = true;
                 
-                hook.origin = GHOrigin;
-                hook.transform.position = GHOrigin.position;
+                hook.origin = GrapplingOrigin;
+                hook.transform.position = GrapplingOrigin.position;
                 hook.target = hit.point;
                 hook.player = rb;
             }

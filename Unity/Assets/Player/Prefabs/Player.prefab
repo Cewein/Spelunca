@@ -488,8 +488,9 @@ MonoBehaviour:
   runSpeed: 500
   jumpForce: 500
   additionnalJump: 1
-  hook: {fileID: 0}
-  GHOrigin: {fileID: 4702679601181366084}
+  HookPrefab: {fileID: 8669081980456443542, guid: b2d288cece5922049a8cac9ad28b969f,
+    type: 3}
+  GrapplingOrigin: {fileID: 4702679601181366084}
   camera: {fileID: 7973881575092609525}
 --- !u!114 &1028526497837865309
 MonoBehaviour:
