@@ -89,7 +89,11 @@ public class Pool:MonoBehaviour
         {
             if (attacking.Count < maxEntitiesAttacking && pool[index].state != EnemyBehaviourState.Fighting)//there is at least 1 spot left as an attacker
             {
-                Debug.Log("Entity n°" + index + " is ready to attack !");
+                //
+                //  VOIR DE DEBUG QUI POP TOUT LE TANT ME TRIGGER 
+                //                                      - Max :)
+                //
+                //Debug.Log("Entity n°" + index + " is ready to attack !");
                 attacking[index] = true;
                 pool[index].state = EnemyBehaviourState.Fighting;
                 return true;
