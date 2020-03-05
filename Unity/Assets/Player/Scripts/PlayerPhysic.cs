@@ -18,7 +18,7 @@ public class PlayerPhysic : MonoBehaviour
     private float jumpForce = 500f;
     
     [Tooltip("The number of jump the player can do before re-land.")][SerializeField]
-    private int additionnalJump = 1;
+    private int additionalJump = 1;
 
     [Header("Grappling Hook parameters")]
     [Tooltip("The origin of the grappling hook.")] [SerializeField]
@@ -27,6 +27,8 @@ public class PlayerPhysic : MonoBehaviour
     private Transform GrapplingOrigin;
     [Tooltip("The player's camera.")][SerializeField]
     private Camera camera;
+    [Tooltip("ONLY FOR FRAME DEBUG")][SerializeField]
+    private bool launchGrapplingHook;
     #endregion
     
     #region Fields ==========
@@ -51,7 +53,7 @@ public class PlayerPhysic : MonoBehaviour
         minerController.jump += isJumping => { jump(isJumping);};
         minerController.grapplingHook += isGrappling => { grapplingHook(isGrappling);};
         minerController.run += isRunning => { run(isRunning);};
-        hook = Instantiate(HookPrefab, transform.position, transform.rotation, transform);
+        hook = Instantiate(HookPrefab, transform.position, transform.rotation);
         hook.origin = GrapplingOrigin;
     }
     
@@ -72,7 +74,7 @@ public class PlayerPhysic : MonoBehaviour
 
     private bool jump(bool isJumping)
     {
-        if (isJumping && additionnalJump == 0)
+        if (isJumping && additionalJump == 0)
         {
             jumpVelocity = transform.up * (jumpForce * rb.mass);
         }
@@ -82,11 +84,12 @@ public class PlayerPhysic : MonoBehaviour
     
     private bool grapplingHook(bool isGrappling)
     {
-        if (previousGrappingInput == true && isGrappling == false)//Le joueur a relaché la touche, on doit arreter le grappin
+        bool grapplingControl = launchGrapplingHook || isGrappling; //FIXME: Will be removed
+        if (previousGrappingInput == true && grapplingControl == false)//Le joueur a relaché la touche, on doit arreter le grappin
         {
             hook.state = GrapplingHookState.Retracting;
             
-        }else if (previousGrappingInput == false && isGrappling == true && hook.state != GrapplingHookState.Retracting)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
+        }else if (previousGrappingInput == false && grapplingControl == true && hook.state != GrapplingHookState.Retracting)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
         {
             Debug.Log("Attempt to throw the hook");
             RaycastHit hit;
@@ -96,13 +99,14 @@ public class PlayerPhysic : MonoBehaviour
                 hook.renderer.enabled = true;
                 
                 hook.origin = GrapplingOrigin;
+                hook.rope.origin = GrapplingOrigin;
                 hook.transform.position = GrapplingOrigin.position;
                 hook.target = hit.point;
                 hook.player = rb;
             }
         }
-        previousGrappingInput = isGrappling;
-        return isGrappling;
+        previousGrappingInput = grapplingControl;
+        return grapplingControl;
     }
     
     void setVelocity()
@@ -116,11 +120,11 @@ public class PlayerPhysic : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        additionnalJump--;
+        additionalJump--;
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        additionnalJump++;
+        additionalJump++;
     }
 }

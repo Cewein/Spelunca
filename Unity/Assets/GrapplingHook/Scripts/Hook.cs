@@ -57,16 +57,21 @@ public class Hook : MonoBehaviour
                 Vector3 direction = target - transform.position;
                 float magnitude = Mathf.Clamp(direction.magnitude,10f,20f);
                 Vector3 normDir = direction.normalized;
-                transform.position += normDir * magnitude * deploySpeed * Time.deltaTime; //
-                transform.forward = normDir;
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, normDir, out hit, deploySpeed * Time.deltaTime))
+                Debug.DrawRay(transform.position, normDir * magnitude * deploySpeed * Time.deltaTime);
+                if (Physics.Raycast(transform.position, normDir, out hit, magnitude * deploySpeed * Time.deltaTime))
                 {
+                    print("Hook : SURFACE TOUCHED");
                     transform.position = hit.point;
                     target = hit.point;
                     transform.forward = hit.normal;
                     transform.position -= hookPoint.position-transform.position;
                     state = GrapplingHookState.Pulling;
+                }
+                else
+                {
+                    transform.position += normDir * magnitude * deploySpeed * Time.deltaTime; //
+                    transform.forward = normDir;
                 }
             }
             if (state == GrapplingHookState.Pulling)

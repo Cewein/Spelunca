@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7074660938793039708}
   - component: {fileID: 2266779676432665962}
-  - component: {fileID: 5497119916271333779}
   - component: {fileID: 8669081980456443542}
+  - component: {fileID: 5497119916271333779}
   m_Layer: 0
   m_Name: grappin
   m_TagString: Untagged
@@ -44,6 +44,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6085884257702626639}
   m_Mesh: {fileID: 6265196687586763717, guid: a11c0d9aea23387468fb485a5182de66, type: 3}
+--- !u!114 &8669081980456443542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6085884257702626639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c964b2ff83d2c498abd07a88bd6194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 5497119916271333779}
+  hookPoint: {fileID: 1746805392035771824}
+  origin: {fileID: 0}
+  rope: {fileID: 6567995057824035653}
+  maxDeployDistance: 60
+  deploySpeed: 8
+  retractSpeed: 25
+  pullSpeed: 2
+  minPullClampDistance: 10
+  maxPullClampDistance: 40
+  rotationAngle: 90
+  state: 3
+  target: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
 --- !u!23 &5497119916271333779
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85,32 +111,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &8669081980456443542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6085884257702626639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60c964b2ff83d2c498abd07a88bd6194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderer: {fileID: 5497119916271333779}
-  hookPoint: {fileID: 1746805392035771824}
-  origin: {fileID: 0}
-  rope: {fileID: 6567995057824035653}
-  maxDeployDistance: 60
-  deploySpeed: 10
-  retractSpeed: 10
-  pullSpeed: 2
-  minPullClampDistance: 10
-  maxPullClampDistance: 40
-  rotationAngle: 90
-  state: 3
-  target: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
 --- !u!1 &6190597386128167679
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6190597386128167679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7074660938793039708}
@@ -247,7 +247,7 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 2
     numCapVertices: 3
     alignment: 0
     textureMode: 0
