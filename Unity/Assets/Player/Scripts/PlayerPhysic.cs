@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(MinerController))]
@@ -16,6 +17,18 @@ public class PlayerPhysic : MonoBehaviour
     [Tooltip("The player jump force in unit per frame.")][SerializeField]
     private float jumpForce = 500f;
     
+    [Tooltip("The number of jump the player can do before re-land.")][SerializeField]
+    private int additionalJump = 1;
+
+    [Header("Grappling Hook parameters")]
+    [Tooltip("The origin of the grappling hook.")] [SerializeField]
+    private Hook HookPrefab;
+    [Tooltip("The origin of the grappling hook.")] [SerializeField]
+    private Transform GrapplingOrigin;
+    [Tooltip("The player's camera.")][SerializeField]
+    private Camera camera;
+    [Tooltip("ONLY FOR FRAME DEBUG")][SerializeField]
+    private bool launchGrapplingHook;
     #endregion
     
     #region Fields ==========
@@ -25,7 +38,10 @@ public class PlayerPhysic : MonoBehaviour
     private Vector3 jumpVelocity = Vector3.zero;
     private float currentSpeed = 0;
     private Rigidbody rb;
+    private Hook hook;
     
+    //Grappling hook variables
+    private bool previousGrappingInput = false;//The grappling hook's input during the previous state
     #endregion
     
     public void Awake()
@@ -35,7 +51,10 @@ public class PlayerPhysic : MonoBehaviour
 
         minerController.move += move;
         minerController.jump += isJumping => { jump(isJumping);};
+        minerController.grapplingHook += isGrappling => { grapplingHook(isGrappling);};
         minerController.run += isRunning => { run(isRunning);};
+        hook = Instantiate(HookPrefab, transform.position, transform.rotation);
+        hook.origin = GrapplingOrigin;
     }
     
     void FixedUpdate(){setVelocity();}
@@ -55,16 +74,57 @@ public class PlayerPhysic : MonoBehaviour
 
     private bool jump(bool isJumping)
     {
-        if (isJumping)
+        if (isJumping && additionalJump == 0)
         {
             jumpVelocity = transform.up * (jumpForce * rb.mass);
         }
         else jumpVelocity = Vector3.zero;
         return isJumping;
     }
+    
+    private bool grapplingHook(bool isGrappling)
+    {
+        bool grapplingControl = launchGrapplingHook || isGrappling; //FIXME: Will be removed
+        if (previousGrappingInput == true && grapplingControl == false)//Le joueur a relaché la touche, on doit arreter le grappin
+        {
+            hook.state = GrapplingHookState.Retracting;
+            
+        }else if (previousGrappingInput == false && grapplingControl == true && hook.state != GrapplingHookState.Retracting)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
+        {
+            //Debug.Log("Attempt to throw the hook");
+            RaycastHit hit;
+            if(Physics.Raycast(GrapplingOrigin.position,camera.transform.forward,out hit,hook.maxDeployDistance)){
+                //Debug.Log("target found ! Reseting the hook!");
+                hook.state = GrapplingHookState.Expanding;
+                hook.renderer.enabled = true;
+                
+                hook.origin = GrapplingOrigin;
+                hook.rope.origin = GrapplingOrigin;
+                hook.transform.position = GrapplingOrigin.position;
+                hook.target = hit.point;
+                hook.player = rb;
+            }
+        }
+        previousGrappingInput = grapplingControl;
+        return grapplingControl;
+    }
+    
     void setVelocity()
     {
-        rb.velocity = transform.up * rb.velocity.y + newVelocity * Time.fixedDeltaTime;
-        rb.AddForce(jumpVelocity);
+        if (hook.state != GrapplingHookState.Pulling)
+        {
+            rb.velocity = transform.up * rb.velocity.y + newVelocity * Time.fixedDeltaTime;
+            rb.AddForce(jumpVelocity);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        additionalJump--;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        additionalJump++;
     }
 }

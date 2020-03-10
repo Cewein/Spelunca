@@ -9,14 +9,32 @@ public class DensityGenerator
 
     public static uint octaveNumber;
     public static float floor;
+    public static Vector3 endZone;
     
     //density function
-    public static float density(float k, float x, float y, float z)
+    //this is out put a value who is going to be use
+    //in the mesh build procces
+    public static float density(float k, float x, float y, float z, Vector3 playerSpawn)
     {
         if (y > 100)
             return 0;
         if (y < -100)
             return 1;
+
+        //start zone
+        float sphereStart = Vector3.Distance(playerSpawn, new Vector3(x, y, z));
+        if (sphereStart < 20)
+            return sphereStart - 20f;
+
+        //end zone
+        float sphereEnd = Vector3.Distance(endZone, new Vector3(x, y, z));
+        if (sphereEnd < 50)
+            return sphereEnd - 50f;
+
+        //static tube need to be more flexible
+        float tube1 = Vector3.Distance(new Vector3(x, y, z), new Vector3(Mathf.Sin(z / 10) * 6, Mathf.Cos(z / 10) * 6 - z / 6, z));
+        float tube2 = Vector3.Distance(new Vector3(x, y, z), new Vector3(Mathf.Cos(z / 10) * 6, Mathf.Sin(z / 10) * 6 - z / 6, z));
+
 
         float densityValue = k;
         int octaveScale = 1;
@@ -29,11 +47,19 @@ public class DensityGenerator
             octaveScale *= 2;
         }
 
+        if (tube1 < 9 && densityValue > tube1 - 9.0f)
+            return tube1 - 9.0f;
+        if (tube2 < 9 && densityValue > tube2 - 9.0f)
+            return tube2 - 9.0f;
+
         return densityValue;
     }
 
-    //marching algorithm
-    public static float [,,] find(float size, Vector3 chunkPos)
+    //denstity algorithm loop, this will output
+    //a 3D float array containing the density of the 
+    //chunk, this array is use in the mesh build procces
+    //and is  a crusial step in the marching algorithm
+    public static float [,,] find(float size, Vector3 chunkPos, Vector3 playerSpawn)
     {
         float[,,] block = new float[(int)size, (int)size, (int)size];
         noise.SetNoiseType(FastNoise.NoiseType.Perlin);
@@ -44,7 +70,7 @@ public class DensityGenerator
             {
                 for (int z = 0; z < size; z++)
                 {
-                    block[x, y, z] = density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z);
+                    block[x, y, z] = density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z, playerSpawn);
                 }
             }
         }

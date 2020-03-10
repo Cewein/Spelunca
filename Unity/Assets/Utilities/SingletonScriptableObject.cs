@@ -13,13 +13,12 @@ public class SingletonScriptableObject<T> : ScriptableObject where T : Scriptabl
             T[] list = Resources.FindObjectsOfTypeAll<T>();
             if (list.Length == 0)
             {
-                Debug.LogError("There is no " + typeof(T).ToString());
+                //Debug.LogError("There is no " + typeof(T).ToString());
                 return null;
             }
             else if (list.Length > 1)
             {
-                Debug.Log("There is more than one " 
-                          + typeof(T).ToString() + " but it must be a singleton ScriptableObject");
+                //Debug.Log("There is more than one " + typeof(T).ToString() + " but it must be a singleton ScriptableObject");
                 return null;
             }
 

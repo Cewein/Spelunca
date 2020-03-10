@@ -7,6 +7,7 @@ public abstract class MinerController : MonoBehaviour
 
     public event Action<bool> run;
     public event Action<bool> jump;
+    public event Action<bool> grapplingHook;
     public event Action<float,float> move;
     public event Action<float,float> rotate;
     
@@ -28,6 +29,11 @@ public abstract class MinerController : MonoBehaviour
     {
         jump?.Invoke(isJumping);
         return isJumping;
+    }
+    protected bool isGrappling(bool isGrappling)
+    {
+        grapplingHook?.Invoke(isGrappling);
+        return isGrappling;
     }
 
     protected bool isRotating(float x, float y)
