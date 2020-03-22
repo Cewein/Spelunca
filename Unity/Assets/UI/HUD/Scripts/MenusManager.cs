@@ -25,9 +25,8 @@ public class MenusManager : MonoBehaviour
     }
 
 
-
-    void Update()
+    private void Update()
     {
-        resourceLoaderSelectionMenu.SetActive(Input.GetButton("ResourceSelection"));
+        resourceLoaderSelectionMenu.SetActive(Input.GetButton(resourceLoaderSelectionInput));
     }
 }

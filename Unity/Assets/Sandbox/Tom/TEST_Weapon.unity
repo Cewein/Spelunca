@@ -788,6 +788,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 579351607850769838, guid: 35dafa8cf209d044b8d2c4af6080713b,
+        type: 3}
+      propertyPath: capacity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7973881576949730166, guid: 35dafa8cf209d044b8d2c4af6080713b,
         type: 3}
       propertyPath: m_RootOrder
@@ -1020,6 +1025,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 91467279}
     m_Modifications:
+    - target: {fileID: 2038012245, guid: 5f375096c4ef3e34ead34b033a17ea9b, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1919689902}
     - target: {fileID: 2348257884050246959, guid: 5f375096c4ef3e34ead34b033a17ea9b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1170,10 +1179,6 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2038012245, guid: 5f375096c4ef3e34ead34b033a17ea9b, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 1919689902}
     - target: {fileID: 4413892916863192389, guid: 5f375096c4ef3e34ead34b033a17ea9b,
         type: 3}
       propertyPath: m_Enabled

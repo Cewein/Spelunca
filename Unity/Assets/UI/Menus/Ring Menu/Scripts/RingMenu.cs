@@ -15,7 +15,8 @@ public class RingMenu : MonoBehaviour
    private RingMenu Parent;
    private int activeElement;
    private ResourceType choosenType;
-   void Start()
+   private bool run = false;
+   void Awake()
     {
         var stepLength = 360f / Data.Elements.Length;
         var iconDist = Vector3.Distance(RingCakePiecePrefab.Icon.transform.position, RingCakePiecePrefab.CakePiece.transform.position);
@@ -42,20 +43,22 @@ public class RingMenu : MonoBehaviour
             
             //set data
             Pieces[i].Data = Data.Elements[i];
-            
-
         }
     }
 
-    public void SetActive(bool isActive)
-    {
+  
+
+   public void SetActive(bool isActive)
+   {
+       gameObject.SetActive(isActive);
+       if (!isActive) return;
         callback?.Invoke(Pieces[activeElement].Data.Type);
         Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
-        gameObject.SetActive(isActive);
+        run = isActive;
     }
     private void Update()
     {
-
+        if (!run) return;
         var stepLength = 360f / Pieces.Length;
         var mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - transform.position, Vector3.forward) + stepLength / 2f);
         activeElement = (int)(mouseAngle / stepLength);

@@ -34,7 +34,7 @@ public class GunLoader : MonoBehaviour
           if (currentResource != null) return currentResource;
           //Resource[] list = Resources.FindObjectsOfTypeAll<Resource>();
          // normalResource = list.First(item => item.Type == ResourceType.normal)
-         currentResource = normalResource;
+          currentResource = normalResource;
           return currentResource;
       }
 
@@ -93,22 +93,21 @@ public class GunLoader : MonoBehaviour
             }
             if (printDebug) Debug.Log(this);
         };
-
-        
     }
     
     private void isReloading(bool isReloading, Resource newResource, float quantity)
     {
-        reload?.Invoke(isReloading,newResource, quantity);
+        reload?.Invoke(isReloading, newResource, quantity);
         if (isReloading && (currentResourceQuantity < capacity)) currentResourceQuantity += quantity;
     }
     
     private void isLoaderEmpty(bool isGaugeEmpty)
     {
         isEmpty?.Invoke(isGaugeEmpty);
-        if( currentResource.Type != ResourceType.normal && (ResourcesStock.Instance.Stock[currentResource.Type] <= 0)) 
-            currentResource = normalResource; 
-        
+        if (currentResource.Type != ResourceType.normal && (ResourcesStock.Instance.Stock[currentResource.Type] <= 0))
+        {
+            isReloading(true,normalResource,0);
+        }
     }
 
     private void isCurrentResourceConsuming(bool isResourceConsuming, float quantity)
