@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
-
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private HealthPoint healthPointPrefab;
-    [SerializeField] private float healthPointXOffset;
+    [Tooltip("The player stats this gauge ui displayed content.")][SerializeField] 
+    private PlayerStats player = null;
+    [Tooltip("Prefab used to instantiate health point.")][SerializeField]
+    private HealthPoint healthPointPrefab;
+    [Tooltip("Pixel between health point.")][SerializeField]
+    private float healthPointXOffset;
 
-    public int maxHP;
-
-    private int HP;
-
+    private int maxHP;
+    
+    private int HP = 0;
     private List<HealthPoint> points;
     private int amountToFill = 0;
     private float secondsBetweenNewHP = 0.1f;
@@ -22,6 +23,7 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         HP = 0;
+        maxHP = player.MaxLife;
         invincible = true;
         amountToFill = 0;
         points = new List<HealthPoint>();
@@ -32,22 +34,11 @@ public class HealthBar : MonoBehaviour
             
             points[i].enable = false;
         }
+        
+        player.hurt += (damage,_,__) => { removeHP(damage); };
+        player.heal += addHP; 
+        addHP(player.Life);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("c"))
-        {
-            addHP(5);
-        }else if (Input.GetKeyDown("v"))
-        {
-            StartCoroutine(fillUpHP());
-        }else if (Input.GetKeyDown("b"))
-        {
-            removeHP(1);
-        }
     }
 
     void addHP(int amount)
@@ -68,8 +59,6 @@ public class HealthBar : MonoBehaviour
     }
     IEnumerator fillUpHP()
     {
-        Debug.Log("fillUpHP");
-        Debug.Log("HP : " + HP);
         WaitForSeconds wait = new WaitForSeconds(secondsBetweenNewHP);
         while (amountToFill > 0)
         {

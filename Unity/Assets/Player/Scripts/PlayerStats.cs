@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Tooltip("Player maximum life amount.")][SerializeField]
-    private float maxLife = 100;
-    private float life;
+    private int maxLife = 100;
+    private int life;
     
 
-    public float Life { get => life; }
+    public int Life { get => life; }
 
-    public float MaxLife{get => maxLife;}
+    public int MaxLife{get => maxLife;}
 
-    public Action<float, Vector3, ResourceType> hurt;
-    public Action<float> heal;
+    public Action<int, Vector3, ResourceType> hurt;
+    public Action<int> heal;
     public Action<bool> die;
 
     private void Awake()
