@@ -51,9 +51,9 @@ public class RingMenu : MonoBehaviour
    public void SetActive(bool isActive)
    {
        gameObject.SetActive(isActive);
+       Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
        if (!isActive) return;
         callback?.Invoke(Pieces[activeElement].Data.Type);
-        Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
         run = isActive;
     }
     private void Update()

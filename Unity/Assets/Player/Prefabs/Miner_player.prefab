@@ -366,10 +366,10 @@ GameObject:
   - component: {fileID: 1151726027123357052}
   - component: {fileID: 1151726027123357049}
   - component: {fileID: 1151726027123357028}
-  - component: {fileID: 1151726027123357031}
   - component: {fileID: 1151726027123357030}
+  - component: {fileID: 3899900704729934196}
   m_Layer: 0
-  m_Name: Miner_player 1
+  m_Name: Miner_player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -508,25 +508,6 @@ MonoBehaviour:
   pitchAmplitude: {x: 0, y: 0}
   showAxes: 0
   axeLength: 2
---- !u!114 &1151726027123357031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151726027123357055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c06c1cdb73b5c664ba61a6471d085315, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  runInputName: Run
-  horizontalInputName: Horizontal
-  verticalInputName: Vertical
-  azimuthInputName: Mouse X
-  elevationInputName: Mouse Y
-  jumpInputName: Jump
-  grapplingInputName: Grappling
 --- !u!114 &1151726027123357030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +521,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 100
+--- !u!114 &3899900704729934196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151726027123357055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9b7f453eb4b314f9bfbe4e2dd397f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 150
+  runSpeed: 500
+  jumpForce: 500
+  additionalJump: 1
+  HookPrefab: {fileID: 0}
+  GrapplingOrigin: {fileID: 0}
+  camera: {fileID: 0}
+  launchGrapplingHook: 0
 --- !u!1 &1151726027986657005
 GameObject:
   m_ObjectHideFlags: 0
