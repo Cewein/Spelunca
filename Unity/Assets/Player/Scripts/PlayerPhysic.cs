@@ -17,9 +17,9 @@ public class PlayerPhysic : MonoBehaviour
     [Tooltip("The player jump force in unit per frame.")][SerializeField]
     private float jumpForce = 500f;
     
-    [Tooltip("The number of jump the player can do before re-land.")][SerializeField]
-    private int additionalJump = 1;
-
+    [Header("Colliders parameters")]
+    [Tooltip("The box collider used to detect if the player is on ground and can jump.")] [SerializeField]
+    private Foots footCollider = null;
     [Header("Grappling Hook parameters")]
     [Tooltip("The origin of the grappling hook.")] [SerializeField]
     private Hook HookPrefab;
@@ -74,9 +74,11 @@ public class PlayerPhysic : MonoBehaviour
 
     private bool jump(bool isJumping)
     {
-        if (isJumping && additionalJump == 0)
+       
+        if (isJumping && footCollider.additionalJumps >= 0)
         {
             jumpVelocity = transform.up * (jumpForce * rb.mass);
+            footCollider.additionalJumps--;
         }
         else jumpVelocity = Vector3.zero;
         return isJumping;
@@ -91,10 +93,8 @@ public class PlayerPhysic : MonoBehaviour
             
         }else if (previousGrappingInput == false && grapplingControl == true && hook.state != GrapplingHookState.Retracting)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
         {
-            //Debug.Log("Attempt to throw the hook");
             RaycastHit hit;
             if(Physics.Raycast(GrapplingOrigin.position,camera.transform.forward,out hit,hook.maxDeployDistance)){
-                //Debug.Log("target found ! Reseting the hook!");
                 hook.state = GrapplingHookState.Expanding;
                 hook.renderer.enabled = true;
                 
@@ -118,13 +118,5 @@ public class PlayerPhysic : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        additionalJump--;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        additionalJump++;
-    }
+   
 }

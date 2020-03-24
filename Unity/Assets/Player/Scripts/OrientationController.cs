@@ -55,6 +55,7 @@ public class OrientationController : MonoBehaviour
     private void Awake()
     {
         controller.rotate += setRotation;
+        if (controller == null) controller = (MinerController) GetComponent<PlayerController>();
     }
 
     public void Update()
