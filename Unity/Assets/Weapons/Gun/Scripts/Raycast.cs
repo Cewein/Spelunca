@@ -11,7 +11,7 @@ public class Raycast : MonoBehaviour
     private Camera cam = null;
 
     [Tooltip("The raycast scope.")] [SerializeField]
-    private int scope = 100;
+    private float scope = 100f;
 
     [Header("Debug")] 
     
@@ -27,9 +27,7 @@ public class Raycast : MonoBehaviour
     #endregion ==========
 
     #region Fields ==========
-
-    private RaycastHit hit;
-
+    
     public RaycastHit Hit;
  
     private Ray ray;
@@ -37,15 +35,20 @@ public class Raycast : MonoBehaviour
     #endregion ==========
 
     #region  Methodes ==========
-   
+
+    private void Awake()
+    {
+        if (cam == null) cam = Camera.main;
+        
+    }
+
     public void PerformRaycast()
     {
         Ray ray = cam.ScreenPointToRay(transform.position);
 
-        if (Physics.Raycast(ray,  out hit, scope))
+        if (Physics.Raycast(ray,  out Hit, scope))
         {
             if (showRaycast) Debug.DrawRay(ray.origin, ray.direction*scope, onTargetColor);
-            Hit = hit;
         }
         else
         {

@@ -337,7 +337,22 @@ PrefabInstance:
     - target: {fileID: 6728318677366320576, guid: c44004625961625478756368f76061cb,
         type: 3}
       propertyPath: showRaycast
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7121861662105125395, guid: c44004625961625478756368f76061cb,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 893597104}
+    - target: {fileID: 7121861662105125395, guid: c44004625961625478756368f76061cb,
+        type: 3}
+      propertyPath: scope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7121861662105125395, guid: c44004625961625478756368f76061cb,
+        type: 3}
+      propertyPath: showRaycast
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c44004625961625478756368f76061cb, type: 3}
@@ -559,6 +574,11 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 1336249962}
+    - target: {fileID: 3217983602656494258, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4822012468320466007, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
         type: 3}
       propertyPath: muzzleFlashTransform
@@ -574,6 +594,27 @@ PrefabInstance:
       propertyPath: printDebug
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1151726026589464908, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449462160049013860, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
+        type: 3}
+      propertyPath: raycastReticle
+      value: 
+      objectReference: {fileID: 1641705198}
+    - target: {fileID: 8449462160049013860, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
+        type: 3}
+      propertyPath: damageEffect
+      value: 
+      objectReference: {fileID: 6950693079315367904, guid: 93b3566f6383cf542a60d0b889d39b6f,
+        type: 3}
+    - target: {fileID: 4737005353289770089, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1206626035}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 208dd381ac2a1b44592b0dcd0e1425ae, type: 3}
 --- !u!1 &705507993
@@ -810,6 +851,31 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 649771996}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1206626034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1151726026589464908, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 649771996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1206626035
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206626034}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46979e61c4117354f86d46c079f8b076, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1307615483
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,5 +991,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c06c1cdb73b5c664ba61a6471d085315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1641705198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7121861662105125395, guid: c44004625961625478756368f76061cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 204548031}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30f9305785d5e84a91ee9aeaffd9887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
