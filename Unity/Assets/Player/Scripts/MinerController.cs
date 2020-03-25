@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
+using System.Linq;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController), typeof(MinerInputHandler))]
@@ -85,7 +86,7 @@ public class MinerController : MonoBehaviour
     float pitch = 0f;
     float yaw = 0f;
     float m_footstepDistanceCounter;
-    float m_TargetCharacterHeight;
+    float newHeight;
     private bool isSprinting;
 
     const float jumpRecoverTime = 0.2f;
@@ -104,7 +105,9 @@ public class MinerController : MonoBehaviour
 
         // force the crouch state to false when starting
         SetCrouchingState(false, true);
-        UpdateCharacterHeight(true);
+        characterController.height = newHeight;
+        characterController.center = Vector3.up * characterController.height * 0.5f;
+        playerCamera.transform.localPosition = Vector3.up * newHeight * cameraHeightRatio;
     }
 
     void Update()
@@ -123,8 +126,8 @@ public class MinerController : MonoBehaviour
         {
             SetCrouchingState(!isCrouching, false);
         }
+        SetHeightSmoothly();
 
-        UpdateCharacterHeight(false);
         
         Rotate();
         Move();
@@ -141,7 +144,7 @@ public class MinerController : MonoBehaviour
         if (Time.time >= lastTimeJumped + jumpRecoverTime)
         {
             // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
-            if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(characterController.height), characterController.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, groundCheckLayers, QueryTriggerInteraction.Ignore))
+            if (Physics.CapsuleCast(HeadPosition(), FootsPosition(characterController.height), characterController.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, groundCheckLayers, QueryTriggerInteraction.Ignore))
             {
                 // storing the upward direction for the surface found
                 normal = hit.normal;
@@ -205,7 +208,7 @@ public class MinerController : MonoBehaviour
     private void Run()
     {
         isSprinting = minerInputs.isRunning();
-        if (isSprinting) { isSprinting = SetCrouchingState(false, false); }
+        if (isSprinting) { isSprinting = SetCrouchingState(false,false); }
         speedModifier = isSprinting ? sprintSpeedModifier : 1f;
     }
     
@@ -223,8 +226,8 @@ public class MinerController : MonoBehaviour
         
 
         // apply the final calculated velocity value as a character movement
-        Vector3 capsuleBottomBeforeMove = GetCapsuleBottomHemisphere();
-        Vector3 capsuleTopBeforeMove = GetCapsuleTopHemisphere(characterController.height);
+        Vector3 capsuleBottomBeforeMove = HeadPosition();
+        Vector3 capsuleTopBeforeMove = FootsPosition(characterController.height);
         characterController.Move(velocity * Time.deltaTime);
 
         // detect obstructions to adjust velocity accordingly
@@ -240,15 +243,14 @@ public class MinerController : MonoBehaviour
 
     // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller
     
-
     // Gets the center point of the bottom hemisphere of the character controller capsule    
-    Vector3 GetCapsuleBottomHemisphere()
+    Vector3 HeadPosition()
     {
         return transform.position + (transform.up * characterController.radius);
     }
 
     // Gets the center point of the top hemisphere of the character controller capsule    
-    Vector3 GetCapsuleTopHemisphere(float atHeight)
+    Vector3 FootsPosition(float atHeight)
     {
         return transform.position + (transform.up * (atHeight - characterController.radius));
     }
@@ -259,60 +261,24 @@ public class MinerController : MonoBehaviour
         return Vector3.Cross(slopeNormal, Vector3.Cross(direction, transform.up)).normalized;
     }
 
-    void UpdateCharacterHeight(bool force)
+    void SetHeightSmoothly()
     {
-        // Update height instantly
-        if (force)
-        {
-            characterController.height = m_TargetCharacterHeight;
-            characterController.center = Vector3.up * characterController.height * 0.5f;
-            playerCamera.transform.localPosition = Vector3.up * m_TargetCharacterHeight * cameraHeightRatio;
-        }
-        // Update smooth height
-        else if (characterController.height != m_TargetCharacterHeight)
-        {
-            // resize the capsule and adjust camera position
-            characterController.height = Mathf.Lerp(characterController.height, m_TargetCharacterHeight, crouchingSharpness * Time.deltaTime);
-            characterController.center = Vector3.up * characterController.height * 0.5f;
-            playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, Vector3.up * m_TargetCharacterHeight * cameraHeightRatio, crouchingSharpness * Time.deltaTime);
-        }
+        if (characterController.height == newHeight) return;
+        characterController.height = Mathf.Lerp(characterController.height, newHeight, crouchingSharpness * Time.deltaTime);
+        characterController.center = Vector3.up * characterController.height * 0.5f;
+        playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, Vector3.up * newHeight * cameraHeightRatio, crouchingSharpness * Time.deltaTime);
     }
 
-    // returns false if there was an obstruction
     bool SetCrouchingState(bool crouched, bool ignoreObstructions)
     {
-        // set appropriate heights
-        if (crouched)
-        {
-            m_TargetCharacterHeight = capsuleHeightCrouching;
-        }
-        else
-        {
-            // Detect obstructions
-            if (!ignoreObstructions)
-            {
-                Collider[] standingOverlaps = Physics.OverlapCapsule(
-                    GetCapsuleBottomHemisphere(),
-                    GetCapsuleTopHemisphere(capsuleHeightStanding),
-                    characterController.radius,
-                    -1,
-                    QueryTriggerInteraction.Ignore);
-                foreach (Collider c in standingOverlaps)
-                {
-                    if (c != characterController)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            m_TargetCharacterHeight = capsuleHeightStanding;
-        }
-
-        if (onStanceChanged != null)
-        {
-            onStanceChanged.Invoke(crouched);
-        }
+        newHeight = crouched ? capsuleHeightCrouching:capsuleHeightStanding;
+        // Check for obstacles
+        if (!crouched && Physics.OverlapCapsule(HeadPosition(), 
+                                                FootsPosition(capsuleHeightStanding),
+                                                       characterController.radius, -1,
+                                                       QueryTriggerInteraction.Ignore
+                                              )
+                                .Any(c => c != characterController)){ return false; }
 
         isCrouching = crouched;
         return true;
