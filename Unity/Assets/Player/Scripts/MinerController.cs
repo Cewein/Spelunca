@@ -82,6 +82,7 @@ public class MinerController : MonoBehaviour
     private float speedModifier;
     private Vector3 newVelocity;
     Vector3 m_LatestImpactSpeed;
+    private RaycastHit hit;
     float lastTimeJumped = 0f;
     float pitch = 0f;
     float yaw = 0f;
@@ -96,39 +97,25 @@ public class MinerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         minerInputs = GetComponent<MinerInputHandler>();
-
-        if (playerCamera == null) playerCamera = Camera.main;
-
-
         characterController.enableOverlapRecovery = true;
+        if (playerCamera == null) playerCamera = Camera.main;
+        ForceStanding();
+    }
 
-
-        // force the crouch state to false when starting
-        SetCrouchingState(false, true);
+    private void ForceStanding()
+    {
+        Crouch(false);
         characterController.height = newHeight;
         characterController.center = Vector3.up * characterController.height * 0.5f;
         playerCamera.transform.localPosition = Vector3.up * newHeight * cameraHeightRatio;
     }
-
-    void Update()
+    
+    private void Update()
     {
-   
-
         hasJumpedThisFrame = false;
-
-        bool wasGrounded = isOnGround;
         SeekGround();
-
-      
-
-        // crouching
-        if (minerInputs.isCrouching())
-        {
-            SetCrouchingState(!isCrouching, false);
-        }
+        if (minerInputs.isCrouching()){Crouch(!isCrouching);}
         SetHeightSmoothly();
-
-        
         Rotate();
         Move();
         Jump();
@@ -180,18 +167,15 @@ public class MinerController : MonoBehaviour
 
     private void Jump()
     {
-        if (isOnGround && minerInputs.isJumping())
+        if (!isOnGround || !minerInputs.isJumping()) return;
+        if (Crouch(false))
         {
-            // force the crouch state to false
-            if (SetCrouchingState(false, false))
-            {
-                velocity.y = 0f;
-                velocity += Vector3.up * jumpForce;
-                lastTimeJumped = Time.time;
-                hasJumpedThisFrame = true;
-                isOnGround = false;
-              //  normal = Vector3.up;
-            }
+            velocity.y = 0f;
+            velocity += Vector3.up * jumpForce;
+            lastTimeJumped = Time.time;
+            hasJumpedThisFrame = true;
+            isOnGround = false;
+            //  normal = Vector3.up;
         }
     }
 
@@ -208,7 +192,7 @@ public class MinerController : MonoBehaviour
     private void Run()
     {
         isSprinting = minerInputs.isRunning();
-        if (isSprinting) { isSprinting = SetCrouchingState(false,false); }
+        if (isSprinting) { isSprinting = Crouch(false); }
         speedModifier = isSprinting ? sprintSpeedModifier : 1f;
     }
     
@@ -223,39 +207,41 @@ public class MinerController : MonoBehaviour
             velocity = Vector3.Lerp(velocity, newVelocity, movementSharpnessOnGround * Time.deltaTime);
         }
         else{AirControl();}
-        
 
-        // apply the final calculated velocity value as a character movement
-        Vector3 capsuleBottomBeforeMove = HeadPosition();
-        Vector3 capsuleTopBeforeMove = FootsPosition(characterController.height);
+        Vector3 previousHeadPosition = HeadPosition();
+        Vector3 previousFootsPosition = FootsPosition(characterController.height);
         characterController.Move(velocity * Time.deltaTime);
+        AvoidObstacles(previousHeadPosition, previousFootsPosition);
+    }
 
-        // detect obstructions to adjust velocity accordingly
-        m_LatestImpactSpeed = Vector3.zero;
-        if (Physics.CapsuleCast(capsuleBottomBeforeMove, capsuleTopBeforeMove, characterController.radius, velocity.normalized, out RaycastHit hit, velocity.magnitude * Time.deltaTime, -1, QueryTriggerInteraction.Ignore))
+
+    private void AvoidObstacles(Vector3 previousHeadPosition,Vector3 previousFootsPosition)
+    {
+        if (Physics.CapsuleCast(previousHeadPosition, previousFootsPosition, characterController.radius, 
+                        velocity.normalized, out hit, velocity.magnitude * Time.deltaTime,
+                        -1, QueryTriggerInteraction.Ignore)
+           )
         {
-            // We remember the last impact speed because the fall damage logic might need it
-            m_LatestImpactSpeed = velocity;
-
             velocity = Vector3.ProjectOnPlane(velocity, hit.normal);
         }
     }
-
-    // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller
     
-    // Gets the center point of the bottom hemisphere of the character controller capsule    
-    Vector3 HeadPosition()
+    private Vector3 HeadPosition()
     {
         return transform.position + (transform.up * characterController.radius);
     }
-
-    // Gets the center point of the top hemisphere of the character controller capsule    
-    Vector3 FootsPosition(float atHeight)
+    
+    private Vector3 FootsPosition(float height)
     {
-        return transform.position + (transform.up * (atHeight - characterController.radius));
+        return transform.position + (transform.up * (height - characterController.radius));
     }
 
-    // Gets a reoriented direction that is tangent to a given slope
+    /// <summary>
+    /// To not being stuck on sharped ground.
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <param name="slopeNormal"></param>
+    /// <returns></returns>
     private Vector3 SlideOnSlope(Vector3 direction, Vector3 slopeNormal)
     {
         return Vector3.Cross(slopeNormal, Vector3.Cross(direction, transform.up)).normalized;
@@ -269,9 +255,9 @@ public class MinerController : MonoBehaviour
         playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, Vector3.up * newHeight * cameraHeightRatio, crouchingSharpness * Time.deltaTime);
     }
 
-    bool SetCrouchingState(bool crouched, bool ignoreObstructions)
+    bool Crouch(bool crouched)
     {
-        newHeight = crouched ? capsuleHeightCrouching:capsuleHeightStanding;
+        newHeight = crouched ? capsuleHeightCrouching : capsuleHeightStanding;
         // Check for obstacles
         if (!crouched && Physics.OverlapCapsule(HeadPosition(), 
                                                 FootsPosition(capsuleHeightStanding),
