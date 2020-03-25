@@ -67,7 +67,6 @@ public class MinerController : MonoBehaviour
         
     MinerInputHandler m_InputHandler;
     CharacterController m_Controller;
-    PlayerWeaponsManager m_WeaponsManager;
     Vector3 m_GroundNormal;
     Vector3 m_CharacterVelocity;
     Vector3 m_LatestImpactSpeed;
@@ -84,7 +83,6 @@ public class MinerController : MonoBehaviour
         // fetch components on the same gameObject
         m_Controller = GetComponent<CharacterController>();
 
-        m_WeaponsManager = GetComponent<PlayerWeaponsManager>();
 
         if (playerCamera == null) playerCamera = Camera.main;
         if (m_InputHandler == null) m_InputHandler = GetComponent<MinerInputHandler>();
@@ -144,7 +142,6 @@ public class MinerController : MonoBehaviour
         isDead = true;
 
         // Tell the weapons manager to switch to a non-existing weapon in order to lower the weapon
-        m_WeaponsManager.SwitchToWeaponIndex(-1, true);
     }
 
     void GroundCheck()
