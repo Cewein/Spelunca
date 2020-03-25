@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
-
+/*
 public class OrientationController : MonoBehaviour
 {
     [Header("Controls")]
@@ -86,3 +86,4 @@ public class OrientationController : MonoBehaviour
          pitch -= y * verticalSensitivity * Time.deltaTime;
     }
 }
+*/

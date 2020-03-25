@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
-
+/*
 [RequireComponent(typeof(MinerController))]
 public class PlayerPhysic : MonoBehaviour
 {
@@ -120,3 +120,4 @@ public class PlayerPhysic : MonoBehaviour
 
    
 }
+*/

@@ -845,11 +845,6 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1206626035}
-    - target: {fileID: 1151726027123357053, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2601211032304505682, guid: 208dd381ac2a1b44592b0dcd0e1425ae,
         type: 3}
       propertyPath: jumps

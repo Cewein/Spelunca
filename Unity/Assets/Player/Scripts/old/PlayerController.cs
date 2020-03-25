@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
+/*
 public class PlayerController : MinerController
 {
     #region SerializeFields ==========
@@ -40,3 +40,4 @@ public class PlayerController : MinerController
     }
     
 }
+*/

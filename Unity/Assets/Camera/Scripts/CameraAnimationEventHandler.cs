@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using UnityEngine;/*
 [RequireComponent(typeof(Animator))]
 public class CameraAnimationEventHandler : MonoBehaviour
 {
@@ -13,3 +13,4 @@ public class CameraAnimationEventHandler : MonoBehaviour
         minerController.jump += isJumping => { animator.SetBool("isJumping", isJumping); };
     }
 }
+*/
