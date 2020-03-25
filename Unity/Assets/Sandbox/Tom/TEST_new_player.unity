@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 168408937}
   - component: {fileID: 168408936}
   - component: {fileID: 168408935}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 198064110}
   - component: {fileID: 198064109}
   - component: {fileID: 198064108}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 624851338}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Parkour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 1108912682}
   - component: {fileID: 1108912681}
   - component: {fileID: 1108912680}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 1307615486}
   - component: {fileID: 1307615485}
   - component: {fileID: 1307615484}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall to test avoid clipping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 1399455198}
   - component: {fileID: 1399455197}
   - component: {fileID: 1399455196}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 1612466055}
   - component: {fileID: 1612466054}
   - component: {fileID: 1612466053}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1088,7 @@ GameObject:
   - component: {fileID: 1722194729}
   - component: {fileID: 1722194728}
   - component: {fileID: 1722194727}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 1979148103}
   - component: {fileID: 1979148102}
   - component: {fileID: 1979148101}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 2064858402}
   - component: {fileID: 2064858401}
   - component: {fileID: 2064858400}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1427,21 +1427,6 @@ PrefabInstance:
         type: 3}
       propertyPath: crouchInputName
       value: Crouch
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: cameraPosition
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: standingHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crouchingHeight
-      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 78457083255532787, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
