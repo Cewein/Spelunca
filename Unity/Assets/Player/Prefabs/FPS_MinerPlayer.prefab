@@ -139,9 +139,9 @@ MonoBehaviour:
   grapplingInputName: Grappling
   fireInputName: Fire
   aimInputName: Aim
-  crouchInputName: Cancel
+  crouchInputName: Crouch
   switchWeaponInputName: Mouse Scrollwheel
-  cameraSensitivity: 1
+  cameraSensitivity: 50
 --- !u!114 &78457083255532787
 MonoBehaviour:
   m_ObjectHideFlags: 0
