@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MinerInputHandler : MonoBehaviour
 {
-    
+    #region SerializedField ============================================================================================
+
     [Header("Inputs")]
     
     [Tooltip("The run input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string runInputName = "Run";
     
-    [Tooltip("The move horizontally input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [Tooltip("The movement horizontally input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string horizontalInputName = "Horizontal";
     
-    [Tooltip("The move vertically input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [Tooltip("The movement vertically input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string verticalInputName = "Vertical";
     
     [Tooltip("The rotate horizontally input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
@@ -38,152 +40,123 @@ public class MinerInputHandler : MonoBehaviour
     [Tooltip("The switch weapon input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string switchWeaponInputName = "Mouse Scrollwheel";
     
-    [Tooltip("Sensitivity multiplier for moving the camera around")]
-    public float lookSensitivity = 1f;
-    [Tooltip("Limit to consider an input when using a trigger on a controller")]
-    public float triggerAxisThreshold = 0.4f;
+    [Header("Parameters")]
+    
+    [Tooltip("Sensitivity multiplier for moving the camera around")][SerializeField]
+    [Range(1,100)]
+    private float cameraSensitivity = 1f;
  
+    #endregion
+    
+    #region Other fields ===============================================================================================
+    
+    private Vector3 movement;
+    
+    /// <summary>
+    /// The miner movement quantity vector.
+    /// </summary>
+    public Vector3 Movement
+    {
+        get
+        {
+            if (!GetIfPlayerCanPlay()) movement.x =  movement.y = movement.z = 0f;
+            else
+            {
+                movement.x = Input.GetAxisRaw(horizontalInputName);
+                movement.y = 0f;
+                movement.z = Input.GetAxisRaw(verticalInputName);
+                // Avoid higher speed on diagonal movement
+                movement = Vector3.ClampMagnitude(movement, 1);
+            }
+            return movement;
+        }
+    }
+    
+    public float Azimuth
+    {
+        get
+        {
+            if (GetIfPlayerCanPlay())
+            {
+                // NOTE : No need to multiply by delta by time because in Unity
+                // mouse input is already calculate in function of delta time.
+                return Input.GetAxis(azimuthInputName) * (cameraSensitivityAdjustement*cameraSensitivity)/100f;
+            }
 
-    bool m_FireInputWasHeld;
-    private Vector3 move;
+            return 0f;
+        }
+       
+    }
+    
+    public float Elevation
+    {
+        get
+        {
+            if (GetIfPlayerCanPlay())
+            {
+                // NOTE : No need to multiply by delta by time because in Unity
+                // mouse input is already calculate in function of delta time.
+                return -Input.GetAxis(elevationInputName) *(cameraSensitivityAdjustement*cameraSensitivity)/100f;
+            }
 
+            return 0f;
+        }
+       
+    }
+    
+    private float cameraSensitivityAdjustement = 0.03f;
+
+    #endregion
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-    private void LateUpdate()
-    {
-        m_FireInputWasHeld = GetFireInputHeld();
-    }
-
-    public bool CanProcessInput()
+    
+    /// <summary>
+    /// Return if player inputs can be used. It will be useful to stop the game while menu UI are
+    /// displayed or to paused the game.
+    /// </summary>
+    /// <returns>a boolean that indicate if player inputs can process.</returns>
+    private bool GetIfPlayerCanPlay()
     {
         return Cursor.lockState == CursorLockMode.Locked;
     }
-
-    public Vector3 GetMoveInput()
+    public bool isJumping()
     {
-        if (!CanProcessInput()) return Vector3.zero;
-        move.x = Input.GetAxisRaw(horizontalInputName);
-        move.y = 0f;
-        move.z = Input.GetAxisRaw(verticalInputName);
-
-        // constrain move input to a maximum magnitude of 1, otherwise diagonal movement might exceed the max move speed defined
-        move = Vector3.ClampMagnitude(move, 1);
-
-        return move;
-
+        return GetIfPlayerCanPlay() && Input.GetButton(jumpInputName);
     }
 
-    public float GetLookInputsHorizontal()
+    public bool isFiring()
     {
-        return GetMouseOrStickLookAxis(azimuthInputName, azimuthInputName);
+        return GetIfPlayerCanPlay() && Input.GetButton(fireInputName);
     }
 
-    public float GetLookInputsVertical()
+    public bool isAiming()
     {
-        return GetMouseOrStickLookAxis(elevationInputName, elevationInputName);
+        return GetIfPlayerCanPlay() && Input.GetButton(aimInputName);
     }
 
-    public bool GetJumpInputDown()
+    public bool isRunning()
     {
-        if (CanProcessInput())
-        {
-            return Input.GetButtonDown(jumpInputName);
-        }
-
-        return false;
+        return GetIfPlayerCanPlay() && Input.GetButton(runInputName);
     }
 
-    public bool GetJumpInputHeld()
+    // NOTE : crouch = s'accroupir
+    public bool isCrouching()
     {
-        if (CanProcessInput())
-        {
-            return Input.GetButton(jumpInputName);
-        }
-
-        return false;
+        return GetIfPlayerCanPlay() && Input.GetButton(crouchInputName);
     }
 
-    public bool GetFireInputDown()
+    public int isSwitchingWeapon()
     {
-        return GetFireInputHeld() && !m_FireInputWasHeld;
-    }
-
-    public bool GetFireInputReleased()
-    {
-        return !GetFireInputHeld() && m_FireInputWasHeld;
-    }
-
-    public bool GetFireInputHeld()
-    {
-        return CanProcessInput() && Input.GetButton(fireInputName);
-    }
-
-    public bool GetAimInputHeld()
-    {
-        return CanProcessInput() && Input.GetButton(aimInputName);
-    }
-
-    public bool GetSprintInputHeld()
-    {
-        return CanProcessInput() && Input.GetButton(runInputName);
-    }
-
-    public bool GetCrouchInputDown()
-    {
-        return CanProcessInput() && Input.GetButtonDown(crouchInputName);
-    }
-
-    public bool GetCrouchInputReleased()
-    {
-        return CanProcessInput() && Input.GetButtonUp(crouchInputName);
-    }
-
-    public int GetSwitchWeaponInput()
-    {
-        if (CanProcessInput())
-        {
-
-
-            if (Input.GetAxis(switchWeaponInputName) > 0f)
-                return -1;
-            if (Input.GetAxis(switchWeaponInputName) < 0f)
-                return 1;
-        }
-
+        if (!GetIfPlayerCanPlay()) return 0;
+        if (Input.GetAxis(switchWeaponInputName) > 0f)
+            return -1;
+        if (Input.GetAxis(switchWeaponInputName) < 0f)
+            return 1;
         return 0;
     }
     
-    float GetMouseOrStickLookAxis(string mouseInputName, string stickInputName)
-    {
-        if (CanProcessInput())
-        {
-            // Check if this look input is coming from the mouse
-            bool isGamepad = Input.GetAxis(stickInputName) != 0f;
-            float i = isGamepad ? Input.GetAxis(stickInputName) : Input.GetAxisRaw(mouseInputName);
-
-            if (mouseInputName.Equals(elevationInputName)) i *= -1f;
-            // apply sensitivity multiplier
-            i *= lookSensitivity;
-
-            if (isGamepad)
-            {
-                // since mouse input is already deltaTime-dependant, only scale input with frame time if it's coming from sticks
-                i *= Time.deltaTime;
-            }
-            else
-            {
-                // reduce mouse input amount to be equivalent to stick movement
-                i *= 0.01f;
-
-            }
-
-            return i;
-        }
-
-        return 0f;
-    }
+ 
 }

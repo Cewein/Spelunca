@@ -213,7 +213,7 @@ namespace UnityEditor.AI
                 pos = Handles.PositionHandle(startPt, navLink.transform.rotation);
                 if (EditorGUI.EndChangeCheck())
                 {
-                    Undo.RecordObject(navLink, "Move link point");
+                    Undo.RecordObject(navLink, "Movement link point");
                     navLink.startPoint = mat.inverse.MultiplyPoint(pos);
                 }
             }
@@ -233,7 +233,7 @@ namespace UnityEditor.AI
                 pos = Handles.PositionHandle(endPt, navLink.transform.rotation);
                 if (EditorGUI.EndChangeCheck())
                 {
-                    Undo.RecordObject(navLink, "Move link point");
+                    Undo.RecordObject(navLink, "Movement link point");
                     navLink.endPoint = mat.inverse.MultiplyPoint(pos);
                 }
             }

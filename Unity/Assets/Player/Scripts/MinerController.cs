@@ -129,7 +129,7 @@ public class MinerController : MonoBehaviour
         }*/
 
         // crouching
-        if (m_InputHandler.GetCrouchInputDown())
+        if (m_InputHandler.isCrouching())
         {
             SetCrouchingState(!isCrouching, false);
         }
@@ -187,13 +187,13 @@ public class MinerController : MonoBehaviour
         // horizontal character rotation
         {
             // rotate the transform with the input speed around its local Y axis
-            transform.Rotate(new Vector3(0f, (m_InputHandler.GetLookInputsHorizontal() * rotationSpeed ), 0f), Space.Self);
+            transform.Rotate(new Vector3(0f, (m_InputHandler.Azimuth * rotationSpeed ), 0f), Space.Self);
         }
 
         // vertical camera rotation
         {
             // add vertical inputs to the camera's vertical angle
-            m_CameraVerticalAngle += m_InputHandler.GetLookInputsVertical() * rotationSpeed ;
+            m_CameraVerticalAngle += m_InputHandler.Elevation * rotationSpeed ;
 
             // limit the camera's vertical angle to min/max
             m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
@@ -203,7 +203,7 @@ public class MinerController : MonoBehaviour
         }
 
         // character movement handling
-        bool isSprinting = m_InputHandler.GetSprintInputHeld();
+        bool isSprinting = m_InputHandler.isRunning();
         {
             if (isSprinting)
             {
@@ -213,7 +213,7 @@ public class MinerController : MonoBehaviour
             float speedModifier = isSprinting ? sprintSpeedModifier : 1f;
 
             // converts move input to a worldspace vector based on our character's transform orientation
-            Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
+            Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.Movement);
 
             // handle grounded movement
             if (isGrounded)
@@ -229,7 +229,7 @@ public class MinerController : MonoBehaviour
                 characterVelocity = Vector3.Lerp(characterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
 
                 // jumping
-                if (isGrounded && m_InputHandler.GetJumpInputDown())
+                if (isGrounded && m_InputHandler.isJumping())
                 {
                     // force the crouch state to false
                     if (SetCrouchingState(false, false))

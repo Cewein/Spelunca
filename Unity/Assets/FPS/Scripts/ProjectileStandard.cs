@@ -108,7 +108,7 @@ public class ProjectileStandard : MonoBehaviour
 
     void Update()
     {
-        // Move
+        // Movement
         transform.position += m_Velocity * Time.deltaTime;
         if (inheritWeaponVelocity)
         {
