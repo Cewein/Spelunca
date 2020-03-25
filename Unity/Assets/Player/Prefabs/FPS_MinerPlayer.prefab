@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4447914795741383104}
   - component: {fileID: 8038581194911468935}
   - component: {fileID: 2465613268572783777}
-  - component: {fileID: 78457083255532787}
+  - component: {fileID: 2474185556268879231}
   m_Layer: 0
   m_Name: FPS_MinerPlayer
   m_TagString: Untagged
@@ -142,7 +142,7 @@ MonoBehaviour:
   crouchInputName: Crouch
   switchWeaponInputName: Mouse Scrollwheel
   cameraSensitivity: 50
---- !u!114 &78457083255532787
+--- !u!114 &2474185556268879231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2338222191191406569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ed5f902c8c28cb46bb21f87785a64ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 96938d5bfebc60447b292326846c0c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 4027019231142951144}
@@ -159,7 +159,7 @@ MonoBehaviour:
   groundCheckLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  groundCheckDistance: 0.05
+  seekGroundScope: 0.05
   maxSpeedOnGround: 10
   movementSharpnessOnGround: 15
   maxSpeedCrouchedRatio: 0.5
@@ -169,10 +169,14 @@ MonoBehaviour:
   killHeight: -50
   rotationSpeed: 200
   aimingRotationMultiplier: 0.4
+  yawAmplitude: {x: -60, y: 60}
+  pitchAmplitude: {x: -90, y: 90}
+  clampVerticalRotation: 1
+  clampHorizontalRotation: 0
   jumpForce: 9
   cameraHeightRatio: 0.9
-  capsuleHeightStanding: 2.5
-  capsuleHeightCrouching: 1.25
+  capsuleHeightStanding: 1.8
+  capsuleHeightCrouching: 0.9
   crouchingSharpness: 10
 --- !u!1 &2495153980376909236
 GameObject:

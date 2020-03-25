@@ -16,7 +16,7 @@ public class MinerController : MonoBehaviour
     [Tooltip("Physic layers checked to consider the player grounded")]
     public LayerMask groundCheckLayers = -1;
     [Tooltip("distance from the bottom of the character controller capsule to test for grounded")]
-    public float groundCheckDistance = 0.05f;
+    public float seekGroundScope = 0.05f;
 
     [Header("Movement")]
     [Tooltip("Max movement speed when grounded (when not sprinting)")]
@@ -41,7 +41,17 @@ public class MinerController : MonoBehaviour
     [Range(0.1f, 1f)]
     [Tooltip("Rotation speed multiplier when aiming")]
     public float aimingRotationMultiplier = 0.4f;
-
+    
+    [Tooltip("The minimum and the maximum yaw value in degree.")][SerializeField]
+    private Vector2 yawAmplitude = new Vector2(-45,45);
+    
+    [Tooltip("The minimum and the maximum pitch value in degree.")][SerializeField]
+    private Vector2 pitchAmplitude = new Vector2(90,-45);
+    [Tooltip("If selected, clamp vertical rotation between the two angles value defined in pitch amplitude.")][SerializeField]
+    private bool clampVerticalRotation = true;
+    
+    [Tooltip("If selected, clamp horizontal rotation between the two angles value defined in yaw amplitude.")][SerializeField]
+    private bool clampHorizontalRotation = false;
     [Header("Jump")]
     [Tooltip("Force applied upward when jumping")]
     public float jumpForce = 9f;
@@ -58,37 +68,36 @@ public class MinerController : MonoBehaviour
 
     public UnityAction<bool> onStanceChanged;
 
-    public Vector3 characterVelocity { get; set; }
     public bool isGrounded { get; private set; }
     public bool hasJumpedThisFrame { get; private set; }
     public bool isDead { get; private set; }
     public bool isCrouching { get; private set; }
    
         
-    MinerInputHandler m_InputHandler;
-    CharacterController m_Controller;
-    Vector3 m_GroundNormal;
-    Vector3 m_CharacterVelocity;
+    MinerInputHandler minerInputs;
+    CharacterController characterController;
+    Vector3 normal;
+    private Vector3 velocity;
     Vector3 m_LatestImpactSpeed;
-    float m_LastTimeJumped = 0f;
-    float m_CameraVerticalAngle = 0f;
+    float lastTimeJumped = 0f;
+    float pitch = 0f;
+    float yaw = 0f;
     float m_footstepDistanceCounter;
     float m_TargetCharacterHeight;
+    private bool isSprinting;
 
-    const float k_JumpGroundingPreventionTime = 0.2f;
-    const float k_GroundCheckDistanceInAir = 0.07f;
+    const float jumpRecoverTime = 0.2f;
+    const float seekGroundScopeAir = 0.07f;
 
     void Start()
     {
-        // fetch components on the same gameObject
-        m_Controller = GetComponent<CharacterController>();
-
+        characterController = GetComponent<CharacterController>();
+        minerInputs = GetComponent<MinerInputHandler>();
 
         if (playerCamera == null) playerCamera = Camera.main;
-        if (m_InputHandler == null) m_InputHandler = GetComponent<MinerInputHandler>();
 
 
-        m_Controller.enableOverlapRecovery = true;
+        characterController.enableOverlapRecovery = true;
 
 
         // force the crouch state to false when starting
@@ -103,114 +112,102 @@ public class MinerController : MonoBehaviour
         hasJumpedThisFrame = false;
 
         bool wasGrounded = isGrounded;
-        GroundCheck();
+        SeekGround();
 
-        // landing
-        /*if (isGrounded && !wasGrounded)
-        {
-            // Fall damage
-            float fallSpeed = -Mathf.Min(characterVelocity.y, m_LatestImpactSpeed.y);
-            float fallSpeedRatio = (fallSpeed - minSpeedForFallDamage) / (maxSpeedForFallDamage - minSpeedForFallDamage);
-            if (recievesFallDamage && fallSpeedRatio > 0f)
-            {
-                float dmgFromFall = Mathf.Lerp(fallDamageAtMinSpeed, fallDamageAtMaxSpeed, fallSpeedRatio);
-                m_Health.TakeDamage(dmgFromFall, null);
-
-                // fall damage SFX
-                audioSource.PlayOneShot(fallDamageSFX);
-            }
-            else
-            {
-                // land SFX
-                audioSource.PlayOneShot(landSFX);
-            }
-        }*/
+      
 
         // crouching
-        if (m_InputHandler.isCrouching())
+        if (minerInputs.isCrouching())
         {
             SetCrouchingState(!isCrouching, false);
         }
 
         UpdateCharacterHeight(false);
-
-        HandleCharacterMovement();
+        
+        Rotate();
+        Move();
     }
 
-    void OnDie()
+  
+    void SeekGround()
     {
-        isDead = true;
-
-        // Tell the weapons manager to switch to a non-existing weapon in order to lower the weapon
-    }
-
-    void GroundCheck()
-    {
-        // Make sure that the ground check distance while already in air is very small, to prevent suddenly snapping to ground
-        float chosenGroundCheckDistance = isGrounded ? (m_Controller.skinWidth + groundCheckDistance) : k_GroundCheckDistanceInAir;
-
-        // reset values before the ground check
+        float chosenGroundCheckDistance = isGrounded ? (characterController.skinWidth + seekGroundScope) : seekGroundScopeAir;
         isGrounded = false;
-        m_GroundNormal = Vector3.up;
+        normal = Vector3.up;
 
-        // only try to detect ground if it's been a short amount of time since last jump; otherwise we may snap to the ground instantly after we try jumping
-        if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
+        if (Time.time >= lastTimeJumped + jumpRecoverTime)
         {
             // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
-            if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height), m_Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, groundCheckLayers, QueryTriggerInteraction.Ignore))
+            if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(characterController.height), characterController.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, groundCheckLayers, QueryTriggerInteraction.Ignore))
             {
                 // storing the upward direction for the surface found
-                m_GroundNormal = hit.normal;
+                normal = hit.normal;
 
                 // Only consider this a valid ground hit if the ground normal goes in the same direction as the character up
                 // and if the slope angle is lower than the character controller's limit
                 if (Vector3.Dot(hit.normal, transform.up) > 0f &&
-                    IsNormalUnderSlopeLimit(m_GroundNormal))
+                    IsNormalUnderSlopeLimit(normal))
                 {
                     isGrounded = true;
 
                     // handle snapping to the ground
-                    if (hit.distance > m_Controller.skinWidth)
+                    if (hit.distance > characterController.skinWidth)
                     {
-                        m_Controller.Move(Vector3.down * hit.distance);
+                        characterController.Move(Vector3.down * hit.distance);
                     }
                 }
             }
         }
     }
 
-    void HandleCharacterMovement()
+    private void Rotate()
     {
-        // horizontal character rotation
+        yaw += minerInputs.Azimuth * rotationSpeed;  
+        pitch += minerInputs.Elevation * rotationSpeed ;
+
+        if ( clampHorizontalRotation ) yaw =  Mathf.Clamp(yaw,yawAmplitude.x,yawAmplitude.y) ;
+        if ( clampVerticalRotation ) pitch = Mathf.Clamp(pitch,pitchAmplitude.x,pitchAmplitude.y) ;
+         
+        transform.localEulerAngles = new Vector3(0f, yaw, 0f);
+        playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+
+    }
+
+    private void Jump()
+    {
+        if (isGrounded && minerInputs.isJumping())
         {
-            // rotate the transform with the input speed around its local Y axis
-            transform.Rotate(new Vector3(0f, (m_InputHandler.Azimuth * rotationSpeed ), 0f), Space.Self);
-        }
-
-        // vertical camera rotation
-        {
-            // add vertical inputs to the camera's vertical angle
-            m_CameraVerticalAngle += m_InputHandler.Elevation * rotationSpeed ;
-
-            // limit the camera's vertical angle to min/max
-            m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
-
-            // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
-            playerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
-        }
-
-        // character movement handling
-        bool isSprinting = m_InputHandler.isRunning();
-        {
-            if (isSprinting)
+            // force the crouch state to false
+            if (SetCrouchingState(false, false))
             {
-                isSprinting = SetCrouchingState(false, false);
-            }
+                velocity.y = 0f;
+                velocity += Vector3.up * jumpForce;
 
-            float speedModifier = isSprinting ? sprintSpeedModifier : 1f;
+                // remember last time we jumped because we need to prevent snapping to ground for a short time
+                lastTimeJumped = Time.time;
+                hasJumpedThisFrame = true;
+
+                // Force grounding to false
+                isGrounded = false;
+                normal = Vector3.up;
+            }
+        }
+    }
+    void Move()
+    {
+       
+        // character movement handling
+        isSprinting = minerInputs.isRunning();
+        if (isSprinting) { isSprinting = SetCrouchingState(false, false); }
+        float speedModifier = isSprinting ? sprintSpeedModifier : 1f;
+
+        
+        {
+           
+
 
             // converts move input to a worldspace vector based on our character's transform orientation
-            Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.Movement);
+            Vector3 worldspaceMoveInput = transform.TransformVector(minerInputs.Movement);
 
             // handle grounded movement
             if (isGrounded)
@@ -220,30 +217,30 @@ public class MinerController : MonoBehaviour
                 // reduce speed if crouching by crouch speed ratio
                 if (isCrouching)
                     targetVelocity *= maxSpeedCrouchedRatio;
-                targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, m_GroundNormal) * targetVelocity.magnitude;
+                targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, normal) * targetVelocity.magnitude;
 
                 // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
-                characterVelocity = Vector3.Lerp(characterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
+                velocity = Vector3.Lerp(velocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
 
                 // jumping
-                if (isGrounded && m_InputHandler.isJumping())
+                if (isGrounded && minerInputs.isJumping())
                 {
                     // force the crouch state to false
                     if (SetCrouchingState(false, false))
                     {
                         // start by canceling out the vertical component of our velocity
-                        characterVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
+                        velocity = new Vector3(velocity.x, 0f, velocity.z);
 
                         // then, add the jumpSpeed value upwards
-                        characterVelocity += Vector3.up * jumpForce;
+                        velocity += Vector3.up * jumpForce;
 
                         // remember last time we jumped because we need to prevent snapping to ground for a short time
-                        m_LastTimeJumped = Time.time;
+                        lastTimeJumped = Time.time;
                         hasJumpedThisFrame = true;
 
                         // Force grounding to false
                         isGrounded = false;
-                        m_GroundNormal = Vector3.up;
+                        normal = Vector3.up;
                     }
                 }
             }
@@ -251,51 +248,51 @@ public class MinerController : MonoBehaviour
             else
             {
                 // add air acceleration
-                characterVelocity += worldspaceMoveInput * accelerationSpeedInAir * Time.deltaTime;
+                velocity += worldspaceMoveInput * accelerationSpeedInAir * Time.deltaTime;
 
                 // limit air speed to a maximum, but only horizontally
-                float verticalVelocity = characterVelocity.y;
-                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(characterVelocity, Vector3.up);
+                float verticalVelocity = velocity.y;
+                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(velocity, Vector3.up);
                 horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeedInAir * speedModifier);
-                characterVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
+                velocity = horizontalVelocity + (Vector3.up * verticalVelocity);
 
                 // apply the gravity to the velocity
-                characterVelocity += Vector3.down * gravityDownForce * Time.deltaTime;
+                velocity += Vector3.down * gravityDownForce * Time.deltaTime;
             }
         }
 
         // apply the final calculated velocity value as a character movement
         Vector3 capsuleBottomBeforeMove = GetCapsuleBottomHemisphere();
-        Vector3 capsuleTopBeforeMove = GetCapsuleTopHemisphere(m_Controller.height);
-        m_Controller.Move(characterVelocity * Time.deltaTime);
+        Vector3 capsuleTopBeforeMove = GetCapsuleTopHemisphere(characterController.height);
+        characterController.Move(velocity * Time.deltaTime);
 
         // detect obstructions to adjust velocity accordingly
         m_LatestImpactSpeed = Vector3.zero;
-        if (Physics.CapsuleCast(capsuleBottomBeforeMove, capsuleTopBeforeMove, m_Controller.radius, characterVelocity.normalized, out RaycastHit hit, characterVelocity.magnitude * Time.deltaTime, -1, QueryTriggerInteraction.Ignore))
+        if (Physics.CapsuleCast(capsuleBottomBeforeMove, capsuleTopBeforeMove, characterController.radius, velocity.normalized, out RaycastHit hit, velocity.magnitude * Time.deltaTime, -1, QueryTriggerInteraction.Ignore))
         {
             // We remember the last impact speed because the fall damage logic might need it
-            m_LatestImpactSpeed = characterVelocity;
+            m_LatestImpactSpeed = velocity;
 
-            characterVelocity = Vector3.ProjectOnPlane(characterVelocity, hit.normal);
+            velocity = Vector3.ProjectOnPlane(velocity, hit.normal);
         }
     }
 
     // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller
     bool IsNormalUnderSlopeLimit(Vector3 normal)
     {
-        return Vector3.Angle(transform.up, normal) <= m_Controller.slopeLimit;
+        return Vector3.Angle(transform.up, normal) <= characterController.slopeLimit;
     }
 
     // Gets the center point of the bottom hemisphere of the character controller capsule    
     Vector3 GetCapsuleBottomHemisphere()
     {
-        return transform.position + (transform.up * m_Controller.radius);
+        return transform.position + (transform.up * characterController.radius);
     }
 
     // Gets the center point of the top hemisphere of the character controller capsule    
     Vector3 GetCapsuleTopHemisphere(float atHeight)
     {
-        return transform.position + (transform.up * (atHeight - m_Controller.radius));
+        return transform.position + (transform.up * (atHeight - characterController.radius));
     }
 
     // Gets a reoriented direction that is tangent to a given slope
@@ -310,16 +307,16 @@ public class MinerController : MonoBehaviour
         // Update height instantly
         if (force)
         {
-            m_Controller.height = m_TargetCharacterHeight;
-            m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
+            characterController.height = m_TargetCharacterHeight;
+            characterController.center = Vector3.up * characterController.height * 0.5f;
             playerCamera.transform.localPosition = Vector3.up * m_TargetCharacterHeight * cameraHeightRatio;
         }
         // Update smooth height
-        else if (m_Controller.height != m_TargetCharacterHeight)
+        else if (characterController.height != m_TargetCharacterHeight)
         {
             // resize the capsule and adjust camera position
-            m_Controller.height = Mathf.Lerp(m_Controller.height, m_TargetCharacterHeight, crouchingSharpness * Time.deltaTime);
-            m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
+            characterController.height = Mathf.Lerp(characterController.height, m_TargetCharacterHeight, crouchingSharpness * Time.deltaTime);
+            characterController.center = Vector3.up * characterController.height * 0.5f;
             playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, Vector3.up * m_TargetCharacterHeight * cameraHeightRatio, crouchingSharpness * Time.deltaTime);
         }
     }
@@ -340,12 +337,12 @@ public class MinerController : MonoBehaviour
                 Collider[] standingOverlaps = Physics.OverlapCapsule(
                     GetCapsuleBottomHemisphere(),
                     GetCapsuleTopHemisphere(capsuleHeightStanding),
-                    m_Controller.radius,
+                    characterController.radius,
                     -1,
                     QueryTriggerInteraction.Ignore);
                 foreach (Collider c in standingOverlaps)
                 {
-                    if (c != m_Controller)
+                    if (c != characterController)
                     {
                         return false;
                     }

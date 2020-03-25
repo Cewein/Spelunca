@@ -145,7 +145,7 @@ public class MinerInputHandler : MonoBehaviour
     // NOTE : crouch = s'accroupir
     public bool isCrouching()
     {
-        return GetIfPlayerCanPlay() && Input.GetButton(crouchInputName);
+        return GetIfPlayerCanPlay() && Input.GetButtonDown(crouchInputName);
     }
 
     public int isSwitchingWeapon()
