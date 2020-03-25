@@ -1430,28 +1430,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
-      propertyPath: pitchAmplitude.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: pitchAmplitude.y
+      propertyPath: cameraPosition
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
-      propertyPath: yawAmplitude.x
-      value: -60
+      propertyPath: standingHeight
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
-      propertyPath: yawAmplitude.y
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: clampVerticalRotation
-      value: 1
+      propertyPath: crouchingHeight
+      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 78457083255532787, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
