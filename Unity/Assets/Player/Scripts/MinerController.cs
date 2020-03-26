@@ -101,7 +101,7 @@ public class MinerController : MonoBehaviour
     // -- Physics and jump
     private float speedFactor;
     private Vector3 normal;
-    private Vector3 velocity;
+    public Vector3 velocity;
     private Vector3 newVelocity;
     private bool hasAlreadyJump;
     private float lastTimeJumped = 0f;

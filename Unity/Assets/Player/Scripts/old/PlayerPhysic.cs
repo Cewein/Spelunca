@@ -89,13 +89,13 @@ public class PlayerPhysic : MonoBehaviour
         bool grapplingControl = launchGrapplingHook || isGrappling; //FIXME: Will be removed
         if (previousGrappingInput == true && grapplingControl == false)//Le joueur a relaché la touche, on doit arreter le grappin
         {
-            hook.state = GrapplingHookState.Retracting;
+            hook.state = GrapplingHookState.RETRACING;
             
-        }else if (previousGrappingInput == false && grapplingControl == true && hook.state != GrapplingHookState.Retracting)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
+        }else if (previousGrappingInput == false && grapplingControl == true && hook.state != GrapplingHookState.RETRACING)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
         {
             RaycastHit hit;
             if(Physics.Raycast(GrapplingOrigin.position,camera.transform.forward,out hit,hook.maxDeployDistance)){
-                hook.state = GrapplingHookState.Expanding;
+                hook.state = GrapplingHookState.EXPANDING;
                 hook.renderer.enabled = true;
                 
                 hook.origin = GrapplingOrigin;
@@ -111,7 +111,7 @@ public class PlayerPhysic : MonoBehaviour
     
     void setVelocity()
     {
-        if (hook.state != GrapplingHookState.Pulling)
+        if (hook.state != GrapplingHookState.PULLING)
         {
             rb.velocity = transform.up * rb.velocity.y + newVelocity * Time.fixedDeltaTime;
             rb.AddForce(jumpVelocity);
