@@ -485,6 +485,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30f9305785d5e84a91ee9aeaffd9887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &513838170 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7121861662105125395, guid: c44004625961625478756368f76061cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963495748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30f9305785d5e84a91ee9aeaffd9887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &624851337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: aimingAcceleration
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -1654,6 +1666,11 @@ PrefabInstance:
       propertyPath: raycastReticle
       value: 
       objectReference: {fileID: 322077846}
+    - target: {fileID: 2142796783819228743, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: raycastReticle
+      value: 
+      objectReference: {fileID: 513838170}
     m_RemovedComponents:
     - {fileID: 78457083255532787, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}

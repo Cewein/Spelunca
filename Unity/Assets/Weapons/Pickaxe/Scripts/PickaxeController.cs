@@ -3,10 +3,8 @@ using System;
 
 public class PickaxeController : MonoBehaviour
 {
-    [Header("Inputs")]
-    
-    [Tooltip("The picking input name but it's the same as fire input name")] [SerializeField]
-    private String pickingInputName = "Fire";
+    [Header("Inputs")] [Tooltip("The picking input name but it's the same as fire input name")] [SerializeField]
+    private MinerInputHandler inputHandler = null;
     public event Action<bool> pick;
     [Header("Effects")]
     [Tooltip("The default damage effect particle system")][SerializeField] 
@@ -23,7 +21,7 @@ public class PickaxeController : MonoBehaviour
 
     private void Update()
     {
-        isPicking(Input.GetButton(pickingInputName));
+        isPicking(inputHandler.isFiringDown());
     }
 
     private bool isPicking(bool isPicking)
