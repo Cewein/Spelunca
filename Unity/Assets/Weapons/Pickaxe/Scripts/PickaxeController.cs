@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 
 public class PickaxeController : MonoBehaviour
 {
@@ -44,9 +45,17 @@ public class PickaxeController : MonoBehaviour
 
             try
             {
+                if (raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick.GetInvocationList()
+                        .Length > 1)
+                {
+                    raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick -= CollectResource;
+                }
+              
+            }
+            catch (NullReferenceException e)
+            {
                 raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick += CollectResource;
             }
-            catch (NullReferenceException e){}
         }
 
         return isShooting && GetComponent<Animator>().GetBool("canAttack");
@@ -54,7 +63,7 @@ public class PickaxeController : MonoBehaviour
 
     private void CollectResource(ResourceType type, float quantity)
     {
-        Debug.Log("You earn "+ quantity+ " of "+ type +" ! ");
+        ResourcesStock.Instance.setResource(type,quantity);
     }
 
 

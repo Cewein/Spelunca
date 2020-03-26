@@ -594,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   quantity: 20
-  pv: 10
+  pv: 20
   gaugeLifePrefab: {fileID: 0}
 --- !u!114 &513838170 stripped
 MonoBehaviour:
