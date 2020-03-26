@@ -10,6 +10,12 @@ public class MinerController : MonoBehaviour
     [Header("Linked objects")]
     [Tooltip("Player view camera, if it's null, it will be the main camera.")][SerializeField]
     private Camera playerCamera;
+    [Header("Grappling Hook parameters")]
+    [Tooltip("The grappling hook.")] [SerializeField]
+    private Hook hook;
+
+    [Tooltip("ONLY FOR FRAME DEBUG")][SerializeField]
+    private bool launchGrapplingHook;
     
     [Header("Weapons")]
     [Tooltip("List of weapons prefab ( gun and pickaxe so).")][SerializeField]
@@ -113,7 +119,8 @@ public class MinerController : MonoBehaviour
     // -- Weapon
     private int weaponIndex = 0;
     private Vector3 weaponNewPosition; 
-    
+    private bool previousGrappingInput = false;//The grappling hook's input during the previous state
+
     #endregion
 
     private void Awake()
@@ -154,6 +161,7 @@ public class MinerController : MonoBehaviour
         SwitchWeapon();
         Aim();
         Reload();
+        GrapplingHook();
     }
 
     private void Aim()
@@ -306,7 +314,7 @@ public class MinerController : MonoBehaviour
         return Vector3.Cross(slopeNormal, Vector3.Cross(direction, transform.up)).normalized;
     }
 
-    void SetHeightSmoothly()
+    private void SetHeightSmoothly()
     {
         if (characterController.height == newHeight) return;
         characterController.height = Mathf.Lerp(characterController.height, newHeight, crouchingAcceleration * Time.deltaTime);
@@ -314,7 +322,7 @@ public class MinerController : MonoBehaviour
         playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, Vector3.up * newHeight * cameraHeightRatio, crouchingAcceleration * Time.deltaTime);
     }
 
-    bool Crouch(bool crouched)
+    private bool Crouch(bool crouched)
     {
         newHeight = crouched ? crouchingHeight : standingHeight;
         // Check for obstacles
@@ -327,5 +335,28 @@ public class MinerController : MonoBehaviour
 
         IsCrouching = crouched;
         return true;
+    }
+    
+    private bool GrapplingHook()
+    {
+        bool grapplingControl = launchGrapplingHook || minerInputs.isGrappling(); //FIXME: Will be removed
+        if (previousGrappingInput == true && grapplingControl == false)//Le joueur a relaché la touche, on doit arreter le grappin
+        {
+            hook.state = GrapplingHookState.RETRACING;
+            
+        }else if (previousGrappingInput == false && grapplingControl == true && hook.state != GrapplingHookState.RETRACING)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
+        {
+            RaycastHit hit;
+            if(Physics.Raycast( hook.origin.position,playerCamera.transform.forward,out hit,hook.maxDeployDistance)){
+                hook.state = GrapplingHookState.EXPANDING;
+                hook.renderer.enabled = true;
+                
+                hook.transform.position = hook.origin.position;
+                hook.target = hit.point;
+                hook.player = this;
+            }
+        }
+        previousGrappingInput = grapplingControl;
+        return grapplingControl;
     }
 }

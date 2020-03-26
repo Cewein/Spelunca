@@ -6,19 +6,19 @@ public class Hook : MonoBehaviour
 {
     #region SerializedFields ============================================================================================
     [Header("Linked objects")]
-    [Tooltip("Miner rigid body.")][SerializeField]
-    private MinerController player;
+    [Tooltip("Miner rigid body.")]
+    public MinerController player;
 
     [Header("General Settings")]
     [Tooltip("Hook inking point transform.")][SerializeField]
     private Transform hookPoint;
     [Tooltip("Grappling hook rope origin transform.")][SerializeField]
-    private Transform origin;
+    public Transform origin;
     
     [Header("Behaviour parameters")]
     
     [Tooltip("Maximum rope deployment length.")][SerializeField]
-    private float maxDeployDistance = 30f;
+    public float maxDeployDistance = 30f;
     [Tooltip("Rope deployment speed.")][SerializeField]
     private float deploySpeed;
     [Tooltip("Rope retraction speed.")][SerializeField]
@@ -35,15 +35,19 @@ public class Hook : MonoBehaviour
     #endregion
     
     private Rope rope;
-    private GrapplingHookState state = GrapplingHookState.INACTIVE;
-    private Vector3 target;
+    [HideInInspector]
+    public GrapplingHookState state = GrapplingHookState.INACTIVE;
+    [HideInInspector]
+    public Vector3 target;
     private Vector3 direction;
-    private MeshRenderer renderer;
+    [HideInInspector]
+    public MeshRenderer renderer;
 
     private void Awake()
     {
         renderer = GetComponent<MeshRenderer>();
         rope = GetComponentInChildren<Rope>();
+        rope.origin = origin;
     }
 
     void Start()

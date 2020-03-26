@@ -165,6 +165,11 @@ public class MinerInputHandler : MonoBehaviour
     {
         return GetIfPlayerCanPlay() && Input.GetButtonDown(crouchInputName);
     }
+    
+    public bool isGrappling()
+    {
+        return GetIfPlayerCanPlay() && Input.GetButton(grapplingInputName);
+    }
 
     public int isSwitchingWeapon()
     {
@@ -175,6 +180,4 @@ public class MinerInputHandler : MonoBehaviour
             return 1;
         return 0;
     }
-    
- 
 }
