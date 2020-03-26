@@ -12,14 +12,13 @@ public class MenusManager : MonoBehaviour
     [Tooltip("The input to display resource magazine selection menu.")][SerializeField]
     private string resourceLoaderSelectionInput = "ResourceSelection";
 
-    [Header("Objects linked")] [Tooltip("The gun magazine.")] [SerializeField]
-    private MinerController miner;
+    [Header("Objects linked")]
+    [Tooltip("The gun magazine.")] [SerializeField]
     private GunLoader gunMagazine;
     public Resource[] list;
 
     private void Start()
     {
-        gunMagazine = miner.GetComponent<GunLoader>();
         resourceLoaderSelectionMenu.callback += type =>
         {
             gunMagazine.CurrentResource = (type == ResourceType.normal) ? gunMagazine.NormalResource : list.First(item => item.Type == type);

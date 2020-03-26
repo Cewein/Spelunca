@@ -123,11 +123,6 @@ public class MinerController : MonoBehaviour
         characterController.enableOverlapRecovery = true;
         if (playerCamera == null) playerCamera = Camera.main;
         ForceStanding();
-
-        foreach (GameObject prefab in weapons)
-        {
-            Instantiate(prefab, weaponParent);
-        }
         switcher();
         
     }
