@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 /// <summary>
 /// Manual : need to press input each time to trigger ( ex : fusil à pompe )
@@ -81,14 +82,26 @@ public class GunArtefact : MonoBehaviour
 
     private float lastTimeFiring;
     private Ammo currentAmmo;
+    private Ammo CurrentAmmo
+    {
+        get
+        {
+            if (currentAmmo == null || !currentAmmo.Type.Equals(magazine.CurrentResource.Type))
+                currentAmmo = magazine.CurrentResource.Type.Equals(ResourceType.normal) ?
+                                                            normalResourceAmmo : 
+                                                            AmmoType.First(ammo => ammo
+                                                                           .Type
+                                                                           .Equals(magazine.CurrentResource.Type));
+            return currentAmmo;
+        }
+    }
+
     #endregion
 
     private void Start()
     {
         if (magazine == null){ magazine = GetComponentInParent<GunLoader>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
-        currentAmmo = normalResourceAmmo; // TODO : change on resource switching
-
     }
 
     private bool Trigger(bool inputDown, bool inputHeld, bool inputUp)
@@ -137,13 +150,13 @@ public class GunArtefact : MonoBehaviour
         for (int i = 0; i < bulletsPerShot; i++)
         {
             Vector3 shotDirection = SpreadBullet(muzzle); 
-            Instantiate(currentAmmo, muzzle.position, Quaternion.LookRotation(shotDirection));
+            Instantiate(CurrentAmmo, muzzle.position, Quaternion.LookRotation(shotDirection));
         }
 
         // muzzle flash
-        if (currentAmmo.MuzzleFlash != null)
+        if (CurrentAmmo.MuzzleFlash != null)
         {
-            Instantiate(currentAmmo.MuzzleFlash, muzzle.position, muzzle.rotation, muzzle.transform);
+            Instantiate(CurrentAmmo.MuzzleFlash, muzzle.position, muzzle.rotation, muzzle.transform);
         }
         
         try
@@ -151,7 +164,7 @@ public class GunArtefact : MonoBehaviour
            if (controller.Hit.transform != null)
                controller.Hit.transform.gameObject.GetComponent<IDamageable>()
                                                   .setDamage( controller.Hit, 
-                                                              currentAmmo.DamageEffect,
+                                                              CurrentAmmo.DamageEffect,
                                                       5, magazine.CurrentResource.Type
                                                   );
         }

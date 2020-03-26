@@ -2051,8 +2051,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 2465613268572783777}
-  damageEffect: {fileID: 6950693079315367904, guid: e82f24cec82f9af4aa751a77fafbe52a,
-    type: 3}
   raycastReticle: {fileID: 0}
 --- !u!114 &2573379550376479987
 MonoBehaviour:
@@ -2277,7 +2275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magazine: {fileID: 2573379550376479987}
-  controller: {fileID: 0}
+  controller: {fileID: 3038336425372666891}
   name: Rifle
   icon: {fileID: 21300000, guid: 0731b10435924fe419a2342a08bcca29, type: 3}
   crosshairDataDefault:
@@ -2286,10 +2284,13 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0, a: 0}
   normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
     type: 3}
-  AmmoType: []
+  AmmoType:
+  - {fileID: 526571972454017004, guid: 69643c5a51cfe0541a3d330935ce419b, type: 3}
+  - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
+  - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 4763558942543255940}
-  shootType: 0
-  firingRate: 0.5
+  shootMode: 1
+  firingRate: 0.1
   bulletSpreadAngle: 0
   bulletsPerShot: 1
   recoil: 1

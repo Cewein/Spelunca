@@ -1610,6 +1610,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1360677050812820615, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
+      propertyPath: AmmoType.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360677050812820615, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
       propertyPath: controller
       value: 
       objectReference: {fileID: 1652175796}
@@ -1634,6 +1639,24 @@ PrefabInstance:
       propertyPath: shootMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1360677050812820615, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: AmmoType.Array.data[0]
+      value: 
+      objectReference: {fileID: 526571972454017004, guid: 69643c5a51cfe0541a3d330935ce419b,
+        type: 3}
+    - target: {fileID: 1360677050812820615, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: AmmoType.Array.data[1]
+      value: 
+      objectReference: {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6,
+        type: 3}
+    - target: {fileID: 1360677050812820615, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: AmmoType.Array.data[2]
+      value: 
+      objectReference: {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 78457083255532787, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
