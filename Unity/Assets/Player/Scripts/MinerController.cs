@@ -10,6 +10,8 @@ public class MinerController : MonoBehaviour
     [Header("Linked objects")]
     [Tooltip("Player view camera, if it's null, it will be the main camera.")][SerializeField]
     private Camera playerCamera;
+    
+    [Header("Weapons")]
     [Tooltip("List of weapons prefab ( gun and pickaxe so).")][SerializeField]
     private GameObject[] weapons;
     [Tooltip("Weapon point position when player is idling.")][SerializeField]
@@ -19,9 +21,7 @@ public class MinerController : MonoBehaviour
     [Tooltip("Transform of the empty game object that is the weapon parent.")][SerializeField]
     private Transform weaponParent;
     [Tooltip("The speed of the aiming animation.")][SerializeField]
-    private float aimingAcceleration = 2f;
-    
-  
+    private float aimingAcceleration = 25.5f;
 
     [Header("Jump physics")]
     [Tooltip("Force applied upward when jumping")][SerializeField]

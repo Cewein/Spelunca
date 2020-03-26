@@ -161,8 +161,8 @@ MonoBehaviour:
   - {fileID: 4950132954975597236, guid: c64ee70d7595dae438d3c883ed3aa4f7, type: 3}
   weaponDefaultPosition: {fileID: 8697801805591340355}
   weaponsAimingPosition: {fileID: 1685177218082241092}
-  weaponParent: {fileID: 0}
-  aimingAcceleration: 2
+  weaponParent: {fileID: 8275482314681205312}
+  aimingAcceleration: 25
   jumpForce: 20
   weight: 75
   groundLayer:
