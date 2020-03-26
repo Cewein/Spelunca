@@ -35,13 +35,13 @@ public class MinerInputHandler : MonoBehaviour
     private string aimInputName = "Aim";
     
     [Tooltip("The reload input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
-    private string reloadInputName = "Aim";
+    private string reloadInputName = "Reload";
     
     [Tooltip("The crouch input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string crouchInputName = "Cancel";
     
     [Tooltip("The switch weapon input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
-    private string switchWeaponInputName = "Mouse Scrollwheel";
+    private string switchWeaponInputName = "Mouse ScrollWheel";
     
     [Header("Parameters")]
     

@@ -7,16 +7,10 @@ public class GunController : MonoBehaviour
 
     [Header("Linked Objects")] [SerializeField]
     private MinerInputHandler inputHandler;
-
-    [Header("Effects")]
-    
-    
-   
     
     [Header("Raycast")]
-    
     [Tooltip("The reticle that perform raycast.")] [SerializeField]
-    private Raycast raycastReticle = null;
+    private Raycast raycastReticle = null; // TODO : le récupérer boudiouuuuu !!!! mais ça va changer la gestion des reticles de la HUD alors je fait après
 
     private GunLoader magazine;
     private bool canAttack = true;
@@ -40,6 +34,7 @@ public class GunController : MonoBehaviour
         Cursor.visible = false;
         trigger += (down,held,up) => Trigger(down, held, up);
         magazine = GetComponentInChildren<GunLoader>();
+        inputHandler = GetComponentInParent<MinerInputHandler>();
     }
 
     private void Update()
@@ -73,10 +68,7 @@ public class GunController : MonoBehaviour
             || ((artefact.ShootMode == ShootingMode.CHARGE )  && up)
             && canAttack)
         {
-            try
-            {
-                raycastReticle.PerformRaycast();
-            }
+            try { raycastReticle.PerformRaycast(); }
             catch (NullReferenceException e){}
         }
 

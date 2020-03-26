@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Linq;
 
@@ -9,6 +10,18 @@ public class MinerController : MonoBehaviour
     [Header("Linked objects")]
     [Tooltip("Player view camera, if it's null, it will be the main camera.")][SerializeField]
     private Camera playerCamera;
+    [Tooltip("List of weapons prefab ( gun and pickaxe so).")][SerializeField]
+    private GameObject[] weapons;
+    [Tooltip("Weapon point position when player is idling.")][SerializeField]
+    private Transform  weaponDefaultPosition;
+    [Tooltip("Weapon point position when player is aiming.")][SerializeField]
+    private Transform weaponsAimingPosition;
+    [Tooltip("Transform of the empty game object that is the weapon parent.")][SerializeField]
+    private Transform weaponParent;
+    [Tooltip("The speed of the aiming animation.")][SerializeField]
+    private float aimingAcceleration = 2f;
+    
+  
 
     [Header("Jump physics")]
     [Tooltip("Force applied upward when jumping")][SerializeField]
@@ -97,6 +110,10 @@ public class MinerController : MonoBehaviour
     private bool isOnGround;
     private RaycastHit hit;
     
+    // -- Weapon
+    private int weaponIndex = 0;
+    private Vector3 weaponNewPosition; 
+    
     #endregion
 
     private void Awake()
@@ -106,7 +123,16 @@ public class MinerController : MonoBehaviour
         characterController.enableOverlapRecovery = true;
         if (playerCamera == null) playerCamera = Camera.main;
         ForceStanding();
+
+        foreach (GameObject prefab in weapons)
+        {
+            Instantiate(prefab, weaponParent);
+        }
+        switcher();
+        
     }
+    
+   
 
     // to debug the height at the beginning of a scene.
     private void ForceStanding()
@@ -127,7 +153,33 @@ public class MinerController : MonoBehaviour
         Move();
         Jump();
     }
-    void SeekGround()
+
+    private void LateUpdate()
+    {
+        SwitchWeapon();
+        Aim();
+    }
+
+    private void Aim()
+    {
+        
+        weaponNewPosition = minerInputs.isAiming() ?
+                                                 weaponsAimingPosition.position : weaponDefaultPosition.position;
+        weaponParent.position = Vector3.Slerp(weaponParent.position, weaponNewPosition, aimingAcceleration * Time.deltaTime);
+    }
+
+    private void SwitchWeapon()
+    {
+        weaponIndex = Mathf.Abs( (weaponIndex - minerInputs.isSwitchingWeapon() ) % weapons.Length );
+        switcher();
+    }
+    
+    private void switcher()
+    {
+        weapons[ Mathf.Abs( (weaponIndex - 1) % weapons.Length ) ].gameObject.SetActive(false);
+        weapons[weaponIndex].gameObject.SetActive(true);
+    }
+    private void SeekGround()
     {
         float scope = isOnGround ? (characterController.skinWidth + seekGroundScope) : seekGroundScopeAir;
         isOnGround = false;

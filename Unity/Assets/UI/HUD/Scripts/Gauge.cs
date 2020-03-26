@@ -4,15 +4,17 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class Gauge : MonoBehaviour
 {
-    [Tooltip("The gun loader this gauge ui displayed content.")][SerializeField] 
+    [Tooltip("The gun loader this gauge ui displayed content.")] [SerializeField]
+    private MinerController miner = null;
     private GunLoader gunLoader = null;
     
     private Resource currentResource;
     private Image gaugeUI;
     
 
-    private void Awake()
+    private void Start()
     {
+        gunLoader = miner.GetComponentInChildren<GunLoader>();
         gaugeUI = GetComponent<Image>();
         gaugeUI.fillAmount = gunLoader.CurrentResourceQuantity / gunLoader.Capacity;
         currentResource = gunLoader.CurrentResource;
