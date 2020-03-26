@@ -100,9 +100,9 @@ public class GunArtefact : MonoBehaviour
                 if (inputHeld){ return TryShoot(); }
                 return false;
             
-            case ShootingMode.SEMI:break; // I don't know for the moment
+            /*case ShootingMode.SEMI:break; // I don't know for the moment
 
-         /*   case ShootingMode.CHARGE:
+          case ShootingMode.CHARGE:
                 if (inputHeld){ TryBeginCharge(); }
                 if (inputUp || (shootOnMaxEnergy && currentCharge >= 1f))
                 {
@@ -140,10 +140,7 @@ public class GunArtefact : MonoBehaviour
         // muzzle flash
         if (currentAmmo.MuzzleFlash != null)
         {
-            var muzzleFlashInstance = Instantiate(currentAmmo.MuzzleFlash, muzzle.position, muzzle.rotation, muzzle.transform); 
-            // TODO : test  -> Destroy(Instantiate(muzzleFlashPrefab, weaponMuzzle.position, weaponMuzzle.rotation, weaponMuzzle.transform), 2f);
-
-            Destroy(muzzleFlashInstance, 2f);
+            Instantiate(currentAmmo.MuzzleFlash, muzzle.position, muzzle.rotation, muzzle.transform);
         }
 
         lastTimeFiring = Time.time;
