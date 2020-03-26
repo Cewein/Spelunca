@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
     public class Ammo : MonoBehaviour
 {
@@ -9,4 +11,15 @@
    
     public ResourceType Type => resourceType;
     public ParticleSystem MuzzleFlash => muzzleFlash;
+
+    private void Awake()
+    {
+        StartCoroutine(AutoDestroy());
+    }
+    
+    private IEnumerator AutoDestroy()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
 }
