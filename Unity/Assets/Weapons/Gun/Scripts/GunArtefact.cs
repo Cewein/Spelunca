@@ -45,10 +45,11 @@ public class GunArtefact : MonoBehaviour
     private Ammo[] AmmoType = null;
     [Tooltip("Point transform where muzzle flash will be spawned.")][SerializeField]
     private Transform muzzle = null;
+
     
     [Header("Shoot Parameters")]
     [Tooltip("How the the trigger ammo when we trigger it.")][SerializeField]
-    private ShootingMode shootType;
+    private ShootingMode shootMode;
    // [Tooltip("The projectile prefab")]
     //public Projectile projectilePrefab;
     [Tooltip("Delay between two shot")][SerializeField]
@@ -76,6 +77,8 @@ public class GunArtefact : MonoBehaviour
     
     #region Other fields ===============================================================================================
 
+    public ShootingMode ShootMode => shootMode;
+
     private float lastTimeFiring;
     private Ammo currentAmmo;
     #endregion
@@ -90,7 +93,7 @@ public class GunArtefact : MonoBehaviour
 
     private bool Trigger(bool inputDown, bool inputHeld, bool inputUp)
     {
-        switch (shootType)
+        switch (shootMode)
         {
             case ShootingMode.MANUAL:
                 if (inputDown){ return TryShoot(); }
@@ -142,6 +145,19 @@ public class GunArtefact : MonoBehaviour
         {
             Instantiate(currentAmmo.MuzzleFlash, muzzle.position, muzzle.rotation, muzzle.transform);
         }
+        
+        try
+        {
+           if (controller.Hit.transform != null)
+               controller.Hit.transform.gameObject.GetComponent<IDamageable>()
+                                                  .setDamage( controller.Hit, 
+                                                              currentAmmo.DamageEffect,
+                                                      5, magazine.CurrentResource.Type
+                                                  );
+        }
+        catch (NullReferenceException e){}
+        
+
 
         lastTimeFiring = Time.time;
     }

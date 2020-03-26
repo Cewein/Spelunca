@@ -1488,6 +1488,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: raycastReticle
+      value: 
+      objectReference: {fileID: 322077846}
     - target: {fileID: 2338222191191406569, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_Name
@@ -1624,11 +1629,11 @@ PrefabInstance:
       propertyPath: firingRate
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
+    - target: {fileID: 1360677050812820615, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
-      propertyPath: raycastReticle
-      value: 
-      objectReference: {fileID: 322077846}
+      propertyPath: shootMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 78457083255532787, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}

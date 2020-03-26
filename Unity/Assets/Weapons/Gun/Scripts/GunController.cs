@@ -10,8 +10,7 @@ public class GunController : MonoBehaviour
 
     [Header("Effects")]
     
-    [Tooltip("The default damage effect particle system")][SerializeField] 
-    private ParticleSystem damageEffect = null;
+    
    
     
     [Header("Raycast")]
@@ -21,6 +20,7 @@ public class GunController : MonoBehaviour
 
     private GunLoader magazine;
     private bool canAttack = true;
+    public RaycastHit Hit { get =>  raycastReticle.Hit; }
 
     #endregion ==========
     
@@ -29,6 +29,7 @@ public class GunController : MonoBehaviour
     public event Action<bool,bool,bool> trigger;
     public event Action<bool> aim;
     public event Action<bool> reload;
+    
 
     #endregion ==========
     
@@ -37,7 +38,7 @@ public class GunController : MonoBehaviour
     private void Awake()
     {
         Cursor.visible = false;
-        trigger += (down,held,up) => Trigger(down || held || up);
+        trigger += (down,held,up) => Trigger(down, held, up);
         magazine = GetComponentInChildren<GunLoader>();
     }
 
@@ -64,20 +65,21 @@ public class GunController : MonoBehaviour
         return isReloading;
     }
 
-    private bool Trigger(bool isShooting)
+    private void Trigger(bool down, bool held, bool up)
     {
-        if (isShooting && canAttack)
+        GunArtefact artefact = GetComponentInChildren<GunArtefact>();
+        if (   ((artefact.ShootMode == ShootingMode.AUTO )    && held)
+            || ((artefact.ShootMode == ShootingMode.MANUAL )  && down)
+            || ((artefact.ShootMode == ShootingMode.CHARGE )  && up)
+            && canAttack)
         {
             try
             {
                 raycastReticle.PerformRaycast();
-                // TODO : move this part in gun artefact
-                raycastReticle.Hit.transform.gameObject.GetComponent<IDamageable>().setDamage(raycastReticle.Hit, damageEffect, 5, magazine.CurrentResource.Type);
             }
             catch (NullReferenceException e){}
         }
 
-        return isShooting && canAttack;
     }
 
     private void onIdle()

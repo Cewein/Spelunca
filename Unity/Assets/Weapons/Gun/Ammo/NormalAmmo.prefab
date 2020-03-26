@@ -46,3 +46,5 @@ MonoBehaviour:
   resourceType: 0
   muzzleFlash: {fileID: 8205363541968128123, guid: 6379d61c0638c4e43b3437e4d0ebf875,
     type: 3}
+  damageEffect: {fileID: 6950693079315367904, guid: e82f24cec82f9af4aa751a77fafbe52a,
+    type: 3}
