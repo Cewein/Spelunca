@@ -1134,6 +1134,7 @@ MonoBehaviour:
   grapplingInputName: Grappling
   fireInputName: Fire
   aimInputName: Aim
+  reloadInputName: Aim
   crouchInputName: Crouch
   switchWeaponInputName: Mouse Scrollwheel
   cameraSensitivity: 50
@@ -1978,6 +1979,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1791932399111129275}
+  - component: {fileID: 3038336425372666891}
+  - component: {fileID: 2573379550376479987}
   m_Layer: 11
   m_Name: StVictoria
   m_TagString: Untagged
@@ -2035,6 +2038,37 @@ Transform:
   m_Father: {fileID: 8697801805591340355}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &3038336425372666891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352192000775338664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5809aa5aeb938b74280a7fa906e35daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputHandler: {fileID: 2465613268572783777}
+  damageEffect: {fileID: 6950693079315367904, guid: e82f24cec82f9af4aa751a77fafbe52a,
+    type: 3}
+  raycastReticle: {fileID: 0}
+--- !u!114 &2573379550376479987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352192000775338664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efc359a1fa9bfd45bad5d28f44a2c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capacity: 50
+  normalResource: {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef, type: 2}
+  printDebug: 0
 --- !u!1 &3461978073058383066
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,6 +2240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4047167204174180574}
+  - component: {fileID: 1360677050812820615}
   m_Layer: 11
   m_Name: Rifle
   m_TagString: Untagged
@@ -2229,6 +2264,37 @@ Transform:
   m_Father: {fileID: 6225168263453905909}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1360677050812820615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3915700154862486604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magazine: {fileID: 2573379550376479987}
+  controller: {fileID: 0}
+  name: Rifle
+  icon: {fileID: 21300000, guid: 0731b10435924fe419a2342a08bcca29, type: 3}
+  crosshairDataDefault:
+    sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    size: 5
+    color: {r: 1, g: 0, b: 0, a: 0}
+  normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
+    type: 3}
+  AmmoType: []
+  muzzle: {fileID: 4763558942543255940}
+  shootType: 0
+  firingRate: 0.5
+  bulletSpreadAngle: 0
+  bulletsPerShot: 1
+  recoil: 1
+  aimFovRatio: 1
+  aimOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &4267624949164935879
 GameObject:
   m_ObjectHideFlags: 0
@@ -4117,7 +4183,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4763558942543255940}
-  - component: {fileID: 1394985868590177019}
   m_Layer: 11
   m_Name: pt_muzzleFX
   m_TagString: Untagged
@@ -4139,33 +4204,6 @@ Transform:
   m_Father: {fileID: 4047167204174180574}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1394985868590177019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8577854569482249329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Rifle
-  icon: {fileID: 0}
-  crosshairDataDefault:
-    sprite: {fileID: 0}
-    size: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
-  shootType: 0
-  firingRate: 0.5
-  bulletSpreadAngle: 0
-  bulletsPerShot: 1
-  recoil: 1
-  aimFovRatio: 1
-  aimOffset: {x: 0, y: 0, z: 0}
-  shootOnMaxEnergy: 0
-  chargeTime: 2
 --- !u!1 &8681829575463378344
 GameObject:
   m_ObjectHideFlags: 0

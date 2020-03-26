@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 /// <summary>
-/// Manual : need to press input each time to shoot ( ex : fusil à pompe )
-/// Automatic : shoot while input is helding ( ex : mitraillette )
-/// Charge : held input to charge energy and shoot when release (ex : les attaques chargées quoi )
+/// Manual : need to press input each time to trigger ( ex : fusil à pompe )
+/// Automatic : trigger while input is helding ( ex : mitraillette )
+/// Charge : held input to charge energy and trigger when release (ex : les attaques chargées quoi )
 /// semi-auto : I don't really know but some gun are like this in real life/video game so I put it
 /// just in case.
 /// </summary>
@@ -19,7 +20,6 @@ public struct Crosshair
     public Color color;
 }
 
-[RequireComponent(typeof(GunLoader))]
 public class GunArtefact : MonoBehaviour
 {
     #region SerializedField ============================================================================================
@@ -27,6 +27,8 @@ public class GunArtefact : MonoBehaviour
     [Header("Linked objects")]
     [Tooltip("The gun magazine that stock ammo.")][SerializeField]
     private GunLoader magazine;
+    [Tooltip("The gun magazine that stock ammo.")][SerializeField]
+    private GunController controller;
     
     [Header("Data")]
     [Tooltip("Artefact name.")][SerializeField]
@@ -37,15 +39,15 @@ public class GunArtefact : MonoBehaviour
     private Crosshair crosshairDataDefault;
 
     [Header("Projectile")]
-    [Tooltip("Normal resource projectil prefab")][SerializeField]
+    [Tooltip("Normal resource projectile prefab")][SerializeField]
     private Ammo normalResourceAmmo = null;
-    [Tooltip("Resource type projectil prefab tab")][SerializeField]
+    [Tooltip("Resource type projectile prefab tab")][SerializeField]
     private Ammo[] AmmoType = null;
     [Tooltip("Point transform where muzzle flash will be spawned.")][SerializeField]
     private Transform muzzle = null;
     
     [Header("Shoot Parameters")]
-    [Tooltip("How the the shoot ammo when we trigger it.")][SerializeField]
+    [Tooltip("How the the trigger ammo when we trigger it.")][SerializeField]
     private ShootingMode shootType;
    // [Tooltip("The projectile prefab")]
     //public Projectile projectilePrefab;
@@ -64,11 +66,11 @@ public class GunArtefact : MonoBehaviour
     [Tooltip("Translation to apply to weapon arm when aiming with this weapon")][SerializeField]
     private Vector3 aimOffset;
 
-    [Header("Charging (charging weapons only)")]
+   /* [Header("Charging (charging weapons only)")]
     [Tooltip("Auto-shooting or not when max charge is reached.")][SerializeField]
     private bool shootOnMaxEnergy;
     [Tooltip("Time needed to reach max energy charged")][SerializeField]
-    private float chargeTime = 2f;
+    private float chargeTime = 2f;*/
     
     #endregion
     
@@ -77,8 +79,16 @@ public class GunArtefact : MonoBehaviour
     private float lastTimeFiring;
     private Ammo currentAmmo;
     #endregion
-    
-    public bool Trigger(bool inputDown, bool inputHeld, bool inputUp)
+
+    private void Start()
+    {
+        if (magazine == null){ magazine = GetComponentInParent<GunLoader>(); }
+        controller.trigger += (down, held, up)=>Trigger(down,held,down);
+        currentAmmo = normalResourceAmmo; // TODO : change on resource switching
+
+    }
+
+    private bool Trigger(bool inputDown, bool inputHeld, bool inputUp)
     {
         switch (shootType)
         {

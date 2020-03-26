@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "NormalAmmo", menuName = "ScriptableObjects/Artefacts/Ammo", order = 1)]
-public class Ammo : ScriptableObject
+public class Ammo : MonoBehaviour
 {
     [Tooltip("Resource type of the projectile")][SerializeField]
     private ResourceType resourceType = ResourceType.normal; 

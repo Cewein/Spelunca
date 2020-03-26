@@ -34,6 +34,9 @@ public class MinerInputHandler : MonoBehaviour
     [Tooltip("The aim input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string aimInputName = "Aim";
     
+    [Tooltip("The reload input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    private string reloadInputName = "Aim";
+    
     [Tooltip("The crouch input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string crouchInputName = "Cancel";
     
@@ -127,14 +130,29 @@ public class MinerInputHandler : MonoBehaviour
         return GetIfPlayerCanPlay() && Input.GetButton(jumpInputName);
     }
 
-    public bool isFiring()
+    public bool isFiringDown()
+    {
+        return GetIfPlayerCanPlay() && Input.GetButtonDown(fireInputName);
+    }
+
+    public bool isFiringHeld()
     {
         return GetIfPlayerCanPlay() && Input.GetButton(fireInputName);
+    }
+
+    public bool isFiringUp()
+    {
+        return GetIfPlayerCanPlay() && Input.GetButtonUp(fireInputName);
     }
 
     public bool isAiming()
     {
         return GetIfPlayerCanPlay() && Input.GetButton(aimInputName);
+    }
+
+    public bool isReloading()
+    {
+        return GetIfPlayerCanPlay() && Input.GetButton(reloadInputName);
     }
 
     public bool isRunning()

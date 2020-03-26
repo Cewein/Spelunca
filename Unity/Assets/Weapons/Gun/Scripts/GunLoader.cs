@@ -75,10 +75,10 @@ public class GunLoader : MonoBehaviour
         GunController gun = GetComponent<GunController>();
 
         currentResourceQuantity = 1;
-        gun.shoot += isShooting =>
+        gun.trigger += (down,held,up) =>
         {
-            if (!isShooting) return;
-            isCurrentResourceConsuming(isShooting, 10);
+            if (!(down || held || up)) return;
+            isCurrentResourceConsuming(down || held || up, 10);
             if (printDebug) Debug.Log(this);
         };
         gun.reload += isGunReloading =>
