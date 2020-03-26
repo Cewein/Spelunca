@@ -140,7 +140,7 @@ MonoBehaviour:
   grapplingInputName: Grappling
   fireInputName: Fire
   aimInputName: Aim
-  reloadInputName: Aim
+  reloadInputName: Reload
   crouchInputName: Crouch
   switchWeaponInputName: Mouse ScrollWheel
   cameraSensitivity: 50
@@ -768,6 +768,11 @@ PrefabInstance:
       propertyPath: inputHandler
       value: 
       objectReference: {fileID: 2465613268572783777}
+    - target: {fileID: 5296651518196909295, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+        type: 3}
+      propertyPath: printDebug
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c64ee70d7595dae438d3c883ed3aa4f7, type: 3}
 --- !u!4 &3711554981447025947 stripped

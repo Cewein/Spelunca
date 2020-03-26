@@ -1584,6 +1584,11 @@ PrefabInstance:
       propertyPath: crouchInputName
       value: Crouch
       objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: reloadInputName
+      value: Reload
+      objectReference: {fileID: 0}
     - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_BackGroundColor.r

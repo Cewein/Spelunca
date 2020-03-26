@@ -145,9 +145,9 @@ public class MinerInputHandler : MonoBehaviour
         return GetIfPlayerCanPlay() && Input.GetButtonUp(fireInputName);
     }
 
-    public bool isAiming()
+    public bool isAiming(bool perform)
     {
-        return GetIfPlayerCanPlay() && Input.GetButton(aimInputName);
+        return perform && GetIfPlayerCanPlay() && Input.GetButton(aimInputName);
     }
 
     public bool isReloading()

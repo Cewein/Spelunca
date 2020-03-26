@@ -40,7 +40,7 @@ public class GunController : MonoBehaviour
     private void Update()
     {
         isShooting(inputHandler.isFiringDown(),inputHandler.isFiringHeld(), inputHandler.isFiringUp());
-        isAiming(inputHandler.isAiming());
+        isAiming(inputHandler.isAiming(true));
         isReloading(inputHandler.isReloading());
     }
 
