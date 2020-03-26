@@ -158,7 +158,7 @@ public class MinerController : MonoBehaviour
 
     private void Aim()
     {
-        if(weaponIndex != 0 ) return;
+        if(weaponIndex != 0 ) return; // TODO : this trick force the gun to be in first position of the list...
         weaponNewPosition = minerInputs.isAiming(true) ?
                                                  weaponsAimingPosition.position : weaponDefaultPosition.position;
         weaponParent.position = Vector3.Slerp(weaponParent.position, weaponNewPosition, aimingAcceleration * Time.deltaTime);

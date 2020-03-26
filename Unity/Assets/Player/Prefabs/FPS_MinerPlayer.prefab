@@ -165,7 +165,7 @@ MonoBehaviour:
   weaponsAimingPosition: {fileID: 1685177218082241092}
   weaponParent: {fileID: 8275482314681205312}
   aimingAcceleration: 25
-  jumpForce: 20
+  jumpForce: 25
   weight: 75
   groundLayer:
     serializedVersion: 2

@@ -14,6 +14,7 @@ public class PickaxeController : MonoBehaviour
     [Tooltip("The reticle that perform raycast.")] [SerializeField]
     private Raycast raycastReticle = null;
 
+    private RaycastHit hit;
     private void Awake()
     {
         pick += isPicking => attack(isPicking);
@@ -37,12 +38,23 @@ public class PickaxeController : MonoBehaviour
             try
             {
                 raycastReticle.PerformRaycast();
-                raycastReticle.Hit.transform.gameObject.GetComponent<IDamageable>().setDamage(raycastReticle.Hit, damageEffect, 5, ResourceType.normal);
+                raycastReticle.Hit.transform.gameObject.GetComponent<IPickable>().Pickax(raycastReticle.Hit, 5);
+            }
+            catch (NullReferenceException e){}
+
+            try
+            {
+                raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick += CollectResource;
             }
             catch (NullReferenceException e){}
         }
 
         return isShooting && GetComponent<Animator>().GetBool("canAttack");
+    }
+
+    private void CollectResource(ResourceType type, float quantity)
+    {
+        Debug.Log("You earn "+ quantity+ " of "+ type +" ! ");
     }
 
 
