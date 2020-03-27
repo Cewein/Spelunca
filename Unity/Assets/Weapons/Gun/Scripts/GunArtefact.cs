@@ -159,45 +159,42 @@ public class GunArtefact : MonoBehaviour
     
     private bool Pick(bool isShooting)
     {
-        if ( isShooting && GetComponent<Animator>().GetBool("canAttack"))
+        if (!isShooting || !GetComponent<Animator>().GetBool("canAttack"))
+            return isShooting && GetComponent<Animator>().GetBool("canAttack");
+        try
         {
-            try
+            if (controller.Hit.transform != null)
             {
-                if (controller.Hit.transform != null)
-                {
                        
-                    try
-                    {
-                        controller.Hit.transform.gameObject.GetComponent<IPickable>().Pickax(controller.Hit, pickaxeDamage);
-                    }
-                    catch (NullReferenceException e){}
+                try
+                {
+                    controller.Hit.transform.gameObject.GetComponent<IPickable>().Pickax(controller.Hit, pickaxeDamage);
+                }
+                catch (NullReferenceException e){}
 
-                    try
+                try
+                {
+                    if (controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick.GetInvocationList()
+                            .Length > 1)
                     {
-                        if (controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick.GetInvocationList()
-                                .Length > 1)
-                        {
-                            controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick -= CollectResource;
-                        }
+                        controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick -= CollectResource;
+                    }
               
-                    }
-                    catch (NullReferenceException e)
-                    {
-                        controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick += CollectResource;
-                    }
+                }
+                catch (NullReferenceException e)
+                {
+                    controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick += CollectResource;
                 }
             }
-            catch (NullReferenceException e){}
-
-         
         }
+        catch (NullReferenceException e){}
 
         return isShooting && GetComponent<Animator>().GetBool("canAttack");
     }
 
     private void CollectResource(ResourceType type, float quantity)
     {
-       // ResourcesStock.Instance.setResource(type,quantity);
+        ResourcesStock.Instance.setResource(type,quantity);
     }
 
     private void Shoot()
