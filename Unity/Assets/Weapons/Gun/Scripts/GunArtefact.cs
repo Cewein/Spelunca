@@ -19,6 +19,8 @@ public struct Crosshair
     public int size;
     [Tooltip("The color of the crosshair image")]
     public Color color;
+    [Tooltip("Distance the raycast can be perform")][SerializeField]
+    public float scope;
 }
 
 public class GunArtefact : MonoBehaviour
@@ -53,8 +55,9 @@ public class GunArtefact : MonoBehaviour
     [Tooltip("Point transform where muzzle flash will be spawned.")][SerializeField]
     private Transform muzzle = null;
 
+
+    [Header("Shoot Parameters")] 
     
-    [Header("Shoot Parameters")]
     [Tooltip("How the the trigger ammo when we trigger it.")][SerializeField]
     private ShootingMode shootMode;
    // [Tooltip("The projectile prefab")]

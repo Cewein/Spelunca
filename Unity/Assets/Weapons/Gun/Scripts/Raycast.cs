@@ -10,8 +10,6 @@ public class Raycast : MonoBehaviour
     [Tooltip("The camera used to perform raycast.")] [SerializeField]
     private Camera cam = null;
 
-    [Tooltip("The raycast scope.")] [SerializeField]
-    private float scope = 100f;
 
     [Header("Debug")] 
     
@@ -27,9 +25,11 @@ public class Raycast : MonoBehaviour
     #endregion ==========
 
     #region Fields ==========
-    
+    [HideInInspector]
     public RaycastHit Hit;
- 
+    [HideInInspector]
+    public float scope = 100f;
+
     private Ray ray;
    
     #endregion ==========

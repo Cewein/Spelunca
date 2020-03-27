@@ -24,6 +24,7 @@ public class CrosshairManager : MonoBehaviour
     #region Other Fields ============================================================================================
 
     private Image crossHair;
+    private Raycast raycaster;
     private bool isOntarget; // IDammageable or IPickable
     private bool pointOnCollectible; // ICollectible
     private RectTransform crossHairSocket;
@@ -34,11 +35,12 @@ public class CrosshairManager : MonoBehaviour
 
     private void Awake()
     {
-        crossHair = GetComponentInChildren<Raycast>().GetComponent<Image>();
+        raycaster = GetComponentInChildren<Raycast>();
+        crossHair = raycaster.GetComponent<Image>();
         crossHairSocket = crossHair.GetComponent<RectTransform>();
         if (minerController == null) minerController = GameObject.FindObjectOfType<MinerController>();
         
-        OnSwitchingWeapon(minerController.CurrentWeapon );
+        OnSwitchingWeapon(minerController.CurrentWeapon);
 
         minerController.switchWeapon += OnSwitchingWeapon;
     }
@@ -57,9 +59,9 @@ public class CrosshairManager : MonoBehaviour
                 {currentWeaponCrosshair = currentWeapon.GetComponent<GunArtefact>().Crosshair;}
                 catch (NullReferenceException ex){}
             }
-
+            raycaster.scope  = currentWeaponCrosshair.scope;
             crossHair.sprite = currentWeaponCrosshair.sprite;
-            crossHair.color = currentWeaponCrosshair.color;
+            crossHair.color  = currentWeaponCrosshair.color;
             crossHairSocket.sizeDelta =  Vector2.one * currentWeaponCrosshair.size;
             crossHair.enabled = true;
         }

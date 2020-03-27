@@ -127,12 +127,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magazine: {fileID: 0}
   controller: {fileID: 0}
-  name: Rifle
+  isPickaxe: 0
+  pickaxeDamage: 5
+  name: Fusil
   icon: {fileID: 21300000, guid: 0731b10435924fe419a2342a08bcca29, type: 3}
-  crosshairDataDefault:
+  crosshair:
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    size: 5
-    color: {r: 1, g: 0, b: 0, a: 0}
+    size: 100
+    color: {r: 0, g: 0, b: 0, a: 0}
   normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
     type: 3}
   AmmoType:

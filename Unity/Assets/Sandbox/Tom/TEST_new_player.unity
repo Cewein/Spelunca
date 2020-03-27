@@ -956,38 +956,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4960815634682092114}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1151348790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151348785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magazine: {fileID: 0}
-  controller: {fileID: 1151348791}
-  isPickaxe: 1
-  pickaxeDamage: 5
-  name: Goliath
-  icon: {fileID: 21300000, guid: 167efa908efb5254383b7c63760ed987, type: 3}
-  crosshair:
-    sprite: {fileID: 21300000, guid: 167efa908efb5254383b7c63760ed987, type: 3}
-    size: 100
-    color: {r: 0, g: 0, b: 0, a: 0}
-  normalResourceAmmo: {fileID: 0}
-  AmmoType: []
-  muzzle: {fileID: 0}
-  shootMode: 0
-  firingRate: 1
-  bulletSpreadAngle: 0
-  bulletsPerShot: 1
-  recoil: 1
-  aimFovRatio: 1
-  aimOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1151348791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1714,6 +1682,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1290475390548412466, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1476937047}
     - target: {fileID: 1290475389702396088, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_Name
@@ -1829,11 +1802,6 @@ PrefabInstance:
       propertyPath: minerController
       value: 
       objectReference: {fileID: 1019905854}
-    - target: {fileID: 1290475390548412466, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 1476937047}
     - target: {fileID: 1290475389282511751, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2133,6 +2101,66 @@ PrefabInstance:
       propertyPath: hook
       value: 
       objectReference: {fileID: 1980271629}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: field of view
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_Depth
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1591
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_AllowMSAA
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846255216405922929, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1151348791}
+    - target: {fileID: 3846255216405922929, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.scope
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: raycastReticle
@@ -2208,56 +2236,6 @@ PrefabInstance:
       propertyPath: reloadInputName
       value: Reload
       objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: far clip plane
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: field of view
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_Depth
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 1591
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_AllowMSAA
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_ForceIntoRT
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1360677050812820615, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: shootType
@@ -2283,58 +2261,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: name
-      value: Fusil
-      objectReference: {fileID: 0}
-    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.size
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.sprite
-      value: 
-      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a236bc108fbb2354f9ebaf37770a4c78,
-        type: 3}
-    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.size
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.color.r
-      value: 0.8893349
-      objectReference: {fileID: 0}
-    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.color.g
-      value: 0.9622642
-      objectReference: {fileID: 0}
-    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 21300000, guid: a236bc108fbb2354f9ebaf37770a4c78,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
 --- !u!1 &4960815634682092115 stripped

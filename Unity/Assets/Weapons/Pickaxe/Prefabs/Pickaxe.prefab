@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 6902260913601319817}
   - component: {fileID: 1265291895204945581}
   - component: {fileID: 8093034665770292783}
+  - component: {fileID: 985337230899952790}
   m_Layer: 11
   m_Name: Pickaxe
   m_TagString: Untagged
@@ -144,3 +145,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &985337230899952790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902260913601319816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magazine: {fileID: 0}
+  controller: {fileID: 0}
+  isPickaxe: 1
+  pickaxeDamage: 5
+  name: Goliath
+  icon: {fileID: 21300000, guid: 167efa908efb5254383b7c63760ed987, type: 3}
+  crosshair:
+    sprite: {fileID: 21300000, guid: 167efa908efb5254383b7c63760ed987, type: 3}
+    size: 50
+    color: {r: 0, g: 1, b: 0, a: 1}
+    scope: 20
+  normalResourceAmmo: {fileID: 0}
+  AmmoType: []
+  muzzle: {fileID: 0}
+  shootMode: 0
+  firingRate: 1
+  bulletSpreadAngle: 0
+  bulletsPerShot: 1
+  recoil: 1
+  aimFovRatio: 1
+  aimOffset: {x: 0, y: 0, z: 0}
