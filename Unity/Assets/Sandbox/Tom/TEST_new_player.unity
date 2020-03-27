@@ -300,6 +300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 175521859}
   - component: {fileID: 175521860}
+  - component: {fileID: 175521861}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -335,6 +336,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175521858}
   m_CullTransparentMesh: 0
+--- !u!114 &175521861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175521858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c73bc20cb36c94d8816e3b650629e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minerController: {fileID: 1019905854}
+  animationSpeed: 5
+  noAmmo: {fileID: 21300000, guid: d7345aab16eb1034b856941118f627aa, type: 3}
+  collectible: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &198064106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,8 +1997,8 @@ MonoBehaviour:
   name: Goliath
   icon: {fileID: 21300000, guid: 565647b4219e97943874d7a738cac3cc, type: 3}
   crosshair:
-    sprite: {fileID: 0}
-    size: 0
+    sprite: {fileID: 21300000, guid: 565647b4219e97943874d7a738cac3cc, type: 3}
+    size: 100
     color: {r: 0, g: 0, b: 0, a: 0}
   normalResourceAmmo: {fileID: 0}
   AmmoType: []
@@ -3925,6 +3942,28 @@ PrefabInstance:
         type: 3}
       propertyPath: name
       value: Fusil
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.size
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0731b10435924fe419a2342a08bcca29,
+        type: 3}
+    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e64223a66d13ae4496cb7112a265e48,
+        type: 3}
+    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.size
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 78457083255532787, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}

@@ -10,8 +10,6 @@ public class CrosshairManager : MonoBehaviour
     private MinerController minerController;
     
     [Header("General settings")]
-    [Tooltip("Current crosshair image")][SerializeField]
-    private Image crossHair;
     [Tooltip("Crosshair animation speed. (when it point on a target, it will be animated)")]
     public float animationSpeed = 5f;
     
@@ -24,7 +22,8 @@ public class CrosshairManager : MonoBehaviour
     #endregion
     
     #region Other Fields ============================================================================================
-    
+
+    private Image crossHair;
     private bool isOntarget; // IDammageable or IPickable
     private bool pointOnCollectible; // ICollectible
     private RectTransform crossHairSocket;
@@ -33,10 +32,12 @@ public class CrosshairManager : MonoBehaviour
     
     #endregion
 
-    void Awake()
+    private void Awake()
     {
+        crossHair = GetComponentInChildren<Raycast>().GetComponent<Image>();
+        crossHairSocket = crossHair.GetComponent<RectTransform>();
         if (minerController == null) minerController = GameObject.FindObjectOfType<MinerController>();
-
+        
         OnWeaponChanged(minerController.CurrentWeapon );
 
         minerController.switchWeapon += OnWeaponChanged;
@@ -50,10 +51,10 @@ public class CrosshairManager : MonoBehaviour
             {
                 currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtefact>().Crosshair;
             }
-            catch (NullReferenceException e)
-            {
-                
-            }
+            catch (NullReferenceException e){}
+
+            crossHair.sprite = currentWeaponCrosshair.sprite;
+            crossHairSocket.sizeDelta =  Vector2.one * currentWeaponCrosshair.size;
             crossHair.enabled = true;
         }
     }
