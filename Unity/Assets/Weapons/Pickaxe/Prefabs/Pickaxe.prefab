@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 1265291895204945581}
   - component: {fileID: 8093034665770292783}
   - component: {fileID: 985337230899952790}
+  - component: {fileID: 3128893638381751823}
   m_Layer: 11
   m_Name: Pickaxe
   m_TagString: Untagged
@@ -178,3 +179,17 @@ MonoBehaviour:
   recoil: 1
   aimFovRatio: 1
   aimOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &3128893638381751823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902260913601319816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5809aa5aeb938b74280a7fa906e35daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputHandler: {fileID: 0}
+  raycastReticle: {fileID: 0}

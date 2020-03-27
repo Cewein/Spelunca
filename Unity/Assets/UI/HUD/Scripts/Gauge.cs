@@ -14,6 +14,8 @@ public class Gauge : MonoBehaviour
 
     private void Start()
     {
+        if (miner == null) miner = FindObjectOfType<MinerController>();
+
         gunLoader = miner.GetComponentInChildren<GunLoader>();
         gaugeUI = GetComponent<Image>();
         gaugeUI.fillAmount = gunLoader.CurrentResourceQuantity / gunLoader.Capacity;

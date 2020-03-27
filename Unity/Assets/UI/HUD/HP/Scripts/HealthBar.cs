@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -20,8 +21,12 @@ public class HealthBar : MonoBehaviour
     private bool invincible = false;
     
     // Start is called before the first frame update
+  
+
     void Start()
     {
+        if (player == null) player = FindObjectOfType<PlayerStats>();
+
         HP = 0;
         maxHP = player.MaxLife;
         invincible = true;

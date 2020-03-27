@@ -950,26 +950,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108912678}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1151348785 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7423616617065048943, guid: 03e5fa6798ff274469d7558ea0d50d23,
+--- !u!114 &1151348791 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1414176941927642856, guid: 03e5fa6798ff274469d7558ea0d50d23,
     type: 3}
   m_PrefabInstance: {fileID: 4960815634682092114}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1151348791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151348785}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5809aa5aeb938b74280a7fa906e35daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 4960815634682092118}
-  raycastReticle: {fileID: 1949351325}
 --- !u!114 &1230041646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 642419920189178195, guid: 03e5fa6798ff274469d7558ea0d50d23,
@@ -2146,6 +2138,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1414176941927642856, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: inputHandler
+      value: 
+      objectReference: {fileID: 4960815634682092118}
+    - target: {fileID: 1414176941927642856, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: raycastReticle
+      value: 
+      objectReference: {fileID: 1949351325}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: weaponParent
@@ -2345,11 +2347,6 @@ PrefabInstance:
         type: 3}
       propertyPath: crosshair.color.b
       value: 0.8544411
-      objectReference: {fileID: 0}
-    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: shootMode
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
