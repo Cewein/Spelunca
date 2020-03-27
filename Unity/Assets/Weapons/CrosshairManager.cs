@@ -38,12 +38,12 @@ public class CrosshairManager : MonoBehaviour
         crossHairSocket = crossHair.GetComponent<RectTransform>();
         if (minerController == null) minerController = GameObject.FindObjectOfType<MinerController>();
         
-        OnWeaponChanged(minerController.CurrentWeapon );
+        OnSwitchingWeapon(minerController.CurrentWeapon );
 
-        minerController.switchWeapon += OnWeaponChanged;
+        minerController.switchWeapon += OnSwitchingWeapon;
     }
     
-    private void OnWeaponChanged(GameObject currentWeapon)
+    private void OnSwitchingWeapon(GameObject currentWeapon)
     {
         if(currentWeapon)
         {
@@ -51,9 +51,15 @@ public class CrosshairManager : MonoBehaviour
             {
                 currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtefact>().Crosshair;
             }
-            catch (NullReferenceException e){}
+            catch (NullReferenceException e)
+            {
+                try
+                {currentWeaponCrosshair = currentWeapon.GetComponent<GunArtefact>().Crosshair;}
+                catch (NullReferenceException ex){}
+            }
 
             crossHair.sprite = currentWeaponCrosshair.sprite;
+            crossHair.color = currentWeaponCrosshair.color;
             crossHairSocket.sizeDelta =  Vector2.one * currentWeaponCrosshair.size;
             crossHair.enabled = true;
         }
