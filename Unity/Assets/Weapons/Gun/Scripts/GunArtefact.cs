@@ -31,13 +31,19 @@ public class GunArtefact : MonoBehaviour
     [Tooltip("The gun magazine that stock ammo.")][SerializeField]
     private GunController controller;
     
+    [Header("Pickaxe only")]
+    [Tooltip("Is that the miner pickaxe ? ")][SerializeField]
+    private bool isPickaxe = false;
+    [Tooltip("Pickax damage")][SerializeField]
+    private float pickaxeDamage = 5f;
+    
     [Header("Data")]
     [Tooltip("Artefact name.")][SerializeField]
     private string name;
     [Tooltip("Artefact icon used in every UI")][SerializeField]
     private Sprite icon;
     [Tooltip("Crosshair parameters")][SerializeField]
-    private Crosshair crosshairDataDefault;
+    private Crosshair crosshair;
 
     [Header("Projectile")]
     [Tooltip("Normal resource projectile prefab")][SerializeField]
@@ -86,6 +92,7 @@ public class GunArtefact : MonoBehaviour
     {
         get
         {
+            if (isPickaxe) return normalResourceAmmo;
             if (currentAmmo == null || !currentAmmo.Type.Equals(magazine.CurrentResource.Type))
                 currentAmmo = magazine.CurrentResource.Type.Equals(ResourceType.normal) ?
                                                             normalResourceAmmo : 
@@ -96,11 +103,13 @@ public class GunArtefact : MonoBehaviour
         }
     }
 
+    public Crosshair Crosshair => crosshair;
+
     #endregion
 
     private void Start()
     {
-        if (magazine == null){ magazine = GetComponentInParent<GunLoader>(); }
+        if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
     }
 
@@ -135,6 +144,10 @@ public class GunArtefact : MonoBehaviour
     
     private bool TryShoot()
     {
+        if (isPickaxe)
+        {
+            return Pick(true);
+        }
         if (magazine.CurrentResourceQuantity >= 0f && lastTimeFiring + firingRate < Time.time)
         {
             Shoot();
@@ -142,6 +155,49 @@ public class GunArtefact : MonoBehaviour
         }
 
         return false;
+    }
+    
+    private bool Pick(bool isShooting)
+    {
+        if ( isShooting && GetComponent<Animator>().GetBool("canAttack"))
+        {
+            try
+            {
+                if (controller.Hit.transform != null)
+                {
+                       
+                    try
+                    {
+                        controller.Hit.transform.gameObject.GetComponent<IPickable>().Pickax(controller.Hit, pickaxeDamage);
+                    }
+                    catch (NullReferenceException e){}
+
+                    try
+                    {
+                        if (controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick.GetInvocationList()
+                                .Length > 1)
+                        {
+                            controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick -= CollectResource;
+                        }
+              
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick += CollectResource;
+                    }
+                }
+            }
+            catch (NullReferenceException e){}
+
+         
+        }
+
+        return isShooting && GetComponent<Animator>().GetBool("canAttack");
+    }
+
+    private void CollectResource(ResourceType type, float quantity)
+    {
+       // ResourcesStock.Instance.setResource(type,quantity);
     }
 
     private void Shoot()

@@ -120,6 +120,9 @@ public class MinerController : MonoBehaviour
     private int weaponIndex = 0;
     private Vector3 weaponNewPosition; 
     private bool previousGrappingInput = false;//The grappling hook's input during the previous state
+    public Action<GameObject> switchWeapon;
+
+    public GameObject CurrentWeapon  => weapons[weaponIndex];
 
     #endregion
 
@@ -193,6 +196,7 @@ public class MinerController : MonoBehaviour
     {
         weapons[ Mathf.Abs( (weaponIndex - 1) % weapons.Length ) ].gameObject.SetActive(false);
         weapons[weaponIndex].gameObject.SetActive(true);
+        switchWeapon?.Invoke(  weapons[weaponIndex]  );
     }
     private void SeekGround()
     {
