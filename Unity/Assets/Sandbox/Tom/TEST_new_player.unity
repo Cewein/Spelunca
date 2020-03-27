@@ -197,25 +197,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &17112881 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1290475389308548273, guid: c7f4ea9f3479a324292c7f522d40fb63,
-    type: 3}
-  m_PrefabInstance: {fileID: 1290475390215992751}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &17112885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17112881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 452677b8b21d7394ba877dbcb0c25939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  miner: {fileID: 1019905854}
 --- !u!1 &168408933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,6 +1687,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1476937047}
+    - target: {fileID: 582398189291119244, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: miner
+      value: 
+      objectReference: {fileID: 1019905854}
     - target: {fileID: 1290475389702396088, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_Name
@@ -2334,6 +2320,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.color.r
+      value: 0.8584906
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.color.g
+      value: 0.8544411
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: crosshair.color.b
+      value: 0.8544411
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: shootMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}

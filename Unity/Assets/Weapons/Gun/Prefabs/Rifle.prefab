@@ -55,6 +55,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: a236bc108fbb2354f9ebaf37770a4c78, type: 3}
     size: 60
     color: {r: 0.8893349, g: 0.9622642, b: 0, a: 1}
+    scope: 0
   normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
     type: 3}
   AmmoType:
