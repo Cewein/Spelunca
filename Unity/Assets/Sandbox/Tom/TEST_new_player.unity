@@ -1642,18 +1642,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975929630}
   m_CullTransparentMesh: 0
---- !u!114 &986191798 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 105404077034488235, guid: 03e5fa6798ff274469d7558ea0d50d23,
-    type: 3}
-  m_PrefabInstance: {fileID: 4960815634682092114}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5809aa5aeb938b74280a7fa906e35daf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1017991757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,20 +1961,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4960815634682092114}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1151348786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151348785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5809aa5aeb938b74280a7fa906e35daf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputHandler: {fileID: 4960815634682092118}
-  raycastReticle: {fileID: 1949351325}
 --- !u!114 &1151348790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2000,8 +1974,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magazine: {fileID: 0}
-  controller: {fileID: 0}
+  controller: {fileID: 1151348791}
   isPickaxe: 1
+  pickaxeDamage: 5
   name: Goliath
   icon: {fileID: 21300000, guid: 565647b4219e97943874d7a738cac3cc, type: 3}
   crosshair:
@@ -2011,13 +1986,27 @@ MonoBehaviour:
   normalResourceAmmo: {fileID: 0}
   AmmoType: []
   muzzle: {fileID: 0}
-  shootMode: 1
+  shootMode: 0
   firingRate: 1
   bulletSpreadAngle: 0
   bulletsPerShot: 1
   recoil: 1
   aimFovRatio: 1
   aimOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &1151348791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151348785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5809aa5aeb938b74280a7fa906e35daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputHandler: {fileID: 4960815634682092118}
+  raycastReticle: {fileID: 1949351325}
 --- !u!114 &1230041646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 642419920189178195, guid: 03e5fa6798ff274469d7558ea0d50d23,
@@ -3521,43 +3510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c964b2ff83d2c498abd07a88bd6194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1981848641 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1451310189066703352, guid: 03e5fa6798ff274469d7558ea0d50d23,
-    type: 3}
-  m_PrefabInstance: {fileID: 4960815634682092114}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1981848645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981848641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magazine: {fileID: 1230041646}
-  controller: {fileID: 986191798}
-  isPickaxe: 0
-  name: 
-  icon: {fileID: 0}
-  crosshair:
-    sprite: {fileID: 0}
-    size: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
-  normalResourceAmmo: {fileID: 0}
-  AmmoType: []
-  muzzle: {fileID: 0}
-  shootMode: 0
-  firingRate: 0.5
-  bulletSpreadAngle: 0
-  bulletsPerShot: 1
-  recoil: 1
-  aimFovRatio: 1
-  aimOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &2018730523
 GameObject:
   m_ObjectHideFlags: 0
@@ -3969,8 +3921,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: name
+      value: Fusil
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 78457083255532787, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
+    - {fileID: 2142796783819228743, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
 --- !u!1 &4960815634682092115 stripped
 GameObject:
