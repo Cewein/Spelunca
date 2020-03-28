@@ -24,6 +24,7 @@ public class PlayerStats : MonoBehaviour
 
     public void SetDamage(int damage, Vector3 direction, ResourceType damageType = ResourceType.normal)
     {
+        if (life - damage < 0  ) return;
         hurt?.Invoke(damage, direction, damageType);
         life -= damage;
         if (life <= 0) isPlayerDie(true);

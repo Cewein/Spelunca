@@ -2216,4 +2216,4 @@ MonoBehaviour:
   player: {fileID: 0}
   healthPointPrefab: {fileID: 7663032640291007894, guid: 9f02617a015902c45966121d8d6c1b3a,
     type: 3}
-  healthPointXOffset: -6
+  healthPointXOffset: -10
