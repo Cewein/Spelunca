@@ -28,6 +28,9 @@ public class MinerInputHandler : MonoBehaviour
     [Tooltip("The grapping hook input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string grapplingInputName = "Grappling";
     
+    [Tooltip("The interact / pick up input name  as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    private string interactInputName = "Interact";
+    
     [Tooltip("The fire input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     private string fireInputName = "Fire";
     
@@ -169,6 +172,11 @@ public class MinerInputHandler : MonoBehaviour
     public bool isGrappling()
     {
         return GetIfPlayerCanPlay() && Input.GetButton(grapplingInputName);
+    }
+    
+    public bool isInteracting()
+    {
+        return GetIfPlayerCanPlay() && Input.GetButtonDown(interactInputName);
     }
 
     public int isSwitchingWeapon()

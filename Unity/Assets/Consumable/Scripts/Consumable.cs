@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Consumable : MonoBehaviour, ICollectible
 {
@@ -20,7 +21,11 @@ public class Consumable : MonoBehaviour, ICollectible
 
     public void Collect(GameObject container)
     {
-        throw new System.NotImplementedException();
+         //TODO : add to consumable stock
+         
+         Destroy(gameObject);
+
+
     }
 
     public void Emphase(bool isEmphased)

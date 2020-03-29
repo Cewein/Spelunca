@@ -34,6 +34,7 @@ public class CrosshairManager : MonoBehaviour
     private Crosshair currentWeaponCrosshair;
     private Crosshair currentCrosshair; // it can be a special one, not just weapon crosshair
     private RaycastHit hit;
+    private MinerInputHandler inputHandler;
     
     #endregion
 
@@ -47,6 +48,7 @@ public class CrosshairManager : MonoBehaviour
         OnSwitchingWeapon(minerController.CurrentWeapon);
 
         minerController.switchWeapon += OnSwitchingWeapon;
+        inputHandler = minerController.gameObject.GetComponent<MinerInputHandler>();
     }
     
     private void OnSwitchingWeapon(GameObject currentWeapon)
@@ -84,15 +86,18 @@ public class CrosshairManager : MonoBehaviour
         {
             try
             {
-                pointOnCollectible = hit.transform.gameObject.GetComponent<ICollectible>().IsReachable(ray, collectible.scope);
-                Debug.DrawRay(ray.origin, ray.direction * pointerScope, Color.red);
+                var item = hit.transform.gameObject.GetComponent<ICollectible>();
+                pointOnCollectible = item.IsReachable(ray, collectible.scope);
+                if (pointOnCollectible && inputHandler.isInteracting())
+                {
+                   item.Collect(gameObject); // TODO ConsummableStock
+                   
+                }
 
             }
             catch (NullReferenceException e){ pointOnCollectible = false;}
         }
         else { pointOnCollectible = false; }
-        
-        
     }
 
     private void Pointer()
