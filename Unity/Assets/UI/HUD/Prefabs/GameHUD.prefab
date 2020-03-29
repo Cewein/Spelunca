@@ -246,8 +246,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minerController: {fileID: 0}
   animationSpeed: 5
+  pointerScope: 20
   noAmmo: {fileID: 21300000, guid: d7345aab16eb1034b856941118f627aa, type: 3}
-  collectible: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  collectible:
+    sprite: {fileID: 21300000, guid: b7ec9b9463ba8f0488b31b5fb644bb06, type: 3}
+    size: 200
+    color: {r: 1, g: 1, b: 1, a: 1}
+    scope: 5
 --- !u!1 &711560070105837802
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,12 +12,15 @@ public class CrosshairManager : MonoBehaviour
     [Header("General settings")]
     [Tooltip("Crosshair animation speed. (when it point on a target, it will be animated)")]
     public float animationSpeed = 5f;
+
+    [Tooltip("Pointer object detection distance")] [SerializeField]
+    private float pointerScope;
     
     [Header("Special crosshair")]
     [Tooltip("Crosser where gun magazine is empty")][SerializeField]
     private Sprite noAmmo;
     [Tooltip("Crosser when player point on a collectible")][SerializeField]
-    private Sprite collectible;
+    private Crosshair collectible;
     
     #endregion
     
@@ -30,6 +33,7 @@ public class CrosshairManager : MonoBehaviour
     private RectTransform crossHairSocket;
     private Crosshair currentWeaponCrosshair;
     private Crosshair currentCrosshair; // it can be a special one, not just weapon crosshair
+    private RaycastHit hit;
     
     #endregion
 
@@ -47,7 +51,7 @@ public class CrosshairManager : MonoBehaviour
     
     private void OnSwitchingWeapon(GameObject currentWeapon)
     {
-        if(currentWeapon)
+        if(currentWeapon && !pointOnCollectible)
         {
             try
             {
@@ -64,6 +68,47 @@ public class CrosshairManager : MonoBehaviour
             crossHair.color  = currentWeaponCrosshair.color;
             crossHairSocket.sizeDelta =  Vector2.one * currentWeaponCrosshair.size;
             crossHair.enabled = true;
+        }
+    }
+
+    private void Update()
+    {
+        PointerRaycast();
+        Pointer();
+    }
+
+    private void PointerRaycast()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(raycaster.transform.position);
+        if (Physics.Raycast(ray, out hit, pointerScope )) // TODO : layers
+        {
+            try
+            {
+                pointOnCollectible = hit.transform.gameObject.GetComponent<ICollectible>().IsReachable(ray, collectible.scope);
+                Debug.DrawRay(ray.origin, ray.direction * pointerScope, Color.red);
+
+            }
+            catch (NullReferenceException e){ pointOnCollectible = false;}
+        }
+        else { pointOnCollectible = false; }
+        
+        
+    }
+
+    private void Pointer()
+    {
+        if (pointOnCollectible)
+        {
+            crossHair.sprite = collectible.sprite;
+            crossHair.color  = collectible.color;
+            crossHairSocket.sizeDelta =  Vector2.one * collectible.size;
+        }
+        else
+        {
+            crossHair.sprite = currentWeaponCrosshair.sprite;
+            crossHair.color  = currentWeaponCrosshair.color;
+            crossHairSocket.sizeDelta =  Vector2.one * currentWeaponCrosshair.size;
+
         }
     }
 
