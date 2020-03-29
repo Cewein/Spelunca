@@ -11,7 +11,7 @@ public class DensityGenerator
     public static float floor;
     public static Vector3 endZone;
     public static Vector3 playerSpawn;
-    
+
     //density function
     //this is out put a value who is going to be use
     //in the mesh build procces
@@ -60,12 +60,12 @@ public class DensityGenerator
     //a 3D float array containing the density of the 
     //chunk, this array is use in the mesh build procces
     //and is  a crusial step in the marching algorithm
-    public static float [,,] find(float size, Vector3 chunkPos)
+    public static float[,,] find(float size, Vector3 chunkPos)
     {
         float[,,] block = new float[(int)size, (int)size, (int)size];
         noise.SetNoiseType(FastNoise.NoiseType.Perlin);
 
-        for(int x = 0; x < size; x++)
+        for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
             {
@@ -77,5 +77,17 @@ public class DensityGenerator
         }
 
         return block;
+    }
+
+    public static void find(ComputeBuffer pointsBuffer, int size, Vector3 chunkPos, ComputeShader densityShader)
+    {
+        int numThreadEachAxis = Mathf.CeilToInt(size / 8.0f);
+
+        densityShader.SetBuffer(0, "points", pointsBuffer);
+        densityShader.SetInt("numPointAxis", size);
+        densityShader.SetVector("chunkPos", chunkPos);
+
+        densityShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
+
     }
 }

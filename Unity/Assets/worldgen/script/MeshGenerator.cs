@@ -12,7 +12,7 @@ public class MeshGenerator
         public float[] val;
     }
 
-    public static MeshData generateMesh(float[,,] block, int x, int y, int z, uint size, float isolevel, int tcount)
+    public static MeshData generateMesh(float[,,] block, int x, int y, int z, int size, float isolevel, int tcount)
     {
         //create a new gridcell struct
         gridcell grid = new gridcell();
