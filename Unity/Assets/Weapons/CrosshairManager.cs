@@ -90,7 +90,7 @@ public class CrosshairManager : MonoBehaviour
                 pointOnCollectible = item.IsReachable(ray, collectible.scope);
                 if (pointOnCollectible && inputHandler.isInteracting())
                 {
-                   item.Collect(gameObject); // TODO ConsummableStock
+                   item.Collect(); 
                    
                 }
 

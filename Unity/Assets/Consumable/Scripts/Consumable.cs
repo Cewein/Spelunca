@@ -19,7 +19,7 @@ public class Consumable : MonoBehaviour, ICollectible
         return Vector3.Distance(ray.origin , transform.position) < detectionScope;
     }
 
-    public void Collect(GameObject container)
+    public void Collect()
     {
          //TODO : add to consumable stock
          
