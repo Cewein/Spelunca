@@ -12,7 +12,8 @@ public class Consumable : MonoBehaviour, ICollectible
     private Sprite icon = null;
     [Tooltip("Description to help the player")] [SerializeField]
     private string description;
-
+    
+    
     public string Name => name;
 
     #endregion
@@ -25,7 +26,7 @@ public class Consumable : MonoBehaviour, ICollectible
     {
          ConsumableStock.Instance.SetConsumable(this);
          gameObject.SetActive(false);
-         Debug.Log( ConsumableStock.Instance);
+      //   Debug.Log( ConsumableStock.Instance);
          
     }
 

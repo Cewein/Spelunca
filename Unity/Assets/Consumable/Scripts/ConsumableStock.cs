@@ -34,7 +34,6 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
         }
         else
         {
-            //stock[item.name] = stock[item] + 1 < slotCapacity ? stock[item] + 1 : slotCapacity;
             int index = SlotNextEmptySocket(stock[item.Name]);
             if ( index < slotCapacity)
             {
