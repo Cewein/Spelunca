@@ -12,7 +12,9 @@ public class Consumable : MonoBehaviour, ICollectible
     private Sprite icon = null;
     [Tooltip("Description to help the player")] [SerializeField]
     private string description;
-    
+
+    public string Name => name;
+
     #endregion
     public bool IsReachable(Ray ray, float detectionScope)
     {
@@ -21,15 +23,21 @@ public class Consumable : MonoBehaviour, ICollectible
 
     public void Collect()
     {
-         //TODO : add to consumable stock
+         ConsumableStock.Instance.SetConsumable(this);
+         gameObject.SetActive(false);
+         Debug.Log( ConsumableStock.Instance);
          
-         Destroy(gameObject);
-
-
     }
 
     public void Emphase(bool isEmphased)
     {
-        throw new System.NotImplementedException();
+        //TODO : add outlined shader (or any shader that emphasis the object)
     }
+
+    public void Use()
+    {
+        Debug.Log("consomable consumed !");
+    }
+    
+    
 }

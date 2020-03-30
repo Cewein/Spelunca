@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private ResourcesStock resourcesStock;
+    [SerializeField]
+    private ConsumableStock consumableStock;
 
     public static GameManager instance = null;
     [SerializeField] private PlayerStats player = null;

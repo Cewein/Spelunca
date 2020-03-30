@@ -88,11 +88,13 @@ public class CrosshairManager : MonoBehaviour
             {
                 var item = hit.transform.gameObject.GetComponent<ICollectible>();
                 pointOnCollectible = item.IsReachable(ray, collectible.scope);
-                if (pointOnCollectible && inputHandler.isInteracting())
+                if (pointOnCollectible)
                 {
-                   item.Collect(); 
-                   
+                    item.Emphase(true);
+                    if (inputHandler.isInteracting())
+                        item.Collect(); 
                 }
+                else item.Emphase(false);
 
             }
             catch (NullReferenceException e){ pointOnCollectible = false;}
