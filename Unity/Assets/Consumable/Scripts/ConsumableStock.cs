@@ -11,6 +11,8 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
     private  Dictionary<string, Consumable[]> stock;
     public  Dictionary<string, Consumable[]> Stock{get => stock;}
 
+    public Action update;
+
     private ConsumableStock()
     {
         stock = new Dictionary<string, Consumable[]>();
@@ -22,6 +24,9 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
         item.Use();
         stock[item]--;
         if (stock[item] <= 0) stock.Remove(item);
+        
+                update?.Invoke();
+
     }*/
     
     public void SetConsumable(Consumable item)
@@ -44,6 +49,8 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
                 Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
             }
         }
+        
+        update?.Invoke();
     }
 
     public override string ToString()
@@ -52,7 +59,7 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
             (current, element) => current + (element.Key + " : " + SlotNextEmptySocket(element.Value) +"\n"));
     }
 
-    private int SlotNextEmptySocket(Consumable[] slot)
+    public int SlotNextEmptySocket(Consumable[] slot)
     {
         int counter = 0;
         foreach (Consumable item in slot)

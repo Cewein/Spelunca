@@ -16,6 +16,8 @@ public class Consumable : MonoBehaviour, ICollectible
     
     public string Name => name;
 
+    public Sprite Icon => icon;
+
     #endregion
     public bool IsReachable(Ray ray, float detectionScope)
     {
