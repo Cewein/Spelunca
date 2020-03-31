@@ -10,9 +10,9 @@ public class chunk : MonoBehaviour
     public MeshRenderer meshRenderer;
     public MeshCollider meshCollider;
 
-    ComputeBuffer pointsBuffer;
-    ComputeBuffer triangleBuffer;
-    ComputeBuffer trisCounterBuffer;
+    private ComputeBuffer pointsBuffer;
+    private ComputeBuffer triangleBuffer;
+    private ComputeBuffer trisCounterBuffer;
 
     List<ComputeBuffer> bufferList;
 
@@ -20,30 +20,56 @@ public class chunk : MonoBehaviour
     public void createMarchingBlock(int size, Vector3 playerSpawn, ComputeShader densityShader, ComputeShader marchShader)
     {
         //init
-        chunkData.meshData = new MeshData();
-        MeshData masterMeshData = new MeshData();
         Vector3 pos = GetComponent<Transform>().position;
+        bufferList = new List<ComputeBuffer>();
 
         //create the 3 buffer needed for the GPU gen
         createBuffer(size);
 
+        int numThreadEachAxis = Mathf.CeilToInt((size-1) / 8.0f);
+
         //create denstiy 
-        //TODO make it a compute shader
         //we make it size + 3 because it's for the normals
         DensityGenerator.find(pointsBuffer, size + 3, pos - Vector3.one, densityShader);
 
-        //loop for creating the mesh
-        //TODO make it a compute shader
-        for (int x = 0; x < size; x++)
+        triangleBuffer.SetCounterValue(0);
+        marchShader.SetBuffer(0, "points", pointsBuffer);
+        marchShader.SetBuffer(0, "triangles", triangleBuffer);
+        marchShader.SetInt("size", size);
+        marchShader.SetFloat("isoLevel", 0.0f);
+
+        marchShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
+
+        ComputeBuffer.CopyCount(triangleBuffer, trisCounterBuffer, 0);
+        int[] triCountArray = { 0 };
+        trisCounterBuffer.GetData(triCountArray);
+        int numTris = triCountArray[0];
+
+        // Get triangle data from shader
+        Triangle[] tris = new Triangle[numTris];
+        triangleBuffer.GetData(tris, 0, 0, numTris);
+
+        Mesh mesh = new Mesh();
+        mesh.Clear();
+
+        var vertices = new Vector3[numTris * 3];
+        var meshTriangles = new int[numTris * 3];
+
+        for (int i = 0; i < numTris; i++)
         {
-            for (int y = 0; y < size; y++)
+            for (int j = 0; j < 3; j++)
             {
-                for (int z = 0; z < size; z++)
-                {
-                    chunkData.meshData.mergeMeshData(MeshGenerator.generateMesh(chunkData.density, x + 1, y + 1, z + 1, size, 0, masterMeshData.tcount));
-                }
+                meshTriangles[i * 3 + j] = i * 3 + j;
+                vertices[i * 3 + j] = tris[i][j];
             }
         }
+        mesh.vertices = vertices;
+        mesh.triangles = meshTriangles;
+
+        mesh.RecalculateNormals();
+
+        chunkData.mesh = mesh;
+
         chunkData.update = true;
         makeMeshFromChunkData();
 
@@ -60,7 +86,7 @@ public class chunk : MonoBehaviour
     {
         if (chunkData.update)
         {
-            chunkData.mesh = chunkData.meshData.createMesh();
+            //chunkData.mesh = chunkData.meshData.createMesh();
             chunkData.update = false;
         }
 
@@ -77,7 +103,7 @@ public class chunk : MonoBehaviour
         int totalMaxTris = totalVox * 5;
 
         pointsBuffer = new ComputeBuffer(nump, sizeof(float) * 4);
-        triangleBuffer = new ComputeBuffer(totalMaxTris, sizeof(float) * 3 * 3 * 2, ComputeBufferType.Append);
+        triangleBuffer = new ComputeBuffer(totalMaxTris, sizeof(float) * 3 * 3, ComputeBufferType.Append);
         trisCounterBuffer = new ComputeBuffer(1, sizeof(int), ComputeBufferType.Raw);
 
         bufferList.Add(pointsBuffer);
@@ -94,4 +120,28 @@ public struct ChunkData
     public Mesh mesh;
     public float[,,] density;
     public MeshData meshData;
+}
+
+public struct Triangle
+{
+    #pragma warning disable 649 // disable unassigned variable warning
+    public Vector3 a;
+    public Vector3 b;
+    public Vector3 c;
+
+    public Vector3 this[int i]
+    {
+        get
+        {
+            switch (i)
+            {
+                case 0:
+                    return a;
+                case 1:
+                    return b;
+                default:
+                    return c;
+            }
+        }
+    }
 }

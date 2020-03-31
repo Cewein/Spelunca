@@ -1,5 +1,4 @@
-﻿
-#pragma kernel density
+﻿#pragma kernel density
 
 RWStructuredBuffer<float4> points;
 int numPointAxis;
@@ -19,7 +18,7 @@ void density (uint3 id : SV_DispatchThreadID)
 
     float3 pos = chunkPos + id;
 
-    int index = indexFromCoord(id)
+	int index = indexFromCoord(id);
 
     if (pos.y < 0)
         points[index] = float4(pos,-1);

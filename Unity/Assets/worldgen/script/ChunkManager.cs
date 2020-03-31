@@ -13,7 +13,7 @@ public class ChunkManager : MonoBehaviour
     //Config
     [Header("Player vision setting")]
     public Transform player;
-    public uint chunkSize;
+    public int chunkSize;
     public uint viewRange = 5;
     public float floor = 0;
     public GameObject chunk;
@@ -175,7 +175,7 @@ public class ChunkManager : MonoBehaviour
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     //Two compute shader are pass
-                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn);
+                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader);
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
@@ -206,7 +206,7 @@ public class ChunkManager : MonoBehaviour
                     else
                     {
                         chunks[x, y, z].transform.position += direction * chunkSize;
-                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn);
+                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader);
                         chunkDictionary.Add(chunks[x, y, z].transform.position / chunkSize, chunks[x, y, z].GetComponent<chunk>().chunkData);
                     }
                 }
