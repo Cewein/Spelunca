@@ -56,13 +56,18 @@ public class DensityGenerator
         return densityValue;
     }
 
+    public static int indexFromCoord(int x, int y, int z, int size)
+    {
+        return z * size * size + y * size + x;
+    }
+
     //denstity algorithm loop, this will output
     //a 3D float array containing the density of the 
     //chunk, this array is use in the mesh build procces
     //and is  a crusial step in the marching algorithm
-    public static float[,,] find(float size, Vector3 chunkPos)
+    public static Vector4[] find(int size, Vector3 chunkPos)
     {
-        float[,,] block = new float[(int)size, (int)size, (int)size];
+        Vector4[] block = new Vector4[(int)size * (int)size * (int)size];
         noise.SetNoiseType(FastNoise.NoiseType.Perlin);
 
         for (int x = 0; x < size; x++)
@@ -71,7 +76,8 @@ public class DensityGenerator
             {
                 for (int z = 0; z < size; z++)
                 {
-                    block[x, y, z] = density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z);
+
+                    block[indexFromCoord(x, y, z, size)] = new Vector4(x,y,z, density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z));
                 }
             }
         }

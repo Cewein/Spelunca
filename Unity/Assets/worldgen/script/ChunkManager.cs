@@ -60,7 +60,7 @@ public class ChunkManager : MonoBehaviour
         generateChunks();
 
         //demo for spawning in a chunk
-        for(int i = 0; i < 1500; i++)
+        for(int i = 0; i < 150; i++)
         {
             Vector3[] spawnPos = getPositionOnChunks();
             if(spawnPos[0] != Vector3.zero)
@@ -174,6 +174,7 @@ public class ChunkManager : MonoBehaviour
                 {
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
+                    print((arr + playerChunk) * chunkSize);
                     //Two compute shader are pass
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader);
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
@@ -237,7 +238,6 @@ public class ChunkManager : MonoBehaviour
     float hash(Vector3 vec)
     {
         double val = (1299689.0f * Math.Abs(vec.x) + 611953.0f * Math.Abs(vec.y)) / 898067 * Math.Abs(vec.z);
-        print((float)(val - Math.Truncate(val)) - 0.5f);
         return (float)(val - Math.Truncate(val)) - 0.5f;
     }
 

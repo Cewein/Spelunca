@@ -4,7 +4,7 @@ RWStructuredBuffer<float4> points;
 int numPointAxis;
 float3 chunkPos;
 
-int indexFromCoord(uint3 id) {
+uint indexFromCoord(uint3 id) {
     return id.z * numPointAxis * numPointAxis + id.y * numPointAxis + id.x;
 }
 
@@ -16,14 +16,24 @@ void density (uint3 id : SV_DispatchThreadID)
         return;
     }
 
-    float3 pos = chunkPos + id;
+    float3 pos = chunkPos + (id);
 
-	int index = indexFromCoord(id);
+	uint index = indexFromCoord(id);
+
+    points[index] = float4(pos,1);
 
     if (pos.y < 0)
         points[index] = float4(pos,-1);
-    if (pos.y == 0)
-        points[index] = float4(pos,0);
-    if (pos.y > 0)
-        points[index] = float4(pos,1);
+
+
+    // float3 pos = (chunkPos*numPointAxis) + (id-1);
+
+	// int index = indexFromCoord(id);
+
+    // if (pos.y < -0.5)
+    //     points[index] = float4(pos,-1);
+    // if (pos.y > -0.5 && pos.y < 0.5)
+    //     points[index] = float4(pos,0);
+    // if (pos.y > 0.5)
+    //     points[index] = float4(pos,1);
 }

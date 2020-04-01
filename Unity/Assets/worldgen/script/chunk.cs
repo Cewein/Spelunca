@@ -16,11 +16,15 @@ public class chunk : MonoBehaviour
 
     List<ComputeBuffer> bufferList;
 
+    Vector4[] dataArray;
+
     //Create a the chunk with a given size
     public void createMarchingBlock(int size, Vector3 playerSpawn, ComputeShader densityShader, ComputeShader marchShader)
     {
         //init
         Vector3 pos = GetComponent<Transform>().position;
+        print(pos);
+        print("\t---");
         bufferList = new List<ComputeBuffer>();
 
         //create the 3 buffer needed for the GPU gen
@@ -30,7 +34,11 @@ public class chunk : MonoBehaviour
 
         //create denstiy 
         //we make it size + 3 because it's for the normals
-        DensityGenerator.find(pointsBuffer, size + 3, pos - Vector3.one, densityShader);
+        //DensityGenerator.find(pointsBuffer, size + 1, pos, densityShader);
+
+        dataArray = DensityGenerator.find(size + 3, pos - Vector3.one);
+
+        pointsBuffer.SetData(dataArray);
 
         triangleBuffer.SetCounterValue(0);
         marchShader.SetBuffer(0, "points", pointsBuffer);
@@ -39,6 +47,7 @@ public class chunk : MonoBehaviour
         marchShader.SetFloat("isoLevel", 0.0f);
 
         marchShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
+
 
         ComputeBuffer.CopyCount(triangleBuffer, trisCounterBuffer, 0);
         int[] triCountArray = { 0 };
@@ -101,6 +110,8 @@ public class chunk : MonoBehaviour
         int voxPerAxe = size - 1;
         int totalVox = voxPerAxe * voxPerAxe * voxPerAxe;
         int totalMaxTris = totalVox * 5;
+
+        dataArray = new Vector4[nump];
 
         pointsBuffer = new ComputeBuffer(nump, sizeof(float) * 4);
         triangleBuffer = new ComputeBuffer(totalMaxTris, sizeof(float) * 3 * 3, ComputeBufferType.Append);
