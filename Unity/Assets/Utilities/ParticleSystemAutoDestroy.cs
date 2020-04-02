@@ -5,13 +5,10 @@ public class ParticleSystemAutoDestroy : MonoBehaviour
 {
     private ParticleSystem ps;
 
-    private void Awake()
-    {
-        ps = GetComponent<ParticleSystem>();
-    }
-
+    private void Awake(){ps = GetComponent<ParticleSystem>();}
     private void Update()
     {
-        if (!ps.IsAlive()) Destroy(gameObject);
+        if (ps.IsAlive()) return;
+        Destroy(gameObject);
     }
 }

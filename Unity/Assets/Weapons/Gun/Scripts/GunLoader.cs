@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(GunController))]
@@ -34,7 +33,7 @@ public class GunLoader : MonoBehaviour
           if (currentResource != null) return currentResource;
           //Resource[] list = Resources.FindObjectsOfTypeAll<Resource>();
          // normalResource = list.First(item => item.Type == ResourceType.normal)
-         currentResource = normalResource;
+          currentResource = normalResource;
           return currentResource;
       }
 
@@ -75,10 +74,10 @@ public class GunLoader : MonoBehaviour
         GunController gun = GetComponent<GunController>();
 
         currentResourceQuantity = 1;
-        gun.shoot += isShooting =>
+        gun.trigger += (down,held,up) =>
         {
-            if (!isShooting) return;
-            isCurrentResourceConsuming(isShooting, 10);
+            if (!(down || held || up)) return;
+            isCurrentResourceConsuming(down || held || up, 10);
             if (printDebug) Debug.Log(this);
         };
         gun.reload += isGunReloading =>
@@ -93,22 +92,21 @@ public class GunLoader : MonoBehaviour
             }
             if (printDebug) Debug.Log(this);
         };
-
-        
     }
     
     private void isReloading(bool isReloading, Resource newResource, float quantity)
     {
-        reload?.Invoke(isReloading,newResource, quantity);
+        reload?.Invoke(isReloading, newResource, quantity);
         if (isReloading && (currentResourceQuantity < capacity)) currentResourceQuantity += quantity;
     }
     
     private void isLoaderEmpty(bool isGaugeEmpty)
     {
         isEmpty?.Invoke(isGaugeEmpty);
-        if( currentResource.Type != ResourceType.normal && (ResourcesStock.Instance.Stock[currentResource.Type] <= 0)) 
-            currentResource = normalResource; 
-        
+        if (currentResource.Type != ResourceType.normal && (ResourcesStock.Instance.Stock[currentResource.Type] <= 0))
+        {
+            isReloading(true,normalResource,0);
+        }
     }
 
     private void isCurrentResourceConsuming(bool isResourceConsuming, float quantity)

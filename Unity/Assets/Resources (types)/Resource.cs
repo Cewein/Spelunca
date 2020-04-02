@@ -15,13 +15,13 @@ public class Resource: ScriptableObject
 {
 
         [Tooltip("The resource type")][SerializeField]
-        private ResourceType type;
+        private ResourceType type = ResourceType.normal;
         [Tooltip("The resource color displayed on gauge ui and gun ammo.")][SerializeField]
-        private Color color;
+        private Color color = Color.black;
         [Tooltip("The resource icon displayed on gauge ui.")][SerializeField]
-        private Image gaugeIcon;
+        private Image gaugeIcon = null;
         [Tooltip("The resource icon displayed on inventory.")][SerializeField]
-        private Image inventoryIcon;
+        private Image inventoryIcon = null;
 
         public ResourceType Type => type;
         public Color Color => color;
