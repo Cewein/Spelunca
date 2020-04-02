@@ -2,9 +2,9 @@
 #include "lookUpTable.compute"
 
 struct  Triangle {
-    float3 vertexC;
-    float3 vertexB;
     float3 vertexA;
+    float3 vertexB;
+    float3 vertexC;
 };
 
 AppendStructuredBuffer<Triangle> triangles;
@@ -71,9 +71,9 @@ void Marcher (int3 id : SV_DispatchThreadID)
         int b2 = cornerIndexBFromEdge[triangulation[cubeIndex][i+2]];
 
         Triangle tri;
-        tri.vertexA = interpolateVerts(cubeCorners[a0], cubeCorners[b0]);
+        tri.vertexC = interpolateVerts(cubeCorners[a0], cubeCorners[b0]);
         tri.vertexB = interpolateVerts(cubeCorners[a1], cubeCorners[b1]);
-        tri.vertexC = interpolateVerts(cubeCorners[a2], cubeCorners[b2]);
+        tri.vertexA = interpolateVerts(cubeCorners[a2], cubeCorners[b2]);
         triangles.Append(tri);
     }
 

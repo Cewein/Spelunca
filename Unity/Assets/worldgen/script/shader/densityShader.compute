@@ -20,10 +20,10 @@ void density (uint3 id : SV_DispatchThreadID)
 
 	uint index = indexFromCoord(id);
 
-    points[index] = float4(pos,1);
+    points[index] = float4(id,1);
 
     if (pos.y < 0)
-        points[index] = float4(pos,-1);
+        points[index] = float4(id,-1);
 
 
     // float3 pos = (chunkPos*numPointAxis) + (id-1);

@@ -76,7 +76,6 @@ public class DensityGenerator
             {
                 for (int z = 0; z < size; z++)
                 {
-
                     block[indexFromCoord(x, y, z, size)] = new Vector4(x,y,z, density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z));
                 }
             }

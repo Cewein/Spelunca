@@ -36,15 +36,15 @@ public class chunk : MonoBehaviour
         //we make it size + 3 because it's for the normals
         //DensityGenerator.find(pointsBuffer, size + 1, pos, densityShader);
 
-        dataArray = DensityGenerator.find(size + 3, pos - Vector3.one);
+        dataArray = DensityGenerator.find(size + 1, pos - Vector3.one);
 
         pointsBuffer.SetData(dataArray);
 
         triangleBuffer.SetCounterValue(0);
         marchShader.SetBuffer(0, "points", pointsBuffer);
         marchShader.SetBuffer(0, "triangles", triangleBuffer);
-        marchShader.SetInt("size", size);
-        marchShader.SetFloat("isoLevel", 0.0f);
+        marchShader.SetInt("size", size + 1);
+        marchShader.SetFloat("isoLevel", DensityGenerator.floor);
 
         marchShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
 
@@ -72,6 +72,7 @@ public class chunk : MonoBehaviour
                 vertices[i * 3 + j] = tris[i][j];
             }
         }
+
         mesh.vertices = vertices;
         mesh.triangles = meshTriangles;
 
