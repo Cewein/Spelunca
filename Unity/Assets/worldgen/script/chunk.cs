@@ -23,8 +23,6 @@ public class chunk : MonoBehaviour
     {
         //init
         Vector3 pos = GetComponent<Transform>().position;
-        print(pos);
-        print("\t---");
         bufferList = new List<ComputeBuffer>();
 
         //create the 3 buffer needed for the GPU gen
@@ -36,9 +34,9 @@ public class chunk : MonoBehaviour
         //we make it size + 3 because it's for the normals
         //DensityGenerator.find(pointsBuffer, size + 1, pos, densityShader);
 
-        dataArray = DensityGenerator.find(size + 1, pos - Vector3.one);
+        DensityGenerator.find(pointsBuffer,size + 1, pos - Vector3.one, densityShader);
 
-        pointsBuffer.SetData(dataArray);
+        //pointsBuffer.SetData(dataArray);
 
         triangleBuffer.SetCounterValue(0);
         marchShader.SetBuffer(0, "points", pointsBuffer);
