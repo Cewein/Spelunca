@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+/*
 [RequireComponent(typeof(GunController))]
 public class GunAnimationEventHandler : MonoBehaviour
 {
@@ -31,4 +31,4 @@ public class GunAnimationEventHandler : MonoBehaviour
 
     }
 
-}
+}*/

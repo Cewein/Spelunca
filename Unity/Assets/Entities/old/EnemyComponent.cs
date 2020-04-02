@@ -92,7 +92,7 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         {
             //tries to hold to any cave surface. if not possible, the entity is considered falling.
             wallClimbBehaviour();
-            if (!isGrounded)//isGrounded is set to false if no surface is detected from walkClimbBehaviour().
+            if (!isGrounded)//isOnGround is set to false if no surface is detected from walkClimbBehaviour().
                             //We can't just use state.Falling because we need to detect the switch to falling state to init the timer.
             {
                 transform.position = transform.position - Vector3.up * 9.81f * Time.deltaTime;
