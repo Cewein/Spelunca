@@ -15,8 +15,11 @@ public class ChunkManager : MonoBehaviour
     public Transform player;
     public int chunkSize;
     public uint viewRange = 5;
-    public float floor = 0;
     public GameObject chunk;
+
+    [Header("World setting")]
+    [Range(0,1)]
+    public float isoLevel = 0;
 
     //chunks 
     private Vector3 playerChunk;
@@ -32,10 +35,6 @@ public class ChunkManager : MonoBehaviour
     //frustum cull of the chunks
     Plane[] planes;
     
-
-    [Header("Noise setting")]
-    public uint octaveNumber = 5;
-    
     private void Awake()
     {
         //init data for runtime
@@ -43,8 +42,7 @@ public class ChunkManager : MonoBehaviour
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
 
         //set static variable for the density generator
-        DensityGenerator.octaveNumber = octaveNumber;
-        DensityGenerator.floor = floor;
+        DensityGenerator.isoLevel = isoLevel;
         DensityGenerator.endZone = boss.position;
         DensityGenerator.playerSpawn = playerSpawn = player.position;
     }
@@ -174,7 +172,6 @@ public class ChunkManager : MonoBehaviour
                 {
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
-                    print((arr + playerChunk) * chunkSize);
                     //Two compute shader are pass
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader);
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);

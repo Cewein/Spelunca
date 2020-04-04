@@ -8,6 +8,12 @@ uint indexFromCoord(uint3 id) {
     return id.z * numPointAxis * numPointAxis + id.y * numPointAxis + id.x;
 }
 
+float rand( float3 n )
+{
+	float3 m = float3(12.9898, 78.233, 65.2432);
+	return frac(sin(dot(n, m))* 45.5453);
+}
+
 [numthreads(8,8,8)]
 void density (uint3 id : SV_DispatchThreadID)
 {
@@ -16,24 +22,31 @@ void density (uint3 id : SV_DispatchThreadID)
         return;
     }
 
+	float dist = 1.;
+	float3 posInsideChunk = id;
+
+	for (float i = -1.; i <= 1.; i++)
+	{
+		for (float j = -1.; j <= 1.; j++)
+		{
+			for (float k = -1.; k <= 1.; k++)
+			{
+				float3 loopPos = float3(i, j, k);
+				float temp = distance(float3(posInsideChunk + loopPos),
+					float3(chunkPos + rand(float3(chunkPos - loopPos)))
+				);
+				if (temp < dist)
+					dist = temp;
+			}
+		}
+	}
+
     float3 pos = chunkPos + (id);
 
 	uint index = indexFromCoord(id);
 
-    points[index] = float4(id,1);
+    points[index] = float4(id, dist*2.);
 
     if (pos.y > 0)
         points[index] = float4(id,-1);
-
-
-    // float3 pos = (chunkPos*numPointAxis) + (id-1);
-
-	// int index = indexFromCoord(id);
-
-    // if (pos.y < -0.5)
-    //     points[index] = float4(pos,-1);
-    // if (pos.y > -0.5 && pos.y < 0.5)
-    //     points[index] = float4(pos,0);
-    // if (pos.y > 0.5)
-    //     points[index] = float4(pos,1);
 }

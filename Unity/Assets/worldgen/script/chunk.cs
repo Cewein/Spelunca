@@ -28,25 +28,28 @@ public class chunk : MonoBehaviour
         //create the 3 buffer needed for the GPU gen
         createBuffer(size);
 
+        //get the number of gpu group thread to run 
+        //at the same time
         int numThreadEachAxis = Mathf.CeilToInt((size-1) / 8.0f);
 
-        //create denstiy 
-        //we make it size + 3 because it's for the normals
-        //DensityGenerator.find(pointsBuffer, size + 1, pos, densityShader);
-
+        //create denstiy on the gpu
+        //the data stay on the gpu with the compute buffer
         DensityGenerator.find(pointsBuffer,size + 1, pos - Vector3.one, densityShader);
 
-        //pointsBuffer.SetData(dataArray);
+        //create the mesh on the gpu
 
+        //set the conteur to 0 and pass value
+        //to the compute shader
         triangleBuffer.SetCounterValue(0);
         marchShader.SetBuffer(0, "points", pointsBuffer);
         marchShader.SetBuffer(0, "triangles", triangleBuffer);
         marchShader.SetInt("size", size + 1);
-        marchShader.SetFloat("isoLevel", DensityGenerator.floor);
+        marchShader.SetFloat("isoLevel", DensityGenerator.isoLevel);
 
+        //lauch the compute shader on each threadGroup
         marchShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
 
-
+        //setup for getting the data
         ComputeBuffer.CopyCount(triangleBuffer, trisCounterBuffer, 0);
         int[] triCountArray = { 0 };
         trisCounterBuffer.GetData(triCountArray);
@@ -56,12 +59,13 @@ public class chunk : MonoBehaviour
         Triangle[] tris = new Triangle[numTris];
         triangleBuffer.GetData(tris, 0, 0, numTris);
 
+        //setup for mesh cpu creation
         Mesh mesh = new Mesh();
         mesh.Clear();
+        Vector3[] vertices = new Vector3[numTris * 3];
+        int[] meshTriangles = new int[numTris * 3];
 
-        var vertices = new Vector3[numTris * 3];
-        var meshTriangles = new int[numTris * 3];
-
+        //but the data into the mesh
         for (int i = 0; i < numTris; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -112,6 +116,7 @@ public class chunk : MonoBehaviour
 
         dataArray = new Vector4[nump];
 
+        //setup the compute buffer
         pointsBuffer = new ComputeBuffer(nump, sizeof(float) * 4);
         triangleBuffer = new ComputeBuffer(totalMaxTris, sizeof(float) * 3 * 3, ComputeBufferType.Append);
         trisCounterBuffer = new ComputeBuffer(1, sizeof(int), ComputeBufferType.Raw);
@@ -124,7 +129,6 @@ public class chunk : MonoBehaviour
 
 public struct ChunkData
 {
-    //to use when make the world editable
     public bool update;
 
     public Mesh mesh;
@@ -134,7 +138,11 @@ public struct ChunkData
 
 public struct Triangle
 {
-    #pragma warning disable 649 // disable unassigned variable warning
+    //if you use a new triangle struct
+    //be sure to modify the compute size
+    //and also the shader
+
+#pragma warning disable 649 // disable unassigned variable warning
     public Vector3 a;
     public Vector3 b;
     public Vector3 c;

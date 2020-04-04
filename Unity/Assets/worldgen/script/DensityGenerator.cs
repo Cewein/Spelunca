@@ -8,7 +8,7 @@ public class DensityGenerator
     public static FastNoise noise = new FastNoise();
 
     public static uint octaveNumber;
-    public static float floor;
+    public static float isoLevel;
     public static Vector3 endZone;
     public static Vector3 playerSpawn;
 
@@ -61,10 +61,6 @@ public class DensityGenerator
         return z * size * size + y * size + x;
     }
 
-    //denstity algorithm loop, this will output
-    //a 3D float array containing the density of the 
-    //chunk, this array is use in the mesh build procces
-    //and is  a crusial step in the marching algorithm
     public static Vector4[] find(int size, Vector3 chunkPos)
     {
         Vector4[] block = new Vector4[(int)size * (int)size * (int)size];
@@ -76,7 +72,7 @@ public class DensityGenerator
             {
                 for (int z = 0; z < size; z++)
                 {
-                    block[indexFromCoord(x, y, z, size)] = new Vector4(x,y,z, density(floor, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z));
+                    block[indexFromCoord(x, y, z, size)] = new Vector4(x,y,z, density(isoLevel, x + chunkPos.x, y + chunkPos.y, z + chunkPos.z));
                 }
             }
         }
@@ -84,6 +80,9 @@ public class DensityGenerator
         return block;
     }
 
+    //use a compute buffer and un compute shader to generate the 
+    //density array for the world gen
+    //it's done on the gpu (see shader/densityShader.copute)
     public static void find(ComputeBuffer pointsBuffer, int size, Vector3 chunkPos, ComputeShader densityShader)
     {
         int numThreadEachAxis = Mathf.CeilToInt(size / 8.0f);
