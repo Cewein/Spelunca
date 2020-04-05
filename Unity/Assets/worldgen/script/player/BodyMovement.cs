@@ -30,6 +30,14 @@ public class BodyMovement : MonoBehaviour
             Vector3 pos = Vector3.Cross(Camera.main.transform.forward, Camera.main.transform.up) * Time.deltaTime * moveSpeed;
             player.position -= new Vector3(pos.x, 0, pos.z);
         }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            player.position += new Vector3(0, 0.1f, 0);
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            player.position -= new Vector3(0, 0.1f, 0);
+        }
 
 
     }
