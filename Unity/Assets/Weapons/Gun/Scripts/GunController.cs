@@ -39,12 +39,14 @@ public class GunController : MonoBehaviour
             trigger += Trigger;
             magazine = GetComponentInChildren<GunLoader>();
             inputHandler = GetComponentInParent<MinerInputHandler>();
+            iaInputHandler = null;
         }
         else
         {
             trigger += Trigger;
             magazine = GetComponentInChildren<GunLoader>();
             iaInputHandler = GetComponentInParent<IAInputHandler>();
+            inputHandler = null;
         }
        
     }

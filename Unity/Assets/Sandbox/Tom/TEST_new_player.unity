@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: The Bad Guy
-  life: 10
+  life: 500
   isAlive: 1
   root: {fileID: 6878860387139817310}
 --- !u!114 &1230041646 stripped
@@ -3441,6 +3441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1603904540229348499}
+  - component: {fileID: 2545396323287290215}
   m_Layer: 0
   m_Name: pt_muzzleFX
   m_TagString: Untagged
@@ -3448,6 +3449,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2545396323287290215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2545396323287290214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30f9305785d5e84a91ee9aeaffd9887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1476937047}
+  showRaycast: 1
+  onTargetColor: {r: 1, g: 0, b: 0, a: 1}
+  outTargetColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  scope: 100
 --- !u!4 &2617358666806581628
 Transform:
   m_ObjectHideFlags: 0
@@ -6642,7 +6660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6efc359a1fa9bfd45bad5d28f44a2c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 50
+  capacity: 500
   normalResource: {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef, type: 2}
   printDebug: 0
 --- !u!4 &8656684959795334180
@@ -6799,7 +6817,7 @@ GameObject:
   - component: {fileID: 9111890153447323932}
   - component: {fileID: 8642339660403407332}
   m_Layer: 0
-  m_Name: StVictoria
+  m_Name: StVictoria_IA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6937,4 +6955,4 @@ MonoBehaviour:
   inputHandler: {fileID: 0}
   IA: 1
   iaInputHandler: {fileID: 6878860387139817311}
-  raycastReticle: {fileID: 1949351325}
+  raycastReticle: {fileID: 2545396323287290215}
