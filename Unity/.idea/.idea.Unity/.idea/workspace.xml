@@ -20,16 +20,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Prefabs/HUD.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Player/Scripts/old/PlayerStats.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Weapons/Gun/Scripts/Container.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Player/Scripts/MinerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Entities/old/EnemyComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Camera/Scripts/CameraAnimationEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game logic/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Prefabs/HUD.prefab" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Weapons/Gun/Scripts/Container.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthPoint.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Entities/Scripts/Pool/Pool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Scripts/LifeGauge.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game logic/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Weapons/Gun/Scripts/GunController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Scripts/Gauge.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -38,9 +41,10 @@
         <option value="$PROJECT_DIR$/Assets/UI/HUD/Scripts/HP/HealthPoint.cs" />
         <option value="$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthPoint.cs" />
         <option value="$PROJECT_DIR$/Assets/Weapons/Gun/Scripts/Container.cs" />
-        <option value="$PROJECT_DIR$/Assets/Player/Scripts/old/PlayerStats.cs" />
         <option value="$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthBar.cs" />
         <option value="$PROJECT_DIR$/Assets/Game logic/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Camera/Scripts/CameraAnimationEventHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Player/Scripts/old/PlayerStats.cs" />
       </list>
     </option>
   </component>
@@ -104,7 +108,7 @@
       <workItem from="1584291982285" duration="1547000" />
       <workItem from="1584391255684" duration="8802000" />
       <workItem from="1585831798239" duration="591000" />
-      <workItem from="1586118611350" duration="4175000" />
+      <workItem from="1586118611350" duration="4755000" />
     </task>
     <servers />
   </component>

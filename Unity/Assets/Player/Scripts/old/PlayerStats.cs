@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public Action<int, Vector3, ResourceType> hurt;
     public Action<int> heal;
     public Action<bool> die;
-    private bool invincible = false;
+    public bool invincible = true;
     private void Awake()
     {
         life = maxLife;

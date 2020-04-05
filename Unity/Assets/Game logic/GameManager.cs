@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
     void LoadLevel(string path)
     {          
         SceneManager.LoadScene(path);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void StartNewGame()
