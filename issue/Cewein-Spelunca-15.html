@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.emoji.js"></script>
+    <title>Gun gauge doesn&#x27;t display the good amount of resource.</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <p>
+          <span class="badge open">open</span>
+          <span class="url">Cewein/Spelunca#15</span>
+        </p>
+        <h1>Gun gauge doesn&#x27;t display the good amount of resource.</h1>
+      </header>
+      <div class="comments">
+        <div class="comment">
+          <div class="meta">
+            <a class="person" href="https://github.com/KrankerApfel">KrankerApfel</a>
+            <time>2020-2-22</time>
+          </div>
+          <div class="body">
+            <p>The gun resource gauge doesn&#39;t display the good information.</p>
+<p>1 ) When a resource is empty, the GunLoader switch to normal type but the gauge color doesn&#39;t change.
+2 ) When we shoot, the gauge filled amount decrease. But if we switch to another resource and then go back to it, the gauge is full whereas  gun current resource quantity isn&#39;t at it maxium. </p>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.comment').each(function(i, d){
+          $(d).emoji()
+        })
+      })
+    </script>
+
+  </body>
+</html>

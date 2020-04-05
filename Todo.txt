@@ -1,0 +1,23 @@
+For the alpha release :
+
+World generation :
+- Compute shader for marching cube algorythm
+- Triplanar mapping for texturing the caves
+- biomes
+- world construction and destruction
+- spawn of ores inside the cave system
+- better spawn
+- better ends zone
+- portals ??? (maybe)
+
+Graphics :
+- sonar model and shader
+- UI for direction 
+
+Entities:
+- Attacking jump
+- Death effects
+- Wall jumping to exit local minimum
+
+Gameplay:
+- Grappling hook
