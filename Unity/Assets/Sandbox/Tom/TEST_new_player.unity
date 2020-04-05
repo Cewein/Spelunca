@@ -474,6 +474,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4960815634682092114}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &271341698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5484596039396800788, guid: c7f4ea9f3479a324292c7f522d40fb63,
+    type: 3}
+  m_PrefabInstance: {fileID: 711560069903080095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &469107957
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,29 +852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96938d5bfebc60447b292326846c0c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1090282947 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1105884406101094885, guid: c7f4ea9f3479a324292c7f522d40fb63,
-    type: 3}
-  m_PrefabInstance: {fileID: 711560069903080095}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1090282950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090282947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b38f6aa5e6387f64780cea0c783160a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gauge: {fileID: 522694722}
-  bossHUDRoot: {fileID: 2037553571}
-  boss: {fileID: 1160891395}
-  playerTransform: {fileID: 4960815634682092117}
-  text: {fileID: 1846844315}
 --- !u!1 &1108912678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,6 +1663,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 711560069903080095}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2037553577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037553571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38f6aa5e6387f64780cea0c783160a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gauge: {fileID: 522694722}
+  bossHUDRoot: {fileID: 271341698}
+  boss: {fileID: 1160891395}
+  playerTransform: {fileID: 4960815634682092117}
+  text: {fileID: 1846844315}
 --- !u!1 &2064858398
 GameObject:
   m_ObjectHideFlags: 0

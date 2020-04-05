@@ -9,14 +9,28 @@ public class BossHUD : MonoBehaviour
    public bossScript boss;
    public Transform playerTransform;
    public Text text;
-
+   private bool ok = true;
    private void Start()
    {
       text.text = boss.blaze;
    }
 
+   private void Update()
+   {
+      try
+      {
+         bossHUDRoot.SetActive(Vector3.Distance(boss.gameObject.transform.position, playerTransform.position) < 18);
+
+      }
+      catch (MissingReferenceException e)
+      {
+         bossHUDRoot.SetActive(false);
+         ok = false;
+      }
+   }
+
    private void LateUpdate()
    {
-      gauge.fillAmount = boss.life / 100;
+      if(ok) gauge.fillAmount = boss.life / 100;
    }
 }
