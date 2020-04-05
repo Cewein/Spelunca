@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 711560070411958150}
   - component: {fileID: 711560070411958151}
   - component: {fileID: 8073892672998829328}
+  - component: {fileID: 2907541405951973123}
   m_Layer: 5
   m_Name: GameHUD
   m_TagString: Untagged
@@ -586,6 +587,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 854650abbbea3844a8772f2184e14a01, type: 2}
   - {fileID: 11400000, guid: b650a57b158f6864aa3497a3b93bf6d6, type: 2}
   - {fileID: 11400000, guid: 031520e7050ce574d99c956b0aeec5a9, type: 2}
+--- !u!114 &2907541405951973123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711560070411958152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38f6aa5e6387f64780cea0c783160a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gauge: {fileID: 2788343811018467949}
+  bossHUDRoot: {fileID: 5484596039396800788}
+  boss: {fileID: 0}
+  playerTransform: {fileID: 0}
+  text: {fileID: 8730744921152539685}
 --- !u!1 &711560070569919010
 GameObject:
   m_ObjectHideFlags: 0
