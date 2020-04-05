@@ -2,7 +2,7 @@
 
 public class bossScript : MonoBehaviour, IDamageable
 {
-    public string name = "The Bad Guy";
+    public string blaze = "The Bad Guy";
     public float life = 50;
     public bool isAlive = true;
     private float deathTime = 5f;
