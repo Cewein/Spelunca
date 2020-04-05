@@ -5660,7 +5660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 10
   timeBetweenShoot: 1
-  rotationSharpness: 5
+  rotationSharpness: 2.5
   player: {fileID: 4960815634682092117}
 --- !u!1 &6879672433376151631
 GameObject:
