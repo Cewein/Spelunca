@@ -36,6 +36,8 @@ public class chunk : MonoBehaviour
         //the data stay on the gpu with the compute buffer
         DensityGenerator.find(pointsBuffer,size + 1, pos - Vector3.one, densityShader);
 
+        pointsBuffer.GetData(dataArray);
+
         //create the mesh on the gpu
 
         //set the conteur to 0 and pass value

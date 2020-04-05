@@ -90,6 +90,7 @@ public class DensityGenerator
         densityShader.SetBuffer(0, "points", pointsBuffer);
         densityShader.SetInt("numPointAxis", size);
         densityShader.SetVector("chunkPos", chunkPos);
+        densityShader.SetVector("chunkCoord", (chunkPos + Vector3.one) / (size - 1));
 
         densityShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
 

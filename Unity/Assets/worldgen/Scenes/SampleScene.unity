@@ -333,7 +333,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 596538675}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -797,9 +797,9 @@ MonoBehaviour:
   MeshGeneratorShader: {fileID: 7200000, guid: 3a3b046f8a188de428720dce66733b07, type: 3}
   player: {fileID: 596538679}
   chunkSize: 16
-  viewRange: 5
+  viewRange: 10
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
-  isoLevel: 0.512
+  isoLevel: 0.35
   boss: {fileID: 704679573}
 --- !u!4 &1869160575
 Transform:
