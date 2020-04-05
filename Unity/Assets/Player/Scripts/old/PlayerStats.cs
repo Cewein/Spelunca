@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IDamageable
 {
     [Tooltip("Player maximum life amount.")][SerializeField]
     private int maxLife = 100;
@@ -40,5 +40,10 @@ public class PlayerStats : MonoBehaviour
     {
         die?.Invoke(isDie);
         life = 0;
+    }
+
+    public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
+    {
+        SetDamage((int) damage, Vector3.forward ,type);
     }
 }

@@ -7,7 +7,9 @@ public class GunController : MonoBehaviour
 
     [Header("Linked Objects")] [SerializeField]
     private MinerInputHandler inputHandler;
-    
+
+    public bool IA = false;
+    public IAInputHandler iaInputHandler;
     [Header("Raycast")]
     [Tooltip("The reticle that perform raycast.")] [SerializeField]
     private Raycast raycastReticle = null; // TODO : le récupérer boudiouuuuu !!!! mais ça va changer la gestion des reticles de la HUD alors je fait après
@@ -31,17 +33,36 @@ public class GunController : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.visible = false;
-        trigger += (down,held,up) => Trigger(down, held, up);
-        magazine = GetComponentInChildren<GunLoader>();
-        inputHandler = GetComponentInParent<MinerInputHandler>();
+        if (!IA)
+        {
+            Cursor.visible = false;
+            trigger += Trigger;
+            magazine = GetComponentInChildren<GunLoader>();
+            inputHandler = GetComponentInParent<MinerInputHandler>();
+        }
+        else
+        {
+            trigger += Trigger;
+            magazine = GetComponentInChildren<GunLoader>();
+            iaInputHandler = GetComponentInParent<IAInputHandler>();
+        }
+       
     }
 
     private void Update()
     {
-        isShooting(inputHandler.isFiringDown(),inputHandler.isFiringHeld(), inputHandler.isFiringUp());
-        isAiming(inputHandler.isAiming(true));
-        isReloading(inputHandler.isReloading());
+        if (!IA)
+        {
+            isShooting(inputHandler.isFiringDown(),inputHandler.isFiringHeld(), inputHandler.isFiringUp());
+            isAiming(inputHandler.isAiming(true));
+            isReloading(inputHandler.isReloading());
+        }
+        else
+        {
+            isShooting(iaInputHandler.isFiringDown(),iaInputHandler.isFiringHeld(), iaInputHandler.isFiringUp());
+            isAiming(iaInputHandler.isAiming(true));
+            isReloading(iaInputHandler.isReloading());
+        }
     }
 
     private void isShooting(bool down, bool held, bool up)
