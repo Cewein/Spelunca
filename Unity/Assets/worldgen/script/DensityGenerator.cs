@@ -92,6 +92,9 @@ public class DensityGenerator
         densityShader.SetVector("chunkPos", chunkPos);
         densityShader.SetVector("chunkCoord", (chunkPos + Vector3.one) / (size - 1));
 
+        densityShader.SetVector("playerSpawn", playerSpawn);
+        densityShader.SetVector("endZone", endZone);
+
         densityShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
 
     }
