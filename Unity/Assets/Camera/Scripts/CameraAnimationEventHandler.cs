@@ -4,12 +4,12 @@ public class CameraAnimationEventHandler : MonoBehaviour
 {
     [Header("Configuration")] [Tooltip("The camera animator.")] [SerializeField]
     private Animator animator = null;
-    private MinerController minerController = null;
+    private MinerInputHandler inputHandler = null;
     private void Awake()
     {
-        minerController = GetComponentInParent<MinerController>();
+        inputHandler = GetComponentInParent<MinerInputHandler>();
         animator = GetComponent<Animator>();
-        minerController.run += isRunning => { animator.SetBool("isRunning", isRunning); };
-        minerController.jump += isJumping => { animator.SetBool("isJumping", isJumping); };
+        animator.SetBool("isRunning", inputHandler.isRunning()); 
+        animator.SetBool("isJumping", inputHandler.isJumping()); 
     }
 }

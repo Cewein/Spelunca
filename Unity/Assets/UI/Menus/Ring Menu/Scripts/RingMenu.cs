@@ -15,7 +15,8 @@ public class RingMenu : MonoBehaviour
    private RingMenu Parent;
    private int activeElement;
    private ResourceType choosenType;
-   void Start()
+   private bool run = false;
+   void Awake()
     {
         var stepLength = 360f / Data.Elements.Length;
         var iconDist = Vector3.Distance(RingCakePiecePrefab.Icon.transform.position, RingCakePiecePrefab.CakePiece.transform.position);
@@ -39,26 +40,35 @@ public class RingMenu : MonoBehaviour
             //set icon
             Pieces[i].Icon.transform.localPosition = Pieces[i].CakePiece.transform.localPosition + Quaternion.AngleAxis(i * stepLength, Vector3.forward) * Vector3.up * iconDist;
             Pieces[i].Icon.sprite = Data.Elements[i].Icon;
-
+            
+            //set data
+            Pieces[i].Data = Data.Elements[i];
         }
     }
 
-    public void SetActive(bool isActive)
-    {
-        callback?.Invoke(Data.Elements[activeElement].Type);
-        Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
-        gameObject.SetActive(isActive);
+  
+
+   public void SetActive(bool isActive)
+   {
+       gameObject.SetActive(isActive);
+       Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+       if (!isActive) return;
+        callback?.Invoke(Pieces[activeElement].Data.Type);
+        run = isActive;
     }
     private void Update()
     {
-
-        var stepLength = 360f / Data.Elements.Length;
+        if (!run) return;
+        var stepLength = 360f / Pieces.Length;
         var mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - transform.position, Vector3.forward) + stepLength / 2f);
         activeElement = (int)(mouseAngle / stepLength);
-        for (int i = 0; i < Data.Elements.Length; i++)
+        for (int i = 0; i < Pieces.Length; i++)
         {
-            Pieces[i].CakePiece.color = i == activeElement+1  ? new Color(1f, 1f, 1f, 0.75f) : new Color(1f, 1f, 1f, 0.5f);
+            int j = (i + 1) % Pieces.Length;
+            Pieces[j].CakePiece.color = i == activeElement  ? new Color(1f, 1f, 1f, 0.75f) : new Color(1f, 1f, 1f, 0.5f);
+    
         }
+
     }
 
     private float NormalizeAngle(float a) => (a + 360f) % 360f;

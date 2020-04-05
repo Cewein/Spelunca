@@ -12,7 +12,8 @@ public class MenusManager : MonoBehaviour
     [Tooltip("The input to display resource magazine selection menu.")][SerializeField]
     private string resourceLoaderSelectionInput = "ResourceSelection";
 
-    [Header("Objects linked")] [Tooltip("The gun magazine.")] [SerializeField]
+    [Header("Objects linked")]
+    [Tooltip("The gun magazine.")] [SerializeField]
     private GunLoader gunMagazine;
     public Resource[] list;
 
@@ -25,9 +26,8 @@ public class MenusManager : MonoBehaviour
     }
 
 
-
-    void Update()
+    private void Update()
     {
-        resourceLoaderSelectionMenu.SetActive(Input.GetButton("ResourceSelection"));
+        resourceLoaderSelectionMenu.SetActive(Input.GetButton(resourceLoaderSelectionInput));
     }
 }

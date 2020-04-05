@@ -4,41 +4,28 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     #region SerializeFields ==========
-    
-    [Header("Inputs")]
-    
-    [Tooltip("The fire input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
-    private String fireInputName = "Fire";
-    
-    [Tooltip("The aim input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
-    private String aimInputName = "Aim";
-    
-    [Tooltip("The reload input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
-    private String reloadInputName = "Reload";
-    
-    [Header("Effects")]
-    
-    [Tooltip("The default damage effect particle system")][SerializeField] 
-    private ParticleSystem damageEffect = null;
-    [Tooltip("The muzzle flash particle system")] [SerializeField]
-    private ParticleSystem  muzzleFlashEffect = null;
-    [Tooltip("The muzzle flash spawn position.")] [SerializeField]
-    private Transform muzzleFlashTransform = null;
-    
+
+    [Header("Linked Objects")] [SerializeField]
+    private MinerInputHandler inputHandler;
+
+    public bool IA = false;
+    public IAInputHandler iaInputHandler;
     [Header("Raycast")]
-    
     [Tooltip("The reticle that perform raycast.")] [SerializeField]
-    private Raycast raycastReticle = null;
+    private Raycast raycastReticle = null; // TODO : le récupérer boudiouuuuu !!!! mais ça va changer la gestion des reticles de la HUD alors je fait après
 
     private GunLoader magazine;
-    
+    private bool canAttack = true;
+    public RaycastHit Hit { get =>  raycastReticle.Hit; }
+
     #endregion ==========
     
     #region Action ==========
 
-    public event Action<bool> shoot;
+    public event Action<bool,bool,bool> trigger;
     public event Action<bool> aim;
     public event Action<bool> reload;
+    
 
     #endregion ==========
     
@@ -46,29 +33,48 @@ public class GunController : MonoBehaviour
 
     private void Awake()
     {
-        muzzleFlashEffect = Instantiate(muzzleFlashEffect, muzzleFlashTransform.position, transform.rotation, transform);
-        Cursor.visible = false;
-        shoot += isShooting => fire(isShooting);
-        magazine = GetComponentInChildren<GunLoader>();
+        if (!IA)
+        {
+            Cursor.visible = false;
+            trigger += Trigger;
+            magazine = GetComponentInChildren<GunLoader>();
+            inputHandler = GetComponentInParent<MinerInputHandler>();
+            iaInputHandler = null;
+        }
+        else
+        {
+            trigger += Trigger;
+            magazine = GetComponentInChildren<GunLoader>();
+            iaInputHandler = GetComponentInParent<IAInputHandler>();
+            inputHandler = null;
+        }
+       
     }
 
     private void Update()
     {
-        isShooting(Input.GetButtonDown(fireInputName));
-        isAiming(Input.GetButton(aimInputName));
-        isReloading(Input.GetButtonDown(reloadInputName));
+        if (!IA)
+        {
+            isShooting(inputHandler.isFiringDown(),inputHandler.isFiringHeld(), inputHandler.isFiringUp());
+            isAiming(inputHandler.isAiming(true));
+            isReloading(inputHandler.isReloading());
+        }
+        else
+        {
+            isShooting(iaInputHandler.isFiringDown(),iaInputHandler.isFiringHeld(), iaInputHandler.isFiringUp());
+            isAiming(iaInputHandler.isAiming(true));
+            isReloading(iaInputHandler.isReloading());
+        }
     }
 
-    private bool isShooting(bool isShooting)
+    private void isShooting(bool down, bool held, bool up)
     {
-        shoot?.Invoke(isShooting);
-        return isShooting;
+        trigger?.Invoke(down, held, up);
     }
 
-    private bool isAiming(bool isAiming)
+    private void isAiming(bool isAiming)
     {
         aim?.Invoke(isAiming);
-        return isAiming;
     }
     
     private bool isReloading(bool isReloading)
@@ -77,25 +83,20 @@ public class GunController : MonoBehaviour
         return isReloading;
     }
 
-    private bool fire(bool isShooting)
+    private void Trigger(bool down, bool held, bool up)
     {
-        if (isShooting && GetComponent<Animator>().GetBool("canAttack"))
-        {
-            muzzleFlashEffect.Play();
-            try
-            {
-                raycastReticle.PerformRaycast();
-                raycastReticle.Hit.transform.gameObject.GetComponent<IDamageable>().setDamage(raycastReticle.Hit, damageEffect, 5, magazine.CurrentResource.Type);
-            }
-            catch (NullReferenceException e){}
-        }
+        GunArtefact artefact = GetComponentInChildren<GunArtefact>();
+        if (((artefact.ShootMode != ShootingMode.AUTO) || !held) &&
+            ((artefact.ShootMode != ShootingMode.MANUAL) || !down) &&
+            (((artefact.ShootMode != ShootingMode.CHARGE) || !up) || !canAttack)) return;
+        try { raycastReticle.PerformRaycast(); }
+        catch (NullReferenceException e){}
 
-        return isShooting && GetComponent<Animator>().GetBool("canAttack");
     }
 
     private void onIdle()
     {
-        GetComponent<Animator>().SetBool("canAttack",true);
+        canAttack = true;
     }
    
     
