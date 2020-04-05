@@ -464,9 +464,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcesStock: {fileID: 11400000, guid: 4684fc6594c338d47b7e119ac52bb1cb, type: 2}
   consumableStock: {fileID: 11400000, guid: 255fe4b12e9fc294dab6748cc99a112e, type: 2}
-  player: {fileID: 0}
-  gameOverScreen: {fileID: 0}
-  mainMenuPath: 
+  player: {fileID: 4960815634682092115}
+  gameOverScreen: {fileID: 640728808}
+  mainMenuPath: Assets/Sandbox/Game/Menu/MainMenu.unity
   gameScenePath: 
 --- !u!4 &253144984 stripped
 Transform:
@@ -624,6 +624,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &640728808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8645740842696408011, guid: c7f4ea9f3479a324292c7f522d40fb63,
+    type: 3}
+  m_PrefabInstance: {fileID: 711560069903080095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,6 +1634,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 711560071311288066, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1476937047}
     - target: {fileID: 2907541405951973123, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: boss
@@ -1748,11 +1759,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameHUD
       objectReference: {fileID: 0}
-    - target: {fileID: 711560071311288066, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 1476937047}
     - target: {fileID: 8073892672998829328, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: gunMagazine
@@ -2573,11 +2579,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2338222191191406569, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_Name
-      value: FPS_MinerPlayer
-      objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: weaponParent
@@ -2652,6 +2653,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ForceIntoRT
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338222191191406569, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_Name
+      value: FPS_MinerPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 105404077034488235, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -2795,6 +2801,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
+--- !u!114 &4960815634682092115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8499784402384746599, guid: 03e5fa6798ff274469d7558ea0d50d23,
+    type: 3}
+  m_PrefabInstance: {fileID: 4960815634682092114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6167ba28a232b444ba017189514e3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4960815634682092117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4447914795741383104, guid: 03e5fa6798ff274469d7558ea0d50d23,
