@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc3d38ba-b82a-41d0-8db0-7a9b8666fa31" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/UI/HUD/HP/Animations/Glow-hit.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/HUD/HP/Animations/Glow-hit.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI/HUD/HP/Animations/Inside-hit.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/HUD/HP/Animations/Inside-hit.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +24,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Entities/Scripts/Pool/Pool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Prefabs/HUD.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Scripts/LifeGauge.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Player/Scripts/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Player/Scripts/MinerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthPoint.cs" root0="FORCE_HIGHLIGHTING" />
@@ -93,6 +97,7 @@
       <workItem from="1583874936309" duration="7714000" />
       <workItem from="1584291982285" duration="1547000" />
       <workItem from="1584391255684" duration="8802000" />
+      <workItem from="1585831798239" duration="591000" />
     </task>
     <servers />
   </component>
