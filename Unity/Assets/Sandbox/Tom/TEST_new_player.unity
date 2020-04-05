@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: The Bad Guy
-  life: 500
+  life: 250
   isAlive: 1
   root: {fileID: 6878860387139817310}
 --- !u!114 &1230041646 stripped
@@ -3461,7 +3461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30f9305785d5e84a91ee9aeaffd9887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1476937047}
+  cam: {fileID: 0}
   showRaycast: 1
   onTargetColor: {r: 1, g: 0, b: 0, a: 1}
   outTargetColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
