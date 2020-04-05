@@ -18,6 +18,12 @@
             <e p="SimpleCameraController.cs" t="Include" />
           </e>
         </e>
+        <e p="Consumable" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="Consumable.cs" t="Include" />
+            <e p="ConsumableStock.cs" t="Include" />
+          </e>
+        </e>
         <e p="Entities" t="Include">
           <e p="old" t="Include">
             <e p="EnemyComponent.cs" t="Include" />
@@ -26,13 +32,9 @@
             <e p="Components" t="Include">
               <e p="SpiderComponent.cs" t="Include" />
             </e>
-            <e p="ECSEntitiesGenerator.cs" t="Include" />
             <e p="EntityGenerator.cs" t="Include" />
             <e p="Pool" t="Include">
               <e p="Pool.cs" t="Include" />
-            </e>
-            <e p="Systems" t="Include">
-              <e p="SpiderSystem.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -53,25 +55,26 @@
         </e>
         <e p="Player" t="Include">
           <e p="Scripts" t="Include">
+            <e p="Foots.cs" t="Include" />
             <e p="MinerController.cs" t="Include" />
-            <e p="OrientationController.cs" t="Include" />
-            <e p="PlayerController.cs" t="Include" />
-            <e p="PlayerPhysic.cs" t="Include" />
-            <e p="PlayerStats.cs" t="Include" />
+            <e p="MinerInputHandler.cs" t="Include" />
+            <e p="old" t="Include">
+              <e p="Foots.cs" t="Include" />
+              <e p="MinerControllerOLD.cs" t="Include" />
+              <e p="OrientationController.cs" t="Include" />
+              <e p="PlayerController.cs" t="Include" />
+              <e p="PlayerPhysic.cs" t="Include" />
+              <e p="PlayerStats.cs" t="Include" />
+            </e>
           </e>
         </e>
         <e p="Resources (types)" t="Include">
           <e p="Resource.cs" t="Include" />
+          <e p="ResourceCollectible.cs" t="Include" />
           <e p="ResourcesStock.cs" t="Include" />
         </e>
         <e p="Sandbox" t="Include">
           <e p="Antoine" t="Include">
-            <e p="ECS Tuto" t="Include">
-              <e p="Boot.cs" t="Include" />
-              <e p="ElevateSystem.cs" t="Include" />
-              <e p="MoveSpeedComponent.cs" t="Include" />
-              <e p="RotateComponent.cs" t="Include" />
-            </e>
             <e p="Scenes" t="Include">
               <e p="Test rotation" t="Include">
                 <e p="TestRotation.cs" t="Include" />
@@ -108,6 +111,12 @@
             </e>
           </e>
           <e p="Menus" t="Include">
+            <e p="Line Menu" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="LineMenu.cs" t="Include" />
+                <e p="LinePiece.cs" t="Include" />
+              </e>
+            </e>
             <e p="Ring Menu" t="Include">
               <e p="Scripts" t="Include">
                 <e p="Ring.cs" t="Include" />
@@ -127,19 +136,36 @@
         <e p="Utilities" t="Include">
           <e p="AutoDestroy.cs" t="Include" />
           <e p="DDOL.cs" t="Include" />
+          <e p="ICollectible.cs" t="Include" />
           <e p="IDamageable.cs" t="Include" />
+          <e p="IPickable.cs" t="Include" />
           <e p="ParticleSystemAutoDestroy.cs" t="Include" />
           <e p="SingletonScriptableObject.cs" t="Include" />
         </e>
         <e p="Weapons" t="Include">
+          <e p="CrosshairManager.cs" t="Include" />
           <e p="Gun" t="Include">
             <e p="Scripts" t="Include">
+              <e p="Ammo.cs" t="Include" />
+              <e p="Container.cs" t="Include" />
               <e p="GunAnimationEventHandler.cs" t="Include" />
+              <e p="GunArtefact.cs" t="Include" />
               <e p="GunController.cs" t="Include" />
               <e p="GunLoader.cs" t="Include" />
               <e p="Raycast.cs" t="Include" />
             </e>
+            <e p="shader" t="Include">
+              <e p="Fluid.shader" t="Include" />
+              <e p="PipeFluid.shader" t="Include" />
+            </e>
           </e>
+          <e p="Pickaxe" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="PickaxeAnimationEventHandler.cs" t="Include" />
+              <e p="PickaxeController.cs" t="Include" />
+            </e>
+          </e>
+          <e p="SwitchWeapons.cs" t="Include" />
         </e>
         <e p="worldgen" t="Include">
           <e p="script" t="Include">
