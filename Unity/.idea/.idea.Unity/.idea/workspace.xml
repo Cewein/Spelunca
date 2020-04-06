@@ -4,9 +4,9 @@
     <list default="true" id="cc3d38ba-b82a-41d0-8db0-7a9b8666fa31" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Weapons/Gun/Scripts/Fluid.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Weapons/Gun/Scripts/Fluid.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Entities/Spider/Prefabs/Spider.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Entities/Spider/Prefabs/Spider.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Entities/old/EnemyComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Entities/old/EnemyComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sandbox/Antoine/Test New Player/TestSceneNewPlayer.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sandbox/Antoine/Test New Player/TestSceneNewPlayer.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,23 +18,34 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+<<<<<<< Updated upstream
     <setting file="file://$PROJECT_DIR$/Assets/Player/Scripts/old/PlayerStats.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Player/Scripts/MinerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Entities/old/EnemyComponent.cs" root0="FORCE_HIGHLIGHTING" />
 <<<<<<< HEAD
     <setting file="file://$PROJECT_DIR$/Assets/Entities/Scripts/Pool/Pool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Weapons/Gun/Shader/Fluid.shader" root0="FORCE_HIGHLIGHTING" />
+=======
+>>>>>>> Stashed changes
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Prefabs/HUD.prefab" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Entities/Scripts/EntityGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Entities/Scripts/Loot.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Weapons/Gun/Shader/Fluid.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Weapons/Gun/Shader/PipeFluid.shader" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Scripts/LifeGauge.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Player/Scripts/MinerController.cs" root0="FORCE_HIGHLIGHTING" />
+<<<<<<< Updated upstream
 =======
     <setting file="file://$PROJECT_DIR$/Assets/Camera/Scripts/CameraAnimationEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game logic/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Prefabs/HUD.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Weapons/Gun/Scripts/Container.cs" root0="FORCE_HIGHLIGHTING" />
 >>>>>>> alpha
+=======
+    <setting file="file://$PROJECT_DIR$/Assets/Entities/old/EnemyComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthBar.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/Scripts/LifeGauge.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Entities/Scripts/Pool/Pool.cs" root0="FORCE_HIGHLIGHTING" />
+>>>>>>> Stashed changes
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthPoint.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Entities/Scripts/Pool/Pool.cs" root0="FORCE_HIGHLIGHTING" />
@@ -45,11 +56,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Entities/old/EnemyComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/UI/HUD/Scripts/HP/HealthPoint.cs" />
         <option value="$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthPoint.cs" />
 <<<<<<< HEAD
         <option value="$PROJECT_DIR$/Assets/Weapons/Gun/Shader/PipeFluid.shader" />
+<<<<<<< Updated upstream
 =======
         <option value="$PROJECT_DIR$/Assets/Weapons/Gun/Scripts/Container.cs" />
         <option value="$PROJECT_DIR$/Assets/UI/HUD/HP/Scripts/HealthBar.cs" />
@@ -57,6 +68,10 @@
         <option value="$PROJECT_DIR$/Assets/Camera/Scripts/CameraAnimationEventHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Player/Scripts/old/PlayerStats.cs" />
 >>>>>>> alpha
+=======
+        <option value="$PROJECT_DIR$/Assets/Entities/Scripts/Loot.cs" />
+        <option value="$PROJECT_DIR$/Assets/Entities/old/EnemyComponent.cs" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -122,9 +137,13 @@
       <workItem from="1585831798239" duration="591000" />
 <<<<<<< HEAD
       <workItem from="1586114331935" duration="3692000" />
+<<<<<<< Updated upstream
 =======
       <workItem from="1586118611350" duration="4755000" />
 >>>>>>> alpha
+=======
+      <workItem from="1586157939979" duration="3763000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

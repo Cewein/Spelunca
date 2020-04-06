@@ -22,6 +22,10 @@ public class EnemyComponent : MonoBehaviour, IDamageable
     public EnemyBehaviourState state;
     private Vector3 target = Vector3.zero; 
     
+    //LOOT
+    [Header("Loot")] 
+    [Header("The script that will loot items.")] 
+    private Loot loot;
     //WALK BEHAVIOUR
     [Header("Wall climbing behaviour parameters")] 
     [Tooltip("Distance from the center point up to which the Enemy is able to detect the presence of a ground surface.")] [SerializeField]
@@ -90,6 +94,11 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         checkDistanceFromPlayer();//checking if the entity is too far or too close. If so, it wil change it's state
         if (state != EnemyBehaviourState.Disabled)
         {
+            if (HP <= 0)//mort de l'araignée
+            {
+                state = EnemyBehaviourState.Disabled;
+                loot.lootItems();
+            }
             //tries to hold to any cave surface. if not possible, the entity is considered falling.
             wallClimbBehaviour();
             if (!isGrounded)//isOnGround is set to false if no surface is detected from walkClimbBehaviour().
@@ -126,20 +135,9 @@ public class EnemyComponent : MonoBehaviour, IDamageable
                     player.GetComponent<PlayerStats>().SetDamage(10, Vector3.zero);
                 }
             }
-
-            if (HP <= 0)
-            {
-                state = EnemyBehaviourState.Disabled;
-            }
-           
         }
         
         
-    }
-
-    public void hit(float damages)
-    {
-        HP -= damages;
     }
 
 
