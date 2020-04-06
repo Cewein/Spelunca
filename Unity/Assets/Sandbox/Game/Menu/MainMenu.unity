@@ -680,10 +680,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourcesStock: {fileID: 11400000, guid: 4684fc6594c338d47b7e119ac52bb1cb, type: 2}
+  consumableStock: {fileID: 11400000, guid: 255fe4b12e9fc294dab6748cc99a112e, type: 2}
   player: {fileID: 0}
   gameOverScreen: {fileID: 0}
+  winScreen: {fileID: 0}
   mainMenuPath: MainMenu
-  gameScenePath: MainGame
+  gameScenePath: Assets/Sandbox/Game/TEST_GAMEPLAY.unity
+  boss: {fileID: 0}
 --- !u!1 &1034848140
 GameObject:
   m_ObjectHideFlags: 0

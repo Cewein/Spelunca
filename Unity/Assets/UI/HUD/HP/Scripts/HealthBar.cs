@@ -56,7 +56,10 @@ public class HealthBar : MonoBehaviour
         int toRemove = amount;
         while (toRemove > 0)
         {
-            points[HP - 1].hit = true;
+            if (HP - 1 > 10)
+            {
+                points[HP - 1].hit = true;
+            }
             toRemove -= 1;
             HP -= 1;
         }

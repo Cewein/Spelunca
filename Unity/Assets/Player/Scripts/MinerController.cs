@@ -344,11 +344,11 @@ public class MinerController : MonoBehaviour
     private bool GrapplingHook()
     {
         bool grapplingControl = launchGrapplingHook || minerInputs.isGrappling(); //FIXME: Will be removed
-        if (previousGrappingInput == true && grapplingControl == false)//Le joueur a relaché la touche, on doit arreter le grappin
+        if (previousGrappingInput && grapplingControl == false)//Le joueur a relaché la touche, on doit arreter le grappin
         {
             hook.state = GrapplingHookState.RETRACING;
             
-        }else if (previousGrappingInput == false && grapplingControl == true && hook.state != GrapplingHookState.RETRACING)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
+        }else if (previousGrappingInput == false && grapplingControl  && hook.state != GrapplingHookState.RETRACING)//Le vient d'appuyer sur le bouton, on doit déployer le grappin
         {
             RaycastHit hit;
             if(Physics.Raycast( hook.origin.position,playerCamera.transform.forward,out hit,hook.maxDeployDistance)){

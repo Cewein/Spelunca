@@ -1,6 +1,8 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,9 +14,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     [SerializeField] private PlayerStats player = null;
     [SerializeField] private GameObject gameOverScreen = null;
+    [SerializeField] private GameObject winScreen = null;
     public string mainMenuPath;
     public string gameScenePath;
-
+    private bool playerIsDead = false;
+    private int count = 300;
+    public bossScript boss;
     void Awake()
     {
         DebugResourcesStockNotLoading();
@@ -37,12 +42,30 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        LoadLevel(mainMenuPath);
+        playerIsDead = true;
+    }
+
+    private void Update()
+    {
+        if (boss == null && winScreen !=null)
+        {
+            winScreen.SetActive(true);
+            count--;   
+            if (count<1)LoadLevel(mainMenuPath);
+        }
+
+        if (playerIsDead)
+        {
+            count--;   
+            if (count<1)LoadLevel(mainMenuPath);
+        }
     }
 
     void LoadLevel(string path)
     {          
         SceneManager.LoadScene(path);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void StartNewGame()
