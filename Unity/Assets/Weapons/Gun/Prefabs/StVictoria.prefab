@@ -492,6 +492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8197042478655474662}
+  - component: {fileID: 3838248238355973585}
   m_Layer: 11
   m_Name: "R\xE9servoirs"
   m_TagString: Untagged
@@ -519,6 +520,19 @@ Transform:
   m_Father: {fileID: 8280218019109568679}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 90}
+--- !u!114 &3838248238355973585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3724843618600934299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a881ddf35038847a12ac4c1f9bfec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gl: {fileID: 5296651518196909295}
 --- !u!1 &3852847666827905453
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +922,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 0}
+  IA: 0
+  iaInputHandler: {fileID: 0}
   raycastReticle: {fileID: 0}
 --- !u!114 &5296651518196909295
 MonoBehaviour:
@@ -923,6 +939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capacity: 50
   normalResource: {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef, type: 2}
+  currentResource: {fileID: 0}
   printDebug: 0
 --- !u!1 &5251389325167364567
 GameObject:
@@ -1973,15 +1990,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 727090761632088209}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &2695418755067667473 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3422498366946763904, guid: c31b0791284bd264a994ab30e0989ee0,
-    type: 3}
-  m_PrefabInstance: {fileID: 727090761632088209}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &473197991614838038 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 902415522462561671, guid: c31b0791284bd264a994ab30e0989ee0,
+    type: 3}
+  m_PrefabInstance: {fileID: 727090761632088209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2695418755067667473 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3422498366946763904, guid: c31b0791284bd264a994ab30e0989ee0,
     type: 3}
   m_PrefabInstance: {fileID: 727090761632088209}
   m_PrefabAsset: {fileID: 0}

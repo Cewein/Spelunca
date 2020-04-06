@@ -18,7 +18,7 @@ public class GunLoader : MonoBehaviour
 
     #region Fields ==========
 
-    private Resource currentResource;
+    [HideInInspector] public Resource currentResource;
     private float currentResourceQuantity = 0;
     public bool printDebug = false;
 
