@@ -19,7 +19,6 @@ public class Loot : MonoBehaviour
     public void lootItems()
     {
         Debug.Log("loot !");
-        float z = transform.position.z + lootYOffset;//ca sert a rien de le calculer a chaque item du coup je le met en dehors du for
         Quaternion rot = new Quaternion();
             
         for (int i = 0; i < lootPrefabs.Length; i++)
@@ -30,8 +29,8 @@ public class Loot : MonoBehaviour
                 if (diceThrow <= lootProba[i])
                 {
                     float x = Random.Range(-lootRange, lootRange);
-                    float y = Random.Range(-lootRange, lootRange);
-                    Vector3 position = new Vector3(x, y, z);
+                    float z = Random.Range(-lootRange, lootRange);
+                    Vector3 position = new Vector3(x, lootYOffset, z);
                     Instantiate(lootPrefabs[i], transform.position+position, rot);
                 }
             }

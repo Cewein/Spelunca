@@ -1431,15 +1431,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootPrefabs:
   - {fileID: 4645125752613040503, guid: 0c46f9ead737fed4cbfbfd42ec02293e, type: 3}
-  - {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641, type: 3}
   lootProba:
-  - 0.5
-  - 0.27
+  - 0.05
   lootMaxQuantity:
-  - 3
-  - 7
+  - 2
   lootYOffset: 0.1
-  lootRange: 0.5
+  lootRange: 1
 --- !u!1 &4827385143590811802
 GameObject:
   m_ObjectHideFlags: 0
