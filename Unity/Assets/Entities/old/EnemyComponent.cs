@@ -24,7 +24,7 @@ public class EnemyComponent : MonoBehaviour, IDamageable
     
     //LOOT
     [Header("Loot")] 
-    [Header("The script that will loot items.")] 
+    [Header("The script that will loot items.")] [SerializeField]
     private Loot loot;
     //WALK BEHAVIOUR
     [Header("Wall climbing behaviour parameters")] 

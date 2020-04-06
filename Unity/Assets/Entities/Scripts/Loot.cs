@@ -18,6 +18,7 @@ public class Loot : MonoBehaviour
     // Start is called before the first frame update
     public void lootItems()
     {
+        Debug.Log("loot !");
         float z = transform.position.z + lootYOffset;//ca sert a rien de le calculer a chaque item du coup je le met en dehors du for
         Quaternion rot = new Quaternion();
             
@@ -25,13 +26,13 @@ public class Loot : MonoBehaviour
         {
             for (int j = 0; j < lootMaxQuantity[i]; j++)
             {
-                float diceThrow = Random.Range(0, 1);
+                float diceThrow = Random.Range(0f, 1f);
                 if (diceThrow <= lootProba[i])
                 {
                     float x = Random.Range(-lootRange, lootRange);
                     float y = Random.Range(-lootRange, lootRange);
                     Vector3 position = new Vector3(x, y, z);
-                    Instantiate(lootPrefabs[i], position, rot);
+                    Instantiate(lootPrefabs[i], transform.position+position, rot);
                 }
             }
         }

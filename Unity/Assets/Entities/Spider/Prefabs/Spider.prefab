@@ -1402,6 +1402,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 3365880456402187860}
   player: {fileID: 0}
   state: 1
+  loot: {fileID: 9211645431798112630}
   surfaceDetectionDistance: 0.7
   surfaceDetectionOffset: 0
   avoidanceDistance: 0.1
@@ -1438,7 +1439,7 @@ MonoBehaviour:
   - 3
   - 7
   lootYOffset: 0.1
-  lootRange: 2
+  lootRange: 0.5
 --- !u!1 &4827385143590811802
 GameObject:
   m_ObjectHideFlags: 0
