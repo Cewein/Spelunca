@@ -1264,7 +1264,7 @@ MonoBehaviour:
     type: 3}
   layerToSpawn: Default
   amount: 500
-  radius: 15
+  radius: 1000
   spawnDuration: 3
   player: {fileID: 134861551}
 --- !u!4 &899804503
@@ -1275,7 +1275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899804501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.55, y: -13.91, z: 34.52}
+  m_LocalPosition: {x: 0, y: -90, z: 300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1866,7 +1866,7 @@ MonoBehaviour:
   MeshGeneratorShader: {fileID: 7200000, guid: 3a3b046f8a188de428720dce66733b07, type: 3}
   player: {fileID: 134861552}
   chunkSize: 32
-  viewRange: 4
+  viewRange: 5
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
   isoLevel: 0.15
   boss: {fileID: 1573004006}
