@@ -152,6 +152,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 105404077034488235, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: raycastReticle
+      value: 
+      objectReference: {fileID: 944888912}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: hook
@@ -177,11 +182,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPS_MinerPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 105404077034488235, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: raycastReticle
-      value: 
-      objectReference: {fileID: 944888912}
     - target: {fileID: 3846255216405922929, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: controller
@@ -1244,7 +1244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899804501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.950447, y: -24.992462, z: 46.442772}
+  m_LocalPosition: {x: -2.55, y: -13.91, z: 34.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1496,6 +1496,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: seekGroundScopeAir
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: seekGroundScope
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: weight
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: miner
+      value: 
+      objectReference: {fileID: 134861554}
     - target: {fileID: 2173078109135552581, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
       propertyPath: m_Name
@@ -1576,6 +1601,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 134861552}
+    - target: {fileID: 5896791595679791659, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6596093949ece3a45b48648d493ec967, type: 3}
 --- !u!4 &1573004006 stripped
@@ -1732,13 +1762,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7fd760c78547c4f923befce0084ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  densityShader: {fileID: 7200000, guid: 43ca010cde78eee4cbae15d9c540c5b7, type: 3}
+  MeshGeneratorShader: {fileID: 7200000, guid: 3a3b046f8a188de428720dce66733b07, type: 3}
   player: {fileID: 134861552}
-  chunkSize: 16
+  chunkSize: 32
   viewRange: 4
-  floor: 0.65
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
+  isoLevel: 0.15
   boss: {fileID: 1573004006}
-  octaveNumber: 5
 --- !u!4 &1869160575
 Transform:
   m_ObjectHideFlags: 0

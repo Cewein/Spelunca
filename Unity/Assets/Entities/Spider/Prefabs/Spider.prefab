@@ -1331,6 +1331,7 @@ GameObject:
   - component: {fileID: 1408859327642575332}
   - component: {fileID: 6298268597955169710}
   - component: {fileID: 7519221456394815101}
+  - component: {fileID: 9211645431798112630}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -1396,25 +1397,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHP: 10
-  baseDamage: 1
+  damage: 1
   movingSpeed: 3
-  state: 1
+  meshRenderer: {fileID: 3365880456402187860}
   player: {fileID: 0}
+  state: 1
+  loot: {fileID: 9211645431798112630}
   surfaceDetectionDistance: 0.7
   surfaceDetectionOffset: 0
-  surfaceWalkingHeightOffset: 0.05
-  groundLayer: Default
   avoidanceDistance: 0.1
-  sineScale: 1
-  sineOctaves: 3
-  directionErrorCoeff: 1
-  enemyDetectionDistance: 7
-  outOfRangeDistance: 50
+  groundLayer: Default
+  surfaceWalkingHeightOffset: 0.05
+  noiseScale: 1
+  noiseOctaves: 1
+  directionNoiseCoeff: 1
+  timeBeforeOOB: 3
   proximityOffset: 2
   proximityPrecision: 0.1
   attackProbability: 0.01
-  timeBeforeOOB: 3
-  meshRenderer: {fileID: 3365880456402187860}
+  enemyDetectionDistance: 7
+  outOfRangeDistance: 50
+--- !u!114 &9211645431798112630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561861964029488193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76a3aebc39eee247a0a1ba4e702fc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootPrefabs:
+  - {fileID: 4645125752613040503, guid: 0c46f9ead737fed4cbfbfd42ec02293e, type: 3}
+  - {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641, type: 3}
+  lootProba:
+  - 0.5
+  - 0.27
+  lootMaxQuantity:
+  - 3
+  - 7
+  lootYOffset: 0.1
+  lootRange: 0.5
 --- !u!1 &4827385143590811802
 GameObject:
   m_ObjectHideFlags: 0

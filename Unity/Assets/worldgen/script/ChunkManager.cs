@@ -5,14 +5,21 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
+    //compute shader
+    [Header("Compute shader file")]
+    public ComputeShader densityShader;
+    public ComputeShader MeshGeneratorShader;
 
     //Config
     [Header("Player vision setting")]
     public Transform player;
-    public uint chunkSize;
+    public int chunkSize;
     public uint viewRange = 5;
-    public float floor = 0;
     public GameObject chunk;
+
+    [Header("World setting")]
+    [Range(0,1)]
+    public float isoLevel = 0;
 
     //chunks 
     private Vector3 playerChunk;
@@ -28,27 +35,27 @@ public class ChunkManager : MonoBehaviour
     //frustum cull of the chunks
     Plane[] planes;
     
-
-    [Header("Noise setting")]
-    public uint octaveNumber = 5;
-    
     private void Awake()
     {
+        //init data for runtime
         chunks = new GameObject[viewRange,viewRange,viewRange];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
-        DensityGenerator.octaveNumber = octaveNumber;
-        DensityGenerator.floor = floor;
+
+        //set static variable for the density generator
+        DensityGenerator.isoLevel = isoLevel;
         DensityGenerator.endZone = boss.position;
+        DensityGenerator.playerSpawn = playerSpawn = player.position;
     }
 
     void Start()
     {
+        //get the player chunk
         playerChunk.x = Mathf.Floor(player.position.x / chunkSize);
         playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
-        playerSpawn = player.position;
+        
+        //create chunk (see function below)
         generateChunks();
-
         //for(int i = 0; i < 1500; i++)
         //{
         //    Vector3[] spawnPos = getPositionOnChunks();
@@ -84,18 +91,41 @@ public class ChunkManager : MonoBehaviour
             Time.timeScale = timeScaleTemp;
         }
 
-        if (Input.GetKeyDown(KeyCode.F1))
+        cheat();
+
+            frustumCulling();
+
+    }
+
+    //cheat for moving faster
+    void cheat()
+    {
+        if (true)
         {
-            player.position = playerSpawn;
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                player.position = playerSpawn;
+            }
+
+            if (Input.GetKeyUp(KeyCode.F2))
+            {
+                player.position = new Vector3(boss.position.x, boss.position.y + 30, boss.position.z);
+            }
+
+            if(Input.GetKeyUp(KeyCode.F3))
+            {
+                for (int i = 0; i < 1500; i++)
+                {
+                    Vector3[] spawnPos = getPositionOnChunks();
+                    if (spawnPos[0] != Vector3.zero)
+                    {
+                        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        cube.transform.position = spawnPos[0];
+                        cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
+                    }
+                }
+            }
         }
-
-        if (Input.GetKeyUp(KeyCode.F2))
-        {
-            player.position = new Vector3(boss.position.x, boss.position.y + 30, boss.position.z);
-        }
-
-        frustumCulling();
-
     }
 
     //with a AABB plane we can see if a mesh
@@ -111,6 +141,9 @@ public class ChunkManager : MonoBehaviour
             {
                 for (int z = 0; z < viewRange; z++)
                 {
+                    //here the is two this appening, the first is checking if the chunks is between the planes 
+                    //of the camera frustum and the second is checking if the chunk is near from the player
+                    //the maximum distance is one chunk, if both test fails it hide the chunk
                     if (GeometryUtility.TestPlanesAABB(planes, chunks[x, y, z].GetComponent<Collider>().bounds))
                         chunks[x, y, z].GetComponent<MeshRenderer>().enabled = true;
                     else if (aroundMiddle(x, y, z))
@@ -137,7 +170,8 @@ public class ChunkManager : MonoBehaviour
                 {
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
-                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn);
+                    //Two compute shader are pass
+                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader);
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
@@ -168,7 +202,7 @@ public class ChunkManager : MonoBehaviour
                     else
                     {
                         chunks[x, y, z].transform.position += direction * chunkSize;
-                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn);
+                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader);
                         chunkDictionary.Add(chunks[x, y, z].transform.position / chunkSize, chunks[x, y, z].GetComponent<chunk>().chunkData);
                     }
                 }
@@ -199,7 +233,6 @@ public class ChunkManager : MonoBehaviour
     float hash(Vector3 vec)
     {
         double val = (1299689.0f * Math.Abs(vec.x) + 611953.0f * Math.Abs(vec.y)) / 898067 * Math.Abs(vec.z);
-        print((float)(val - Math.Truncate(val)) - 0.5f);
         return (float)(val - Math.Truncate(val)) - 0.5f;
     }
 
