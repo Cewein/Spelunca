@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Antoine\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Antoine\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Unity.99716440.00" t="ExcludeRecursive" />
-    <e p="D:\0-Workspace\Unity\Projects\Spelunca\Unity" t="IncludeRecursive">
+    <e p="C:\Users\tahin\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\tahin\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Unity.1785504871.00" t="ExcludeRecursive" />
+    <e p="D:\Game dev\Projet annuel\Prog\Spelunca\Unity" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="boss" t="Include">
+          <e p="BossHUD.cs" t="Include" />
           <e p="bossScript.cs" t="Include" />
+          <e p="IAInputHandler.cs" t="Include" />
         </e>
         <e p="Camera" t="Include">
           <e p="Scripts" t="Include">
@@ -148,6 +150,10 @@
             <e p="Scripts" t="Include">
               <e p="Ammo.cs" t="Include" />
               <e p="Container.cs" t="Include" />
+<<<<<<< HEAD
+=======
+              <e p="Fluid.shader" t="Include" />
+>>>>>>> alpha
               <e p="GunAnimationEventHandler.cs" t="Include" />
               <e p="GunArtefact.cs" t="Include" />
               <e p="GunController.cs" t="Include" />
@@ -165,6 +171,15 @@
               <e p="PickaxeController.cs" t="Include" />
             </e>
           </e>
+<<<<<<< HEAD
+=======
+          <e p="Pickaxe" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="PickaxeAnimationEventHandler.cs" t="Include" />
+              <e p="PickaxeController.cs" t="Include" />
+            </e>
+          </e>
+>>>>>>> alpha
           <e p="SwitchWeapons.cs" t="Include" />
         </e>
         <e p="worldgen" t="Include">

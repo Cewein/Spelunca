@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IDamageable
 {
     [Tooltip("Player maximum life amount.")][SerializeField]
     private int maxLife = 100;
@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour
     public Action<int, Vector3, ResourceType> hurt;
     public Action<int> heal;
     public Action<bool> die;
-
+    public bool invincible = true;
     private void Awake()
     {
         life = maxLife;
@@ -24,7 +24,15 @@ public class PlayerStats : MonoBehaviour
 
     public void SetDamage(int damage, Vector3 direction, ResourceType damageType = ResourceType.normal)
     {
-        if (life - damage < 0  ) return;
+        if (life - damage <= 0)
+        {
+            if (!invincible)
+            {
+                isPlayerDie(true);
+            }
+            else if (invincible) return;
+            
+        }
         hurt?.Invoke(damage, direction, damageType);
         life -= damage;
         if (life <= 0) isPlayerDie(true);
@@ -36,9 +44,22 @@ public class PlayerStats : MonoBehaviour
         life += hp;
     }
     
-    private void isPlayerDie(bool isDie)
+    public void isPlayerDie(bool isDie)
     {
         die?.Invoke(isDie);
         life = 0;
+    }
+
+    public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
+    {
+        SetDamage((int) damage, Vector3.forward ,type);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            invincible = !invincible;
+        }
     }
 }

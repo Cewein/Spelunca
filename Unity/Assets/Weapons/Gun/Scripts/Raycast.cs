@@ -38,14 +38,18 @@ public class Raycast : MonoBehaviour
 
     private void Awake()
     {
-        if (cam == null) cam = Camera.main;
+       // if (cam == null) cam = Camera.main;
         
     }
 
     public void PerformRaycast()
     {
-        Ray ray = cam.ScreenPointToRay(transform.position);
-
+        if (cam != null) ray = cam.ScreenPointToRay(transform.position);
+        else
+        {
+            ray.origin = transform.position;
+            ray.direction = -transform.right * scope;
+        }
         if (Physics.Raycast(ray,  out Hit, scope))
         {
             if (showRaycast) Debug.DrawRay(ray.origin, ray.direction*scope, onTargetColor);
