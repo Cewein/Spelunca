@@ -46,7 +46,7 @@ public class Container : MonoBehaviour
         
         //calcul de la scale en hauteur
         Vector3 objectSize = rend.bounds.size * (1-glassWidth);
-        Debug.Log("x : " + objectSize.x + " y : " + objectSize.y + " z : " + objectSize.z);
+//        Debug.Log("x : " + objectSize.x + " y : " + objectSize.y + " z : " + objectSize.z);
         
         // send it to the shader
         contentRenderer.material.SetFloat("_WobbleX", wobbleAmountX);

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Plant
   m_EditorClassIdentifier: 
   Type: 3
-  Icon: {fileID: 21300000, guid: 6d0ef07c8d878844f8f1bf732dc9f807, type: 3}
+  Icon: {fileID: 21300000, guid: 678cccb5908eb5548abd23aad2bb4327, type: 3}
