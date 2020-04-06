@@ -39,7 +39,7 @@ public class BossDraftGravity : MonoBehaviour
     private void Update()
     {
         SeekGround();
-        if(Vector3.Distance(miner.GetComponent<Transform>().position, transform.position) < 30) Move();
+        if(Vector3.Distance(miner.GetComponent<Transform>().position, transform.position) < 40) Move();
 
     }
 
