@@ -57,7 +57,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F6))
         {
             invincible = !invincible;
         }

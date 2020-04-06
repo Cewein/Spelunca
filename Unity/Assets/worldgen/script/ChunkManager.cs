@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
+    public GameObject resourceFirePrefab;
     //compute shader
     [Header("Compute shader file")]
     public ComputeShader densityShader;
@@ -119,7 +120,8 @@ public class ChunkManager : MonoBehaviour
                     Vector3[] spawnPos = getPositionOnChunks();
                     if (spawnPos[0] != Vector3.zero)
                     {
-                        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        GameObject cube = Instantiate(resourceFirePrefab);
                         cube.transform.position = spawnPos[0];
                         cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
                     }
