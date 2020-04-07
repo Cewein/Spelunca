@@ -4,6 +4,7 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(InputNameAttribute))]
 public class InputNameDrawer : PropertyDrawer
 {
+    private int index = 0;
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         InputNameAttribute inputNameAttribute = attribute as InputNameAttribute;
@@ -13,10 +14,9 @@ public class InputNameDrawer : PropertyDrawer
         }
         else
         {
-            int index = 0;
             string[] list = GetInputManagerAxisList();
-            index = EditorGUI.Popup (position, property.displayName, index, list);
-            property.stringValue = list [index];
+            index = EditorGUI.Popup(position, property.displayName, index, list);
+            property.stringValue = list[index];
         }
 
     }
