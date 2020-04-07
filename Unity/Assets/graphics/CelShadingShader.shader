@@ -9,6 +9,7 @@ Shader "Hidden/CelShadingShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+		_Space ("Spacing", Range(0,0.1)) = 0.05
     }
     SubShader
     {
@@ -44,7 +45,9 @@ Shader "Hidden/CelShadingShader"
             }
 
             sampler2D _MainTex;
+			float _Space;
 			float2 iResolution;
+			
 
 			float pixelIntensity(float3 color)
 			{
@@ -73,8 +76,8 @@ Shader "Hidden/CelShadingShader"
 
 			float3 mainImage(in float2 uv)
 			{
-				float space = 0.003;
-				float magnitude = mag(uv, float2(0.001, 0.002));
+				float space = 0.001;
+				float magnitude = mag(uv, float2(0.001, 0.001));
 
 				float3 col = magnitude;
 
