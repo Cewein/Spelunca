@@ -134,19 +134,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bf6612c5a84af4491f79b8aa61652b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runInputName: Run
-  horizontalInputName: Horizontal
-  verticalInputName: Vertical
-  azimuthInputName: Mouse X
-  elevationInputName: Mouse Y
-  jumpInputName: Jump
-  grapplingInputName: Grappling
-  interactInputName: Interact
-  fireInputName: Fire
-  aimInputName: Aim
-  reloadInputName: Reload
-  crouchInputName: Crouch
-  switchWeaponInputName: Mouse ScrollWheel
+  runInputName: Fire3
+  horizontalInputName: Crouch
+  verticalInputName: Horizontal
+  azimuthInputName: Submit
+  elevationInputName: Horizontal
+  jumpInputName: Fire3
+  grapplingInputName: Horizontal
+  interactInputName: Horizontal
+  fireInputName: Mouse ScrollWheel
+  aimInputName: Horizontal
+  reloadInputName: Interact
+  crouchInputName: Horizontal
+  switchWeaponInputName: Horizontal
   cameraSensitivity: 50
 --- !u!114 &2474185556268879231
 MonoBehaviour:
@@ -877,6 +877,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4619938465951187991, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+        type: 3}
+      propertyPath: inputHandler
+      value: 
+      objectReference: {fileID: 2465613268572783777}
+    - target: {fileID: 5296651518196909295, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+        type: 3}
+      propertyPath: printDebug
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8280218019109568679, guid: c64ee70d7595dae438d3c883ed3aa4f7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -930,16 +940,6 @@ PrefabInstance:
     - target: {fileID: 8280218019109568679, guid: c64ee70d7595dae438d3c883ed3aa4f7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4619938465951187991, guid: c64ee70d7595dae438d3c883ed3aa4f7,
-        type: 3}
-      propertyPath: inputHandler
-      value: 
-      objectReference: {fileID: 2465613268572783777}
-    - target: {fileID: 5296651518196909295, guid: c64ee70d7595dae438d3c883ed3aa4f7,
-        type: 3}
-      propertyPath: printDebug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4895481979858790706, guid: c64ee70d7595dae438d3c883ed3aa4f7,
