@@ -8,42 +8,55 @@ public class MinerInputHandler : MonoBehaviour
     [Header("Inputs")]
     
     [Tooltip("The run input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string runInputName = "Run";
     
     [Tooltip("The movement horizontally input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string horizontalInputName = "Horizontal";
     
     [Tooltip("The movement vertically input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string verticalInputName = "Vertical";
     
     [Tooltip("The rotate horizontally input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string azimuthInputName = "Mouse X";
     
     [Tooltip("The rotate vertically input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string elevationInputName = "Mouse Y";
     
     [Tooltip("The jump input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string jumpInputName = "Jump";
     
     [Tooltip("The grapping hook input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string grapplingInputName = "Grappling";
     
     [Tooltip("The interact / pick up input name  as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string interactInputName = "Interact";
     
     [Tooltip("The fire input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string fireInputName = "Fire";
     
     [Tooltip("The aim input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string aimInputName = "Aim";
     
     [Tooltip("The reload input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string reloadInputName = "Reload";
     
     [Tooltip("The crouch input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string crouchInputName = "Cancel";
     
     [Tooltip("The switch weapon input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
     private string switchWeaponInputName = "Mouse ScrollWheel";
     
     [Header("Parameters")]
