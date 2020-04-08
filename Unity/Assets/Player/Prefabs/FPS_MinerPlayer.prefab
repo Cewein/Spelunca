@@ -134,19 +134,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bf6612c5a84af4491f79b8aa61652b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runInputName: Fire3
-  horizontalInputName: Crouch
-  verticalInputName: Horizontal
-  azimuthInputName: Submit
-  elevationInputName: Horizontal
-  jumpInputName: Fire3
-  grapplingInputName: Horizontal
-  interactInputName: Horizontal
-  fireInputName: Mouse ScrollWheel
-  aimInputName: Horizontal
-  reloadInputName: Interact
-  crouchInputName: Horizontal
-  switchWeaponInputName: Horizontal
+  runInputName: Run
+  horizontalInputName: Horizontal
+  verticalInputName: Vertical
+  azimuthInputName: Mouse X
+  elevationInputName: Mouse Y
+  jumpInputName: Jump
+  grapplingInputName: Grappling
+  interactInputName: Interact
+  fireInputName: Fire
+  aimInputName: Aim
+  reloadInputName: Reload
+  crouchInputName: Crouch
+  switchWeaponInputName: Mouse ScrollWheel
   cameraSensitivity: 50
 --- !u!114 &2474185556268879231
 MonoBehaviour:

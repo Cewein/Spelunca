@@ -1,12 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 [CustomPropertyDrawer(typeof(InputNameAttribute))]
 public class InputNameDrawer : PropertyDrawer
 {
-    [SerializeField]
-    private int index = 0;
+    private int index;
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         InputNameAttribute inputNameAttribute = attribute as InputNameAttribute;
@@ -17,9 +17,9 @@ public class InputNameDrawer : PropertyDrawer
         else
         {
             string[] list = GetInputManagerAxisList();
-            index  = EditorGUI.Popup(position, property.displayName, index, list);
+            index  = EditorGUI.Popup(position, property.displayName, Array.IndexOf(list, property.stringValue), list);
             property.stringValue = list[index];
-
+            
         }
     
     }
