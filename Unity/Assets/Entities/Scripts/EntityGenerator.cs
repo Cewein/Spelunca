@@ -71,6 +71,18 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            float rand = Random.value;
+            if (rand < 1 / 3f)
+            {
+                pool.spawn(50,ResourceType.fire);
+            }else if (rand > 2 / 3f)
+            {
+                pool.spawn(50,ResourceType.water);
+            }else
+            {
+                pool.spawn(50,ResourceType.plant);
+            }
+                
             //Debug.Log("GOING TO SPAWN");
             pool.spawnAll();
         }

@@ -1348,7 +1348,7 @@ Transform:
   m_GameObject: {fileID: 4561861964029488193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 1351452957295022128}
   - {fileID: 4451132005456191142}
@@ -1402,6 +1402,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 3365880456402187860}
   player: {fileID: 0}
   state: 1
+  type: 0
   loot: {fileID: 9211645431798112630}
   surfaceDetectionDistance: 0.7
   surfaceDetectionOffset: 0
@@ -1415,6 +1416,9 @@ MonoBehaviour:
   proximityOffset: 2
   proximityPrecision: 0.1
   attackProbability: 0.01
+  fireColor: {r: 0.9811321, g: 0.0722362, b: 0, a: 0}
+  waterColor: {r: 0, g: 0.9058261, b: 1, a: 0}
+  plantColor: {r: 0.43357527, g: 1, b: 0, a: 0}
   enemyDetectionDistance: 7
   outOfRangeDistance: 50
 --- !u!114 &9211645431798112630

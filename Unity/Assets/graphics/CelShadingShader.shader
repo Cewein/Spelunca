@@ -45,7 +45,12 @@ Shader "Hidden/CelShadingShader"
 
             sampler2D _MainTex;
 			float2 iResolution;
-
+			float center;
+            float smoothness;
+            int debugMode;
+            float spacing;
+            float lowPassFilter;
+            
 			float pixelIntensity(float3 color)
 			{
 				return sqrt(color.x*color.x + color.y*color.y + color.z*color.z);
@@ -53,7 +58,7 @@ Shader "Hidden/CelShadingShader"
 
 
 			float mag(float2 pixel, float2 spacing)
-			{
+			{			    
 				float tl = tex2D(_MainTex, pixel + float2(-spacing.x, spacing.y)).rgb;
 				float tm = tex2D(_MainTex, pixel + float2(0, spacing.y)).rgb;
 				float tr = tex2D(_MainTex, pixel + float2(spacing.x, spacing.y)).rgb;
@@ -73,19 +78,34 @@ Shader "Hidden/CelShadingShader"
 
 			float3 mainImage(in float2 uv)
 			{
-				float space = 0.003;
-				float magnitude = mag(uv, float2(0.001, 0.002));
-
-				float3 col = magnitude;
-
-				return float3(col);
+			    float3 col = tex2D(_MainTex, uv).rgb;
+			    float luminosity = (col.r + col.g + col.b)/3;
+			    if(luminosity<=lowPassFilter){
+			        float magnitude = mag(uv, float2(spacing/100, spacing/100)); //0.001, 0.002
+                    float bottom = center - smoothness;
+                    float top = center + smoothness;
+                    //on empeche les valeurs de dépasser [0,1]
+                    bottom = bottom < 0 ? 0 : bottom; 
+                    top = top > 1 ? 1 : top; 
+                    magnitude = smoothstep(bottom,top,magnitude);
+                    col = magnitude;
+				    return col;
+                }else{
+                    return (0,0,0);
+                }
 			}
 
 			float4 frag (v2f i) : SV_Target
             {
-				float3 magnitude = mainImage(i.uv);
-
-				float3 col = tex2D(_MainTex, i.uv).rgb * (1. - magnitude);
+                float3 col = (0,0,0);
+                float3 magnitude = mainImage(i.uv);
+                if(debugMode == 1){
+                    col = (1. - magnitude);
+                }else{
+                    col = tex2D(_MainTex, i.uv).rgb * (1. - magnitude);
+                }
+				//float3 col = tex2D(_MainTex, i.uv).rgb * (1. - magnitude);
+				//float3 col = (1. - magnitude);//tex2D(_MainTex, i.uv).rgb * 
 
                 return float4(col.x, col.y, col.z,1.);
             }

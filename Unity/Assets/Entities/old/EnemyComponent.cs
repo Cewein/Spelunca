@@ -20,6 +20,9 @@ public class EnemyComponent : MonoBehaviour, IDamageable
     public GameObject player;
     [HideInInspector]
     public EnemyBehaviourState state;
+
+    public ResourceType type;
+    
     private Vector3 target = Vector3.zero; 
     
     //LOOT
@@ -64,6 +67,17 @@ public class EnemyComponent : MonoBehaviour, IDamageable
     [Header("Attacking behaviour parameters")]
     [Tooltip("The probability for an entity to attack each frame.")] [SerializeField]
     public float attackProbability = 0.01f;
+    
+    //TYPES
+    
+    [Header("The entity's colors for types'")] 
+    [Tooltip("The color corresponding to the fire type.")] [SerializeField]
+    private Color fireColor;
+    [Tooltip("The color corresponding to the water type.")] [SerializeField]
+    private Color waterColor;
+    [Tooltip("The color corresponding to the plant type.")] [SerializeField]
+    private Color plantColor;
+    
     //OTHER
     [Header("Other entity behaviour parameters")] 
     [Tooltip("The distance at which entities will begin to chase the player.")] [SerializeField]
@@ -266,6 +280,22 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         return avoidanceMove;
     }
 
+    public void refreshMaterial()
+    {
+        if (type == ResourceType.fire)
+        {
+            //meshRenderer.material.color = fireColor;
+        }else if (type == ResourceType.water)
+        {
+            //meshRenderer.material.color = waterColor;
+        }else if (type == ResourceType.plant)
+        {
+            //meshRenderer.material.color = plantColor;
+        }else
+        {
+            //meshRenderer.material.color = Color.magenta;
+        }
+    }
     
     
     private void OnDrawGizmosSelected()
@@ -285,7 +315,9 @@ public class EnemyComponent : MonoBehaviour, IDamageable
 
     public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
     {
-        HP -= damage; 
+        float finalDamages = damage;
+        //changer finalDamage en fonction des ressources
+        HP -= finalDamages; 
         ParticleSystem d = Instantiate(damageEffect, hit.point, Quaternion.identity);
         d.Play();
     }

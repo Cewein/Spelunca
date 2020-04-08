@@ -110,10 +110,10 @@ public class Pool:MonoBehaviour
     
     public void spawnAll()
     {
-        spawn(poolSize);
+        spawn(poolSize,ResourceType.fire);
     }
 
-    public void spawn(int amount)
+    public void spawn(int amount, ResourceType type)
     {
         int counter = 0;
         foreach (var i in disabled.Keys.ToList())
@@ -132,6 +132,9 @@ public class Pool:MonoBehaviour
                     pool[i].transform.position = spawnPoint.position + spawnPoint.direction * spawnDistance;
                     pool[i].meshRenderer.enabled = true;
                 }
+
+                pool[i].type = type;
+                pool[i].refreshMaterial();
                 pool[i].transform.up = spawnPoint.direction;
                 pool[i].state = EnemyBehaviourState.Idle;
                 pool[i].player = player;
