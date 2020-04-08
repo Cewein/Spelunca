@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class CelShadingMaster : MonoBehaviour
 {
     public Shader celShadingShader;
+    
+    [Range(0f,1f)] public float intensity = 1.0f;
 
     [Range(0f,1f)] public float filterCenter = 0.5f;
 
@@ -27,11 +29,7 @@ public class CelShadingMaster : MonoBehaviour
         {
             _mat = new Material(celShadingShader);
             _mat.SetVector("iResolution", new Vector2(Screen.width, Screen.height));
-            _mat.SetFloat("smoothness", filterSmoothness);
-            _mat.SetFloat("center", filterCenter);
-            _mat.SetFloat("spacing", spacing);
-            _mat.SetInt("debugMode", debugMode ? 1:0);
-            _mat.SetFloat("lowPassFilter", lowPassFilter);
+            updateShader();
         }
 
 
@@ -41,12 +39,18 @@ public class CelShadingMaster : MonoBehaviour
     private void OnValidate()
     {
         if(_mat != null)
-        { 
-            _mat.SetFloat("smoothness", filterSmoothness);
-            _mat.SetFloat("center", filterCenter);
-            _mat.SetFloat("spacing", spacing);
-            _mat.SetInt("debugMode", debugMode ? 1:0);
-            _mat.SetFloat("lowPassFilter", lowPassFilter);
+        {
+            updateShader();
         }
+    }
+
+    private void updateShader()
+    {
+        _mat.SetFloat("intensity", intensity);
+        _mat.SetFloat("smoothness", filterSmoothness);
+        _mat.SetFloat("center", filterCenter);
+        _mat.SetFloat("spacing", spacing);
+        _mat.SetInt("debugMode", debugMode ? 1:0);
+        _mat.SetFloat("lowPassFilter", lowPassFilter);
     }
 }

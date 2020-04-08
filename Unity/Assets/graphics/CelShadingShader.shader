@@ -45,6 +45,7 @@ Shader "Hidden/CelShadingShader"
 
             sampler2D _MainTex;
 			float2 iResolution;
+			float intensity;
 			float center;
             float smoothness;
             int debugMode;
@@ -102,7 +103,7 @@ Shader "Hidden/CelShadingShader"
                 if(debugMode == 1){
                     col = (1. - magnitude);
                 }else{
-                    col = tex2D(_MainTex, i.uv).rgb * (1. - magnitude);
+                    col = tex2D(_MainTex, i.uv).rgb * (1. - magnitude*intensity);
                 }
 				//float3 col = tex2D(_MainTex, i.uv).rgb * (1. - magnitude);
 				//float3 col = (1. - magnitude);//tex2D(_MainTex, i.uv).rgb * 
