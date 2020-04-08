@@ -877,6 +877,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4619938465951187991, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+        type: 3}
+      propertyPath: inputHandler
+      value: 
+      objectReference: {fileID: 2465613268572783777}
+    - target: {fileID: 5296651518196909295, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+        type: 3}
+      propertyPath: printDebug
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8280218019109568679, guid: c64ee70d7595dae438d3c883ed3aa4f7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -930,16 +940,6 @@ PrefabInstance:
     - target: {fileID: 8280218019109568679, guid: c64ee70d7595dae438d3c883ed3aa4f7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4619938465951187991, guid: c64ee70d7595dae438d3c883ed3aa4f7,
-        type: 3}
-      propertyPath: inputHandler
-      value: 
-      objectReference: {fileID: 2465613268572783777}
-    - target: {fileID: 5296651518196909295, guid: c64ee70d7595dae438d3c883ed3aa4f7,
-        type: 3}
-      propertyPath: printDebug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4895481979858790706, guid: c64ee70d7595dae438d3c883ed3aa4f7,

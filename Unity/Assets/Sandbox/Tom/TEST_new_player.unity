@@ -2709,12 +2709,37 @@ PrefabInstance:
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: crouchInputName
-      value: Crouch
+      value: Horizontal
       objectReference: {fileID: 0}
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: reloadInputName
-      value: Reload
+      value: Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: runInputName
+      value: Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: horizontalInputName
+      value: Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: azimuthInputName
+      value: Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: jumpInputName
+      value: Horizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: fireInputName
+      value: Horizontal
       objectReference: {fileID: 0}
     - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
