@@ -4,8 +4,7 @@ public class InputNameAttribute : PropertyAttribute
 {
     public string inputName;
 
-    public InputNameAttribute(string defaultValue)
+    public InputNameAttribute()
     {
-        inputName = defaultValue;
     }
 }
