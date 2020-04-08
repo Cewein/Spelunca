@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public Action<int, Vector3, ResourceType> hurt;
     public Action<int> heal;
     public Action<bool> die;
-    public bool invincible = true;
+    public bool invincible = false;
     private void Awake()
     {
         life = maxLife;
@@ -24,7 +24,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void SetDamage(int damage, Vector3 direction, ResourceType damageType = ResourceType.normal)
     {
-        if (life - damage <= 0)
+        /*if (life - damage <= 0)
         {
             if (!invincible)
             {
@@ -32,10 +32,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
             }
             else if (invincible) return;
             
-        }
+        }*/
         hurt?.Invoke(damage, direction, damageType);
-        life -= damage;
-        if (life <= 0) isPlayerDie(true);
+        life -= damage;    
+        if (life <= 0 && !invincible) isPlayerDie(true);
     }
 
     public void RestoreLife(int hp)

@@ -69,6 +69,12 @@ void density (uint3 id : SV_DispatchThreadID)
 
 	///////   special gen area (spawn, tunnel, hardfloor and boss area)    ////////
 
+	if(pos.y < -100)
+	{
+		points[index] = float4(id, 1.); 
+		return;
+	}
+	
 	float sphereStart = distance(playerSpawn, pos);
 
 	if (sphereStart < 20.)
@@ -98,6 +104,4 @@ void density (uint3 id : SV_DispatchThreadID)
 		return;
 	}
 
-	if(pos.y < -100)
-		points[index] = float4(id, 1.); 
 }
