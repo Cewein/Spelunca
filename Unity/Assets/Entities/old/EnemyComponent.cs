@@ -71,12 +71,12 @@ public class EnemyComponent : MonoBehaviour, IDamageable
     //TYPES
     
     [Header("The entity's colors for types'")] 
-    [Tooltip("The color corresponding to the fire type.")] [SerializeField]
-    private Color fireColor;
-    [Tooltip("The color corresponding to the water type.")] [SerializeField]
-    private Color waterColor;
-    [Tooltip("The color corresponding to the plant type.")] [SerializeField]
-    private Color plantColor;
+    [Tooltip("The material of to the fire type.")] [SerializeField]
+    private Material fireMat;
+    [Tooltip("The material of to the water type.")] [SerializeField]
+    private Material waterMat;
+    [Tooltip("The material of to the plant type.")] [SerializeField]
+    private Material plantMat;
     
     //OTHER
     [Header("Other entity behaviour parameters")] 
@@ -284,16 +284,13 @@ public class EnemyComponent : MonoBehaviour, IDamageable
     {
         if (type == ResourceType.fire)
         {
-            //meshRenderer.material.color = fireColor;
+            meshRenderer.material = fireMat;
         }else if (type == ResourceType.water)
         {
-            //meshRenderer.material.color = waterColor;
+            meshRenderer.material = waterMat;
         }else if (type == ResourceType.plant)
         {
-            //meshRenderer.material.color = plantColor;
-        }else
-        {
-            //meshRenderer.material.color = Color.magenta;
+            meshRenderer.material = plantMat;
         }
     }
     
