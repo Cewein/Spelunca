@@ -20,13 +20,20 @@ public class ChunkManager : MonoBehaviour
     [Header("World setting")]
     [Range(1, 8)]
     public int octave = 2;
-    [Range(1, 10)]
+    [Range(1, 4)]
     public float lacunarity = 2.0f;
     [Range(0, 1)]
     public float persistence = 0.5f;
 
     [Range(0, 1)]
     public float isoLevel = 0f;
+
+    [Header("Area setting")]
+    public float spawnSize = 20.0f;
+    public float bossSize = 50.0f;
+    public float tunnelSize = 9.0f;
+
+
 
     //chunks 
     private Vector3 playerChunk;
@@ -55,6 +62,9 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.lacunarity = lacunarity;
         DensityGenerator.octave = octave;
         DensityGenerator.persistence = persistence;
+        DensityGenerator.spawnSize = spawnSize;
+        DensityGenerator.bossSize = bossSize;
+        DensityGenerator.tunnelSize = tunnelSize;
     }
 
     void Start()

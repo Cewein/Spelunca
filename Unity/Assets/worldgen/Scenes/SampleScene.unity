@@ -806,8 +806,11 @@ MonoBehaviour:
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
   octave: 4
   lacunarity: 2
-  persistence: 0.02
-  isoLevel: 0.06
+  persistence: 0.35
+  isoLevel: 0.42
+  spawnSize: 20
+  bossSize: 50
+  tunnelSize: 9
   boss: {fileID: 704679573}
 --- !u!4 &1869160575
 Transform:

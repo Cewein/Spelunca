@@ -34,7 +34,7 @@ public class chunk : MonoBehaviour
 
         //create denstiy on the gpu
         //the data stay on the gpu with the compute buffer
-        DensityGenerator.find(pointsBuffer,size + 1, pos - Vector3.one, densityShader);
+        DensityGenerator.find(pointsBuffer,size + 2, pos - Vector3.one, densityShader);
 
         pointsBuffer.GetData(dataArray);
 
@@ -45,7 +45,7 @@ public class chunk : MonoBehaviour
         triangleBuffer.SetCounterValue(0);
         marchShader.SetBuffer(0, "points", pointsBuffer);
         marchShader.SetBuffer(0, "triangles", triangleBuffer);
-        marchShader.SetInt("size", size + 1);
+        marchShader.SetInt("size", size + 2);
         marchShader.SetFloat("isoLevel", DensityGenerator.isoLevel);
 
         //lauch the compute shader on each threadGroup
