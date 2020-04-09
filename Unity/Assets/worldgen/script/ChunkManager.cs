@@ -19,8 +19,15 @@ public class ChunkManager : MonoBehaviour
     public GameObject chunk;
 
     [Header("World setting")]
-    [Range(0,1)]
-    public float isoLevel = 0;
+    [Range(1, 8)]
+    public int octave = 2;
+    [Range(1, 10)]
+    public float lacunarity = 2.0f;
+    [Range(0, 1)]
+    public float persistence = 0.5f;
+
+    [Range(0, 1)]
+    public float isoLevel = 0f;
 
     //chunks 
     private Vector3 playerChunk;
@@ -46,6 +53,9 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.isoLevel = isoLevel;
         DensityGenerator.endZone = boss.position;
         DensityGenerator.playerSpawn = playerSpawn = player.position;
+        DensityGenerator.lacunarity = lacunarity;
+        DensityGenerator.octave = octave;
+        DensityGenerator.persistence = persistence;
     }
 
     void Start()
