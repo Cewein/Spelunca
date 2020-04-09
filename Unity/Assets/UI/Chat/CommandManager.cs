@@ -17,7 +17,7 @@ public class CommandManager : MonoBehaviour
 {
     
     private string[] cmdWords;
-    
+    private string help = "See '/help' for more info.";
     [SerializeField] public GODictionary targetableObjects;
     public CommandMessage parseCommand(string command)
     {
@@ -29,8 +29,65 @@ public class CommandManager : MonoBehaviour
                 return cmdTp();
             case "destroy":
                 return cmdDestroy();
+            case "chunk":
+                return chunkCommands();
         }
-        return commandError("unknown command.");
+        return commandError("Unknown command. "+help);
+    }
+    
+    //CHUNK COMMANDS
+
+    private CommandMessage chunkCommands()
+    {
+        if (cmdWords.Length > 1) //si on a au moins un parametre en plus que 'chunk'
+        {
+            switch (cmdWords[1])
+            {
+                case "show":
+                    return chunkShowCommands();
+                case "reload":
+                    return cmdChunkReload();
+            }
+            return commandError("Unknown '/chunk "+cmdWords[1]+"'. "+help);
+        }
+        return commandError("'/chunk' is a group of commands. "+help);
+    }
+
+    private CommandMessage chunkShowCommands()
+    {
+        if (cmdWords.Length > 2) //si on a au moins un parametre en plus que 'chunk show'
+        {
+            switch (cmdWords[2])
+            {
+                case "border":
+                    return cmdChunkShowBorder();
+            }
+            return commandError("Unknown '/chunk "+cmdWords[2]+"'. "+help);
+        }
+        return commandError("'/chunk show' can't be used without parameters. "+help);
+    }
+    
+    private CommandMessage cmdChunkReload()
+    {
+        return commandSuccess("Chunks reloaded.");
+    }
+    private CommandMessage cmdChunkShowBorder()
+    {
+        if (cmdWords.Length < 4)
+            return commandError("'/chunk show border' can't be used without parameters. Expected 'true' or 'false'.");
+        if (cmdWords.Length > 4)
+            return commandError("'/chunk show border' can't have more than 1 parameter. "+help);
+        
+        switch (cmdWords[3])
+        {
+            case "true":
+                return commandSuccess("Chunk borders are now visible.");
+            case "false":
+                return commandSuccess("Chunk borders are now hidden.");
+        }
+        return commandError("Unknown parameter "+cmdWords[3]+"'. Expected 'true' or 'false'.");
+        
+        return commandError("'/chunk show' can't be used without parameters. "+help);
     }
 
     private CommandMessage cmdTp()
@@ -61,11 +118,8 @@ public class CommandManager : MonoBehaviour
             return commandError("unknown target : '"+targetKey+"'.");
             
         }
-        else if (cmdWords.Length == 2) //mode player to destination
-        {
-            
-        }
-        return commandError("tp command requires at least 1 parameter.");
+        if (cmdWords.Length == 2){} //mode player to destination
+        return commandError("tp command requires at least 1 parameter. "+help);
     }
     
     private CommandMessage cmdDestroy()
@@ -84,9 +138,9 @@ public class CommandManager : MonoBehaviour
                 }
                 return commandError("'" + toDestroyKey + "' has already been destroyed.");
             }
-            return commandError("unknown target : '"+toDestroyKey+"'.");
+            return commandError("Unknown target : '"+toDestroyKey+"'.");
         }
-        return commandError("destroy command requires 1 parameter.");
+        return commandError("Destroy command requires 1 parameter. "+help);
     }
 
     private GameObject getTarget(string key)
