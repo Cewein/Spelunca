@@ -7,7 +7,9 @@ public class DensityGenerator
 {
     public static FastNoise noise = new FastNoise();
 
-    public static uint octaveNumber;
+    public static int octave;
+    public static float lacunarity;
+    public static float persistence;
     public static float isoLevel;
     public static Vector3 endZone;
     public static Vector3 playerSpawn;
@@ -41,7 +43,7 @@ public class DensityGenerator
         int octaveScale = 1;
         float octaveIntensity = 1.0f;
 
-        for (int i = 0; i < octaveNumber; i++)
+        for (int i = 0; i < octave; i++)
         {
             densityValue += noise.GetPerlin(x * octaveScale, y * octaveScale, z * octaveScale) * octaveIntensity;
             octaveIntensity *= 0.5f;
@@ -94,6 +96,10 @@ public class DensityGenerator
 
         densityShader.SetVector("playerSpawn", playerSpawn);
         densityShader.SetVector("endZone", endZone);
+
+        densityShader.SetFloat("lacunarity", lacunarity);
+        densityShader.SetFloat("persistence", persistence);
+        densityShader.SetInt("octave", octave);
 
         densityShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
 

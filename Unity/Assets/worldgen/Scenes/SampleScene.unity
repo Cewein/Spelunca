@@ -802,9 +802,12 @@ MonoBehaviour:
   MeshGeneratorShader: {fileID: 7200000, guid: 3a3b046f8a188de428720dce66733b07, type: 3}
   player: {fileID: 596538679}
   chunkSize: 32
-  viewRange: 7
+  viewRange: 5
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
-  isoLevel: 0.15
+  octave: 4
+  lacunarity: 2
+  persistence: 0.02
+  isoLevel: 0.06
   boss: {fileID: 704679573}
 --- !u!4 &1869160575
 Transform:
@@ -814,7 +817,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869160573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -49.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
