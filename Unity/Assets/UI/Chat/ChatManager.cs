@@ -112,10 +112,6 @@ public class ChatManager : MonoBehaviour
                 if (buttonPressed)
                     buttonPressed = false;
             }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SendMessageToChat("You pressed the space bar !",Message.Type.info);
-            }
         }
     }
     
