@@ -516,7 +516,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ff0f7e2465a25a94cb00b79824da9931, type: 2}
+  - {fileID: 2100000, guid: 561a74507d704c944b3fd011d85bc19e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1416,9 +1416,9 @@ MonoBehaviour:
   proximityOffset: 2
   proximityPrecision: 0.1
   attackProbability: 0.01
-  fireColor: {r: 0.9811321, g: 0.0722362, b: 0, a: 0}
-  waterColor: {r: 0, g: 0.9058261, b: 1, a: 0}
-  plantColor: {r: 0.43357527, g: 1, b: 0, a: 0}
+  fireMat: {fileID: 2100000, guid: 561a74507d704c944b3fd011d85bc19e, type: 2}
+  waterMat: {fileID: 2100000, guid: 424321a785e47ad4cb01aab514ea5206, type: 2}
+  plantMat: {fileID: 2100000, guid: ff0f7e2465a25a94cb00b79824da9931, type: 2}
   enemyDetectionDistance: 7
   outOfRangeDistance: 50
 --- !u!114 &9211645431798112630
