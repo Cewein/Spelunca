@@ -145,6 +145,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5809aa5aeb938b74280a7fa906e35daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &118478127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5026901897224756689, guid: c7f4ea9f3479a324292c7f522d40fb63,
+    type: 3}
+  m_PrefabInstance: {fileID: 696846402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &134661766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5026901896901606464, guid: c7f4ea9f3479a324292c7f522d40fb63,
+    type: 3}
+  m_PrefabInstance: {fileID: 696846402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &134861550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1220,6 +1232,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3fd727bb83f2e45858808e880599d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &770057839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770057842}
+  - component: {fileID: 770057841}
+  - component: {fileID: 770057840}
+  m_Layer: 0
+  m_Name: ChatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &770057840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770057839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fcb0a9a4f88694daf06babdd69c916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetableObjects:
+    _Keys:
+    - player
+    - bosszone
+    - spawn
+    - boss
+    - 
+    - 
+    - 
+    _Values:
+    - {fileID: 134861551}
+    - {fileID: 1405054361}
+    - {fileID: 899804501}
+    - {fileID: 1573004007}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    _Buckets: ffffffff03000000ffffffff02000000ffffffffffffffffffffffff
+    _HashCodes: 1bc2ce6fbf63011083d65179911cc179000000000000000000000000
+    _Next: ffffffff0000000001000000ffffffff000000000000000000000000
+    _Count: 4
+    _Version: 60
+    _FreeList: -1
+    _FreeCount: 0
+--- !u!114 &770057841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770057839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5daaf76a438194ebbcb82e1737e771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chatInputName: Chat
+  commandManager: {fileID: 770057840}
+  maxMessage: 25
+  chat: {fileID: 134661766}
+  chatContent: {fileID: 118478127}
+  chatTextPrefab: {fileID: 4099402577975005489, guid: 2dbef538a9e69df49b1f9c650d2bec0b,
+    type: 3}
+  chatBox: {fileID: 2053644883}
+  CaretColor: {r: 0.2783019, g: 0.7695603, b: 1, a: 1}
+  CaretSize: 4
+  playerMessageColor: {r: 1, g: 1, b: 1, a: 1}
+  commandColor: {r: 1, g: 0.8520418, b: 0, a: 1}
+  infoColor: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+  warningColor: {r: 1, g: 0.46038252, b: 0, a: 1}
+  errorColor: {r: 1, g: 0.08857537, b: 0, a: 1}
+  messageList: []
+--- !u!4 &770057842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770057839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 394.0844, y: 228.19493, z: 241.073}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &786286350 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8645740842696408011, guid: c7f4ea9f3479a324292c7f522d40fb63,
@@ -1778,6 +1886,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1573004005}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1573004007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2173078109135552581, guid: 6596093949ece3a45b48648d493ec967,
+    type: 3}
+  m_PrefabInstance: {fileID: 1573004005}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1659497387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5228326227350966859, guid: c7f4ea9f3479a324292c7f522d40fb63,
@@ -1934,7 +2048,10 @@ MonoBehaviour:
   chunkSize: 32
   viewRange: 5
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
-  isoLevel: 0.15
+  octave: 4
+  lacunarity: 2
+  persistence: 0.33
+  isoLevel: 0.45
   boss: {fileID: 1573004006}
 --- !u!4 &1869160575
 Transform:
@@ -1950,6 +2067,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2053644883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5026901896986330947, guid: c7f4ea9f3479a324292c7f522d40fb63,
+    type: 3}
+  m_PrefabInstance: {fileID: 696846402}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2105379859 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8669081980456443542, guid: b2d288cece5922049a8cac9ad28b969f,

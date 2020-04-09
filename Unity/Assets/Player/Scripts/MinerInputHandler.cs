@@ -5,6 +5,7 @@ public class MinerInputHandler : MonoBehaviour
 {
     #region SerializedField ============================================================================================
 
+    public bool disabled = false;
     [Header("Inputs")]
     
     [Tooltip("The run input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
@@ -139,7 +140,7 @@ public class MinerInputHandler : MonoBehaviour
     /// <returns>a boolean that indicate if player inputs can process.</returns>
     private bool GetIfPlayerCanPlay()
     {
-        return Cursor.lockState == CursorLockMode.Locked;
+        return !disabled && Cursor.lockState == CursorLockMode.Locked;
     }
     public bool isJumping()
     {
