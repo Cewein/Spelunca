@@ -9,6 +9,7 @@ Shader "Hidden/CelShadingShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+		_Space ("Spacing", Range(0,0.1)) = 0.05
     }
     SubShader
     {
@@ -44,6 +45,7 @@ Shader "Hidden/CelShadingShader"
             }
 
             sampler2D _MainTex;
+			float _Space;
 			float2 iResolution;
 			float intensity;
 			float center;
