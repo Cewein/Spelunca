@@ -139,7 +139,7 @@ void density (uint3 id : SV_DispatchThreadID)
 		points[index] = float4(id, 1.);
 		return;
 	}
-
+  
 	float sphereStart = distance(playerSpawn, pos);
 
 	if (sphereStart < 20.)
@@ -168,6 +168,4 @@ void density (uint3 id : SV_DispatchThreadID)
 		points[index] = float4(id, tube2 - 9.);
 		return;
 	}
-
-	
 }

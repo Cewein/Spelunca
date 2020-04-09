@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
+    public GameObject resourceFirePrefab;
     //compute shader
     [Header("Compute shader file")]
     public ComputeShader densityShader;
@@ -66,18 +67,16 @@ public class ChunkManager : MonoBehaviour
         
         //create chunk (see function below)
         generateChunks();
-
-        //demo for spawning in a chunk
-        for(int i = 0; i < 150; i++)
-        {
-            Vector3[] spawnPos = getPositionOnChunks();
-            if(spawnPos[0] != Vector3.zero)
-            {
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                cube.transform.position = spawnPos[0];
-                cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
-            }
-        }
+        //for(int i = 0; i < 1500; i++)
+        //{
+        //    Vector3[] spawnPos = getPositionOnChunks();
+        //    if(spawnPos[0] != Vector3.zero)
+        //    {
+        //        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //        cube.transform.position = spawnPos[0];
+        //        cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
+        //    }
+        //}
 
     }
 
@@ -131,7 +130,8 @@ public class ChunkManager : MonoBehaviour
                     Vector3[] spawnPos = getPositionOnChunks();
                     if (spawnPos[0] != Vector3.zero)
                     {
-                        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        GameObject cube = Instantiate(resourceFirePrefab);
                         cube.transform.position = spawnPos[0];
                         cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
                     }
@@ -249,7 +249,7 @@ public class ChunkManager : MonoBehaviour
     }
 
     //return a array, first value is the position and the second is the rotation !
-    Vector3[] getPositionOnChunks()
+    public Vector3[] getPositionOnChunks()
     {
         Vector3[] rez = new Vector3[2];
 
