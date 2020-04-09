@@ -10,6 +10,7 @@ public class ChatManager : MonoBehaviour
     [SerializeField][InputName]
     private string chatInputName;
     [SerializeField] private CommandManager commandManager;
+    [SerializeField] private MinerInputHandler playerControls;
     
     [SerializeField] private int maxMessage = 25;
 
@@ -18,6 +19,9 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private GameObject chatTextPrefab;
     [SerializeField] private InputField chatBox;
     
+    
+    [SerializeField] private Color CaretColor = Color.blue;
+    [SerializeField, Range(1,5)] private int CaretSize = 4;
     
     [Header("Message colors")]
     [SerializeField] private Color playerMessageColor = Color.white;
@@ -29,22 +33,43 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private List<Message> messageList = new List<Message>();
 
     private string previousLine = "";
+    private string currentLine = "";
 
     private bool buttonPressed;
     void Start()
     {
         chat.SetActive(false);
+        chatBox.customCaretColor = true;
+        chatBox.caretColor = CaretColor;
+        chatBox.caretWidth = CaretSize;
     }
-    void Update()
+
+    void LateUpdate()
     {
         if (chat.activeInHierarchy)
         {
+            
             if (chatBox.isFocused)
             {
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    chatBox.text = previousLine;
+                    if (previousLine != "")
+                    {
+                        currentLine = chatBox.text;
+                        chatBox.text = previousLine;
+                        chatBox.caretPosition = previousLine.Length;
+                    }
+                }if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    if (currentLine != "")
+                    {
+                        chatBox.text = currentLine;
+                        chatBox.caretPosition = currentLine.Length;
+                        currentLine = "";
+                    }
                 }
+            } else if(Input.GetKeyDown(KeyCode.Return)){
+                chatBox.ActivateInputField();
             }
             if (chatBox.text != "")
             {
@@ -53,11 +78,8 @@ public class ChatManager : MonoBehaviour
                     previousLine = chatBox.text;
                     ParseMessage(chatBox.text);
                     chatBox.text = "";
-                    chatBox.ActivateInputField();
+                    chatBox.DeactivateInputField();//ActivateInputField();
                 }
-            }
-            else if(!chatBox.isFocused && Input.GetKeyDown(KeyCode.Return)){
-                chatBox.ActivateInputField();
             }
         }
         
@@ -66,9 +88,24 @@ public class ChatManager : MonoBehaviour
             if (Input.GetAxis(chatInputName) > 0)
             {
                 if (!buttonPressed)
+                {
                     chat.SetActive(!chat.activeInHierarchy);
-                buttonPressed = true;
-                chatBox.ActivateInputField();
+                    buttonPressed = true;
+                    chatBox.ActivateInputField();
+                    playerControls.disabled = chat.activeInHierarchy;
+                    if (chat.activeInHierarchy)
+                    {
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
+                    }
+                    else
+                    {
+                        Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+                    }
+                    
+                }
+                    
             }
             else
             {
@@ -80,9 +117,8 @@ public class ChatManager : MonoBehaviour
                 SendMessageToChat("You pressed the space bar !",Message.Type.info);
             }
         }
-        
     }
-
+    
     private Color MessageTypeColor(Message.Type type)
     {
          Color color = playerMessageColor;
