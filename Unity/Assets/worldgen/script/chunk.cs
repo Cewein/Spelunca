@@ -19,7 +19,7 @@ public class chunk : MonoBehaviour
     Vector4[] dataArray;
 
     //Create a the chunk with a given size
-    public void createMarchingBlock(int size, Vector3 playerSpawn, ComputeShader densityShader, ComputeShader marchShader)
+    public void createMarchingBlock(int size, Vector3 playerSpawn, ComputeShader densityShader, ComputeShader marchShader, bool defaultNormal)
     {
         //init
         Vector3 pos = GetComponent<Transform>().position;
@@ -34,7 +34,7 @@ public class chunk : MonoBehaviour
 
         //create denstiy on the gpu
         //the data stay on the gpu with the compute buffer
-        DensityGenerator.find(pointsBuffer,size + 2, pos - Vector3.one, densityShader);
+        DensityGenerator.find(pointsBuffer,size + 3, pos - Vector3.one, densityShader);
 
         pointsBuffer.GetData(dataArray);
 
@@ -45,7 +45,7 @@ public class chunk : MonoBehaviour
         triangleBuffer.SetCounterValue(0);
         marchShader.SetBuffer(0, "points", pointsBuffer);
         marchShader.SetBuffer(0, "triangles", triangleBuffer);
-        marchShader.SetInt("size", size + 2);
+        marchShader.SetInt("size", size + 3);
         marchShader.SetFloat("isoLevel", DensityGenerator.isoLevel);
 
         //lauch the compute shader on each threadGroup
@@ -65,6 +65,7 @@ public class chunk : MonoBehaviour
         Mesh mesh = new Mesh();
         mesh.Clear();
         Vector3[] vertices = new Vector3[numTris * 3];
+        Vector3[] normals = new Vector3[numTris * 3];
         int[] meshTriangles = new int[numTris * 3];
 
         //but the data into the mesh
@@ -74,13 +75,16 @@ public class chunk : MonoBehaviour
             {
                 meshTriangles[i * 3 + j] = i * 3 + j;
                 vertices[i * 3 + j] = tris[i][j];
+                normals[i * 3 + j] = tris[i][j+3];
             }
         }
 
         mesh.vertices = vertices;
         mesh.triangles = meshTriangles;
+        mesh.normals = normals;
 
-        mesh.RecalculateNormals();
+        if(defaultNormal)
+            mesh.RecalculateNormals();
 
         chunkData.mesh = mesh;
 
@@ -120,7 +124,7 @@ public class chunk : MonoBehaviour
 
         //setup the compute buffer
         pointsBuffer = new ComputeBuffer(nump, sizeof(float) * 4);
-        triangleBuffer = new ComputeBuffer(totalMaxTris, sizeof(float) * 3 * 3, ComputeBufferType.Append);
+        triangleBuffer = new ComputeBuffer(totalMaxTris, sizeof(float) * 3 * 3 * 2, ComputeBufferType.Append);
         trisCounterBuffer = new ComputeBuffer(1, sizeof(int), ComputeBufferType.Raw);
 
         bufferList.Add(pointsBuffer);
@@ -134,7 +138,6 @@ public struct ChunkData
     public bool update;
 
     public Mesh mesh;
-    public float[,,] density;
     public MeshData meshData;
 }
 
@@ -149,6 +152,10 @@ public struct Triangle
     public Vector3 b;
     public Vector3 c;
 
+    public Vector3 na;
+    public Vector3 nb;
+    public Vector3 nc;
+
     public Vector3 this[int i]
     {
         get
@@ -159,8 +166,14 @@ public struct Triangle
                     return a;
                 case 1:
                     return b;
-                default:
+                case 2:
                     return c;
+                case 3:
+                    return na;
+                case 4:
+                    return nb;
+                default:
+                    return nc;
             }
         }
     }
