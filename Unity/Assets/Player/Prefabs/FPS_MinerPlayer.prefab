@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bf6612c5a84af4491f79b8aa61652b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabled: 0
   runInputName: Run
   horizontalInputName: Horizontal
   verticalInputName: Vertical
@@ -301,7 +302,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 300
-  field of view: 60
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -340,6 +341,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   celShadingShader: {fileID: 4800000, guid: 939e094cb57ff2d4c98351c80374a641, type: 3}
+  intensity: 1
+  filterCenter: 0.5
+  filterSmoothness: 0.5
+  spacing: 0.1
+  lowPassFilter: 1
+  debugMode: 0
 --- !u!1 &2756053813625259436
 GameObject:
   m_ObjectHideFlags: 0

@@ -2416,11 +2416,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 711560070411958148}
     m_Modifications:
-    - target: {fileID: 6356025319944449562, guid: d5edd161a190fd941a18fdb030018830,
-        type: 3}
-      propertyPath: m_Name
-      value: Chat
-      objectReference: {fileID: 0}
     - target: {fileID: 6356025319944449563, guid: d5edd161a190fd941a18fdb030018830,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2483,11 +2478,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6356025319944449563, guid: d5edd161a190fd941a18fdb030018830,
         type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6356025319944449563, guid: d5edd161a190fd941a18fdb030018830,
-        type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
@@ -2526,6 +2516,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6356025320098631826, guid: d5edd161a190fd941a18fdb030018830,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356025319944449562, guid: d5edd161a190fd941a18fdb030018830,
+        type: 3}
+      propertyPath: m_Name
+      value: Chat
+      objectReference: {fileID: 0}
     - target: {fileID: 6356025318779054956, guid: d5edd161a190fd941a18fdb030018830,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2541,6 +2541,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6356025319630196620, guid: d5edd161a190fd941a18fdb030018830,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6356025320291422465, guid: d5edd161a190fd941a18fdb030018830,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2549,6 +2554,11 @@ PrefabInstance:
     - target: {fileID: 6356025320291422465, guid: d5edd161a190fd941a18fdb030018830,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356025320291422465, guid: d5edd161a190fd941a18fdb030018830,
+        type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

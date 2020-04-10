@@ -16,9 +16,11 @@ public class ChatManager : MonoBehaviour
 
     [SerializeField] private GameObject chat;
     [SerializeField] private GameObject chatContent;
-    [SerializeField] private GameObject chatTextPrefab;
     [SerializeField] private InputField chatBox;
+    [SerializeField] private Scrollbar chatScrollbar;
+    [SerializeField] private GameObject chatTextPrefab;
     
+    [SerializeField] private float mouseSpeed = 0.1f;
     
     [SerializeField] private Color CaretColor = Color.blue;
     [SerializeField, Range(1,5)] private int CaretSize = 4;
@@ -114,7 +116,16 @@ public class ChatManager : MonoBehaviour
             }
         }
     }
-    
+
+    private void Update()
+    {
+        Debug.Log(chatScrollbar.value);
+        float value = chatScrollbar.value + Input.mouseScrollDelta.y*mouseSpeed;
+        value = Mathf.Clamp(value, 0f, 1f);
+        chatScrollbar.value = value;
+
+    }
+
     private Color MessageTypeColor(Message.Type type)
     {
          Color color = playerMessageColor;
@@ -163,14 +174,21 @@ public class ChatManager : MonoBehaviour
         if (text[0] == '/')
         {
             CommandMessage msg = commandManager.parseCommand(text.Substring(1));
-            
-            if (!msg.isError)//si on a pas eu d'erreur
+
+            switch (msg.type)
             {
-                SendMessageToChat(msg.message,Message.Type.command);
-            }
-            else
-            {
-                SendMessageToChat("CommandError : "+msg.message,Message.Type.error);
+                case Message.Type.command:
+                    SendMessageToChat(msg.message,Message.Type.command);
+                    break;
+                case Message.Type.warning:
+                    SendMessageToChat("CommandWarning : "+msg.message,Message.Type.warning);
+                    break;
+                case Message.Type.error:
+                    SendMessageToChat("CommandError : "+msg.message,Message.Type.error);
+                    break;
+                case Message.Type.info:
+                    SendMessageToChat(msg.message,Message.Type.info);
+                    break;
             }
         }
         else

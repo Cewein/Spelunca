@@ -44,7 +44,7 @@ public class CelShadingMaster : MonoBehaviour
         }
     }
 
-    private void updateShader()
+    public void updateShader()
     {
         _mat.SetFloat("intensity", intensity);
         _mat.SetFloat("smoothness", filterSmoothness);

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityObject = UnityEngine.Object;
- 
+
+#if UNITY_EDITOR
 public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
 {
     private SerializableDictionary<TK, TV> _Dictionary;
@@ -175,3 +176,5 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
 
 [CustomPropertyDrawer(typeof(GODictionary))]
 public class MyDictionaryDrawer1 : DictionaryDrawer<string, GameObject> { }
+
+#endif
