@@ -10,6 +10,7 @@ public class ChunkManager : MonoBehaviour
     [Header("Compute shader file")]
     public ComputeShader densityShader;
     public ComputeShader MeshGeneratorShader;
+    public bool useDefaultNormal = false;
 
     //Config
     [Header("Player vision setting")]
@@ -21,13 +22,20 @@ public class ChunkManager : MonoBehaviour
     [Header("World setting")]
     [Range(1, 8)]
     public int octave = 2;
-    [Range(1, 10)]
+    [Range(1, 4)]
     public float lacunarity = 2.0f;
     [Range(0, 1)]
     public float persistence = 0.5f;
 
     [Range(0, 1)]
     public float isoLevel = 0f;
+
+    [Header("Area setting")]
+    public float spawnSize = 20.0f;
+    public float bossSize = 50.0f;
+    public float tunnelSize = 9.0f;
+
+
 
     //chunks 
     private Vector3 playerChunk;
@@ -56,6 +64,9 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.lacunarity = lacunarity;
         DensityGenerator.octave = octave;
         DensityGenerator.persistence = persistence;
+        DensityGenerator.spawnSize = spawnSize;
+        DensityGenerator.bossSize = bossSize;
+        DensityGenerator.tunnelSize = tunnelSize;
     }
 
     void Start()
@@ -183,7 +194,7 @@ public class ChunkManager : MonoBehaviour
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     //Two compute shader are pass
-                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader);
+                    chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
@@ -214,7 +225,7 @@ public class ChunkManager : MonoBehaviour
                     else
                     {
                         chunks[x, y, z].transform.position += direction * chunkSize;
-                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader);
+                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                         chunkDictionary.Add(chunks[x, y, z].transform.position / chunkSize, chunks[x, y, z].GetComponent<chunk>().chunkData);
                     }
                 }

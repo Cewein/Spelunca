@@ -11,6 +11,9 @@ public class DensityGenerator
     public static float lacunarity;
     public static float persistence;
     public static float isoLevel;
+    public static float spawnSize;
+    public static float bossSize;
+    public static float tunnelSize;
     public static Vector3 endZone;
     public static Vector3 playerSpawn;
 
@@ -99,6 +102,11 @@ public class DensityGenerator
 
         densityShader.SetFloat("lacunarity", lacunarity);
         densityShader.SetFloat("persistence", persistence);
+
+        densityShader.SetFloat("spawnSize", spawnSize);
+        densityShader.SetFloat("bossSize", bossSize);
+        densityShader.SetFloat("tunnelSize", tunnelSize);
+
         densityShader.SetInt("octave", octave);
 
         densityShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);

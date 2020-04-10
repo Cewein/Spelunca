@@ -11,8 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 9d48b9fcd84cb864781fbd898b4ba82f, type: 3}
   m_ShaderKeywords: _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -74,12 +74,12 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: -0.33
+    - _Offset: -0.61
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Strengh: 0.466
+    - _Strengh: 0.93
     - _Strength: 0
     - _UVSec: 0
     - _UseText: 0
@@ -88,5 +88,5 @@ Material:
     m_Colors:
     - _Color: {r: 0.7264151, g: 0.37706053, b: 0.07195621, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Grass: {r: 0.44211897, g: 0.8392157, b: 0.15294118, a: 1}
-    - _Stone: {r: 0.4528302, g: 0.29302955, b: 0.06621573, a: 1}
+    - _Grass: {r: 0.41713142, g: 0.631, b: 0.096, a: 1}
+    - _Stone: {r: 0.4509804, g: 0.2375897, b: 0.06666666, a: 1}
