@@ -2677,7 +2677,7 @@ PrefabInstance:
     - target: {fileID: 2173078109135552581, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
@@ -2744,11 +2744,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 4960815634682092117}
-    - target: {fileID: 568981547921675915, guid: 6596093949ece3a45b48648d493ec967,
-        type: 3}
-      propertyPath: recoil
-      value: 0.03
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6596093949ece3a45b48648d493ec967, type: 3}
 --- !u!1001 &4960815634682092114
