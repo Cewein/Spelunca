@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
 
@@ -95,6 +96,9 @@ public class GunArtefact : MonoBehaviour
     private float normalFOV;
     private float aimingFOV;
     private float lastTimeFiring;
+    private MinerController miner;
+    private Vector3 target;
+
     private Ammo currentAmmo;
     private Ammo CurrentAmmo
     {
@@ -119,10 +123,10 @@ public class GunArtefact : MonoBehaviour
     {
         normalFOV = Camera.main.fieldOfView;
         aimingFOV = normalFOV * aimFovRatio;
+        miner = GetComponentInParent<MinerController>();
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
         if (controller == null){ controller = GetComponentInParent<GunController>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
-        controller.aim += Aim;
     }
 
     private void Aim(bool isAiming)
@@ -241,10 +245,15 @@ public class GunArtefact : MonoBehaviour
                                                   );
         }
         catch (NullReferenceException e){}
-        
 
-
+        TakeRecoil();
         lastTimeFiring = Time.time;
+    }
+
+    private void TakeRecoil()
+    {
+        miner.WeaponParent.position -= miner.WeaponParent.transform.forward*recoil;
+        // TODO : FPSCamera shake accordind to recoil;
     }
     
     private Vector3 SpreadBullet(Transform shootTransform)
