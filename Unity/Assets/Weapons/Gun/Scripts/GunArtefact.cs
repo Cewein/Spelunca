@@ -29,7 +29,7 @@ public struct Crosshair
 public class GunArtefact : MonoBehaviour
 {
     #region SerializedField ============================================================================================
-
+    
     [Header("Linked objects")]
     [Tooltip("The gun magazine that stock ammo.")][SerializeField]
     private GunLoader magazine;
@@ -87,6 +87,8 @@ public class GunArtefact : MonoBehaviour
     private bool shootOnMaxEnergy;
     [Tooltip("Time needed to reach max energy charged")][SerializeField]
     private float chargeTime = 2f;*/
+
+   [Header("IA")] [SerializeField] private bool ia = false;
     
     #endregion
     
@@ -125,7 +127,7 @@ public class GunArtefact : MonoBehaviour
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
         if (controller == null){ controller = GetComponentInParent<GunController>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
-        controller.aim += Aim;
+        if (!ia) controller.aim += Aim;
     }
 
     private void Aim(bool isAiming)
