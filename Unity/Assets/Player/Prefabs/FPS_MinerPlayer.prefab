@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6167ba28a232b444ba017189514e3be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
+  maxLife: 50
   invincible: 1
 --- !u!1 &2495153980376909236
 GameObject:
