@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 985337230899952790}
   - component: {fileID: 3128893638381751823}
   m_Layer: 11
-  m_Name: Pickaxe
+  m_Name: BlackElysian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   magazine: {fileID: 0}
   controller: {fileID: 3128893638381751823}
   isPickaxe: 1
-  pickaxeDamage: 5
+  pickaxeDamage: 20
   name: Goliath
   icon: {fileID: 21300000, guid: 167efa908efb5254383b7c63760ed987, type: 3}
   crosshair:
@@ -178,7 +178,7 @@ MonoBehaviour:
   bulletsPerShot: 1
   recoil: 1
   aimFovRatio: 1
-  aimOffset: {x: 0, y: 0, z: 0}
+  zoomSpeed: 10
 --- !u!114 &3128893638381751823
 MonoBehaviour:
   m_ObjectHideFlags: 0
