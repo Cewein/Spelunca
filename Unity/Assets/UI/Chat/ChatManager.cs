@@ -119,7 +119,7 @@ public class ChatManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(chatScrollbar.value);
+        //Debug.Log(chatScrollbar.value);
         float value = chatScrollbar.value + Input.mouseScrollDelta.y*mouseSpeed;
         value = Mathf.Clamp(value, 0f, 1f);
         chatScrollbar.value = value;
