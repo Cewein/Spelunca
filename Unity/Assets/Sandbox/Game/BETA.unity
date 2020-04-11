@@ -152,6 +152,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: filterSmoothness
+      value: 0.266
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: filterCenter
+      value: 0.389
+      objectReference: {fileID: 0}
     - target: {fileID: 105404077034488235, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: raycastReticle
@@ -267,16 +275,6 @@ PrefabInstance:
       propertyPath: hookPoint
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 1946802908197384821, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: filterSmoothness
-      value: 0.266
-      objectReference: {fileID: 0}
-    - target: {fileID: 1946802908197384821, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: filterCenter
-      value: 0.389
-      objectReference: {fileID: 0}
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_SpotAngle
@@ -312,8 +310,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackElysian
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1946802908197384821, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
+    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: aimFovRatio
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: zoomSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
 --- !u!1 &134861551 stripped
 GameObject:
@@ -370,6 +377,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5026901896901606464, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 711560071311288066, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: cam
@@ -1208,17 +1220,17 @@ PrefabInstance:
     - target: {fileID: 5026901897514400054, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5026901897514400054, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5026901897514400054, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 5026901897224756694, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
@@ -1228,12 +1240,12 @@ PrefabInstance:
     - target: {fileID: 5026901896010924891, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5026901896010924891, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7f4ea9f3479a324292c7f522d40fb63, type: 3}
