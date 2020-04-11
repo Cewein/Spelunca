@@ -1740,11 +1740,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7149283391178080406}
     m_Modifications:
-    - target: {fileID: 1140787521867408397, guid: c31b0791284bd264a994ab30e0989ee0,
-        type: 3}
-      propertyPath: m_Name
-      value: "r\xE9servoir"
-      objectReference: {fileID: 0}
     - target: {fileID: 4147742603452618270, guid: c31b0791284bd264a994ab30e0989ee0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1800,6 +1795,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1140787521867408397, guid: c31b0791284bd264a994ab30e0989ee0,
+        type: 3}
+      propertyPath: m_Name
+      value: "r\xE9servoir"
+      objectReference: {fileID: 0}
     - target: {fileID: 3422498366946763904, guid: c31b0791284bd264a994ab30e0989ee0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1832,11 +1832,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280218019109568679}
     m_Modifications:
-    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
-        type: 3}
-      propertyPath: m_Name
-      value: "lampe \xE0 tube (4)"
-      objectReference: {fileID: 0}
     - target: {fileID: 3796627187238355988, guid: 723e95d8347480e43a63d048aceff641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1902,6 +1897,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 19.011663
       objectReference: {fileID: 0}
+    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
+        type: 3}
+      propertyPath: m_Name
+      value: "lampe \xE0 tube (4)"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 723e95d8347480e43a63d048aceff641, type: 3}
 --- !u!4 &3463268289430739218 stripped
@@ -1917,11 +1917,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8297495310755519220}
     m_Modifications:
-    - target: {fileID: 1140787521867408397, guid: c31b0791284bd264a994ab30e0989ee0,
-        type: 3}
-      propertyPath: m_Name
-      value: "r\xE9servoir"
-      objectReference: {fileID: 0}
     - target: {fileID: 4147742603452618270, guid: c31b0791284bd264a994ab30e0989ee0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1977,6 +1972,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1140787521867408397, guid: c31b0791284bd264a994ab30e0989ee0,
+        type: 3}
+      propertyPath: m_Name
+      value: "r\xE9servoir"
+      objectReference: {fileID: 0}
     - target: {fileID: 3422498366946763904, guid: c31b0791284bd264a994ab30e0989ee0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2009,11 +2009,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280218019109568679}
     m_Modifications:
-    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
-        type: 3}
-      propertyPath: m_Name
-      value: "lampe \xE0 tube (6)"
-      objectReference: {fileID: 0}
     - target: {fileID: 3796627187238355988, guid: 723e95d8347480e43a63d048aceff641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2084,6 +2079,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 19.011662
       objectReference: {fileID: 0}
+    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
+        type: 3}
+      propertyPath: m_Name
+      value: "lampe \xE0 tube (6)"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 723e95d8347480e43a63d048aceff641, type: 3}
 --- !u!4 &4073222463388883482 stripped
@@ -2099,11 +2099,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280218019109568679}
     m_Modifications:
-    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
-        type: 3}
-      propertyPath: m_Name
-      value: "lampe \xE0 tube (3)"
-      objectReference: {fileID: 0}
     - target: {fileID: 3796627187238355988, guid: 723e95d8347480e43a63d048aceff641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2169,6 +2164,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 19.011662
       objectReference: {fileID: 0}
+    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
+        type: 3}
+      propertyPath: m_Name
+      value: "lampe \xE0 tube (3)"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 723e95d8347480e43a63d048aceff641, type: 3}
 --- !u!4 &4158997611700941641 stripped
@@ -2184,11 +2184,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280218019109568679}
     m_Modifications:
-    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
-        type: 3}
-      propertyPath: m_Name
-      value: "lampe \xE0 tube"
-      objectReference: {fileID: 0}
     - target: {fileID: 3796627187238355988, guid: 723e95d8347480e43a63d048aceff641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2244,6 +2239,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
+        type: 3}
+      propertyPath: m_Name
+      value: "lampe \xE0 tube"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 723e95d8347480e43a63d048aceff641, type: 3}
 --- !u!4 &1720048490312089037 stripped
@@ -2259,11 +2259,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4747053773127546293}
     m_Modifications:
-    - target: {fileID: 1140787521867408397, guid: c31b0791284bd264a994ab30e0989ee0,
-        type: 3}
-      propertyPath: m_Name
-      value: "r\xE9servoir"
-      objectReference: {fileID: 0}
     - target: {fileID: 4147742603452618270, guid: c31b0791284bd264a994ab30e0989ee0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2319,6 +2314,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1140787521867408397, guid: c31b0791284bd264a994ab30e0989ee0,
+        type: 3}
+      propertyPath: m_Name
+      value: "r\xE9servoir"
+      objectReference: {fileID: 0}
     - target: {fileID: 3422498366946763904, guid: c31b0791284bd264a994ab30e0989ee0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2351,11 +2351,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280218019109568679}
     m_Modifications:
-    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
-        type: 3}
-      propertyPath: m_Name
-      value: "lampe \xE0 tube (1)"
-      objectReference: {fileID: 0}
     - target: {fileID: 3796627187238355988, guid: 723e95d8347480e43a63d048aceff641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2411,6 +2406,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
+        type: 3}
+      propertyPath: m_Name
+      value: "lampe \xE0 tube (1)"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 723e95d8347480e43a63d048aceff641, type: 3}
 --- !u!4 &443513142084514534 stripped
@@ -2426,11 +2426,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280218019109568679}
     m_Modifications:
-    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
-        type: 3}
-      propertyPath: m_Name
-      value: "lampe \xE0 tube (5)"
-      objectReference: {fileID: 0}
     - target: {fileID: 3796627187238355988, guid: 723e95d8347480e43a63d048aceff641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2501,6 +2496,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 19.011662
       objectReference: {fileID: 0}
+    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
+        type: 3}
+      propertyPath: m_Name
+      value: "lampe \xE0 tube (5)"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 723e95d8347480e43a63d048aceff641, type: 3}
 --- !u!4 &7052243396137492986 stripped
@@ -2516,11 +2516,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4346882809951706089}
     m_Modifications:
-    - target: {fileID: 652977199385629695, guid: 25f2cd1f772b25e4daaebb4af64c5a95,
-        type: 3}
-      propertyPath: m_Name
-      value: Rifle
-      objectReference: {fileID: 0}
     - target: {fileID: 536745189333772141, guid: 25f2cd1f772b25e4daaebb4af64c5a95,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2576,6 +2571,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 652977199385629695, guid: 25f2cd1f772b25e4daaebb4af64c5a95,
+        type: 3}
+      propertyPath: m_Name
+      value: Rifle
+      objectReference: {fileID: 0}
     - target: {fileID: 3295108081359485748, guid: 25f2cd1f772b25e4daaebb4af64c5a95,
         type: 3}
       propertyPath: magazine
@@ -2586,6 +2586,16 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 4619938465951187991}
+    - target: {fileID: 3295108081359485748, guid: 25f2cd1f772b25e4daaebb4af64c5a95,
+        type: 3}
+      propertyPath: pickaxeDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295108081359485748, guid: 25f2cd1f772b25e4daaebb4af64c5a95,
+        type: 3}
+      propertyPath: bulletSpreadAngle
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3813918882793845741, guid: 25f2cd1f772b25e4daaebb4af64c5a95,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2612,16 +2622,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4346882809951706089}
     m_Modifications:
-    - target: {fileID: 1947296168385012162, guid: fd56325d815faa34fb034900a07d524e,
-        type: 3}
-      propertyPath: m_Name
-      value: Fusil
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947296168385012162, guid: fd56325d815faa34fb034900a07d524e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3371648697353894460, guid: fd56325d815faa34fb034900a07d524e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2675,6 +2675,16 @@ PrefabInstance:
     - target: {fileID: 3371648697353894460, guid: fd56325d815faa34fb034900a07d524e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947296168385012162, guid: fd56325d815faa34fb034900a07d524e,
+        type: 3}
+      propertyPath: m_Name
+      value: Fusil
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947296168385012162, guid: fd56325d815faa34fb034900a07d524e,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1442571915609982077, guid: fd56325d815faa34fb034900a07d524e,
@@ -2707,11 +2717,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280218019109568679}
     m_Modifications:
-    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
-        type: 3}
-      propertyPath: m_Name
-      value: "lampe \xE0 tube (7)"
-      objectReference: {fileID: 0}
     - target: {fileID: 3796627187238355988, guid: 723e95d8347480e43a63d048aceff641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2777,6 +2782,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 19.011662
       objectReference: {fileID: 0}
+    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
+        type: 3}
+      propertyPath: m_Name
+      value: "lampe \xE0 tube (7)"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 723e95d8347480e43a63d048aceff641, type: 3}
 --- !u!4 &6025503779732845055 stripped
@@ -2792,11 +2802,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8280218019109568679}
     m_Modifications:
-    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
-        type: 3}
-      propertyPath: m_Name
-      value: "lampe \xE0 tube (2)"
-      objectReference: {fileID: 0}
     - target: {fileID: 3796627187238355988, guid: 723e95d8347480e43a63d048aceff641,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2856,6 +2861,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 19.011662
+      objectReference: {fileID: 0}
+    - target: {fileID: 1482929639004663895, guid: 723e95d8347480e43a63d048aceff641,
+        type: 3}
+      propertyPath: m_Name
+      value: "lampe \xE0 tube (2)"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 723e95d8347480e43a63d048aceff641, type: 3}

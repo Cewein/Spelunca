@@ -2013,6 +2013,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.6506
       objectReference: {fileID: 0}
+    - target: {fileID: 5026901896757887688, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.01953125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026901896986330946, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.01953125
+      objectReference: {fileID: 0}
     - target: {fileID: 5026901897514400054, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2622,6 +2632,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 4960815634682092117}
+    - target: {fileID: 568981547921675915, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: recoil
+      value: 0.03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6596093949ece3a45b48648d493ec967, type: 3}
 --- !u!1001 &4960815634682092114
@@ -2736,11 +2751,6 @@ PrefabInstance:
       propertyPath: invincible
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1946802908197384821, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: crouchInputName
@@ -2826,6 +2836,11 @@ PrefabInstance:
       propertyPath: m_ForceIntoRT
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7015592363743400258, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_TagString
+      value: FPSCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 5915367057393189970, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_Name
@@ -2858,8 +2873,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
-      propertyPath: pickaxeDamage
-      value: 0
+      propertyPath: recoil
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -2877,6 +2892,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2142796783819228743, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946802908197384821, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_Enabled
       value: 0

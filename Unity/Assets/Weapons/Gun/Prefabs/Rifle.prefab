@@ -67,9 +67,9 @@ MonoBehaviour:
   firingRate: 0.1
   bulletSpreadAngle: 0
   bulletsPerShot: 1
-  recoil: 1
+  recoil: 0.08
   aimFovRatio: 1
-  aimOffset: {x: 0, y: 0, z: 0}
+  zoomSpeed: 10
 --- !u!1 &4743559943885876923
 GameObject:
   m_ObjectHideFlags: 0
