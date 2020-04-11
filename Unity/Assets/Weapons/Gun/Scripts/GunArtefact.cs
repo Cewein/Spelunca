@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Assertions.Comparers;
+
 /// <summary>
 /// Manual : need to press input each time to trigger ( ex : fusil à pompe )
 /// Automatic : trigger while input is helding ( ex : mitraillette )
@@ -71,11 +74,13 @@ public class GunArtefact : MonoBehaviour
     [Tooltip("gun recoil")][SerializeField]
     [Range(0f, 2f)]
     private float recoil = 1;
+    
+    [Header("Aiming Parameters")]
     [Tooltip("Ratio of the default FOV that this weapon applies while aiming")][SerializeField]
     [Range(0f, 1f)]
-    private float aimFovRatio = 1f;
-    [Tooltip("Translation to apply to weapon arm when aiming with this weapon")][SerializeField]
-    private Vector3 aimOffset;
+    private float aimFovRatio = 0.8f;
+    [Tooltip("How fast the smooth aiming zoom animaiton occured.")][SerializeField]
+    private float zoomSpeed = 10f;
 
    /* [Header("Charging (charging weapons only)")]
     [Tooltip("Auto-shooting or not when max charge is reached.")][SerializeField]
@@ -88,8 +93,11 @@ public class GunArtefact : MonoBehaviour
     #region Other fields ===============================================================================================
 
     public ShootingMode ShootMode => shootMode;
-
+    private float normalFOV;
     private float lastTimeFiring;
+    private MinerController miner;
+    private Vector3 target;
+
     private Ammo currentAmmo;
     private Ammo CurrentAmmo
     {
@@ -112,8 +120,19 @@ public class GunArtefact : MonoBehaviour
 
     private void Start()
     {
+        normalFOV = Camera.main.fieldOfView;
+        miner = GetComponentInParent<MinerController>();
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
+        if (controller == null){ controller = GetComponentInParent<GunController>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
+        controller.aim += Aim;
+    }
+
+    private void Aim(bool isAiming)
+    {
+        float targetFOV = isAiming ? normalFOV * aimFovRatio : normalFOV;
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
+
     }
 
     private bool Trigger(bool inputDown, bool inputHeld, bool inputUp)
@@ -225,10 +244,15 @@ public class GunArtefact : MonoBehaviour
                                                   );
         }
         catch (NullReferenceException e){}
-        
 
-
+        TakeRecoil();
         lastTimeFiring = Time.time;
+    }
+
+    private void TakeRecoil()
+    {
+        miner.WeaponParent.position -= miner.WeaponParent.transform.forward*recoil;
+        // TODO : FPSCamera shake accordind to recoil;
     }
     
     private Vector3 SpreadBullet(Transform shootTransform)

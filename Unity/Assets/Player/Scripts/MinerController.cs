@@ -124,6 +124,8 @@ public class MinerController : MonoBehaviour
 
     public GameObject CurrentWeapon  => weapons[weaponIndex];
 
+    public Transform WeaponParent => weaponParent;
+
     #endregion
 
     private void Awake()

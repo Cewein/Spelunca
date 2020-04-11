@@ -117,7 +117,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.8
   m_Radius: 0.35
-  m_SlopeLimit: 45
+  m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.001
   m_MinMoveDistance: 0
@@ -251,7 +251,6 @@ GameObject:
   - component: {fileID: 4359365164128686354}
   - component: {fileID: 4027019231142951144}
   - component: {fileID: 4960815634591792199}
-  - component: {fileID: 1946802908197384821}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -328,25 +327,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2563191609042716782}
   m_Enabled: 1
---- !u!114 &1946802908197384821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2563191609042716782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b422e748a0ae054184047235e05ab61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  celShadingShader: {fileID: 4800000, guid: 939e094cb57ff2d4c98351c80374a641, type: 3}
-  intensity: 1
-  filterCenter: 0.5
-  filterSmoothness: 0.5
-  spacing: 0.1
-  lowPassFilter: 1
-  debugMode: 0
 --- !u!1 &2756053813625259436
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,16 +864,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4619938465951187991, guid: c64ee70d7595dae438d3c883ed3aa4f7,
-        type: 3}
-      propertyPath: inputHandler
-      value: 
-      objectReference: {fileID: 2465613268572783777}
-    - target: {fileID: 5296651518196909295, guid: c64ee70d7595dae438d3c883ed3aa4f7,
-        type: 3}
-      propertyPath: printDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8280218019109568679, guid: c64ee70d7595dae438d3c883ed3aa4f7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -947,6 +917,16 @@ PrefabInstance:
     - target: {fileID: 8280218019109568679, guid: c64ee70d7595dae438d3c883ed3aa4f7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619938465951187991, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+        type: 3}
+      propertyPath: inputHandler
+      value: 
+      objectReference: {fileID: 2465613268572783777}
+    - target: {fileID: 5296651518196909295, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+        type: 3}
+      propertyPath: printDebug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4895481979858790706, guid: c64ee70d7595dae438d3c883ed3aa4f7,
