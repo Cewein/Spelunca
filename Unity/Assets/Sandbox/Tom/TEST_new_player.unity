@@ -2692,7 +2692,8 @@ PrefabInstance:
         type: 3}
       propertyPath: hook
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8669081980456443542, guid: b2d288cece5922049a8cac9ad28b969f,
+        type: 3}
     - target: {fileID: 1414176941927642856, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: inputHandler

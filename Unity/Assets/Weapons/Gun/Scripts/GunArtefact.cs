@@ -251,7 +251,11 @@ public class GunArtefact : MonoBehaviour
 
     private void TakeRecoil()
     {
-        miner.WeaponParent.position -= miner.WeaponParent.transform.forward*recoil;
+        try
+        {
+            miner.WeaponParent.position -= miner.WeaponParent.transform.forward*recoil;
+        }
+        catch (NullReferenceException e){} 
         // TODO : FPSCamera shake accordind to recoil;
     }
     
