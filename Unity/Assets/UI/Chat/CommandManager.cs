@@ -20,6 +20,7 @@ public class CommandManager : MonoBehaviour
     
     [SerializeField] private CelShadingMaster celShading;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private PlayerStats playerStats;
     [SerializeField] public GODictionary targetableObjects;
     
     private string[] cmdWords;
@@ -43,12 +44,70 @@ public class CommandManager : MonoBehaviour
                 return cmdSetMarker();
             case "cel":
                 return celCommands();
+            case "invincible":
+                return cmdInvincible();
+            case "maxresources":
+                return cmdMaxResources();
+            case "konami":
+                return cmdKonami();
             case "help":
                 return cmdHelp();
         }
         return commandError("Unknown command. "+help);
     }
 
+    private CommandMessage cmdInvincible()
+    {
+        if (cmdWords.Length == 2)
+        {
+            switch (cmdWords[1])
+            {
+                case "true":
+                    playerStats.invincible = true;
+                    return commandSuccess("Invincibility activated.");
+                case "false":
+                    playerStats.invincible = false;
+                    return commandSuccess("Invincibility deactivated.");
+            }
+            return commandError("Unknown '" + cmdWords[1] + "'Expected 'true' or 'false'.");
+        }
+        return commandError("'/invincible' is expecting 1 parameter.");
+    }
+    private CommandMessage cmdMaxResources()
+    {
+        if (cmdWords.Length == 2)
+        {
+            switch (cmdWords[1])
+            {
+                case "true":
+                    
+                    return commandWarning("Will be implemented later.");
+                case "false":
+                    return commandSuccess("Will be implemented later.");
+            }
+            return commandError("Unknown '" + cmdWords[1] + "'Expected 'true' or 'false'.");
+        }
+        return commandError("'/konami' is expecting 1 parameter.");
+    }
+    private CommandMessage cmdKonami()
+    {
+        if (cmdWords.Length == 2)
+        {
+            switch (cmdWords[1])
+            {
+                case "true":
+                    cmdMaxResources();
+                    cmdInvincible();
+                    return commandSuccess("KONAMI CODE ACTIVATED.");
+                case "false":
+                    cmdMaxResources();
+                    cmdInvincible();
+                    return commandSuccess("KONAMI CODE DEACTIVATED.");
+            }
+            return commandError("Unknown '" + cmdWords[1] + "'Expected 'true' or 'false'.");
+        }
+        return commandError("'/maxresources' is expecting 1 parameter.");
+    }
     private CommandMessage celCommands()
     {
         if (cmdWords.Length > 1) //si on a au moins un parametre en plus que 'chunk'

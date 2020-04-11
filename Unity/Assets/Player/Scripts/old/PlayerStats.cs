@@ -30,6 +30,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         if (invincible)
         {
+            Debug.Log("Player can die");
             invincibleImage.enabled = true;
         }
         else
