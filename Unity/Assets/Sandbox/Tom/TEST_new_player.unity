@@ -2567,6 +2567,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 2173078109135552581, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
       propertyPath: miner
@@ -2871,10 +2876,15 @@ PrefabInstance:
       propertyPath: crosshair.color.b
       value: 0.8544411
       objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: aimFovRatio
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
-      propertyPath: recoil
-      value: 0.08
+      propertyPath: aimFovRatio
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}

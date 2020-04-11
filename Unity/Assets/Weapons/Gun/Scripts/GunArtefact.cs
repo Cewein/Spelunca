@@ -94,7 +94,6 @@ public class GunArtefact : MonoBehaviour
 
     public ShootingMode ShootMode => shootMode;
     private float normalFOV;
-    private float aimingFOV;
     private float lastTimeFiring;
     private MinerController miner;
     private Vector3 target;
@@ -122,16 +121,16 @@ public class GunArtefact : MonoBehaviour
     private void Start()
     {
         normalFOV = Camera.main.fieldOfView;
-        aimingFOV = normalFOV * aimFovRatio;
         miner = GetComponentInParent<MinerController>();
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
         if (controller == null){ controller = GetComponentInParent<GunController>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
+        controller.aim += Aim;
     }
 
     private void Aim(bool isAiming)
     {
-        float targetFOV = isAiming ? aimingFOV : normalFOV;
+        float targetFOV = isAiming ? normalFOV * aimFovRatio : normalFOV;
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
 
     }
