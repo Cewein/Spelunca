@@ -55,7 +55,7 @@ public class CommandManager : MonoBehaviour
         {
             switch (cmdWords[1])
             {
-                case "on":
+                case "true":
                     celShading.intensity = 1f;
                     celShading.updateShader();
                     return commandSuccess("Cel shading activated.");
@@ -66,7 +66,7 @@ public class CommandManager : MonoBehaviour
                 case "debug":
                     return cmdCelDebug();
             }
-            return commandError("Unknown '/cel debug "+cmdWords[1]+"'. "+help);
+            return commandError("Unknown '/cel "+cmdWords[1]+"'. "+help);
         }
         return commandError("'/cel' is a group of commands. "+help);
     }
@@ -281,24 +281,50 @@ public class CommandManager : MonoBehaviour
             switch (cmdWords[1])
             {
                 case "gameplay":
-                    return commandInfo("");
+                    string helpGameplay = "---------------- GAMEPLAY ----------------\n\nWhat are you doing in those caves ?\n" +
+                                          "You don't know yet but one thing is for sure. There is something strange happening in those caves.\n" +
+                                          "It seems like something is calling you from deep inside those caves and it doesn't feel friendly...\n" +
+                                          "Equipped with your wonderful St Victoria - an incredible weapon that can shoot multiple types of energy -, your pickaxe and your grappling hook, you'll seek out for that menace while you'll try to survive in those caves...\n\n" +
+                                          "As you'll soon figure out, there are enemies hidden in those caves and they are quite... hungry...\n" +
+                                          "These enemies seem to have different colors... I bet this is important...\n" +
+                                          "And what about those wonderful crystals ? It must be related...\n\n" +
+                                          "Well, what are you waiting for ? You're still reading this ?\n" +
+                                          "You better grab your pickaxe and your weapon and start your adventure before these caves get the better of you ...\n\n\n" +
+                                          "Spelunca's dev team - Tom, Max and Antoine\n";
+                    return commandInfo(helpGameplay);
                 case "controls":
-                    return commandInfo("");
+                    string helpControls = "---------------- CONTROLS ----------------\n\nHere are the controls of Spelunca :\n\n" +
+                                          " - jump : [" + "x" + "]\n\n" +
+                                          " - jump : [" + "x" + "]\n\n" +
+                                          " - jump : [" + "x" + "]\n\n" +
+                                          " - jump : [" + "x" + "]\n\n" +
+                                          " - jump : [" + "x" + "]\n\n" +
+                                          " - jump : [" + "x" + "]\n\n" +
+                                          "";
+                    return commandInfo(helpControls);
             }
         }
-        string helpFileContent = "---------------- HELPER ----------------\n\nHere are all the commands currently available:\n\n" +
-                                 " - /destroy [id] :\n   Destroy a marked object by giving its id.\n\n" +
-                                 " - /setmark player [id] :\n   Creates a marker in game named [id].\n\n" +
-                                 " - /setmark cursor [id] :\n   Creates a marker at cursor's position named [id].\n\n" +
-                                 " - /setmark target [id] :\n   Marks the object pointed by the cursor and names it [id].\n\n" +
-                                 " - /chunk show border [true|false] :\n   (WIP) Shows the chunk's borders.\n\n" +
-                                 " - /chunk reload :\n   (WIP) Reloads the current chunks.\n\n" +
-                                 " - /tp [target] [destination] :\n   Teleports [target] [destination].\n\n" +
-                                 " - /tp [destination] :\n   Teleports the player [destination].\n\n" +
-                                 " - /cel [true|false] :\n   Activates/deactivates the cel shading effect.\n\n" +
-                                 " - /cel debug [true|false] :\n   Activates/deactivates the cel shading debug mode.\n" +
-                                 " - /godmode [true|false] :\n   Activates/deactivates the cel shading debug mode.\n" +
-                                 " - /cel debug [true|false] :\n   Activates/deactivates the cel shading debug mode.\n";
+
+        string helpFileContent =
+            "---------------- HELP ----------------\n\nHere are all the commands currently available:\n\n" +
+            "1)  CHEAT COMMANDS\n\n" +
+            " - /godmode [true|false] :\n   (WIP) Prevent the player from loosing HPs.\n\n" +
+            " - /fullresources [true|false] :\n   (WIP) Fills up the resource tanks to infinite amount of energy.\n\n" +
+            " - /konami [true|false] :\n   (WIP) Well... godmode + fullresources.\n\n" +
+            " - /tp [target] [destination] :\n   Teleports [target] to [destination]'s current position'.\n\n" +
+            " - /tp [destination] :\n   Teleports the player [destination].\n\n" +
+            "3)  CHUNKS COMMANDS\n\n" +
+            " - /chunk show border [true|false] :\n   (WIP) Shows the chunk's borders.\n\n" +
+            " - /chunk reload :\n   (WIP) Reloads the current chunks.\n\n" +
+            "3)  GRAPHISM COMMANDS\n\n" +
+            " - /cel debug [true|false] :\n   Activates/deactivates the cel shading debug mode.\n\n" +
+            " - /cel debug [true|false] :\n   Activates/deactivates the cel shading debug mode.\n\n" +
+            " - /cel [true|false] :\n   Activates/deactivates the cel shading effect.\n\n" +
+            "4)  MISCELLANEOUS COMMANDS\n\n" +
+            " - /destroy [id] :\n   Destroy a marked object by giving its id.\n\n" +
+            " - /setmark player [id] :\n   Creates a marker in game named [id].\n\n" +
+            " - /setmark cursor [id] :\n   Creates a marker at cursor's position named [id].\n\n" +
+            " - /setmark target [id] :\n   Marks the object pointed by the cursor and names it [id].\n\n";
         return commandInfo(helpFileContent);
         //Dictionary<string,> = JsonUtility.FromJson(helpFileContent);
 
