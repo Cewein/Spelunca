@@ -1,65 +1,70 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour, IDamageable
 {
     [Tooltip("Player maximum life amount.")][SerializeField]
-    private int maxLife = 100;
-    private int life;
-    
+    private int _maxHP = 50;
 
-    public int Life { get => life; }
+    [Tooltip("Invincibility HUD image.")] [SerializeField]
+    private Image invincibleImage;
+    private int _HP;
 
-    public int MaxLife{get => maxLife;}
+    public HealthBar healthBar;
+
+    public int Life { 
+        get => _HP;
+        set => _HP = value;
+    }
+
+    public int MaxLife{get => _maxHP;}
 
     public Action<int, Vector3, ResourceType> hurt;
     public Action<int> heal;
     public Action<bool> die;
     public bool invincible = false;
-    private void Awake()
+
+    private void FixedUpdate()
     {
-        life = maxLife;
+        if (invincible)
+        {
+         //   Debug.Log("Player can die");
+            invincibleImage.enabled = true;
+        }
+        else
+        {
+         //   Debug.Log("Player can die");
+            invincibleImage.enabled = false;
+        }
     }
+
 
     public void SetDamage(int damage, Vector3 direction, ResourceType damageType = ResourceType.normal)
     {
-        /*if (life - damage <= 0)
+        if (!invincible)
         {
-            if (!invincible)
-            {
-                isPlayerDie(true);
-            }
-            else if (invincible) return;
-            
-        }*/
-        hurt?.Invoke(damage, direction, damageType);
-        life -= damage;    
-        if (life <= 0 && !invincible) isPlayerDie(true);
+            healthBar.removeHP(damage);
+            hurt?.Invoke(damage, direction, damageType);
+        }  
+        if (_HP <= 0 && !invincible) isPlayerDead(true);
     }
 
     public void RestoreLife(int hp)
     {
         heal?.Invoke(hp);
-        life += hp;
+        healthBar.addHP(hp);
     }
     
-    public void isPlayerDie(bool isDie)
+    public void isPlayerDead(bool isDead)
     {
-        die?.Invoke(isDie);
-        life = 0;
+        die?.Invoke(isDead);
     }
 
     public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
     {
         SetDamage((int) damage, Vector3.forward ,type);
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F6))
-        {
-            invincible = !invincible;
-        }
     }
 }
