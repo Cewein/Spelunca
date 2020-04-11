@@ -1240,7 +1240,7 @@ PrefabInstance:
     - target: {fileID: 5026901897224756694, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00024414062
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 5026901896010924891, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
@@ -2194,6 +2194,7 @@ MonoBehaviour:
     type: 3}
   densityShader: {fileID: 7200000, guid: 43ca010cde78eee4cbae15d9c540c5b7, type: 3}
   MeshGeneratorShader: {fileID: 7200000, guid: 3a3b046f8a188de428720dce66733b07, type: 3}
+  useDefaultNormal: 0
   player: {fileID: 134861552}
   chunkSize: 32
   viewRange: 5
@@ -2202,6 +2203,9 @@ MonoBehaviour:
   lacunarity: 2
   persistence: 0.33
   isoLevel: 0.45
+  spawnSize: 20
+  bossSize: 50
+  tunnelSize: 9
   boss: {fileID: 1573004006}
 --- !u!4 &1869160575
 Transform:

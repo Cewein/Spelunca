@@ -113,6 +113,7 @@ public class GunArtefact : MonoBehaviour
     private void Start()
     {
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
+        if (controller == null){ controller = GetComponentInParent<GunController>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
     }
 

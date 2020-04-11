@@ -1582,6 +1582,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5026901896901606464, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 711560071311288066, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: cam
@@ -2007,6 +2012,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6506
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026901897514400054, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026901897514400054, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026901897514400054, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026901896010924891, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026901896010924891, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 711560070411958152, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
@@ -2522,16 +2552,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
-        type: 3}
-      propertyPath: miner
-      value: 
-      objectReference: {fileID: 1019905854}
     - target: {fileID: 2173078109135552581, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: miner
+      value: 
+      objectReference: {fileID: 1019905854}
     - target: {fileID: 279629205196209772, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2606,6 +2636,11 @@ PrefabInstance:
       propertyPath: raycastReticle
       value: 
       objectReference: {fileID: 1949351325}
+    - target: {fileID: 2338222191191406569, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_Name
+      value: FPS_MinerPlayer
+      objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: weaponParent
@@ -2631,11 +2666,6 @@ PrefabInstance:
       propertyPath: raycastReticle
       value: 
       objectReference: {fileID: 1949351325}
-    - target: {fileID: 2338222191191406569, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_Name
-      value: FPS_MinerPlayer
-      objectReference: {fileID: 0}
     - target: {fileID: 3846255216405922929, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: controller
@@ -2706,20 +2736,25 @@ PrefabInstance:
       propertyPath: invincible
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1946802908197384821, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: crouchInputName
-      value: Horizontal
+      value: Crouch
       objectReference: {fileID: 0}
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: reloadInputName
-      value: Horizontal
+      value: Reload
       objectReference: {fileID: 0}
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: runInputName
-      value: Horizontal
+      value: Run
       objectReference: {fileID: 0}
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -2729,17 +2764,17 @@ PrefabInstance:
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: azimuthInputName
-      value: Horizontal
+      value: Mouse X
       objectReference: {fileID: 0}
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: jumpInputName
-      value: Horizontal
+      value: Jump
       objectReference: {fileID: 0}
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: fireInputName
-      value: Horizontal
+      value: Fire
       objectReference: {fileID: 0}
     - target: {fileID: 4027019231142951144, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -2795,11 +2830,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: pt_Reticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1946802908197384821, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}

@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magazine: {fileID: 0}
-  controller: {fileID: 0}
+  controller: {fileID: 3128893638381751823}
   isPickaxe: 1
   pickaxeDamage: 5
   name: Goliath
@@ -168,7 +168,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 167efa908efb5254383b7c63760ed987, type: 3}
     size: 50
     color: {r: 0, g: 1, b: 0, a: 1}
-    scope: 20
+    scope: 2
   normalResourceAmmo: {fileID: 0}
   AmmoType: []
   muzzle: {fileID: 0}
@@ -192,4 +192,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 0}
+  IA: 0
+  iaInputHandler: {fileID: 0}
   raycastReticle: {fileID: 0}
