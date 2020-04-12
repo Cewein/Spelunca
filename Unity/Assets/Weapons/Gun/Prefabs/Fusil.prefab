@@ -147,7 +147,7 @@ MonoBehaviour:
   firingRate: 0.7
   bulletSpreadAngle: 10
   bulletsPerShot: 1
-  recoil: 2
+  recoil: 1.2
   reloadCooldown: 35
   aimFovRatio: 0.8
   zoomSpeed: 10
