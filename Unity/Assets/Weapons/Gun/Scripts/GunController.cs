@@ -9,34 +9,44 @@ public class GunController : MonoBehaviour
 
     [Header("Linked Objects")] [SerializeField]
     private MinerInputHandler inputHandler;
-
-    public bool IA = false;
+    
+    [Header("Artificial Intelligence")]
+    [Tooltip("Is this weapon controlled by an Artificial Intelligence")][SerializeField] 
+    private bool IA = false;
+    [Tooltip("Artificial Intelligence input handler")][SerializeField]
     public IAInputHandler iaInputHandler;
+    
     [Header("Raycast")]
     [Tooltip("The reticle that perform raycast.")] [SerializeField]
-    private Raycast raycastReticle = null; // TODO : le récupérer boudiouuuuu !!!! mais ça va changer la gestion des reticles de la HUD alors je fait après
-
-    [Header("Animations")] [SerializeField]
+    private Raycast raycastReticle = null;
+    
+    [Header("Animations")] 
+    [Tooltip("Transform of the gun fore-end.")][SerializeField]
     private Transform foreEndTransform = null;
-    [SerializeField] private Transform maxPulledPosition = null;
-    [SerializeField] private Transform minPullPosition = null;
+    [Tooltip("Transform of the gun fore-end position when it's fully pulled.")][SerializeField]
+    private Transform maxPulledPosition = null;
+    [Tooltip("Transform of the gun fore-end position when it's not pulled at all.")] [SerializeField] 
+    private Transform minPullPosition = null;
+    [Tooltip("Time of the animation when it's reload.")][SerializeField]
+    private float reloadAnimationTime = 50;
+   
+    #endregion ==========
 
-    [SerializeField] private float reloadAnimationTime = 50;
+    #region Other Fields ===============================================================================================
+
     private bool triggerReloadAnimation;
-    private float reloadTimer;
     private bool canAttack = true;
-    public RaycastHit Hit { get =>  raycastReticle.Hit; }
-
+    private float reloadTimer;
+    public RaycastHit Hit { get =>  raycastReticle.Hit; } 
     public bool TriggerReloadAnimation{get => triggerReloadAnimation;}
 
-    #endregion ==========
+    #endregion
     
     #region Action ==========
 
     public event Action<bool,bool,bool> trigger;
     public event Action<bool> aim;
     public event Action<bool> reload;
-    
 
     #endregion ==========
     
@@ -124,7 +134,6 @@ public class GunController : MonoBehaviour
         {
             foreEndTransform.position = Vector3.Lerp(foreEndTransform.position , maxPulledPosition.position, (reloadAnimationTime - reloadTimer)/(reloadAnimationTime/2));
             reloadTimer--;
-
         }
         else if (triggerReloadAnimation && reloadTimer <= reloadAnimationTime/2)
         {
@@ -132,8 +141,6 @@ public class GunController : MonoBehaviour
             if (triggerReloadAnimation && reloadTimer < 0) triggerReloadAnimation = false;
             reloadTimer--;
         }
-        
-
     }
     
     #endregion ==========

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
 
 /// <summary>
-/// Manual : need to press input each time to trigger ( ex : fusil à pompe )
-/// Automatic : trigger while input is helding ( ex : mitraillette )
-/// Charge : held input to charge energy and trigger when release (ex : les attaques chargées quoi )
-/// semi-auto : I don't really know but some gun are like this in real life/video game so I put it
-/// just in case.
+/// Weapon reloading mode.
+/// Manual : need to press input each time to trigger and reload after each shoot ( ex : shotgun )
+/// Automatic : shoot while input is pressed until the magazine is empty ( ex : machine gun )
+/// Semi-auto : need to press input each time to trigger but no need to reload if the magazine isn't empty (ex : sniper)
+/// Charge : held input to charge energy and trigger when release (ex : plasma canon )
 /// </summary>
 public enum ShootingMode{ MANUAL , AUTO, SEMI, CHARGE }
 
@@ -63,8 +61,6 @@ public class GunArtefact : MonoBehaviour
     
     [Tooltip("How the the trigger ammo when we trigger it.")][SerializeField]
     private ShootingMode shootMode;
-   // [Tooltip("The projectile prefab")]
-    //public Projectile projectilePrefab;
     [Tooltip("Delay between two shot")][SerializeField]
     private float firingRate = 0.5f;
     [Tooltip("Cone angle where the bullet will spread while shooting.")][SerializeField]
@@ -74,8 +70,8 @@ public class GunArtefact : MonoBehaviour
     [Tooltip("gun recoil")][SerializeField]
     [Range(0f, 2f)]
     private float recoil = 1;
-
-    [SerializeField] private int reloadCooldown = 30;
+    [Tooltip("Time between a shot and the reloading action ( Manual weapon only )")][SerializeField] 
+    private int reloadCooldown = 30;
     
     [Header("Aiming Parameters")]
     [Tooltip("Ratio of the default FOV that this weapon applies while aiming")][SerializeField]
@@ -90,15 +86,16 @@ public class GunArtefact : MonoBehaviour
     [Tooltip("Time needed to reach max energy charged")][SerializeField]
     private float chargeTime = 2f;*/
 
-   [Header("IA")] [SerializeField] private bool ia = false;
+   [Header("AI")] 
+   [Tooltip("Is the miner controller an Artificial Intelligence ?")][SerializeField] 
+   private bool ai = false;
     
     #endregion
     
     #region Other fields ===============================================================================================
 
     private int timer;
-    private bool forceReload = false;
-    public ShootingMode ShootMode => shootMode;
+    private bool forceReload;
     private float normalFOV;
     private float lastTimeFiring;
     private MinerController miner;
@@ -121,6 +118,7 @@ public class GunArtefact : MonoBehaviour
     }
 
     public Crosshair Crosshair => crosshair;
+    public ShootingMode ShootMode => shootMode;
 
     #endregion
 
@@ -131,7 +129,8 @@ public class GunArtefact : MonoBehaviour
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
         if (controller == null){ controller = GetComponentInParent<GunController>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
-        if (!ia) controller.aim += Aim;
+        if (!ai) controller.aim += Aim;
+        forceReload = false;
     }
 
     private void Aim(bool isAiming)
@@ -176,8 +175,6 @@ public class GunArtefact : MonoBehaviour
             default:
                 return false;
         }
-
-        return false;
     }
 
     private void LateUpdate()
@@ -187,16 +184,15 @@ public class GunArtefact : MonoBehaviour
 
     private bool TryShoot()
     {
-        if (isPickaxe)
-        {
-            return Pick(true);
-        }
-        if (magazine.CurrentResourceQuantity >= 0f && lastTimeFiring + firingRate < Time.time && !controller.TriggerReloadAnimation && !forceReload)
+        if (isPickaxe){return Pick(true);}
+        if (magazine.CurrentResourceQuantity >= 0f
+            && lastTimeFiring + firingRate < Time.time
+            && !controller.TriggerReloadAnimation
+            && !forceReload)
         {
             Shoot();
             return true;
         }
-
         return false;
     }
     
@@ -289,10 +285,8 @@ public class GunArtefact : MonoBehaviour
     private void ForceReload()
     {
         timer--;
-        if (timer < 0)
-        {
-            controller.isReloading(true);
-            forceReload = false;
-        }
+        if (timer >= 0) return;
+        controller.isReloading(true);
+        forceReload = false;
     }
 }
