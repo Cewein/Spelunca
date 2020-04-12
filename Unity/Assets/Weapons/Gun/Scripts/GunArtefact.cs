@@ -141,16 +141,25 @@ public class GunArtefact : MonoBehaviour
         switch (shootMode)
         {
             case ShootingMode.MANUAL:
-                if (inputDown){ return TryShoot(); }
+                if (inputDown)
+                {
+                    if (TryShoot())
+                    {
+                        return ForceReload();
+                    }
+                }
                 return false;
 
             case ShootingMode.AUTO:
                 if (inputHeld){ return TryShoot(); }
                 return false;
             
-            /*case ShootingMode.SEMI:break; // I don't know for the moment
+            case ShootingMode.SEMI:
+                if (inputDown){ return TryShoot(); }
+                return false;
+                
 
-          case ShootingMode.CHARGE:
+        /*  case ShootingMode.CHARGE:
                 if (inputHeld){ TryBeginCharge(); }
                 if (inputUp || (shootOnMaxEnergy && currentCharge >= 1f))
                 {
@@ -220,7 +229,7 @@ public class GunArtefact : MonoBehaviour
         ResourcesStock.Instance.setResource(type,quantity);
     }
 
-    private void Shoot()
+    private bool Shoot()
     {
         // spawn all bullets with random direction
         for (int i = 0; i < bulletsPerShot; i++)
@@ -248,6 +257,7 @@ public class GunArtefact : MonoBehaviour
 
         TakeRecoil();
         lastTimeFiring = Time.time;
+        return true;
     }
 
     private void TakeRecoil()
@@ -263,5 +273,10 @@ public class GunArtefact : MonoBehaviour
     private Vector3 SpreadBullet(Transform shootTransform)
     {
         return Vector3.Slerp(shootTransform.forward, UnityEngine.Random.insideUnitSphere,  bulletSpreadAngle / 180f);;
+    }
+
+    private bool ForceReload()
+    {
+        return controller.isReloading(true);
     }
 }

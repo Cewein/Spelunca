@@ -77,7 +77,7 @@ public class GunController : MonoBehaviour
         aim?.Invoke(isAiming);
     }
     
-    private bool isReloading(bool isReloading)
+    public bool isReloading(bool isReloading)
     {
         reload?.Invoke(isReloading);
         return isReloading;
