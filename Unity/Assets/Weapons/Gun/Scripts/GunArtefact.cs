@@ -136,7 +136,7 @@ public class GunArtefact : MonoBehaviour
 
     private void Aim(bool isAiming)
     {
-        float targetFOV = isAiming ? normalFOV * aimFovRatio : normalFOV;
+        float targetFOV = isAiming && !controller.TriggerReloadAnimation  ? normalFOV * aimFovRatio : normalFOV;
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
     }
 
