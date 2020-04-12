@@ -528,6 +528,11 @@ PrefabInstance:
       propertyPath: invincibleImage
       value: 
       objectReference: {fileID: 22150288}
+    - target: {fileID: 8499784402384746599, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1000155468}
     - target: {fileID: 422830776158004674, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: player
@@ -1049,6 +1054,18 @@ MonoBehaviour:
   mainMenuPath: MainMenu
   gameScenePath: Assets/Sandbox/Game/TEST_GAMEPLAY.unity
   boss: {fileID: 726125846}
+--- !u!114 &1000155468 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4908962831358623288, guid: 5dad608840011074d8539964cb7f9440,
+    type: 3}
+  m_PrefabInstance: {fileID: 107481891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572af0d38aff0c34cae56373e37560c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1037837887
 GameObject:
   m_ObjectHideFlags: 0
