@@ -179,7 +179,7 @@ public class GunArtefact : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (forceReload) ForceReload();
+        if (forceReload && !isPickaxe) ForceReload();
     }
 
     private bool TryShoot()
