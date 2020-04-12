@@ -74,6 +74,8 @@ public class GunArtefact : MonoBehaviour
     [Tooltip("gun recoil")][SerializeField]
     [Range(0f, 2f)]
     private float recoil = 1;
+
+    [SerializeField] private int reloadCooldown = 30;
     
     [Header("Aiming Parameters")]
     [Tooltip("Ratio of the default FOV that this weapon applies while aiming")][SerializeField]
@@ -94,6 +96,8 @@ public class GunArtefact : MonoBehaviour
     
     #region Other fields ===============================================================================================
 
+    private int timer;
+    private bool forceReload = false;
     public ShootingMode ShootMode => shootMode;
     private float normalFOV;
     private float lastTimeFiring;
@@ -145,7 +149,9 @@ public class GunArtefact : MonoBehaviour
                 {
                     if (TryShoot())
                     {
-                        return ForceReload();
+                        timer = reloadCooldown;
+                        forceReload = true;
+                        return forceReload;
                     }
                 }
                 return false;
@@ -173,14 +179,19 @@ public class GunArtefact : MonoBehaviour
 
         return false;
     }
-    
+
+    private void LateUpdate()
+    {
+        if (forceReload) ForceReload();
+    }
+
     private bool TryShoot()
     {
         if (isPickaxe)
         {
             return Pick(true);
         }
-        if (magazine.CurrentResourceQuantity >= 0f && lastTimeFiring + firingRate < Time.time)
+        if (magazine.CurrentResourceQuantity >= 0f && lastTimeFiring + firingRate < Time.time && !controller.TriggerReloadAnimation && !forceReload)
         {
             Shoot();
             return true;
@@ -275,8 +286,13 @@ public class GunArtefact : MonoBehaviour
         return Vector3.Slerp(shootTransform.forward, UnityEngine.Random.insideUnitSphere,  bulletSpreadAngle / 180f);;
     }
 
-    private bool ForceReload()
+    private void ForceReload()
     {
-        return controller.isReloading(true);
+        timer--;
+        if (timer < 0)
+        {
+            controller.isReloading(true);
+            forceReload = false;
+        }
     }
 }

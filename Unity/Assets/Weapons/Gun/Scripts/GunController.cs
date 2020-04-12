@@ -1,5 +1,7 @@
 ﻿using System;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.Assertions.Comparers;
 
 public class GunController : MonoBehaviour
 {
@@ -14,9 +16,18 @@ public class GunController : MonoBehaviour
     [Tooltip("The reticle that perform raycast.")] [SerializeField]
     private Raycast raycastReticle = null; // TODO : le récupérer boudiouuuuu !!!! mais ça va changer la gestion des reticles de la HUD alors je fait après
 
-    private GunLoader magazine;
+    [Header("Animations")] [SerializeField]
+    private Transform foreEndTransform = null;
+    [SerializeField] private Transform maxPulledPosition = null;
+    [SerializeField] private Transform minPullPosition = null;
+
+    [SerializeField] private float reloadAnimationTime = 50;
+    private bool triggerReloadAnimation;
+    private float reloadTimer;
     private bool canAttack = true;
     public RaycastHit Hit { get =>  raycastReticle.Hit; }
+
+    public bool TriggerReloadAnimation{get => triggerReloadAnimation;}
 
     #endregion ==========
     
@@ -31,24 +42,30 @@ public class GunController : MonoBehaviour
     
     #region  Methodes ==========
 
-    private void Awake()
+    private void Start()
     {
         if (!IA)
         {
             Cursor.visible = false;
             trigger += Trigger;
-            magazine = GetComponentInChildren<GunLoader>();
             inputHandler = GetComponentInParent<MinerInputHandler>();
             iaInputHandler = null;
         }
         else
         {
             trigger += Trigger;
-            magazine = GetComponentInChildren<GunLoader>();
             iaInputHandler = GetComponentInParent<IAInputHandler>();
             inputHandler = null;
         }
-       
+
+        reload += trigger =>
+        {
+            if (trigger)
+            {
+                reloadTimer = reloadAnimationTime;
+                triggerReloadAnimation = true;
+            }
+        };
     }
 
     private void Update()
@@ -65,6 +82,8 @@ public class GunController : MonoBehaviour
             isAiming(iaInputHandler.isAiming(true));
             isReloading(iaInputHandler.isReloading());
         }
+
+        if(triggerReloadAnimation) ReloadAnimation();
     }
 
     private void isShooting(bool down, bool held, bool up)
@@ -98,7 +117,24 @@ public class GunController : MonoBehaviour
     {
         canAttack = true;
     }
-   
+
+    private void ReloadAnimation()
+    {
+        if (triggerReloadAnimation && reloadTimer > reloadAnimationTime/2)
+        {
+            foreEndTransform.position = Vector3.Lerp(foreEndTransform.position , maxPulledPosition.position, (reloadAnimationTime - reloadTimer)/(reloadAnimationTime/2));
+            reloadTimer--;
+
+        }
+        else if (triggerReloadAnimation && reloadTimer <= reloadAnimationTime/2)
+        {
+            foreEndTransform.position = Vector3.Slerp(foreEndTransform.position , minPullPosition.position, ((reloadAnimationTime/2) - reloadTimer)/(reloadAnimationTime/2));
+            if (triggerReloadAnimation && reloadTimer < 0) triggerReloadAnimation = false;
+            reloadTimer--;
+        }
+        
+
+    }
     
     #endregion ==========
 }

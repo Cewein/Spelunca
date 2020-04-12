@@ -165,7 +165,7 @@ public class MinerController : MonoBehaviour
     {
         SwitchWeapon();
         Aim();
-        Reload();
+       // Reload();
         GrapplingHook();
     }
 
@@ -177,7 +177,7 @@ public class MinerController : MonoBehaviour
         weaponParent.position = Vector3.Slerp(weaponParent.position, weaponNewPosition, aimingAcceleration * Time.deltaTime);
     }
 
-    private void Reload()
+   /* private void Reload()
     {
         //TODO : use an animator later ( after alpha )
         bool isReloading = minerInputs.isReloading();
@@ -185,7 +185,7 @@ public class MinerController : MonoBehaviour
         minerInputs.isAiming(isReloading);
         weaponParent.position = Vector3.Slerp(weaponParent.position,transform.position*0.92f, 0.2f*aimingAcceleration * Time.deltaTime);
 
-    }
+    }*/
    
 
     private void SwitchWeapon()
