@@ -476,6 +476,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4960815634682092114}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &465927632 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7865811305182023672, guid: 03e5fa6798ff274469d7558ea0d50d23,
+    type: 3}
+  m_PrefabInstance: {fileID: 4960815634682092114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &624851337
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,12 +3104,32 @@ PrefabInstance:
     - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: aimFovRatio
-      value: 0
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: muzzle
+      value: 
+      objectReference: {fileID: 465927632}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: recoil
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: firingRate
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: reloadCooldown
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -3133,12 +3159,12 @@ PrefabInstance:
     - target: {fileID: 2092891907812641260, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 979589123072772401, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -3149,6 +3175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: reloadCooldown
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
