@@ -57,13 +57,18 @@
             // put more per-instance properties here
         UNITY_INSTANCING_BUFFER_END(Props)
 
+		// for more info on how the function look : https://www.desmos.com/calculator/qceqjaoil3
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // calculate the blender between bot color/texutre 
+			// here we use a smoothstep so we get a smooth/hard (depends on setting)
+			// between 0. and 1., this value is used in the lerp function to blend color/texture
 			float3 m = smoothstep(0., 1., (dot(IN.worldNormal, float3(0,1,0)) + _Offset) / (1-_Strengh));
 
-			//mix texture of color together
+			// mix texture of color together
+			// use the m for a gradual mix
             float3 c = lerp(_Stone, _Grass, m);
+
 			float3 t = lerp(tex2D(_StoneTex, IN.uv_MainTex), tex2D(_GrassTex, IN.uv_MainTex),m);
 
 			//if we should use "c" color or "t" texutre since _UseText is only 0 or 1
