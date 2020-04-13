@@ -89,6 +89,7 @@ public class chunk : MonoBehaviour
         chunkData.mesh = mesh;
 
         chunkData.update = true;
+        chunkData.canSpawnResources = true;
         makeMeshFromChunkData();
 
         //release all the buffer
@@ -104,7 +105,6 @@ public class chunk : MonoBehaviour
     {
         if (chunkData.update)
         {
-            //chunkData.mesh = chunkData.meshData.createMesh();
             chunkData.update = false;
         }
 
@@ -136,6 +136,7 @@ public class chunk : MonoBehaviour
 public struct ChunkData
 {
     public bool update;
+    public bool canSpawnResources;
 
     public Mesh mesh;
     public MeshData meshData;

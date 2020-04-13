@@ -159,7 +159,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310066411}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -251,7 +251,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459108120}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -808,10 +808,16 @@ MonoBehaviour:
   octave: 4
   lacunarity: 2
   persistence: 0.24
-  isoLevel: 0.15
+  isoLevel: 0.265
   spawnSize: 15
   bossSize: 50
   tunnelSize: 9
+  maxNumberOfStructPerChunk: 200
+  structures:
+  - minAngle: -1
+    maxAngle: -0.7
+    gameObject: {fileID: 2730456907395069716, guid: 7ad406bf4b4383645a04c655425e98ea,
+      type: 3}
   boss: {fileID: 704679573}
 --- !u!4 &1869160575
 Transform:
