@@ -107,7 +107,6 @@ public class ChunkManager : MonoBehaviour
 
             Time.fixedDeltaTime = timeFixedScaleTemp;
             Time.timeScale = timeScaleTemp;
-            spawnStructures();
         }
 
         cheat();
@@ -266,40 +265,35 @@ public class ChunkManager : MonoBehaviour
 
     void spawnStructures()
     {
-        for (int x = 0; x < viewRange; x++)
+        foreach (GameObject ck in chunks)
         {
-            for (int y = 0; y < viewRange; y++)
+            if (ck.GetComponent<chunk>().chunkData.canSpawnResources == true)
             {
-                for (int z = 0; z < viewRange; z++)
+                for (int i = 0; i < maxNumberOfStructPerChunk; i++)
                 {
-                    if (chunks[x, y, z].GetComponent<chunk>().chunkData.canSpawnResources)
-                    { 
-                        for (int i = 0; i < maxNumberOfStructPerChunk; i++)
-                        {
 
-                            Vector3[] data = getPositionOnChunks(chunks[x, y, z]);
+                    Vector3[] data = getPositionOnChunks(ck);
 
-                            int size = structures.Length;
-                            int s = UnityEngine.Random.Range(0, structures.Length);
+                    int size = structures.Length;
+                    int s = UnityEngine.Random.Range(0, structures.Length);
 
-                            float angle = Vector3.Dot(data[1], Vector3.up);
+                    float angle = Vector3.Dot(data[1], Vector3.up);
 
-                            if (structures[s].minAngle <= angle && structures[s].maxAngle >= angle)
-                            {
-                                print(data[0]);
-                                print(data[1]);
-                                GameObject obj = GameObject.Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
-                            }
-
-
-                        }
+                    if (structures[s].minAngle <= angle && structures[s].maxAngle >= angle)
+                    {
+                        print(data[0]);
+                        print(data[1]);
+                        GameObject obj = GameObject.Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
                     }
 
 
-                    chunks[x, y, z].GetComponent<chunk>().chunkData.canSpawnResources = false;
                 }
             }
+
+
+            ck.GetComponent<chunk>().chunkData.canSpawnResources = false;
         }
+                
     }
 }
 

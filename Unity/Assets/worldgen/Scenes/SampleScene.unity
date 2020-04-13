@@ -812,11 +812,15 @@ MonoBehaviour:
   spawnSize: 15
   bossSize: 50
   tunnelSize: 9
-  maxNumberOfStructPerChunk: 200
+  maxNumberOfStructPerChunk: 50
   structures:
   - minAngle: -1
     maxAngle: -0.7
     gameObject: {fileID: 2730456907395069716, guid: 7ad406bf4b4383645a04c655425e98ea,
+      type: 3}
+  - minAngle: 0
+    maxAngle: 1
+    gameObject: {fileID: 2554912070397700839, guid: fa3a3d5084fea6b47b7e915af6fede6d,
       type: 3}
   boss: {fileID: 704679573}
 --- !u!4 &1869160575
