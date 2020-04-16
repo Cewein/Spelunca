@@ -25,6 +25,7 @@ public class ChunkManager : MonoBehaviour
     public float lacunarity = 2.0f;
     [Range(0, 1)]
     public float persistence = 0.5f;
+    public float seed = 0;
 
     [Range(0, 1)]
     public float isoLevel = 0f;
@@ -37,9 +38,6 @@ public class ChunkManager : MonoBehaviour
     [Header("Structures setting")]
     public int maxNumberOfStructPerChunk = 200;
     public structure[] structures;
-
-
-
 
     //chunks 
     private Vector3 playerChunk;
@@ -54,7 +52,7 @@ public class ChunkManager : MonoBehaviour
 
     //frustum cull of the chunks
     Plane[] planes;
-    
+
     private void Awake()
     {
         //init data for runtime
@@ -71,6 +69,7 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.spawnSize = spawnSize;
         DensityGenerator.bossSize = bossSize;
         DensityGenerator.tunnelSize = tunnelSize;
+        DensityGenerator.seed = seed;
     }
 
     void Start()
@@ -83,7 +82,7 @@ public class ChunkManager : MonoBehaviour
         //create chunk (see function below)
         generateChunks();
 
-        spawnStructures();
+        //spawnStructures();
 
     }
 
@@ -285,11 +284,8 @@ public class ChunkManager : MonoBehaviour
                         print(data[1]);
                         GameObject obj = GameObject.Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
                     }
-
-
                 }
             }
-
 
             ck.GetComponent<chunk>().chunkData.canSpawnResources = false;
         }

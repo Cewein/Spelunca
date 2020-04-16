@@ -251,7 +251,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459108120}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -808,6 +808,7 @@ MonoBehaviour:
   octave: 4
   lacunarity: 2
   persistence: 0.24
+  seed: 0
   isoLevel: 0.265
   spawnSize: 15
   bossSize: 50
