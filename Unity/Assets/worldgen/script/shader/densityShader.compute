@@ -44,7 +44,9 @@ void density (int3 id : SV_DispatchThreadID)
         return;
     }
 
-    float3 pos = chunkCoord + (float3(id)/float(numPointAxis-1.));
+    float3 pos = chunkCoord + (float3(id)/float(numPointAxis-1));
+
+	pos *= (numPointAxis/64.);
 
 	//get the pos
 	uint index = indexFromCoord(id);  

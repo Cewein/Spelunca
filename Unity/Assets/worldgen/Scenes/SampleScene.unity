@@ -802,8 +802,8 @@ MonoBehaviour:
   MeshGeneratorShader: {fileID: 7200000, guid: 3a3b046f8a188de428720dce66733b07, type: 3}
   useDefaultNormal: 0
   player: {fileID: 596538679}
-  chunkSize: 32
-  viewRange: 5
+  chunkSize: 16
+  viewRange: 10
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
   octave: 4
   lacunarity: 2
