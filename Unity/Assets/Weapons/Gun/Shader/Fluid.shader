@@ -61,6 +61,12 @@
             float _Rotation;
             float _IsRimAdditive;
             float _Height;
+
+			float luminance(float3 rgb)
+			{
+				float3 w = float3(0.2125, 0.7154, 0.0721);
+				return clamp(dot(rgb, w),0.,1.);
+			}
             
             v2f vert (appdata v)
             {
@@ -94,13 +100,15 @@
                 float4 resultColored = result * col;
                 
                 float4 finalResult = resultColored;	//je pourrais plus tard ajouter une texture ici
-                if (_IsRimAdditive > 0.5){ //ici on aditionne les couleurs
-                    finalResult.rgb += RimResult;
-                }else{//alors qu'ici on fait un fade entre les deux
-                    float baseLuminance = ( _RimColor.r +  _RimColor.g +  _RimColor.b) /3.0;
-                    float percentLuminance = (RimResult.r + RimResult.g + RimResult.b) /3.0/baseLuminance;
-                    finalResult.rgb = finalResult.rgb*(1-percentLuminance) + RimResult*percentLuminance;
-                }
+				float lum = luminance(_RimColor);
+
+				float mx = step(0.5, _IsRimAdditive);
+                float3 res = finalResult.xyz + RimResult;
+
+				//alors qu'ici on fait un fade entre les deux
+				float3 res2 = finalResult.xyz*(1-lum) + RimResult*lum;
+
+				finalResult.xyz = lerp(res2, res, mx);
                 
                 //On calcule la couleur des pixels qui représente le dessus du liquide
                 float4 topColor = _TopColor * (result);
