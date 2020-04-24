@@ -126,6 +126,12 @@ public class MinerController : MonoBehaviour
 
     #endregion
 
+    private bool grapplingControl
+    {
+        get{return launchGrapplingHook || minerInputs.isGrappling();}
+    } 
+    
+    
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -242,7 +248,7 @@ public class MinerController : MonoBehaviour
 
     private void Jump()
     {
-        if (!isOnGround || !minerInputs.isJumping()) return;
+        if (!grapplingControl || !isOnGround || !minerInputs.isJumping()) return;
         if (Crouch(false))
         {
             velocity.y = 0f;
@@ -256,12 +262,19 @@ public class MinerController : MonoBehaviour
 
     private void AirControl()
     {
-        velocity +=  transform.TransformVector(minerInputs.Movement) * accelerationInAir * Time.deltaTime;
-        Vector3 horizontalVelocity = Vector3.ProjectOnPlane(velocity, Vector3.up);
-        horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeedInAir * speedFactor);
-        velocity = horizontalVelocity + (Vector3.up * velocity.y);
-        // apply the weight to the velocity
-        velocity += Vector3.down * weight * Time.deltaTime;
+        if (!grapplingControl)
+        {
+            velocity +=  transform.TransformVector(minerInputs.Movement) * accelerationInAir * Time.deltaTime;
+            Vector3 horizontalVelocity = Vector3.ProjectOnPlane(velocity, Vector3.up);
+            horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeedInAir * speedFactor);
+            velocity = horizontalVelocity + (Vector3.up * velocity.y);
+            // apply the weight to the velocity
+            velocity += Vector3.down * weight * Time.deltaTime;
+        }
+        else
+        {
+            velocity += Vector3.down * weight * Time.deltaTime;
+        }
     }
 
     private void Run()
@@ -343,7 +356,6 @@ public class MinerController : MonoBehaviour
     
     private bool GrapplingHook()
     {
-        bool grapplingControl = launchGrapplingHook || minerInputs.isGrappling(); //FIXME: Will be removed
         if (previousGrappingInput && grapplingControl == false)//Le joueur a relaché la touche, on doit arreter le grappin
         {
             hook.state = GrapplingHookState.RETRACING;
