@@ -34,6 +34,8 @@ public class chunk : MonoBehaviour
 
         //create denstiy on the gpu
         //the data stay on the gpu with the compute buffer
+
+        Vector3 chunkPos = pos - Vector3.one;
         DensityGenerator.find(pointsBuffer,size + 3, pos - Vector3.one, densityShader);
 
         pointsBuffer.GetData(dataArray);
