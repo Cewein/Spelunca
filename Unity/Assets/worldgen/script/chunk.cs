@@ -139,6 +139,7 @@ public struct ChunkData
 {
     public bool update;
     public bool canSpawnResources;
+    public Vector3 lastPlayerPos;
 
     public Mesh mesh;
     public MeshData meshData;

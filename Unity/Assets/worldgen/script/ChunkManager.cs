@@ -80,7 +80,7 @@ public class ChunkManager : MonoBehaviour
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
         
         //create chunk (see function below)
-        generateChunks();
+        generateChunks(playerChunk);
 
         //spawnStructures();
 
@@ -88,30 +88,11 @@ public class ChunkManager : MonoBehaviour
 
     void Update()
     {
-        Vector3 temp = new Vector3();
-        temp.x = Mathf.Floor(player.position.x / chunkSize);
-        temp.y = Mathf.Floor(player.position.y / chunkSize);
-        temp.z = Mathf.Floor(player.position.z / chunkSize);
-
-        if(playerChunk != temp)
-        {
-            float timeScaleTemp = Time.timeScale;
-            float timeFixedScaleTemp = Time.fixedDeltaTime;
-            Time.fixedDeltaTime = 0;
-            Time.timeScale = 0;
-
-            Vector3 direction = (temp - playerChunk);
-            playerChunk = temp;
-            updateChunks(direction);
-
-            Time.fixedDeltaTime = timeFixedScaleTemp;
-            Time.timeScale = timeScaleTemp;
-        }
+        StartCoroutine(updateChunks());
 
         cheat();
 
         frustumCulling();
-
     }
 
     //cheat for moving faster
@@ -161,7 +142,7 @@ public class ChunkManager : MonoBehaviour
     //this generate the chunks
     //for genertating chunk during runtime
     //see updateChunks function
-    void generateChunks()
+    void generateChunks(Vector3 playerChunk)
     {
         int half = (int)viewRange / 2;
 
@@ -175,6 +156,7 @@ public class ChunkManager : MonoBehaviour
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     //Two compute shader are pass
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
+                    chunks[x, y, z].GetComponent<chunk>().chunkData.lastPlayerPos = playerChunk;
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
@@ -183,31 +165,64 @@ public class ChunkManager : MonoBehaviour
 
     //update the chunk during runtime, create new
     //chunk if they are not inside the dictionnary
-    void updateChunks(Vector3 direction)
+    //
+    //gen update is done everyframe
+    IEnumerator updateChunks()
     {
-        for (int x = 0; x < viewRange; x++)
-        {
-            for (int y = 0; y < viewRange; y++)
-            {
-                for (int z = 0; z < viewRange; z++)
-                {
-                    Vector3 chunkPos = chunks[x, y, z].transform.position / chunkSize;
-                    ChunkData tempData;
+        Vector3 chunkPos;
+        Vector3 chunkPlayerPos;
+        
 
-                    //look if it find the chunk into the dictionary
-                    //if not it create a new chunk
-                    if (chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
-                    {
-                        chunks[x, y, z].transform.position += direction * chunkSize;
-                        chunks[x, y, z].GetComponent<chunk>().chunkData = tempData;
-                        chunks[x, y, z].GetComponent<chunk>().makeMeshFromChunkData();
-                    }
-                    else
-                    {
-                        chunks[x, y, z].transform.position += direction * chunkSize;
-                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
-                        chunkDictionary.Add(chunks[x, y, z].transform.position / chunkSize, chunks[x, y, z].GetComponent<chunk>().chunkData);
-                    }
+        Vector3 temp = new Vector3();
+        temp = new Vector3();
+        temp.x = Mathf.Floor(player.position.x / chunkSize);
+        temp.y = Mathf.Floor(player.position.y / chunkSize);
+        temp.z = Mathf.Floor(player.position.z / chunkSize);
+
+        foreach (var chunk in chunks)
+        {
+            chunkPos = chunk.transform.position / chunkSize;
+            chunkPlayerPos = chunk.GetComponent<chunk>().chunkData.lastPlayerPos;
+
+            if (chunkPlayerPos != temp)
+            {
+                ChunkData tempData;
+                Vector3 direction = (temp - chunkPlayerPos);
+
+                //look if it find the chunk into the dictionary
+                //if not it create a new chunk
+                if (chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
+                {
+                    chunk.transform.position += direction * chunkSize;
+                    chunk.GetComponent<chunk>().chunkData = tempData;
+                    chunk.GetComponent<chunk>().makeMeshFromChunkData();
+                    chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
+                }
+            }
+        }
+
+        foreach (var chunk in chunks)
+        {
+            chunkPos = chunk.transform.position / chunkSize;
+            chunkPlayerPos = chunk.GetComponent<chunk>().chunkData.lastPlayerPos;
+
+            temp = new Vector3();
+            temp.x = Mathf.Floor(player.position.x / chunkSize);
+            temp.y = Mathf.Floor(player.position.y / chunkSize);
+            temp.z = Mathf.Floor(player.position.z / chunkSize);
+
+            if (chunkPlayerPos != temp)
+            {
+                ChunkData tempData;
+                Vector3 direction = (temp - chunkPlayerPos);
+
+                if (!chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
+                {
+                    chunk.transform.position += direction * chunkSize;
+                    chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
+                    chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
+                    chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
+                    yield return null;
                 }
             }
         }
