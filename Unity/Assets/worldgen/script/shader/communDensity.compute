@@ -5,6 +5,7 @@ int numPointAxis;
 
 float3 playerSpawn;
 float3 endZone;
+float presicion;
 
 //world position of the chunk 
 float3 chunkPos;
@@ -31,6 +32,7 @@ uint indexFromCoord(int3 id) {
 
 float densityAtPoint(float3 id)
 {
+	id = id * presicion;
 	float3 pos = chunkCoord + (float3(id) / float(numPointAxis - 1));
 
 	pos *= (numPointAxis / 64.);
@@ -53,6 +55,10 @@ float densityAtPoint(float3 id)
 	if (pos.y < -100)
 	{
 		return 1.;
+	}
+	if (pos.y > 100)
+	{
+		return -1.;
 	}
 
 	float sphereStart = distance(playerSpawn, pos);

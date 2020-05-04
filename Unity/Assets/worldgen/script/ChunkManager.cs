@@ -16,6 +16,7 @@ public class ChunkManager : MonoBehaviour
     public Transform player;
     public int chunkSize;
     public uint viewRange = 5;
+    public float presicion = 1.0f;
     public GameObject chunk;
 
     [Header("World setting")]
@@ -70,6 +71,7 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.bossSize = bossSize;
         DensityGenerator.tunnelSize = tunnelSize;
         DensityGenerator.seed = seed;
+        DensityGenerator.presicion = presicion;
     }
 
     void Start()

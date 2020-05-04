@@ -370,7 +370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596538675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 596538679}
-  moveSpeed: 5
+  moveSpeed: 20
 --- !u!4 &1522588108
 Transform:
   m_ObjectHideFlags: 0
@@ -803,7 +803,8 @@ MonoBehaviour:
   useDefaultNormal: 0
   player: {fileID: 596538679}
   chunkSize: 16
-  viewRange: 10
+  viewRange: 9
+  presicion: 1
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
   octave: 4
   lacunarity: 2
