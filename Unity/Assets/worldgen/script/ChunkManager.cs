@@ -16,7 +16,7 @@ public class ChunkManager : MonoBehaviour
     public Transform player;
     public int chunkSize;
     public uint viewRange = 5;
-    public float presicion = 1.0f;
+    public float precision = 1.0f;
     public GameObject chunk;
 
     [Header("World setting")]
@@ -37,6 +37,8 @@ public class ChunkManager : MonoBehaviour
     public float tunnelSize = 9.0f;
 
     [Header("Structures setting")]
+    [Range(0,1)]
+    public float ratioOfSpawn = 0.5f;
     public int maxNumberOfStructPerChunk = 200;
     public structure[] structures;
 
@@ -60,6 +62,8 @@ public class ChunkManager : MonoBehaviour
         chunks = new GameObject[viewRange,viewRange,viewRange];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
 
+        ratioOfSpawn = 1.0f - ratioOfSpawn;
+
         //set static variable for the density generator
         DensityGenerator.isoLevel = isoLevel;
         DensityGenerator.endZone = boss.position;
@@ -71,7 +75,7 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.bossSize = bossSize;
         DensityGenerator.tunnelSize = tunnelSize;
         DensityGenerator.seed = seed;
-        DensityGenerator.presicion = presicion;
+        DensityGenerator.precision = precision;
     }
 
     void Start()
@@ -83,9 +87,6 @@ public class ChunkManager : MonoBehaviour
         
         //create chunk (see function below)
         generateChunks(playerChunk);
-
-        //spawnStructures();
-
     }
 
     void Update()
@@ -159,6 +160,8 @@ public class ChunkManager : MonoBehaviour
                     //Two compute shader are pass
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunks[x, y, z].GetComponent<chunk>().chunkData.lastPlayerPos = playerChunk;
+                    if(hash(chunks[x, y, z].transform.position) > ratioOfSpawn)
+                        spawnStructures(chunks[x, y, z]);
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
@@ -224,8 +227,10 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
-                    yield return null;
+                    if (hash(chunk.transform.position) > ratioOfSpawn)
+                        spawnStructures(chunk);
                 }
+                yield return null;
             }
         }
     }
@@ -253,7 +258,7 @@ public class ChunkManager : MonoBehaviour
     float hash(Vector3 vec)
     {
         double val = (1299689.0f * Math.Abs(vec.x) + 611953.0f * Math.Abs(vec.y)) / 898067 * Math.Abs(vec.z);
-        return (float)(val - Math.Truncate(val)) - 0.5f;
+        return (float)(val - Math.Truncate(val));
     }
 
     //return a array, first value is the position and the second is the rotation !
@@ -279,44 +284,30 @@ public class ChunkManager : MonoBehaviour
         return  rez;
     }
 
-    void spawnStructures()
+    void spawnStructures(GameObject ck)
     {
-        foreach (GameObject ck in chunks)
+            
+        for (int i = 0; i < maxNumberOfStructPerChunk; i++)
         {
-            if (ck.GetComponent<chunk>().chunkData.canSpawnResources == true)
-            {
-                for (int i = 0; i < maxNumberOfStructPerChunk; i++)
-                {
 
-                    Vector3[] data = getPositionOnChunks(ck);
+            Vector3[] data = getPositionOnChunks(ck);
 
-                    int size = structures.Length;
-                    int s = UnityEngine.Random.Range(0, structures.Length);
+            int size = structures.Length;
+            int s = UnityEngine.Random.Range(0, structures.Length);
 
-                    float angle = Vector3.Dot(data[1], Vector3.up);
+            float angle = Vector3.Dot(data[1], Vector3.up);
 
-                    if (structures[s].minAngle <= angle && structures[s].maxAngle >= angle)
-                    {
-                        print(data[0]);
-                        print(data[1]);
-                        GameObject obj = GameObject.Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
-                    }
-                }
-            }
-
-            ck.GetComponent<chunk>().chunkData.canSpawnResources = false;
+            GameObject obj = Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
         }
-                
+            
+        ck.GetComponent<chunk>().chunkData.canSpawnResources = false; 
     }
 }
 
 [System.Serializable]
 public struct structure
 {
-    //must be between -1 and 1
-    public float minAngle;
-    public float maxAngle;
-
     //the gameobject we want to spawn
     public GameObject gameObject;
+    Vector3 position;
 }

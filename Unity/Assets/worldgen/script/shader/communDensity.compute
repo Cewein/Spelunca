@@ -5,7 +5,7 @@ int numPointAxis;
 
 float3 playerSpawn;
 float3 endZone;
-float presicion;
+float precision;
 
 //world position of the chunk 
 float3 chunkPos;
@@ -32,7 +32,7 @@ uint indexFromCoord(int3 id) {
 
 float densityAtPoint(float3 id)
 {
-	id = id * presicion;
+	id = id * precision;
 	float3 pos = chunkCoord + (float3(id) / float(numPointAxis - 1));
 
 	pos *= (numPointAxis / 64.);

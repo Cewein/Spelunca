@@ -15,7 +15,7 @@ public class DensityGenerator
     public static Vector3 endZone;
     public static Vector3 playerSpawn;
     public static float seed;
-    public static float presicion;
+    public static float precision;
 
     //use a compute buffer and un compute shader to generate the 
     //density array for the world gen
@@ -28,7 +28,7 @@ public class DensityGenerator
         densityShader.SetInt("numPointAxis", size);
         densityShader.SetVector("chunkPos", chunkPos);
         densityShader.SetVector("chunkCoord", (chunkPos + Vector3.one) / (size - 1));
-        densityShader.SetFloat("presicion", presicion);
+        densityShader.SetFloat("precision", precision);
 
         densityShader.SetVector("playerSpawn", playerSpawn);
         densityShader.SetVector("endZone", endZone);

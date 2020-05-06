@@ -25,7 +25,7 @@ public class chunk : MonoBehaviour
         Vector3 pos = GetComponent<Transform>().position;
         bufferList = new List<ComputeBuffer>();
 
-        size = (int)(size / DensityGenerator.presicion);
+        size = (int)(size / DensityGenerator.precision);
 
         //create the 3 buffer needed for the GPU gen
         createBuffer(size);
@@ -51,7 +51,7 @@ public class chunk : MonoBehaviour
         marchShader.SetBuffer(0, "triangles", triangleBuffer);
         marchShader.SetInt("size", size + 3);
         marchShader.SetFloat("isoLevel", DensityGenerator.isoLevel);
-        marchShader.SetFloat("precision", DensityGenerator.presicion);
+        marchShader.SetFloat("precision", DensityGenerator.precision);
 
         //lauch the compute shader on each threadGroup
         marchShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
@@ -73,7 +73,7 @@ public class chunk : MonoBehaviour
         Vector3[] normals = new Vector3[numTris * 3];
         int[] meshTriangles = new int[numTris * 3];
 
-        //but the data into the mesh
+        //put the data into the mesh
         for (int i = 0; i < numTris; i++)
         {
             for (int j = 0; j < 3; j++)

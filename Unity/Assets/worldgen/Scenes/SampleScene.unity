@@ -804,25 +804,20 @@ MonoBehaviour:
   player: {fileID: 596538679}
   chunkSize: 16
   viewRange: 9
-  presicion: 1
+  precision: 1
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
   octave: 4
   lacunarity: 2
-  persistence: 0.24
+  persistence: 0.2
   seed: 0
-  isoLevel: 0.265
+  isoLevel: 0.3
   spawnSize: 15
   bossSize: 50
   tunnelSize: 9
-  maxNumberOfStructPerChunk: 50
+  ratioOfSpawn: 0.05
+  maxNumberOfStructPerChunk: 10
   structures:
-  - minAngle: -1
-    maxAngle: -0.7
-    gameObject: {fileID: 2730456907395069716, guid: 7ad406bf4b4383645a04c655425e98ea,
-      type: 3}
-  - minAngle: 0
-    maxAngle: 1
-    gameObject: {fileID: 2554912070397700839, guid: fa3a3d5084fea6b47b7e915af6fede6d,
+  - gameObject: {fileID: 2554912070397700839, guid: fa3a3d5084fea6b47b7e915af6fede6d,
       type: 3}
   boss: {fileID: 704679573}
 --- !u!4 &1869160575
