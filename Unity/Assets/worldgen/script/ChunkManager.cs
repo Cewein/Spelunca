@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
+    public GameObject resourceFirePrefab;
     //compute shader
     [Header("Compute shader file")]
     public ComputeShader densityShader;
@@ -87,6 +88,7 @@ public class ChunkManager : MonoBehaviour
         
         //create chunk (see function below)
         generateChunks(playerChunk);
+        
     }
 
     void Update()
@@ -262,6 +264,7 @@ public class ChunkManager : MonoBehaviour
     }
 
     //return a array, first value is the position and the second is the rotation !
+
     Vector3[] getPositionOnChunks(GameObject chunk)
     {
         Vector3[] rez = new Vector3[2];

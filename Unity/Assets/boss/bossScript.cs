@@ -1,28 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class bossScript : MonoBehaviour
+public class bossScript : MonoBehaviour, IDamageable
 {
-    public int life = 5;
+    public string blaze = "The Bad Guy";
+    public float life = 50;
     public bool isAlive = true;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    private float deathTime = 5f;
+    public GameObject root = null;
     void Update()
     {
         if (life <= 0)
+        {
             isAlive = false;
+            Destroy(root);
+        }
     }
 
-    void Hit()
+    public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
     {
-        life--;
+        life -= damage;
+        ParticleSystem d = Instantiate(damageEffect, hit.point, Quaternion.identity);
+        d.Play();
     }
+
 
 }
