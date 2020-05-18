@@ -17,6 +17,7 @@ public class ChunkManager : MonoBehaviour
     public Transform player;
     public int chunkSize;
     public uint viewRange = 5;
+    public float precision = 1.0f;
     public GameObject chunk;
 
     [Header("World setting")]
@@ -26,6 +27,7 @@ public class ChunkManager : MonoBehaviour
     public float lacunarity = 2.0f;
     [Range(0, 1)]
     public float persistence = 0.5f;
+    public float seed = 0;
 
     [Range(0, 1)]
     public float isoLevel = 0f;
@@ -35,7 +37,11 @@ public class ChunkManager : MonoBehaviour
     public float bossSize = 50.0f;
     public float tunnelSize = 9.0f;
 
-
+    [Header("Structures setting")]
+    [Range(0,1)]
+    public float ratioOfSpawn = 0.5f;
+    public int maxNumberOfStructPerChunk = 200;
+    public structure[] structures;
 
     //chunks 
     private Vector3 playerChunk;
@@ -50,12 +56,14 @@ public class ChunkManager : MonoBehaviour
 
     //frustum cull of the chunks
     Plane[] planes;
-    
+
     private void Awake()
     {
         //init data for runtime
         chunks = new GameObject[viewRange,viewRange,viewRange];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
+
+        ratioOfSpawn = 1.0f - ratioOfSpawn;
 
         //set static variable for the density generator
         DensityGenerator.isoLevel = isoLevel;
@@ -67,6 +75,8 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.spawnSize = spawnSize;
         DensityGenerator.bossSize = bossSize;
         DensityGenerator.tunnelSize = tunnelSize;
+        DensityGenerator.seed = seed;
+        DensityGenerator.precision = precision;
     }
 
     void Start()
@@ -77,46 +87,16 @@ public class ChunkManager : MonoBehaviour
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
         
         //create chunk (see function below)
-        generateChunks();
-        //for(int i = 0; i < 1500; i++)
-        //{
-        //    Vector3[] spawnPos = getPositionOnChunks();
-        //    if(spawnPos[0] != Vector3.zero)
-        //    {
-        //        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //        cube.transform.position = spawnPos[0];
-        //        cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
-        //    }
-        //}
-
+        generateChunks(playerChunk);
     }
 
     void Update()
     {
-        Vector3 temp = new Vector3();
-        temp.x = Mathf.Floor(player.position.x / chunkSize);
-        temp.y = Mathf.Floor(player.position.y / chunkSize);
-        temp.z = Mathf.Floor(player.position.z / chunkSize);
-
-        if(playerChunk != temp)
-        {
-            float timeScaleTemp = Time.timeScale;
-            float timeFixedScaleTemp = Time.fixedDeltaTime;
-            Time.fixedDeltaTime = 0;
-            Time.timeScale = 0;
-
-            Vector3 direction = (temp - playerChunk);
-            playerChunk = temp;
-            updateChunks(direction);
-
-            Time.fixedDeltaTime = timeFixedScaleTemp;
-            Time.timeScale = timeScaleTemp;
-        }
+        StartCoroutine(updateChunks());
 
         cheat();
 
-            frustumCulling();
-
+        frustumCulling();
     }
 
     //cheat for moving faster
@@ -132,21 +112,6 @@ public class ChunkManager : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.F2))
             {
                 player.position = new Vector3(boss.position.x, boss.position.y + 30, boss.position.z);
-            }
-
-            if(Input.GetKeyUp(KeyCode.F3))
-            {
-                for (int i = 0; i < 1500; i++)
-                {
-                    Vector3[] spawnPos = getPositionOnChunks();
-                    if (spawnPos[0] != Vector3.zero)
-                    {
-                        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        GameObject cube = Instantiate(resourceFirePrefab);
-                        cube.transform.position = spawnPos[0];
-                        cube.transform.rotation = Quaternion.FromToRotation(cube.transform.up, spawnPos[1]) * transform.rotation;
-                    }
-                }
             }
         }
     }
@@ -181,7 +146,7 @@ public class ChunkManager : MonoBehaviour
     //this generate the chunks
     //for genertating chunk during runtime
     //see updateChunks function
-    void generateChunks()
+    void generateChunks(Vector3 playerChunk)
     {
         int half = (int)viewRange / 2;
 
@@ -195,6 +160,9 @@ public class ChunkManager : MonoBehaviour
                     chunks[x, y, z] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     //Two compute shader are pass
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
+                    chunks[x, y, z].GetComponent<chunk>().chunkData.lastPlayerPos = playerChunk;
+                    if(hash(chunks[x, y, z].transform.position) > ratioOfSpawn)
+                        spawnStructures(chunks[x, y, z]);
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
@@ -203,32 +171,67 @@ public class ChunkManager : MonoBehaviour
 
     //update the chunk during runtime, create new
     //chunk if they are not inside the dictionnary
-    void updateChunks(Vector3 direction)
+    //
+    //gen update is done everyframe
+    IEnumerator updateChunks()
     {
-        for (int x = 0; x < viewRange; x++)
-        {
-            for (int y = 0; y < viewRange; y++)
-            {
-                for (int z = 0; z < viewRange; z++)
-                {
-                    Vector3 chunkPos = chunks[x, y, z].transform.position / chunkSize;
-                    ChunkData tempData;
+        Vector3 chunkPos;
+        Vector3 chunkPlayerPos;
+        
 
-                    //look if it find the chunk into the dictionary
-                    //if not it create a new chunk
-                    if (chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
-                    {
-                        chunks[x, y, z].transform.position += direction * chunkSize;
-                        chunks[x, y, z].GetComponent<chunk>().chunkData = tempData;
-                        chunks[x, y, z].GetComponent<chunk>().makeMeshFromChunkData();
-                    }
-                    else
-                    {
-                        chunks[x, y, z].transform.position += direction * chunkSize;
-                        chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
-                        chunkDictionary.Add(chunks[x, y, z].transform.position / chunkSize, chunks[x, y, z].GetComponent<chunk>().chunkData);
-                    }
+        Vector3 temp = new Vector3();
+        temp = new Vector3();
+        temp.x = Mathf.Floor(player.position.x / chunkSize);
+        temp.y = Mathf.Floor(player.position.y / chunkSize);
+        temp.z = Mathf.Floor(player.position.z / chunkSize);
+
+        foreach (var chunk in chunks)
+        {
+            chunkPos = chunk.transform.position / chunkSize;
+            chunkPlayerPos = chunk.GetComponent<chunk>().chunkData.lastPlayerPos;
+
+            if (chunkPlayerPos != temp)
+            {
+                ChunkData tempData;
+                Vector3 direction = (temp - chunkPlayerPos);
+
+                //look if it find the chunk into the dictionary
+                //if not it create a new chunk
+                if (chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
+                {
+                    chunk.transform.position += direction * chunkSize;
+                    chunk.GetComponent<chunk>().chunkData = tempData;
+                    chunk.GetComponent<chunk>().makeMeshFromChunkData();
+                    chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
                 }
+            }
+        }
+
+        foreach (var chunk in chunks)
+        {
+            chunkPos = chunk.transform.position / chunkSize;
+            chunkPlayerPos = chunk.GetComponent<chunk>().chunkData.lastPlayerPos;
+
+            temp = new Vector3();
+            temp.x = Mathf.Floor(player.position.x / chunkSize);
+            temp.y = Mathf.Floor(player.position.y / chunkSize);
+            temp.z = Mathf.Floor(player.position.z / chunkSize);
+
+            if (chunkPlayerPos != temp)
+            {
+                ChunkData tempData;
+                Vector3 direction = (temp - chunkPlayerPos);
+
+                if (!chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
+                {
+                    chunk.transform.position += direction * chunkSize;
+                    chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
+                    chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
+                    chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
+                    if (hash(chunk.transform.position) > ratioOfSpawn)
+                        spawnStructures(chunk);
+                }
+                yield return null;
             }
         }
     }
@@ -256,34 +259,56 @@ public class ChunkManager : MonoBehaviour
     float hash(Vector3 vec)
     {
         double val = (1299689.0f * Math.Abs(vec.x) + 611953.0f * Math.Abs(vec.y)) / 898067 * Math.Abs(vec.z);
-        return (float)(val - Math.Truncate(val)) - 0.5f;
+        return (float)(val - Math.Truncate(val));
     }
 
     //return a array, first value is the position and the second is the rotation !
-    public Vector3[] getPositionOnChunks()
+    Vector3[] getPositionOnChunks(GameObject chunk)
     {
         Vector3[] rez = new Vector3[2];
 
         rez[0] = Vector3.zero;
         rez[1] = Vector3.zero;
 
-        int x = (int)UnityEngine.Random.Range(0, viewRange - 1);
-        int y = (int)UnityEngine.Random.Range(0, viewRange - 1);
-        int z = (int)UnityEngine.Random.Range(0, viewRange - 1);
+        chunk ck = chunk.GetComponent<chunk>();
+        Vector3 pos = chunk.transform.position;
 
-        chunk ck = chunks[x, y, z].GetComponent<chunk>();
-        Vector3 pos = chunks[x, y, z].transform.position;
 
-        if (hash(pos) > 0)
+        int len = ck.chunkData.mesh.vertices.Length;
+        if (len > 0)
         {
-            int len = ck.chunkData.mesh.vertices.Length;
-            if (len > 0)
-            {
-                int v = (int)(UnityEngine.Random.Range(0, ck.chunkData.mesh.vertices.Length - 1));
-                rez[0] = ck.chunkData.mesh.vertices[v] + pos;
-                rez[1] = ck.chunkData.mesh.normals[v];
-            }
+            int v = (int)(UnityEngine.Random.Range(0, ck.chunkData.mesh.vertices.Length - 1));
+            rez[0] = ck.chunkData.mesh.vertices[v] + pos;
+            rez[1] = ck.chunkData.mesh.normals[v];
         }
+
         return  rez;
     }
+
+    void spawnStructures(GameObject ck)
+    {
+            
+        for (int i = 0; i < maxNumberOfStructPerChunk; i++)
+        {
+
+            Vector3[] data = getPositionOnChunks(ck);
+
+            int size = structures.Length;
+            int s = UnityEngine.Random.Range(0, structures.Length);
+
+            float angle = Vector3.Dot(data[1], Vector3.up);
+
+            GameObject obj = Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
+        }
+            
+        ck.GetComponent<chunk>().chunkData.canSpawnResources = false; 
+    }
+}
+
+[System.Serializable]
+public struct structure
+{
+    //the gameobject we want to spawn
+    public GameObject gameObject;
+    Vector3 position;
 }

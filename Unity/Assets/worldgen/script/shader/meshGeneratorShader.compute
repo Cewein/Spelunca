@@ -16,6 +16,7 @@ RWStructuredBuffer<float4> points;
 
 int size;
 float isoLevel;
+float precision;
 
 float3 interpolateVerts(float4 v1, float4 v2) {
     float t = (isoLevel - v1.w) / (v2.w - v1.w);
@@ -98,9 +99,9 @@ void Marcher (int3 id : SV_DispatchThreadID)
         int b2 = cornerIndexBFromEdge[triangulation[cubeIndex][i+2]];
 
         Triangle tri;
-        tri.vertexC = interpolateVerts(cubeCorners[a0], cubeCorners[b0]);
-        tri.vertexB = interpolateVerts(cubeCorners[a1], cubeCorners[b1]);
-        tri.vertexA = interpolateVerts(cubeCorners[a2], cubeCorners[b2]);
+        tri.vertexC = interpolateVerts(cubeCorners[a0], cubeCorners[b0]) * precision;
+        tri.vertexB = interpolateVerts(cubeCorners[a1], cubeCorners[b1]) * precision;
+        tri.vertexA = interpolateVerts(cubeCorners[a2], cubeCorners[b2]) * precision;
 
 		tri.normalC = -interpolateVerts(normalCorners[a0], normalCorners[b0]);
 		tri.normalB = -interpolateVerts(normalCorners[a1], normalCorners[b1]);
