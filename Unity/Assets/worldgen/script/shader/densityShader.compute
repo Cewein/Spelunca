@@ -16,5 +16,4 @@ void density (int3 id : SV_DispatchThreadID)
 	uint index = indexFromCoord(id);  
 
 	points[index] = float4(id, densityAtPoint(id));
-	
 }
