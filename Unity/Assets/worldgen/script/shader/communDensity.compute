@@ -1,0 +1,90 @@
+﻿////////// BUFFER AND VARIABLE //////////
+
+RWStructuredBuffer<float4> points;
+int numPointAxis;
+
+float3 playerSpawn;
+float3 endZone;
+float precision;
+
+//world position of the chunk 
+float3 chunkPos;
+
+//coord of the chunk
+float3 chunkCoord;
+
+//noise setting
+float lacunarity;
+float persistence;
+int octave;
+float seed;
+
+//area setting
+float spawnSize;
+float bossSize;
+float tunnelSize;
+
+////////// HELP FUNCTION //////////
+
+uint indexFromCoord(int3 id) {
+	return id.z * numPointAxis * numPointAxis + id.y * numPointAxis + id.x;
+}
+
+float densityAtPoint(float3 id)
+{
+	id = id * precision;
+	float3 pos = chunkCoord + (float3(id) / float(numPointAxis - 1));
+
+	pos *= (numPointAxis / 64.);
+
+	float densityValue = 0.;
+
+	for (int i = 0; i < octave; i++)
+	{
+		float l = pow(abs(lacunarity), float(i));
+		float p = pow(abs(persistence), float(i));
+		densityValue += snoise((float3(seed, seed, seed) + pos) * l) * p;
+	}
+
+	densityValue += (densityValue + 1.) / 2.;
+
+	pos = chunkPos + id;
+
+	///////   special gen area (spawn, tunnel, hardfloor and boss area)    ////////
+
+	if (pos.y < -100)
+	{
+		return 1.;
+	}
+	if (pos.y > 100)
+	{
+		return -1.;
+	}
+
+	float sphereStart = distance(playerSpawn, pos);
+
+	if (sphereStart < spawnSize)
+	{
+		return sphereStart - spawnSize;
+	}
+
+	float sphereEnd = distance(endZone, pos);
+	if (sphereEnd < bossSize)
+	{
+		return sphereEnd - bossSize;
+	}
+
+	float tube1 = distance(pos, float3(sin(pos.z / 10.) * 6., cos(pos.z / 10.) * 6. - pos.z / 6., pos.z));
+	float tube2 = distance(pos, float3(cos(pos.z / 10.) * 6., sin(pos.z / 10.) * 6. - pos.z / 6., pos.z));
+
+	if (tube1 < tunnelSize && densityValue > tube1 - tunnelSize)
+	{
+		return tube1 - tunnelSize;
+	}
+	if (tube2 < tunnelSize && densityValue > tube2 - tunnelSize)
+	{
+		return tube2 - tunnelSize;
+	}
+
+	return densityValue;
+}
