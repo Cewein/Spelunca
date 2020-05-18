@@ -227,7 +227,7 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
-                    if (hash(chunk.transform.position) > ratioOfSpawn)
+                    if (hash(chunk.transform.position) > ratioOfSpawn )
                         spawnStructures(chunk);
                 }
                 yield return null;
@@ -286,18 +286,29 @@ public class ChunkManager : MonoBehaviour
 
     void spawnStructures(GameObject ck)
     {
-            
+        int s = UnityEngine.Random.Range(0, structures.Length);
+
         for (int i = 0; i < maxNumberOfStructPerChunk; i++)
         {
 
             Vector3[] data = getPositionOnChunks(ck);
 
             int size = structures.Length;
-            int s = UnityEngine.Random.Range(0, structures.Length);
-
+            
             float angle = Vector3.Dot(data[1], Vector3.up);
 
-            GameObject obj = Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
+            UnityEngine.Random.Range(0, structures.Length);
+
+            if (data[0] != Vector3.zero)
+            {
+                GameObject o = Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
+
+                Vector3 scl = o.transform.localScale;
+                Vector3 mul = new Vector3(UnityEngine.Random.Range(0f, 0.1f), UnityEngine.Random.Range(0f, 0.1f), UnityEngine.Random.Range(0.0f, 0.1f));
+                scl = Vector3.Scale(scl, mul);
+
+                o.transform.localScale.Set(scl.x,scl.y,scl.z);
+            }
         }
             
         ck.GetComponent<chunk>().chunkData.canSpawnResources = false; 

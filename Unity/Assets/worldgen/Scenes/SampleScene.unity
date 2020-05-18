@@ -285,13 +285,13 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459108120}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 50
+  m_Color: {r: 0.9150943, g: 0.8522493, b: 0.6517889, a: 1}
+  m_Intensity: 1
+  m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -589,7 +589,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90.7
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -599,7 +599,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b422e748a0ae054184047235e05ab61, type: 3}
   m_Name: 
@@ -848,10 +848,14 @@ MonoBehaviour:
   spawnSize: 15
   bossSize: 50
   tunnelSize: 9
-  ratioOfSpawn: 0.05
+  ratioOfSpawn: 0.03
   maxNumberOfStructPerChunk: 10
   structures:
-  - gameObject: {fileID: 2554912070397700839, guid: fa3a3d5084fea6b47b7e915af6fede6d,
+  - gameObject: {fileID: 4627741173994672451, guid: 872e34af141fa4147bbb9a1e2f2d7270,
+      type: 3}
+  - gameObject: {fileID: 4333270871201857030, guid: e0c7ac8a115253144940848ca8ee8e46,
+      type: 3}
+  - gameObject: {fileID: 6361500002223971637, guid: 6666f89a7cace3846a669caaa37a8e20,
       type: 3}
   boss: {fileID: 704679573}
 --- !u!4 &1869160575

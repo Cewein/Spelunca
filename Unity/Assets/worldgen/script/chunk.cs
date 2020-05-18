@@ -16,6 +16,9 @@ public class chunk : MonoBehaviour
 
     List<ComputeBuffer> bufferList;
 
+    [HideInInspector]
+    public List<GameObject> structList;
+
     Vector4[] dataArray;
 
     //Create a the chunk with a given size
