@@ -285,7 +285,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459108120}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -843,20 +843,38 @@ MonoBehaviour:
   octave: 4
   lacunarity: 2
   persistence: 0.2
-  seed: 0
+  seed: 10
   isoLevel: 0.3
   spawnSize: 15
   bossSize: 50
   tunnelSize: 9
-  ratioOfSpawn: 0.03
+  ratioOfSpawn: 0.97
   maxNumberOfStructPerChunk: 10
   structures:
-  - gameObject: {fileID: 4627741173994672451, guid: 872e34af141fa4147bbb9a1e2f2d7270,
-      type: 3}
   - gameObject: {fileID: 4333270871201857030, guid: e0c7ac8a115253144940848ca8ee8e46,
       type: 3}
-  - gameObject: {fileID: 6361500002223971637, guid: 6666f89a7cace3846a669caaa37a8e20,
+    area: {x: -1, y: 1}
+  - gameObject: {fileID: 4627741173994672451, guid: 872e34af141fa4147bbb9a1e2f2d7270,
       type: 3}
+    area: {x: -1, y: 1}
+  ratioOfFluff: 0.5
+  maxNumberOfFluffPerChunk: 5
+  Fluffs:
+  - gameObject: {fileID: 8732615353163473822, guid: 96b834eb204b9fc4abbeec3014449f00,
+      type: 3}
+    area: {x: 0.9, y: 1}
+  - gameObject: {fileID: 5052183422691309722, guid: e92faa21541942b4bb4ec703718ff9eb,
+      type: 3}
+    area: {x: 0.9, y: 1}
+  - gameObject: {fileID: 3059923775177781101, guid: d599eab93ba20f34389d6103ce27dd42,
+      type: 3}
+    area: {x: 0.9, y: 0}
+  - gameObject: {fileID: 9013278580472398440, guid: 8d555e31993cb0e42b8202b790578aa2,
+      type: 3}
+    area: {x: -1, y: -0.9}
+  - gameObject: {fileID: 6656094920142475523, guid: f5fb442cb33b0184ba9342ffb41677cb,
+      type: 3}
+    area: {x: -1, y: -0.9}
   boss: {fileID: 704679573}
 --- !u!4 &1869160575
 Transform:

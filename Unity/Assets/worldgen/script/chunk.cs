@@ -16,9 +16,6 @@ public class chunk : MonoBehaviour
 
     List<ComputeBuffer> bufferList;
 
-    [HideInInspector]
-    public List<GameObject> structList;
-
     Vector4[] dataArray;
 
     //Create a the chunk with a given size
@@ -95,9 +92,10 @@ public class chunk : MonoBehaviour
             mesh.RecalculateNormals();
 
         chunkData.mesh = mesh;
-
         chunkData.update = true;
-        chunkData.canSpawnResources = true;
+        chunkData.hasSpawnResources = false;
+        chunkData.mineralDictionary = new Dictionary<Vector3, GameObject>();
+        chunkData.flufflDictionary = new Dictionary<Vector3, GameObject>();
         makeMeshFromChunkData();
 
         //release all the buffer
@@ -144,11 +142,28 @@ public class chunk : MonoBehaviour
 public struct ChunkData
 {
     public bool update;
-    public bool canSpawnResources;
+    public bool hasSpawnResources;
     public Vector3 lastPlayerPos;
+
+    public Dictionary<Vector3, GameObject> mineralDictionary;
+    public Dictionary<Vector3, GameObject> flufflDictionary;
 
     public Mesh mesh;
     public MeshData meshData;
+
+    public void toggle(bool val)
+    {
+        
+        foreach (var mineral in mineralDictionary)
+        {
+            mineral.Value.SetActive(val);
+        }
+        foreach (var fluff in flufflDictionary)
+        {
+            fluff.Value.SetActive(val);
+        }
+        
+    }
 }
 
 public struct Triangle
