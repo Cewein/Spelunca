@@ -630,12 +630,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b422e748a0ae054184047235e05ab61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  celShadingShader: {fileID: 4800000, guid: 939e094cb57ff2d4c98351c80374a641, type: 3}
+  celShadingShader: {fileID: 4800000, guid: 397ccd84e3b4d9f45a1b6fe93b6c58f4, type: 3}
+  dist: 10
+  width: 1
 --- !u!1 &1522588103
 GameObject:
   m_ObjectHideFlags: 0

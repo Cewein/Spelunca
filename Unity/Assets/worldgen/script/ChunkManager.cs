@@ -225,7 +225,6 @@ public class ChunkManager : MonoBehaviour
             temp.y = Mathf.Floor(player.position.y / chunkSize);
             temp.z = Mathf.Floor(player.position.z / chunkSize);
 
-            chunk.GetComponent<chunk>().chunkData.toggle(false);
             if (chunkPlayerPos != temp)
             {
                 ChunkData tempData;
