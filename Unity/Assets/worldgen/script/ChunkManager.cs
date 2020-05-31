@@ -195,7 +195,6 @@ public class ChunkManager : MonoBehaviour
             chunkPos = chunk.transform.position / chunkSize;
             chunkPlayerPos = chunk.GetComponent<chunk>().chunkData.lastPlayerPos;
 
-            chunk.GetComponent<chunk>().chunkData.toggle(false);
             if (chunkPlayerPos != temp)
             {
                 ChunkData tempData;
@@ -205,13 +204,14 @@ public class ChunkManager : MonoBehaviour
                 //if not it create a new chunk
                 if (chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
                 {
+                    chunk.GetComponent<chunk>().chunkData.toggle(false);
                     chunk.transform.position += direction * chunkSize;
                     chunk.GetComponent<chunk>().chunkData = tempData;
+                    chunk.GetComponent<chunk>().chunkData.toggle(true);
                     chunk.GetComponent<chunk>().makeMeshFromChunkData();
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
                 }
             }
-            chunk.GetComponent<chunk>().chunkData.toggle(true);
 
         }
 
@@ -236,16 +236,16 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().chunkData.toggle(false);
                     chunk.transform.position += direction * chunkSize;
                     chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
-
-                    chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
-
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
+
                     float ckHash = hash(chunk.transform.position);
                     if (ckHash > ratioOfSpawn )
                         spawnStructures(chunk, structures, maxNumberOfStructPerChunk);
 
                     if (ckHash > ratioOfFluff)
                         spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
+
+                    chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
                 }
                 yield return null;
             }
@@ -306,7 +306,6 @@ public class ChunkManager : MonoBehaviour
     {
         int size = strct.Length;
         int s = UnityEngine.Random.Range(0, size);
-        Vector3 cknb = ck.transform.position / chunkSize;
         Dictionary<Vector3, GameObject> dico = new Dictionary<Vector3, GameObject>();
 
         for (int i = 0; i < mnspc && size > 0; i++)
