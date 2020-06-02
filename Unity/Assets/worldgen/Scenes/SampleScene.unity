@@ -635,9 +635,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b422e748a0ae054184047235e05ab61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  celShadingShader: {fileID: 4800000, guid: 397ccd84e3b4d9f45a1b6fe93b6c58f4, type: 3}
-  dist: 10
+  scannerShader: {fileID: 4800000, guid: 397ccd84e3b4d9f45a1b6fe93b6c58f4, type: 3}
   width: 1
+  key: 284
+  speed: 0.5
 --- !u!1 &1522588103
 GameObject:
   m_ObjectHideFlags: 0
