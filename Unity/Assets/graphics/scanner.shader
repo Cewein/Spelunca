@@ -48,12 +48,16 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
+				//get the texture of the screen
                 fixed4 col = tex2D(_MainTex, i.uv);
+
+				//get the depth for the gien pixel
 				float depth = tex2D(_CameraDepthTexture, i.uv).r;
 
 				//linear depth between camera and far clipping plane
 				depth = Linear01Depth(depth) * _ProjectionParams.z;
 
+				//render the scanner line
 				if (depth < distanceFromCam && depth >(distanceFromCam - width))
 				{
 					//TODO add other stuff for better scanner

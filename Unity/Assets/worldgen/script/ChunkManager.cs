@@ -215,6 +215,9 @@ public class ChunkManager : MonoBehaviour
 
         }
 
+        //there is a corouting in that chunk but it's need, it's spread out
+        //the computation on time, it compute on chunk per frame so normally
+        //60 chunks per second (or more if you have a powerfull cpu + gpu)
         foreach (var chunk in chunks)
         {
             chunkPos = chunk.transform.position / chunkSize;
@@ -252,6 +255,7 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
+    // when doing view frustum culling this function let a 3x3 chunks box around the player
     bool aroundMiddle(int x, int y, int z)
     {
         int half = (int)viewRange / 2;
@@ -301,6 +305,7 @@ public class ChunkManager : MonoBehaviour
         return  rez;
     }
 
+    //spawn a structre on a chunk with the given structure array and number of maximum object in that chunk 
     void spawnStructures(GameObject ck, structure[] strct, int mnspc, bool fluff = false)
     {
         int size = strct.Length;
@@ -332,6 +337,11 @@ public class ChunkManager : MonoBehaviour
         else ck.GetComponent<chunk>().chunkData.mineralDictionary = dico;
             
         ck.GetComponent<chunk>().chunkData.hasSpawnResources = true; 
+    }
+
+    public void deleteStructure(Vector3 chunk, Vector3 structPos)
+    {
+        print(chunkDictionary[chunk].mineralDictionary.Remove(structPos));
     }
 }
 
