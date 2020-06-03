@@ -51,6 +51,8 @@ public class ChunkManager : MonoBehaviour
     private GameObject[,,] chunks;
     private Dictionary<Vector3, ChunkData> chunkDictionary;
 
+    [HideInInspector]
+    public static Transform playerPos;
     //zone of spawn
     private Vector3 playerSpawn;
     [Header("Boss position")]
@@ -89,10 +91,14 @@ public class ChunkManager : MonoBehaviour
         
         //create chunk (see function below)
         generateChunks(playerChunk);
+
+        playerPos = player;
     }
 
     void Update()
     {
+        playerPos = player;
+
         StartCoroutine(updateChunks());
 
         cheat();
@@ -207,11 +213,11 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().chunkData.toggle(false);
                     chunk.transform.position += direction * chunkSize;
                     chunk.GetComponent<chunk>().chunkData = tempData;
-                    chunk.GetComponent<chunk>().chunkData.toggle(true);
                     chunk.GetComponent<chunk>().makeMeshFromChunkData();
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
                 }
             }
+            chunk.GetComponent<chunk>().chunkData.toggle(true);
 
         }
 
@@ -248,6 +254,7 @@ public class ChunkManager : MonoBehaviour
                         spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
 
                     chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
+                    chunk.GetComponent<chunk>().chunkData.toggle(true);
                 }
                 yield return null;
             }

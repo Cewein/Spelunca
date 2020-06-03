@@ -11,7 +11,8 @@ public class ScannerMaster : MonoBehaviour
     public float speed;
 
     private Material _mat;
-    private float dist = -1.0f;
+    [HideInInspector]
+    public static float dist = -1.0f;
     private bool isMoving = false;
 
 
@@ -40,6 +41,7 @@ public class ScannerMaster : MonoBehaviour
             _mat.SetVector("iResolution", new Vector2(Screen.width, Screen.height));
         }
 
+        
         _mat.SetFloat("distanceFromCam", dist);
         _mat.SetFloat("width", width);
         Graphics.Blit(source, destination, _mat);
