@@ -251,7 +251,6 @@ public class ChunkManager : MonoBehaviour
                 }
                 yield return null;
             }
-            chunk.GetComponent<chunk>().chunkData.toggle(true);
         }
     }
 
@@ -337,11 +336,6 @@ public class ChunkManager : MonoBehaviour
         else ck.GetComponent<chunk>().chunkData.mineralDictionary = dico;
             
         ck.GetComponent<chunk>().chunkData.hasSpawnResources = true; 
-    }
-
-    public void deleteStructure(Vector3 chunk, Vector3 structPos)
-    {
-        print(chunkDictionary[chunk].mineralDictionary.Remove(structPos));
     }
 }
 

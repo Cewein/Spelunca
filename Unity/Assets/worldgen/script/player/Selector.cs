@@ -34,10 +34,9 @@ public class Selector : MonoBehaviour
                 Vector3 chunk = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), Mathf.Round(pos.z)) / ckm.chunkSize;
                 Vector3 crystal = hit.transform.gameObject.transform.position;
 
+                Destroy(hit.transform.gameObject);
                 print(chunk);
                 print(crystal);
-
-                ckm.deleteStructure(chunk, crystal);
 
             }
             else
