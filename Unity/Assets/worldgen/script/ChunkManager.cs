@@ -222,6 +222,7 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().chunkData = tempData;
                     chunk.GetComponent<chunk>().makeMeshFromChunkData();
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
+
                 }
             }
             chunk.GetComponent<chunk>().chunkData.toggle(true);
@@ -359,7 +360,7 @@ public class ChunkManager : MonoBehaviour
     {
         int size = Enum.GetNames(typeof(ResourceType)).Length;
         int s = UnityEngine.Random.Range(1, size);
-        for (int i = 0; i < mnspc && size > 0; i++)
+        for (int i = 0; i < mnspc; i++)
         {
 
             Vector3[] data = getPositionOnChunks(ck);

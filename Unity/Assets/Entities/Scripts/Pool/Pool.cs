@@ -141,8 +141,11 @@ public class Pool:MonoBehaviour
                 counter++;
                 //pool[i].target = target;
             }
+
+            if (counter >= amount)
+                break;
         }
-        //Debug.Log("Asked to spawn " + amount + " entities : " + counter + " entities spawned.");
+        Debug.Log("Asked to spawn " + amount + " entities : " + counter + " entities spawned.");
     }
     
     /*
