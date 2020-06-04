@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -14,7 +15,6 @@ public class LineMenu : MonoBehaviour
    [SerializeField] private int slotsNumber = 3;
    [SerializeField] private GameObject slotPrefab = null;
    private int activeElement;
-   private GameObject[] slots;
 
    private void Awake()
    {
@@ -25,7 +25,7 @@ public class LineMenu : MonoBehaviour
       Clear();
       foreach (Consumable[] slot in ConsumableStock.Instance.Stock.Values)
       {
-         slots.Append(Instantiate(slotPrefab, transform));
+         Instantiate(slotPrefab, transform);
          slotPrefab.GetComponent<LinePiece>().icon.sprite = slot[0].Icon;
          slotPrefab.GetComponent<LinePiece>().SetQuantity(ConsumableStock.Instance.SlotNextEmptySocket(slot));
          slotPrefab.GetComponent<LinePiece>().Name = slot[0].Name;
@@ -45,7 +45,7 @@ public class LineMenu : MonoBehaviour
       else if (Input.GetButtonDown(decrement)) activeElement = (activeElement-1)%ConsumableStock.Instance.Stock.Count;
       else if (Input.GetButtonDown(use))
       {
-         ConsumableStock.Instance.Stock[slots[activeElement].GetComponent<LinePiece>().Name][0].Use();
+         ConsumableStock.Instance.Stock.ElementAt(activeElement).Value[0].Use();
       }
    }
 }

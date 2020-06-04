@@ -1,45 +1,55 @@
-﻿using System;
-using System.Linq;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
+/// <summary>
+/// Draws InputNameAttribute dropdown menu in inspector.
+/// </summary>
 [CustomPropertyDrawer(typeof(InputNameAttribute))]
 public class InputNameDrawer : PropertyDrawer
 {
-    private int index;
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        InputNameAttribute inputNameAttribute = attribute as InputNameAttribute;
-        if (!property.propertyType.Equals(SerializedPropertyType.String))
+        if (property.propertyType == SerializedPropertyType.String)
         {
-            EditorGUI.LabelField(position, label.text, "Input name attribute only work with string type.");
+            InputNameAttribute inputName = attribute as InputNameAttribute;
+            Rect rectangle = EditorGUI.PrefixLabel(position, label);
+            Rect dropdownMenuRect = new Rect(rectangle.x , rectangle.y, rectangle.width, rectangle.height);
+            string[] inputNames = getInputNamesList().ToArray();
+            int currentIndex = getIndex(property.stringValue, inputNames);
+            property.stringValue = inputNames[EditorGUI.Popup(dropdownMenuRect, currentIndex, inputNames)];
         }
+        else GUI.Label(position, "InputName attribute can only work with string !");
+    }
+
+    /// <summary>
+    /// Return a list of strings that contains all input names defined in Project Settings.
+    /// </summary>
+    private List<string> getInputNamesList()
+    {
+        var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
+        SerializedObject obj = new SerializedObject(inputManager);
+        SerializedProperty axisArray = obj.FindProperty("m_Axes");
+        List<string> inputNames = new List<string>();
+
+        if (axisArray.arraySize == 0) inputNames.Add("No input is defined in project settings.");
         else
         {
-            string[] list = GetInputManagerAxisList();
-            index  = EditorGUI.Popup(position, property.displayName, Array.IndexOf(list, property.stringValue), list);
-            property.stringValue = list[index];
-            
+            for (int i = 0; i < axisArray.arraySize; i++)
+            {
+                var axe = axisArray.GetArrayElementAtIndex(i);
+                inputNames.Add(axe.FindPropertyRelative("m_Name").stringValue);
+            }
         }
-    
+        return inputNames;
     }
 
-    private string[] GetInputManagerAxisList()
+    private int getIndex(string s, string[] tab)
     {
-        SerializedObject inputManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0]);
-        SerializedProperty axis = inputManager.FindProperty("m_Axes");
-        string[] inputNameList = new string[axis.arraySize];
-        int i = 0;
-        foreach (SerializedProperty axe in axis)
+        for (int i = 0; i < tab.Length; i++)
         {
-            inputNameList[i++] = axe.FindPropertyRelative("m_Name").stringValue;
+            if (tab[i].Equals(s)) return i;
         }
-
-        return inputNameList;
-    }
-
-    private string ValidateInputName(string name)
-    {
-        return GetInputManagerAxisList().Contains(name) ? name : GetInputManagerAxisList()[0];
+        return 0;
     }
 }
