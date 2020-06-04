@@ -2276,6 +2276,7 @@ MonoBehaviour:
   spawnSize: 15
   bossSize: 50
   tunnelSize: 9
+  pool: {fileID: 899804502}
   ratioOfSpawn: 0.97
   maxNumberOfStructPerChunk: 10
   structures:
