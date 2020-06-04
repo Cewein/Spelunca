@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
+
+/// <summary>
+/// An attribute to display a dropdown list with inputs name defined in projects settings.
+/// </summary>
 public class InputNameAttribute : PropertyAttribute
 {
-    public string inputName;
 
-    public InputNameAttribute()
-    {
-    }
+    private string inputName;
+ 
+
 }
