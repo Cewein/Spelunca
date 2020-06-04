@@ -18,13 +18,13 @@ public class ScannerMaster : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(key))
+        if (Input.GetKeyDown(key) && dist < 0)
         {
             isMoving = true;
             dist = -1.0f;
         }
 
-        if (dist < 150.0 && isMoving)
+        if (dist < 200.0 && isMoving)
             dist += speed;
         else
         {
