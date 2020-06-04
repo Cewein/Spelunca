@@ -22,9 +22,9 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
     {
         if (!stock.ContainsKey(item.Name)) return;
         stock[item.Name].RemoveAt(0);
-        if (stock[item.Name].Count <= 0) stock.Remove(item.Name);
-        
-                update?.Invoke();
+
+        if (SlotNextEmptySocket(stock[item.Name]) <= 0) stock.Remove(item.Name); 
+            update?.Invoke();
 
     }
     
@@ -48,6 +48,7 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
                 Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
             }
         }
+
         
         update?.Invoke();
     }
