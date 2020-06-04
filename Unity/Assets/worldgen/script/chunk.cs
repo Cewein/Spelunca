@@ -25,6 +25,8 @@ public class chunk : MonoBehaviour
         Vector3 pos = GetComponent<Transform>().position;
         bufferList = new List<ComputeBuffer>();
 
+        size = (int)(size / DensityGenerator.precision);
+
         //create the 3 buffer needed for the GPU gen
         createBuffer(size);
 
@@ -34,6 +36,8 @@ public class chunk : MonoBehaviour
 
         //create denstiy on the gpu
         //the data stay on the gpu with the compute buffer
+
+        Vector3 chunkPos = pos - Vector3.one;
         DensityGenerator.find(pointsBuffer,size + 3, pos - Vector3.one, densityShader);
 
         pointsBuffer.GetData(dataArray);
@@ -47,6 +51,7 @@ public class chunk : MonoBehaviour
         marchShader.SetBuffer(0, "triangles", triangleBuffer);
         marchShader.SetInt("size", size + 3);
         marchShader.SetFloat("isoLevel", DensityGenerator.isoLevel);
+        marchShader.SetFloat("precision", DensityGenerator.precision);
 
         //lauch the compute shader on each threadGroup
         marchShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
@@ -68,7 +73,7 @@ public class chunk : MonoBehaviour
         Vector3[] normals = new Vector3[numTris * 3];
         int[] meshTriangles = new int[numTris * 3];
 
-        //but the data into the mesh
+        //put the data into the mesh
         for (int i = 0; i < numTris; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -87,8 +92,10 @@ public class chunk : MonoBehaviour
             mesh.RecalculateNormals();
 
         chunkData.mesh = mesh;
-
         chunkData.update = true;
+        chunkData.hasSpawnResources = false;
+        chunkData.mineralDictionary = new Dictionary<Vector3, GameObject>();
+        chunkData.flufflDictionary = new Dictionary<Vector3, GameObject>();
         makeMeshFromChunkData();
 
         //release all the buffer
@@ -104,7 +111,6 @@ public class chunk : MonoBehaviour
     {
         if (chunkData.update)
         {
-            //chunkData.mesh = chunkData.meshData.createMesh();
             chunkData.update = false;
         }
 
@@ -136,9 +142,28 @@ public class chunk : MonoBehaviour
 public struct ChunkData
 {
     public bool update;
+    public bool hasSpawnResources;
+    public Vector3 lastPlayerPos;
+
+    public Dictionary<Vector3, GameObject> mineralDictionary;
+    public Dictionary<Vector3, GameObject> flufflDictionary;
 
     public Mesh mesh;
     public MeshData meshData;
+
+    public void toggle(bool val)
+    {
+        
+        foreach (var mineral in mineralDictionary)
+        {
+            mineral.Value.SetActive(val);
+        }
+        foreach (var fluff in flufflDictionary)
+        {
+            fluff.Value.SetActive(val);
+        }
+        
+    }
 }
 
 public struct Triangle

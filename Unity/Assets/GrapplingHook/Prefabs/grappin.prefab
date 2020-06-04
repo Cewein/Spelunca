@@ -56,10 +56,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c964b2ff83d2c498abd07a88bd6194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 5497119916271333779}
+  player: {fileID: 0}
   hookPoint: {fileID: 1746805392035771824}
-  origin: {fileID: 0}
-  rope: {fileID: 6567995057824035653}
+  origin: {fileID: 6328225772386239192}
   maxDeployDistance: 60
   deploySpeed: 8
   retractSpeed: 25
@@ -69,7 +68,7 @@ MonoBehaviour:
   rotationAngle: 90
   state: 3
   target: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
+  renderer: {fileID: 5497119916271333779}
 --- !u!23 &5497119916271333779
 MeshRenderer:
   m_ObjectHideFlags: 0

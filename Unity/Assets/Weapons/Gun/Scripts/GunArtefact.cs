@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+
 /// <summary>
-/// Manual : need to press input each time to trigger ( ex : fusil à pompe )
-/// Automatic : trigger while input is helding ( ex : mitraillette )
-/// Charge : held input to charge energy and trigger when release (ex : les attaques chargées quoi )
-/// semi-auto : I don't really know but some gun are like this in real life/video game so I put it
-/// just in case.
+/// Weapon reloading mode.
+/// Manual : need to press input each time to trigger and reload after each shoot ( ex : shotgun )
+/// Automatic : shoot while input is pressed until the magazine is empty ( ex : machine gun )
+/// Semi-auto : need to press input each time to trigger but no need to reload if the magazine isn't empty (ex : sniper)
+/// Charge : held input to charge energy and trigger when release (ex : plasma canon )
 /// </summary>
 public enum ShootingMode{ MANUAL , AUTO, SEMI, CHARGE }
 
@@ -26,7 +27,7 @@ public struct Crosshair
 public class GunArtefact : MonoBehaviour
 {
     #region SerializedField ============================================================================================
-
+    
     [Header("Linked objects")]
     [Tooltip("The gun magazine that stock ammo.")][SerializeField]
     private GunLoader magazine;
@@ -60,8 +61,6 @@ public class GunArtefact : MonoBehaviour
     
     [Tooltip("How the the trigger ammo when we trigger it.")][SerializeField]
     private ShootingMode shootMode;
-   // [Tooltip("The projectile prefab")]
-    //public Projectile projectilePrefab;
     [Tooltip("Delay between two shot")][SerializeField]
     private float firingRate = 0.5f;
     [Tooltip("Cone angle where the bullet will spread while shooting.")][SerializeField]
@@ -71,25 +70,37 @@ public class GunArtefact : MonoBehaviour
     [Tooltip("gun recoil")][SerializeField]
     [Range(0f, 2f)]
     private float recoil = 1;
+    [Tooltip("Time between a shot and the reloading action ( Manual weapon only )")][SerializeField] 
+    private int reloadCooldown = 30;
+    
+    [Header("Aiming Parameters")]
     [Tooltip("Ratio of the default FOV that this weapon applies while aiming")][SerializeField]
     [Range(0f, 1f)]
-    private float aimFovRatio = 1f;
-    [Tooltip("Translation to apply to weapon arm when aiming with this weapon")][SerializeField]
-    private Vector3 aimOffset;
+    private float aimFovRatio = 0.8f;
+    [Tooltip("How fast the smooth aiming zoom animaiton occured.")][SerializeField]
+    private float zoomSpeed = 10f;
 
    /* [Header("Charging (charging weapons only)")]
     [Tooltip("Auto-shooting or not when max charge is reached.")][SerializeField]
     private bool shootOnMaxEnergy;
     [Tooltip("Time needed to reach max energy charged")][SerializeField]
     private float chargeTime = 2f;*/
+
+   [Header("AI")] 
+   [Tooltip("Is the miner controller an Artificial Intelligence ?")][SerializeField] 
+   private bool ai = false;
     
     #endregion
     
     #region Other fields ===============================================================================================
 
-    public ShootingMode ShootMode => shootMode;
-
+    private int timer;
+    private bool forceReload;
+    private float normalFOV;
     private float lastTimeFiring;
+    private MinerController miner;
+    private Vector3 target;
+
     private Ammo currentAmmo;
     private Ammo CurrentAmmo
     {
@@ -107,13 +118,25 @@ public class GunArtefact : MonoBehaviour
     }
 
     public Crosshair Crosshair => crosshair;
+    public ShootingMode ShootMode => shootMode;
 
     #endregion
 
     private void Start()
     {
+        normalFOV = Camera.main.fieldOfView;
+        miner = GetComponentInParent<MinerController>();
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
+        if (controller == null){ controller = GetComponentInParent<GunController>(); }
         controller.trigger += (down, held, up)=>Trigger(down,held,down);
+        if (!ai) controller.aim += Aim;
+        forceReload = false;
+    }
+
+    private void Aim(bool isAiming)
+    {
+        float targetFOV = isAiming && !controller.TriggerReloadAnimation  ? normalFOV * aimFovRatio : normalFOV;
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
     }
 
     private bool Trigger(bool inputDown, bool inputHeld, bool inputUp)
@@ -121,16 +144,27 @@ public class GunArtefact : MonoBehaviour
         switch (shootMode)
         {
             case ShootingMode.MANUAL:
-                if (inputDown){ return TryShoot(); }
+                if (inputDown)
+                {
+                    if (TryShoot())
+                    {
+                        timer = reloadCooldown;
+                        forceReload = true;
+                        return forceReload;
+                    }
+                }
                 return false;
 
             case ShootingMode.AUTO:
                 if (inputHeld){ return TryShoot(); }
                 return false;
             
-            /*case ShootingMode.SEMI:break; // I don't know for the moment
+            case ShootingMode.SEMI:
+                if (inputDown){ return TryShoot(); }
+                return false;
+                
 
-          case ShootingMode.CHARGE:
+        /*  case ShootingMode.CHARGE:
                 if (inputHeld){ TryBeginCharge(); }
                 if (inputUp || (shootOnMaxEnergy && currentCharge >= 1f))
                 {
@@ -141,22 +175,24 @@ public class GunArtefact : MonoBehaviour
             default:
                 return false;
         }
-
-        return false;
     }
-    
+
+    private void LateUpdate()
+    {
+        if (forceReload && !isPickaxe) ForceReload();
+    }
+
     private bool TryShoot()
     {
-        if (isPickaxe)
-        {
-            return Pick(true);
-        }
-        if (magazine.CurrentResourceQuantity >= 0f && lastTimeFiring + firingRate < Time.time)
+        if (isPickaxe){return Pick(true);}
+        if (magazine.CurrentResourceQuantity >= 0f
+            && lastTimeFiring + firingRate < Time.time
+            && !controller.TriggerReloadAnimation
+            && !forceReload)
         {
             Shoot();
             return true;
         }
-
         return false;
     }
     
@@ -200,7 +236,7 @@ public class GunArtefact : MonoBehaviour
         ResourcesStock.Instance.setResource(type,quantity);
     }
 
-    private void Shoot()
+    private bool Shoot()
     {
         // spawn all bullets with random direction
         for (int i = 0; i < bulletsPerShot; i++)
@@ -225,14 +261,32 @@ public class GunArtefact : MonoBehaviour
                                                   );
         }
         catch (NullReferenceException e){}
-        
 
-
+        TakeRecoil();
         lastTimeFiring = Time.time;
+        return true;
+    }
+
+    private void TakeRecoil()
+    {
+        try
+        {
+            miner.WeaponParent.position -= miner.WeaponParent.transform.forward*recoil;
+        }
+        catch (NullReferenceException e){} 
+        // TODO : FPSCamera shake accordind to recoil;
     }
     
     private Vector3 SpreadBullet(Transform shootTransform)
     {
         return Vector3.Slerp(shootTransform.forward, UnityEngine.Random.insideUnitSphere,  bulletSpreadAngle / 180f);;
+    }
+
+    private void ForceReload()
+    {
+        timer--;
+        if (timer >= 0) return;
+        controller.isReloading(true);
+        forceReload = false;
     }
 }

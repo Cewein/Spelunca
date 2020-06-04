@@ -124,6 +124,8 @@ public class MinerController : MonoBehaviour
 
     public GameObject CurrentWeapon  => weapons[weaponIndex];
 
+    public Transform WeaponParent => weaponParent;
+
     #endregion
 
     private bool grapplingControl
@@ -169,28 +171,17 @@ public class MinerController : MonoBehaviour
     {
         SwitchWeapon();
         Aim();
-        Reload();
         GrapplingHook();
     }
 
     private void Aim()
     {
-        if(weaponIndex != 0 ) return; // TODO : this trick force the gun to be in first position of the list...
-        weaponNewPosition = minerInputs.isAiming(true) ?
-                                                 weaponsAimingPosition.position : weaponDefaultPosition.position;
+        if(weaponIndex != 0 ) return; // TODO : Be aware because this trick force the gun to be in first position of the list...
+        weaponNewPosition = minerInputs.isAiming(true)
+                            && !weapons[weaponIndex].GetComponent<GunController>().TriggerReloadAnimation?
+                            weaponsAimingPosition.position : weaponDefaultPosition.position;
         weaponParent.position = Vector3.Slerp(weaponParent.position, weaponNewPosition, aimingAcceleration * Time.deltaTime);
     }
-
-    private void Reload()
-    {
-        //TODO : use an animator later ( after alpha )
-        bool isReloading = minerInputs.isReloading();
-        if(!isReloading) return;
-        minerInputs.isAiming(isReloading);
-        weaponParent.position = Vector3.Slerp(weaponParent.position,transform.position*0.92f, 0.2f*aimingAcceleration * Time.deltaTime);
-
-    }
-   
 
     private void SwitchWeapon()
     {
