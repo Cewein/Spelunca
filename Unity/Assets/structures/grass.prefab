@@ -92,8 +92,23 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!64 &3440733729804078921
-MeshCollider:
+--- !u!114 &4312168254796153900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701087378586291128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64301d05b98bc5b44b5cc16d744dd145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  quantity: 20
+  pv: 1
+--- !u!65 &3991123515964427898
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,10 +117,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 616af3eb1d57a7b4fa2218af6ec23e1d, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.055857483, y: 0.054396134, z: 0.02362669}
+  m_Center: {x: 0.0017203931, y: 0.00010728839, z: 0.009416761}
 --- !u!1 &4627741173994672451
 GameObject:
   m_ObjectHideFlags: 0
