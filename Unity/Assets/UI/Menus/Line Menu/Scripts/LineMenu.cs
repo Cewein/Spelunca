@@ -23,7 +23,7 @@ public class LineMenu : MonoBehaviour
    private void UpdateSlots()
    {
       Clear();
-      foreach (Consumable[] slot in ConsumableStock.Instance.Stock.Values)
+      foreach (List<Consumable> slot in ConsumableStock.Instance.Stock.Values)
       {
          Instantiate(slotPrefab, transform);
          slotPrefab.GetComponent<LinePiece>().icon.sprite = slot[0].Icon;

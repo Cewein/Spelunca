@@ -41,6 +41,7 @@ public class Consumable : MonoBehaviour, ICollectible
     public void Use()
     {
         callback.Invoke();
+        ConsumableStock.Instance.TakeConsumable(this);
     }
     
     

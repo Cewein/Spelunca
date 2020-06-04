@@ -8,32 +8,31 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
 {
     [Tooltip("Max item quantity per slot.")][SerializeField]
     private int slotCapacity = 15;
-    private  Dictionary<string, Consumable[]> stock;
-    public  Dictionary<string, Consumable[]> Stock{get => stock;}
+    private  Dictionary<string, List<Consumable>> stock;
+    public  Dictionary<string, List<Consumable>> Stock{get => stock;}
 
     public Action update;
 
     private ConsumableStock()
     {
-        stock = new Dictionary<string, Consumable[]>();
+        stock = new Dictionary<string,List<Consumable>>();
     }
 
-   /* public void TakeConsumable(Consumable item)
+    public void TakeConsumable(Consumable item)
     {
-        if (!ContainsItem(item)) return;
-        item.Use();
-        stock[item]--;
-        if (stock[item] <= 0) stock.Remove(item);
+        if (!stock.ContainsKey(item.Name)) return;
+        stock[item.Name].RemoveAt(0);
+        if (stock[item.Name].Count <= 0) stock.Remove(item.Name);
         
                 update?.Invoke();
 
-    }*/
+    }
     
     public void SetConsumable(Consumable item)
     {
         if (!stock.ContainsKey(item.Name))
         {
-            Consumable[] slot = Enumerable.Repeat<Consumable>(null, slotCapacity).ToArray();
+            List<Consumable> slot = Enumerable.Repeat<Consumable>(null, slotCapacity).ToList();
             slot[0] = item;
             stock.Add(item.Name, slot);
         }
@@ -59,7 +58,7 @@ public class ConsumableStock : SingletonScriptableObject<ConsumableStock>
             (current, element) => current + (element.Key + " : " + SlotNextEmptySocket(element.Value) +"\n"));
     }
 
-    public int SlotNextEmptySocket(Consumable[] slot)
+    public int SlotNextEmptySocket(List<Consumable> slot)
     {
         int counter = 0;
         foreach (Consumable item in slot)
