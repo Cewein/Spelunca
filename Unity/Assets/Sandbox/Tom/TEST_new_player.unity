@@ -2794,6 +2794,16 @@ PrefabInstance:
       propertyPath: p
       value: 
       objectReference: {fileID: 1813701067}
+    - target: {fileID: 4552334123100878343, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: maxPulledPosition
+      value: 
+      objectReference: {fileID: 1813701067}
+    - target: {fileID: 4552334123100878343, guid: 6596093949ece3a45b48648d493ec967,
+        type: 3}
+      propertyPath: minPullPosition
+      value: 
+      objectReference: {fileID: 914285790}
     - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
       propertyPath: miner
