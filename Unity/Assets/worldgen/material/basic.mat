@@ -97,6 +97,7 @@ Material:
     - _UseText: 0
     - _ZWrite: 1
     - _isToggled: 0
+    - _size: 0.5
     - tex_scale: 0.008
     m_Colors:
     - _Color: {r: 0.7264151, g: 0.37706053, b: 0.07195621, a: 1}

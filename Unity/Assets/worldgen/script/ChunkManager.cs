@@ -39,9 +39,13 @@ public class ChunkManager : MonoBehaviour
 
     [Header("Structures setting")]
     [Range(0,1)]
-    public float ratioOfSpawn = 0.5f;
+    public float ratioOfSpawn = 0.97f;
     public int maxNumberOfStructPerChunk = 200;
     public structure[] structures;
+    [Space(10)]
+    public float ratioOfFluff = 0.90f;
+    public int maxNumberOfFluffPerChunk = 200;
+    public structure[] Fluffs;
 
     //chunks 
     private Vector3 playerChunk;
@@ -62,8 +66,6 @@ public class ChunkManager : MonoBehaviour
         //init data for runtime
         chunks = new GameObject[viewRange,viewRange,viewRange];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
-
-        ratioOfSpawn = 1.0f - ratioOfSpawn;
 
         //set static variable for the density generator
         DensityGenerator.isoLevel = isoLevel;
@@ -162,8 +164,12 @@ public class ChunkManager : MonoBehaviour
                     //Two compute shader are pass
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunks[x, y, z].GetComponent<chunk>().chunkData.lastPlayerPos = playerChunk;
-                    if(hash(chunks[x, y, z].transform.position) > ratioOfSpawn)
-                        spawnStructures(chunks[x, y, z]);
+                    float ckHash = hash(chunks[x, y, z].transform.position);
+                    if (ckHash > ratioOfSpawn)
+                        spawnStructures(chunks[x, y, z], structures, maxNumberOfStructPerChunk);
+                    if (ckHash > ratioOfFluff)
+                        spawnStructures(chunks[x, y, z], Fluffs, maxNumberOfFluffPerChunk, true);
+
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
             }
@@ -200,12 +206,15 @@ public class ChunkManager : MonoBehaviour
                 //if not it create a new chunk
                 if (chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
                 {
+                    chunk.GetComponent<chunk>().chunkData.toggle(false);
                     chunk.transform.position += direction * chunkSize;
                     chunk.GetComponent<chunk>().chunkData = tempData;
+                    chunk.GetComponent<chunk>().chunkData.toggle(true);
                     chunk.GetComponent<chunk>().makeMeshFromChunkData();
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
                 }
             }
+
         }
 
         foreach (var chunk in chunks)
@@ -218,6 +227,7 @@ public class ChunkManager : MonoBehaviour
             temp.y = Mathf.Floor(player.position.y / chunkSize);
             temp.z = Mathf.Floor(player.position.z / chunkSize);
 
+            chunk.GetComponent<chunk>().chunkData.toggle(false);
             if (chunkPlayerPos != temp)
             {
                 ChunkData tempData;
@@ -225,15 +235,23 @@ public class ChunkManager : MonoBehaviour
 
                 if (!chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
                 {
+                    chunk.GetComponent<chunk>().chunkData.toggle(false);
                     chunk.transform.position += direction * chunkSize;
                     chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
-                    chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
-                    if (hash(chunk.transform.position) > ratioOfSpawn)
-                        spawnStructures(chunk);
+
+                    float ckHash = hash(chunk.transform.position);
+                    if (ckHash > ratioOfSpawn )
+                        spawnStructures(chunk, structures, maxNumberOfStructPerChunk);
+
+                    if (ckHash > ratioOfFluff)
+                        spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
+
+                    chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
                 }
                 yield return null;
             }
+            chunk.GetComponent<chunk>().chunkData.toggle(true);
         }
     }
 
@@ -287,23 +305,37 @@ public class ChunkManager : MonoBehaviour
         return  rez;
     }
 
-    void spawnStructures(GameObject ck)
+    void spawnStructures(GameObject ck, structure[] strct, int mnspc, bool fluff = false)
     {
-            
-        for (int i = 0; i < maxNumberOfStructPerChunk; i++)
+        int size = strct.Length;
+        int s = UnityEngine.Random.Range(0, size);
+        Dictionary<Vector3, GameObject> dico = new Dictionary<Vector3, GameObject>();
+
+        for (int i = 0; i < mnspc && size > 0; i++)
         {
 
             Vector3[] data = getPositionOnChunks(ck);
 
-            int size = structures.Length;
-            int s = UnityEngine.Random.Range(0, structures.Length);
+            if (!dico.ContainsKey(data[0]))
+            {
+                float angle = Vector3.Dot(data[1], Vector3.up);
 
-            float angle = Vector3.Dot(data[1], Vector3.up);
+                if (fluff) s = UnityEngine.Random.Range(0, size);
 
-            GameObject obj = Instantiate(structures[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
+                Vector3 area = strct[s].area;
+
+                if (data[0] != Vector3.zero && area.x <= angle && area.y >= angle)
+                {
+                    GameObject o = Instantiate(strct[s].gameObject, data[0], Quaternion.FromToRotation(Vector3.up, data[1]) * transform.rotation);
+                    dico.Add(o.transform.position, o);
+                }
+            }
         }
+
+        if (fluff) ck.GetComponent<chunk>().chunkData.flufflDictionary = dico;
+        else ck.GetComponent<chunk>().chunkData.mineralDictionary = dico;
             
-        ck.GetComponent<chunk>().chunkData.canSpawnResources = false; 
+        ck.GetComponent<chunk>().chunkData.hasSpawnResources = true; 
     }
 }
 
@@ -312,5 +344,5 @@ public struct structure
 {
     //the gameobject we want to spawn
     public GameObject gameObject;
-    Vector3 position;
+    public Vector2 area;
 }

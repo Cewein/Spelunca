@@ -110,6 +110,9 @@ Shader "Hidden/CelShadingShader"
 				//float3 col = tex2D(_MainTex, i.uv).rgb * (1. - magnitude);
 				//float3 col = (1. - magnitude);//tex2D(_MainTex, i.uv).rgb * 
 
+				//tone mapping ?
+				//col = pow(col, float3(0.84545, 0.84545, 0.84545));
+
                 return float4(col.x, col.y, col.z,1.);
             }
             ENDCG
