@@ -182,6 +182,21 @@ PrefabInstance:
       propertyPath: raycastReticle
       value: 
       objectReference: {fileID: 944888912}
+    - target: {fileID: 1414176941927642856, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: maxPulledPosition
+      value: 
+      objectReference: {fileID: 1761860636}
+    - target: {fileID: 1414176941927642856, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: minPullPosition
+      value: 
+      objectReference: {fileID: 1442154399}
+    - target: {fileID: 1414176941927642856, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: foreEndTransform
+      value: 
+      objectReference: {fileID: 1761860636}
     - target: {fileID: 2092891907812641260, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_IsActive
@@ -655,6 +670,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: increment
+      value: Consumable+
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: decrement
+      value: Consumable-
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: use
+      value: UseConsumable
       objectReference: {fileID: 0}
     - target: {fileID: 1290475389282511751, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
@@ -1896,6 +1926,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1442154399 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5018064241965982926, guid: 03e5fa6798ff274469d7558ea0d50d23,
+    type: 3}
+  m_PrefabInstance: {fileID: 134861550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1553239997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7015592363743400258, guid: 03e5fa6798ff274469d7558ea0d50d23,
@@ -2171,6 +2207,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!4 &1761860636 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4504465824951461231, guid: 03e5fa6798ff274469d7558ea0d50d23,
+    type: 3}
+  m_PrefabInstance: {fileID: 134861550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1869160573
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,30 +2242,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7fd760c78547c4f923befce0084ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceFirePrefab: {fileID: 3979415163191105060, guid: cb7e007744c96404ebed6390a8dbbcaa,
-    type: 3}
+  resourceFirePrefab: {fileID: 0}
   densityShader: {fileID: 7200000, guid: 43ca010cde78eee4cbae15d9c540c5b7, type: 3}
   MeshGeneratorShader: {fileID: 7200000, guid: 3a3b046f8a188de428720dce66733b07, type: 3}
   useDefaultNormal: 0
   player: {fileID: 134861552}
-  chunkSize: 32
-  viewRange: 5
+  chunkSize: 16
+  viewRange: 10
   precision: 1
   chunk: {fileID: 6361677797010164805, guid: 5b5925fa97f9f2a439f5ea234679fc50, type: 3}
   octave: 4
   lacunarity: 2
-  persistence: 0.33
-  seed: 0
-  isoLevel: 0.45
-  spawnSize: 20
+  persistence: 0.2
+  seed: 10
+  isoLevel: 0.3
+  spawnSize: 15
   bossSize: 50
   tunnelSize: 9
   ratioOfSpawn: 0.97
-  maxNumberOfStructPerChunk: 200
-  structures: []
-  ratioOfFluff: 0.9
-  maxNumberOfFluffPerChunk: 200
-  Fluffs: []
+  maxNumberOfStructPerChunk: 10
+  structures:
+  - gameObject: {fileID: 4333270871201857030, guid: e0c7ac8a115253144940848ca8ee8e46,
+      type: 3}
+    area: {x: -1, y: 1}
+  - gameObject: {fileID: 4627741173994672451, guid: 872e34af141fa4147bbb9a1e2f2d7270,
+      type: 3}
+    area: {x: -1, y: 1}
+  ratioOfFluff: 0.5
+  maxNumberOfFluffPerChunk: 5
+  Fluffs:
+  - gameObject: {fileID: 8732615353163473822, guid: 96b834eb204b9fc4abbeec3014449f00,
+      type: 3}
+    area: {x: 0.9, y: 1}
+  - gameObject: {fileID: 5052183422691309722, guid: e92faa21541942b4bb4ec703718ff9eb,
+      type: 3}
+    area: {x: 0.9, y: 1}
+  - gameObject: {fileID: 3059923775177781101, guid: d599eab93ba20f34389d6103ce27dd42,
+      type: 3}
+    area: {x: 0.9, y: 0}
+  - gameObject: {fileID: 9013278580472398440, guid: 8d555e31993cb0e42b8202b790578aa2,
+      type: 3}
+    area: {x: -1, y: -0.9}
+  - gameObject: {fileID: 6656094920142475523, guid: f5fb442cb33b0184ba9342ffb41677cb,
+      type: 3}
+    area: {x: -1, y: -0.9}
   boss: {fileID: 1573004006}
 --- !u!4 &1869160575
 Transform:
