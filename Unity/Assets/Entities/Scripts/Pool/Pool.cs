@@ -108,34 +108,33 @@ public class Pool:MonoBehaviour
         
     }
     
-    public void spawnAll()
+    /*public void spawnAll()
     {
         spawn(poolSize,ResourceType.fire);
-    }
+    }*/
 
-    public void spawn(int amount, ResourceType type)
+    public void spawn(int amount, Vector3[] spawnData, ResourceType type)
     {
         int counter = 0;
         foreach (var i in disabled.Keys.ToList())
         {
             if (disabled.ContainsKey(i))
             {
-                var spawnPoint = poolSpawner.getNewSpawnPosition();
                 if (pool[i] == null)
                 {
-                    pool[i] = Instantiate(enemy, spawnPoint.position + spawnPoint.direction * spawnDistance,Quaternion.Euler(0, 0, 0));
+                    pool[i] = Instantiate(enemy, spawnData[0] + spawnData[0] * spawnDistance,Quaternion.Euler(0, 0, 0));
                     pool[i].name = name + i;
                     pool[i].groundLayer = this.layerToSpawn;
                 }
                 else
                 {
-                    pool[i].transform.position = spawnPoint.position + spawnPoint.direction * spawnDistance;
+                    pool[i].transform.position = spawnData[1] + spawnData[0] * spawnDistance;
                     pool[i].meshRenderer.enabled = true;
                 }
 
                 pool[i].type = type;
                 pool[i].refreshMaterial();
-                pool[i].transform.up = spawnPoint.direction;
+                pool[i].transform.up = spawnData[0];
                 pool[i].state = EnemyBehaviourState.Idle;
                 pool[i].player = player;
                 disabled.Remove(i);
