@@ -11,7 +11,7 @@ using System.Collections.Generic;
  public class MainMenuManager : MonoBehaviour
  {
      
-     private enum EnvironmentMode {Local,Prod}
+     private enum EnvironmentMode {Local,PreProd,Prod}
      private struct KEY
      {
          internal static readonly string URL_GET_USER = "get_user/";
@@ -32,7 +32,8 @@ using System.Collections.Generic;
 
      [SerializeField] private EnvironmentMode environmentMode = EnvironmentMode.Local;
      private string localUrl = "localhost:8000/api/";
-     private string prodUrl = "13.80.137.233:8000/api/";
+     private string preprodUrl = "13.80.137.233:8000/api/";
+     private string prodUrl = "13.80.137.233/api/";
 
      public void showLoginView()
      {
@@ -126,6 +127,8 @@ using System.Collections.Generic;
                  return localUrl;
              case EnvironmentMode.Prod:
                  return prodUrl;
+             case EnvironmentMode.PreProd:
+                 return preprodUrl;
              default:
                  return "";
          }
