@@ -1605,9 +1605,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 899804501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e10d435922f7e54aa8f956d1fc64242, type: 3}
+  m_Script: {fileID: 11500000, guid: 455df8d8cd28ebd45bd73f0221cccb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolSize: 500
+  enemy: {fileID: 7519221456394815101, guid: 3287f4f4f4d3e894891d7c1732865c18, type: 3}
+  layerToSpawn: Enemy
+  name: Spider
+  spawnDistance: 0.015
+  player: {fileID: 134861551}
+  maxEntitiesAttacking: 5
 --- !u!4 &899804503
 Transform:
   m_ObjectHideFlags: 0
