@@ -67,7 +67,7 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
     }
     
     
-    private void Update()
+   /* private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -86,5 +86,5 @@ public class EntityGenerator : MonoBehaviour, PoolSpawner
             //Debug.Log("GOING TO SPAWN");
             pool.spawnAll();
         }
-    }
+    }*/
 }

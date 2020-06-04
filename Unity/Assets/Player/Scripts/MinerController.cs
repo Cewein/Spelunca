@@ -249,6 +249,7 @@ public class MinerController : MonoBehaviour
             isOnGround = false;
             //  normal = Vector3.up;
         }
+
     }
 
     private void AirControl()
