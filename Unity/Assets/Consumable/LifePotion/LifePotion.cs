@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class LifePotion : MonoBehaviour
 {
+   [SerializeField] private int healPoints = 1;
+
    public void callback()
    {
-      Debug.Log("ouais t'as pris une potion de vie !!");
+      FindObjectOfType<PlayerStats>().RestoreLife(healPoints); // TODO : not very good to use findObjectOfType
    }
 }
