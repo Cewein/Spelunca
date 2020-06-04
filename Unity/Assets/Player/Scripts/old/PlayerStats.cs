@@ -10,13 +10,19 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     [Tooltip("Invincibility HUD image.")] [SerializeField]
     private Image invincibleImage;
-    private int _HP;
+    
+    [Tooltip("Player life amount.")][SerializeField]private int _HP;
 
     public HealthBar healthBar;
 
     public int Life { 
         get => _HP;
         set => _HP = value;
+    }
+
+    private void Awake()
+    {
+        _HP = _maxHP;
     }
 
     public int MaxLife{get => _maxHP;}
