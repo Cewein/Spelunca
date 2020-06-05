@@ -470,12 +470,6 @@ MonoBehaviour:
   mainMenuPath: Assets/Sandbox/Game/Menu/MainMenu.unity
   gameScenePath: 
   boss: {fileID: 0}
---- !u!4 &253144984 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8275482314681205312, guid: 03e5fa6798ff274469d7558ea0d50d23,
-    type: 3}
-  m_PrefabInstance: {fileID: 4960815634682092114}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &624851337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,19 +2914,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
-      propertyPath: weaponParent
-      value: 
-      objectReference: {fileID: 253144984}
-    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: aimingAcceleration
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
       propertyPath: hook
       value: 
       objectReference: {fileID: 1327662802}
+    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: footstepSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 8253f7c4516f780429982e481d0a8e0a, type: 3}
+    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: footstep.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 56154816a8dbdb443ac1aff05073c935, type: 3}
+    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: footstep.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3dc268acb5edc644bb293e3a888740fb, type: 3}
+    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: footstep.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: c9fbae3e650dc9146b059456ac657a5a, type: 3}
+    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: footstep.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 20666bdee10e92c459afc0514c98e2df, type: 3}
     - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: raycastReticle
