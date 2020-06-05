@@ -2012,6 +2012,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 3.9517484
       objectReference: {fileID: 0}
+    - target: {fileID: 574667680223950126, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: miner
+      value: 
+      objectReference: {fileID: 1019905854}
     - target: {fileID: 711560069660404935, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2379,6 +2384,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711560071650044868, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711560071650044868, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711560071650044868, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 711560071662489265, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
