@@ -1747,7 +1747,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 0}
   winScreen: {fileID: 0}
   mainMenuPath: MainMenu
-  gameScenePath: Assets/Sandbox/Game/TEST_GAMEPLAY.unity
+  gameScenePath: Assets/Sandbox/Game/BETA.unity
   boss: {fileID: 0}
 --- !u!114 &1018978479
 MonoBehaviour:
