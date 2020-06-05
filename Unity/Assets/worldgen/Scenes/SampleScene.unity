@@ -630,15 +630,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b422e748a0ae054184047235e05ab61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scannerShader: {fileID: 4800000, guid: 397ccd84e3b4d9f45a1b6fe93b6c58f4, type: 3}
-  width: 1
-  key: 284
-  speed: 0.5
+  celShadingShader: {fileID: 4800000, guid: 939e094cb57ff2d4c98351c80374a641, type: 3}
 --- !u!1 &1522588103
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa316197f5cd43540850c9947f491c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ckm: {fileID: 0}
 --- !u!114 &1522588107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,10 +857,7 @@ MonoBehaviour:
   - gameObject: {fileID: 4627741173994672451, guid: 872e34af141fa4147bbb9a1e2f2d7270,
       type: 3}
     area: {x: -1, y: 1}
-  - gameObject: {fileID: 6361500002223971637, guid: 6666f89a7cace3846a669caaa37a8e20,
-      type: 3}
-    area: {x: -1, y: 1}
-  ratioOfFluff: 0.25
+  ratioOfFluff: 0.5
   maxNumberOfFluffPerChunk: 5
   Fluffs:
   - gameObject: {fileID: 8732615353163473822, guid: 96b834eb204b9fc4abbeec3014449f00,

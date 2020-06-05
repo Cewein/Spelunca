@@ -18,7 +18,7 @@ public class Loot : MonoBehaviour
     // Start is called before the first frame update
     public void lootItems()
     {
-        //Debug.Log("loot !");
+        Debug.Log("loot !");
         Quaternion rot = new Quaternion();
             
         for (int i = 0; i < lootPrefabs.Length; i++)
