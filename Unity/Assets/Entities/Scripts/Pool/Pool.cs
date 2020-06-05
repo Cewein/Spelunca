@@ -122,7 +122,7 @@ public class Pool:MonoBehaviour
             {
                 if (pool[i] == null)
                 {
-                    pool[i] = Instantiate(enemy, spawnData[0] + spawnData[1] * spawnDistance,Quaternion.Euler(0, 0, 0));
+                    pool[i] = Instantiate(enemy, spawnData[0] + spawnData[0] * spawnDistance,Quaternion.Euler(0, 0, 0));
                     pool[i].name = name + i;
                     pool[i].groundLayer = this.layerToSpawn;
                 }

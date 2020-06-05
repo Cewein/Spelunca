@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -138,8 +137,6 @@ public class chunk : MonoBehaviour
         bufferList.Add(triangleBuffer);
         bufferList.Add(trisCounterBuffer);
     }
-
-    
 }
 
 public struct ChunkData
@@ -156,14 +153,23 @@ public struct ChunkData
 
     public void toggle(bool val)
     {
+        List<Vector3> toRemove = new List<Vector3>();
         foreach (var mineral in mineralDictionary)
         {
             if (mineral.Value != null)
-                mineral.Value.SetActive(val);
+                mineral.Value.SetActive(val); 
             else
-                mineralDictionary.Remove(mineral.Key);
+                toRemove.Add(mineral.Key);
 
         }
+
+        foreach(Vector3 remover in toRemove)
+        {
+            mineralDictionary.Remove(remover);
+        }
+
+        toRemove.Clear();
+
         foreach (var fluff in flufflDictionary)
         {
             fluff.Value.SetActive(val);

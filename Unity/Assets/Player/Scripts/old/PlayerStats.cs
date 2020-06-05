@@ -13,7 +13,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
     
     [Tooltip("Player life amount.")][SerializeField]private int _HP;
 
-    public HealthBar healthBar;
 
     public int Life { 
         get => _HP;
@@ -51,7 +50,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         if (!invincible)
         {
-            healthBar.removeHP(damage);
             hurt?.Invoke(damage, direction, damageType);
         }  
         if (_HP <= 0 && !invincible) isPlayerDead(true);
@@ -60,7 +58,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void RestoreLife(int hp)
     {
         heal?.Invoke(hp);
-        healthBar.addHP(hp);
     }
     
     public void isPlayerDead(bool isDead)
