@@ -122,27 +122,31 @@ public class Pool:MonoBehaviour
             {
                 if (pool[i] == null)
                 {
-                    pool[i] = Instantiate(enemy, spawnData[0] + spawnData[0] * spawnDistance,Quaternion.Euler(0, 0, 0));
+                    pool[i] = Instantiate(enemy, spawnData[0] + spawnData[1] * spawnDistance, Quaternion.FromToRotation(Vector3.up, spawnData[1]));
                     pool[i].name = name + i;
                     pool[i].groundLayer = this.layerToSpawn;
                 }
                 else
                 {
-                    pool[i].transform.position = spawnData[1] + spawnData[0] * spawnDistance;
+                    pool[i].transform.position = spawnData[0] + spawnData[1] * spawnDistance;
+                    pool[i].transform.localRotation = Quaternion.FromToRotation(Vector3.up, spawnData[1]);
                     pool[i].meshRenderer.enabled = true;
                 }
 
                 pool[i].type = type;
                 pool[i].refreshMaterial();
-                pool[i].transform.up = spawnData[0];
+                pool[i].transform.up = spawnData[1];
                 pool[i].state = EnemyBehaviourState.Idle;
                 pool[i].player = player;
                 disabled.Remove(i);
                 counter++;
                 //pool[i].target = target;
             }
+
+            if (counter >= amount)
+                break;
         }
-        //Debug.Log("Asked to spawn " + amount + " entities : " + counter + " entities spawned.");
+        Debug.Log("Asked to spawn " + amount + " entities : " + counter + " entities spawned.");
     }
     
     /*
