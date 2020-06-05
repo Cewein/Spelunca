@@ -8,6 +8,19 @@ using System.Collections.Generic;
  using UnityEngine.SocialPlatforms;
  using UnityEngine.UI;
 
+
+ public struct LoginInfo
+ {
+     public string username;
+     public string password;
+ } 
+ public struct PlayerData
+ {
+     public string id;
+     public string username;
+     public string email;
+ } 
+ 
  public class MainMenuManager : MonoBehaviour
  {
      
@@ -15,11 +28,6 @@ using System.Collections.Generic;
      private struct KEY
      {
          internal static readonly string URL_GET_USER = "get_user/";
-     }
-     private struct LoginInfo
-     {
-         public string username;
-         public string password;
      }
      
      public GameObject mainLayout;
@@ -35,6 +43,10 @@ using System.Collections.Generic;
      private string preprodUrl = "13.80.137.233:8000/api/";
      private string prodUrl = "13.80.137.233/api/";
 
+     public void quit()
+     {
+         Application.Quit();
+     }
      public void showLoginView()
      {
          mainLayout.SetActive(false);
@@ -58,15 +70,20 @@ using System.Collections.Generic;
          creditsLayout.SetActive(false);
      }
 
-     public void startLogin()
+     public void login()
      {
          LoginInfo loginInfo = new LoginInfo();
          loginInfo.username = usernameInput.text;
          loginInfo.password = passwordInput.text;
-         //Debug.Log(loginInfo.username + " " + loginInfo.password);
-         StartCoroutine(login(loginInfo));
+         StartCoroutine(RestClient.Instance.login(getAPIUrl() + KEY.URL_GET_USER, loginInfo, loginCallBack));
      }
 
+     private void loginCallBack(PlayerData player)
+     {
+         Debug.Log("Callback ! Id : " + player.id);
+     
+     }
+/*
      private IEnumerator login(LoginInfo loginInfo)
      {
          WWWForm form = new WWWForm();
@@ -91,7 +108,8 @@ using System.Collections.Generic;
              Debug.Log("Recieved : " + www.downloadHandler.text);
              
          }
-     }
+     }*/
+
      /*var request = UnityWebRequest.Post(getAPIUrl() + KEY.URL_GET_USER, postData);
          var handler = request.SendWebRequest();
          while(!handler.isDone){
