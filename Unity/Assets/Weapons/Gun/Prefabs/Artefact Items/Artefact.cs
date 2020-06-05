@@ -6,8 +6,12 @@ public class Artefact : MonoBehaviour, ICollectible
     [SerializeField] private string name = "";
     [SerializeField] private float amplitude = 1.5f;
     [SerializeField] private float speed = 3;
+    [SerializeField] private GameObject prefab = null;
+    [SerializeField] private Sprite icon = null;
+    public GameObject Prefab{get => prefab;}
+    public Sprite Icon{get => icon;}
     private float y;
-
+    
     private void Start()
     {
         y = transform.position.y;
@@ -24,8 +28,9 @@ public class Artefact : MonoBehaviour, ICollectible
     }
 
     public void Collect()
-    {
-       Debug.Log(name + "is collected");
+    { 
+        ArtefactStock.Instance.SetArtefact(this);
+        gameObject.SetActive(false);
     }
 
     public void Emphase(bool isEmphased)

@@ -28,9 +28,8 @@ public class Consumable : MonoBehaviour, ICollectible
     public void Collect()
     {
          ConsumableStock.Instance.SetConsumable(this);
-         gameObject.SetActive(false);
-      //   Debug.Log( ConsumableStock.Instance);
-         
+        // Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void Emphase(bool isEmphased)

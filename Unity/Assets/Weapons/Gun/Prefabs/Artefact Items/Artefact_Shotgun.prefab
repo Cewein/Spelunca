@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6872005943523888319}
   - component: {fileID: 892501712967217222}
   - component: {fileID: 7457950600132287885}
+  - component: {fileID: 2044026051417200003}
   m_Layer: 0
   m_Name: Artefact_Shotgun
   m_TagString: Untagged
@@ -96,3 +97,17 @@ MonoBehaviour:
   name: Shotgun
   amplitude: 0.1
   speed: 3
+  prefab: {fileID: 1947296168385012162, guid: fd56325d815faa34fb034900a07d524e, type: 3}
+--- !u!65 &2044026051417200003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467640872501019802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02479358, y: 0.003750115, z: 0.0027655256}
+  m_Center: {x: -0.015709406, y: 0, z: 0.0058309967}
