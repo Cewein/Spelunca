@@ -17,6 +17,8 @@ public class CommandMessage
 
 public class CommandManager : MonoBehaviour
 {
+    
+    [SerializeField] private CelShadingMaster celShading;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] public GODictionary targetableObjects;
@@ -40,6 +42,8 @@ public class CommandManager : MonoBehaviour
                 return chunkCommands();
             case "setmarker":
                 return cmdSetMarker();
+            case "cel":
+                return celCommands();
             case "invincible":
                 return cmdInvincible();
             case "maxresources":
@@ -103,6 +107,47 @@ public class CommandManager : MonoBehaviour
             return commandError("Unknown '" + cmdWords[1] + "'Expected 'true' or 'false'.");
         }
         return commandError("'/maxresources' is expecting 1 parameter.");
+    }
+    private CommandMessage celCommands()
+    {
+        if (cmdWords.Length > 1) //si on a au moins un parametre en plus que 'chunk'
+        {
+            switch (cmdWords[1])
+            {
+                case "true":
+                    celShading.intensity = 1f;
+                    celShading.updateShader();
+                    return commandSuccess("Cel shading activated.");
+                case "false":
+                    celShading.intensity = 0f;
+                    celShading.updateShader();
+                    return commandSuccess("Cel shading deactivated.");
+                case "debug":
+                    return cmdCelDebug();
+            }
+            return commandError("Unknown '/cel "+cmdWords[1]+"'. "+help);
+        }
+        return commandError("'/cel' is a group of commands. "+help);
+    }
+
+    private CommandMessage cmdCelDebug()
+    {
+        if (cmdWords.Length == 3) //si on a au moins un parametre en plus que 'chunk'
+        {
+            switch (cmdWords[2])
+            {
+                case "true":
+                    celShading.debugMode = true;
+                    celShading.updateShader();
+                    return commandSuccess("Cel shading debug mode activated.");
+                case "false":
+                    celShading.debugMode = false;
+                    celShading.updateShader();
+                    return commandSuccess("Cel shading debug mode deactivated.");
+            }
+            return commandError("Unknown '/cel debug "+cmdWords[1]+"'. Expected 'on' or 'false'"+help);
+        }
+        return commandError("'/cel debug' requires a parameter. "+help);
     }
     
     //CHUNK COMMANDS
