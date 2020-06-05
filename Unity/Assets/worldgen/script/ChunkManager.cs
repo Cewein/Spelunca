@@ -46,10 +46,15 @@ public class ChunkManager : MonoBehaviour
     public float ratioOfSpawn = 0.97f;
     public int maxNumberOfStructPerChunk = 200;
     public structure[] structures;
-    [Space(10)]
+
+    [Header("Fluff setting")]
     public float ratioOfFluff = 0.90f;
     public int maxNumberOfFluffPerChunk = 200;
     public structure[] Fluffs;
+
+    [Header("Rare spawn setting")]
+    public float ratioOfRareStruct = 0.90f;
+    public structure[] rare;
 
     //chunks 
     private Vector3 playerChunk;
@@ -85,6 +90,8 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.tunnelSize = tunnelSize;
         DensityGenerator.seed = seed;
         DensityGenerator.precision = precision;
+
+        portal.spawnCoord = playerSpawn;
     }
 
     void Start()
@@ -173,13 +180,8 @@ public class ChunkManager : MonoBehaviour
                     //Two compute shader are pass
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunks[x, y, z].GetComponent<chunk>().chunkData.lastPlayerPos = playerChunk;
-                    float ckHash = hash(chunks[x, y, z].transform.position);
-                    if (ckHash > ratioOfSpawn)
-                        spawnStructures(chunks[x, y, z], structures, maxNumberOfStructPerChunk);
-                    if (ckHash > ratioOfFluff)
-                        spawnStructures(chunks[x, y, z], Fluffs, maxNumberOfFluffPerChunk, true);
-                    if (ckHash > ratioOfSpawnSpider)
-                        spawnSpiders(chunks[x, y, z], maxNumberOfSpiderPerChunk);
+
+                    spawnStructures(chunks[x, y, z]);
 
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
@@ -254,15 +256,7 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
 
-                    float ckHash = hash(chunk.transform.position);
-                    if (ckHash > ratioOfSpawn )
-                        spawnStructures(chunk, structures, maxNumberOfStructPerChunk);
-
-                    if (ckHash > ratioOfFluff)
-                        spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
-
-                    if (ckHash > ratioOfSpawnSpider)
-                        spawnSpiders(chunk, maxNumberOfSpiderPerChunk);
+                    spawnStructures(chunk);
 
                     chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
                     chunk.GetComponent<chunk>().chunkData.toggle(true);
@@ -270,6 +264,19 @@ public class ChunkManager : MonoBehaviour
                 yield return null;
             }
         }
+    }
+
+    void spawnStructures(GameObject chunk)
+    {
+        float ckHash = hash(chunk.transform.position);
+        if (ckHash > ratioOfSpawn)
+            spawnStructures(chunk, structures, maxNumberOfStructPerChunk);
+        if (ckHash > ratioOfFluff)
+            spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
+        if (ckHash > ratioOfSpawnSpider)
+            spawnSpiders(chunk, maxNumberOfSpiderPerChunk);
+        if (ckHash > ratioOfRareStruct)
+            spawnStructures(chunk, rare, 1);
     }
 
     // when doing view frustum culling this function let a 3x3 chunks box around the player
