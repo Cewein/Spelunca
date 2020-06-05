@@ -599,8 +599,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1018978479}
-        m_MethodName: startLogin
+      - m_Target: {fileID: 1176374578}
+        m_MethodName: login
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1043,7 +1043,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1018978479}
+      - m_Target: {fileID: 1176374578}
         m_MethodName: hideCreditsView
         m_Mode: 1
         m_Arguments:
@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1018978479}
+      - m_Target: {fileID: 1176374578}
         m_MethodName: showCreditsView
         m_Mode: 1
         m_Arguments:
@@ -1437,7 +1437,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1018978479}
+      - m_Target: {fileID: 1176374578}
         m_MethodName: showLoginView
         m_Mode: 1
         m_Arguments:
@@ -1500,7 +1500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &927909687
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1672,7 +1672,6 @@ GameObject:
   - component: {fileID: 1018978476}
   - component: {fileID: 1018978475}
   - component: {fileID: 1018978478}
-  - component: {fileID: 1018978479}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1748,25 +1747,6 @@ MonoBehaviour:
   mainMenuPath: MainMenu
   gameScenePath: Assets/Sandbox/Game/TEST_GAMEPLAY.unity
   boss: {fileID: 0}
---- !u!114 &1018978479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018978474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36b8e01d55c345f499d05fb77cb12a5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainLayout: {fileID: 1940154112}
-  loginLayout: {fileID: 1406892951}
-  creditsLayout: {fileID: 927909686}
-  usernameInput: {fileID: 179911198}
-  passwordInput: {fileID: 1137549385}
-  loginInputFieldAnimators: []
-  environmentMode: 0
 --- !u!1 &1034848140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,7 +1959,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1018978479}
+      - m_Target: {fileID: 1176374578}
         m_MethodName: hideLoginView
         m_Mode: 1
         m_Arguments:
@@ -2343,6 +2323,56 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1176374577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1176374579}
+  - component: {fileID: 1176374578}
+  m_Layer: 0
+  m_Name: MainMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1176374578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176374577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b8e01d55c345f499d05fb77cb12a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainLayout: {fileID: 1940154112}
+  loginLayout: {fileID: 1406892951}
+  creditsLayout: {fileID: 927909686}
+  usernameInput: {fileID: 179911198}
+  passwordInput: {fileID: 1137549385}
+  loginInputFieldAnimators: []
+  environmentMode: 0
+--- !u!4 &1176374579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176374577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.140625, y: -9.504395, z: -184.26562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196040150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2580,7 +2610,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1315231781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1176374578}
+        m_MethodName: quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1315231781
 MonoBehaviour:
   m_ObjectHideFlags: 0

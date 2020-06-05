@@ -43,6 +43,10 @@ using System.Collections.Generic;
      private string preprodUrl = "13.80.137.233:8000/api/";
      private string prodUrl = "13.80.137.233/api/";
 
+     public void quit()
+     {
+         Application.Quit();
+     }
      public void showLoginView()
      {
          mainLayout.SetActive(false);
@@ -77,7 +81,7 @@ using System.Collections.Generic;
      private void loginCallBack(PlayerData player)
      {
          Debug.Log("Callback ! Id : " + player.id);
-         //PlayerPrefs.Save();
+     
      }
 /*
      private IEnumerator login(LoginInfo loginInfo)
