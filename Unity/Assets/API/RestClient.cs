@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -46,7 +47,7 @@ public class RestClient : MonoBehaviour
         }
     }*/
     
-    public IEnumerator login(string url,LoginInfo loginInfo, System.Action<PlayerData> callBack)
+    public IEnumerator login(string url,LoginInfo loginInfo, System.Action<long,string> callBack)
     {
         var jsonData = JsonUtility.ToJson(loginInfo);
         using (UnityWebRequest www = UnityWebRequest.Post(url,jsonData))
@@ -55,9 +56,10 @@ public class RestClient : MonoBehaviour
             www.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(jsonData));
             www.uploadHandler.contentType = "application/json";
             yield return www.SendWebRequest();
-            if (www.isNetworkError)
+            if (www.isNetworkError || www.isHttpError)
             {
                 Debug.LogError(www.error);
+                callBack(www.responseCode, null);
             }
             else
             {
@@ -65,8 +67,7 @@ public class RestClient : MonoBehaviour
                 {
                     string jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
                     Debug.Log(jsonResult);
-                    PlayerData playerData = JsonUtility.FromJson<PlayerData>(jsonResult);
-                    callBack(playerData);
+                    callBack(www.responseCode,jsonResult);
                 }
             }
         }
