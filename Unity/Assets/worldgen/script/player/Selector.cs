@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Selector : MonoBehaviour
 {
-    public ChunkManager ckm;
-
     Vector3 front;
     Vector3 position;
 
@@ -28,15 +26,7 @@ public class Selector : MonoBehaviour
                 Debug.Log("HIT AT : " + hit.distance + "m");
 
                 hit.transform.SendMessage("Hit");
-
-                Vector3 pos = hit.transform.position;
-
-                Vector3 chunk = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), Mathf.Round(pos.z)) / ckm.chunkSize;
-                Vector3 crystal = hit.transform.gameObject.transform.position;
-
-                Destroy(hit.transform.gameObject);
-                print(chunk);
-                print(crystal);
+   
 
             }
             else

@@ -62,7 +62,7 @@ MonoBehaviour:
   maxDeployDistance: 60
   deploySpeed: 8
   retractSpeed: 25
-  pullSpeed: 5
+  pullSpeed: 2
   minPullClampDistance: 10
   maxPullClampDistance: 40
   rotationAngle: 90

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -138,8 +137,6 @@ public class chunk : MonoBehaviour
         bufferList.Add(triangleBuffer);
         bufferList.Add(trisCounterBuffer);
     }
-
-    
 }
 
 public struct ChunkData

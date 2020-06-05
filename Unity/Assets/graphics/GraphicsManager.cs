@@ -16,6 +16,5 @@ public class GraphicsManager : MonoBehaviour
         RenderSettings.fogEndDistance = endFogDistance;
         RenderSettings.fogStartDistance = startFogDistance;
         Camera.main.backgroundColor = fogColor;
-        Camera.main.depthTextureMode = Camera.main.depthTextureMode | DepthTextureMode.Depth;
     }
 }
