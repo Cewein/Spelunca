@@ -36,6 +36,11 @@ public class ChunkManager : MonoBehaviour
     public float bossSize = 50.0f;
     public float tunnelSize = 9.0f;
 
+    [Header("Mob Setting")]
+    public Pool pool;
+    public float ratioOfSpawnSpider = 0.97f;
+    public int maxNumberOfSpiderPerChunk = 50;
+
     [Header("Structures setting")]
     [Range(0,1)]
     public float ratioOfSpawn = 0.97f;
@@ -173,6 +178,8 @@ public class ChunkManager : MonoBehaviour
                         spawnStructures(chunks[x, y, z], structures, maxNumberOfStructPerChunk);
                     if (ckHash > ratioOfFluff)
                         spawnStructures(chunks[x, y, z], Fluffs, maxNumberOfFluffPerChunk, true);
+                    if (ckHash > ratioOfSpawnSpider)
+                        spawnSpiders(chunks[x, y, z], maxNumberOfSpiderPerChunk);
 
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
@@ -215,6 +222,7 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().chunkData = tempData;
                     chunk.GetComponent<chunk>().makeMeshFromChunkData();
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
+
                 }
             }
             chunk.GetComponent<chunk>().chunkData.toggle(true);
@@ -252,6 +260,9 @@ public class ChunkManager : MonoBehaviour
 
                     if (ckHash > ratioOfFluff)
                         spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
+
+                    if (ckHash > ratioOfSpawnSpider)
+                        spawnSpiders(chunk, maxNumberOfSpiderPerChunk);
 
                     chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
                     chunk.GetComponent<chunk>().chunkData.toggle(true);
@@ -343,6 +354,22 @@ public class ChunkManager : MonoBehaviour
         else ck.GetComponent<chunk>().chunkData.mineralDictionary = dico;
             
         ck.GetComponent<chunk>().chunkData.hasSpawnResources = true; 
+    }
+
+    void spawnSpiders(GameObject ck, int mnspc)
+    {
+        int size = Enum.GetNames(typeof(ResourceType)).Length;
+        int s = UnityEngine.Random.Range(1, size);
+        for (int i = 0; i < mnspc; i++)
+        {
+
+            Vector3[] data = getPositionOnChunks(ck);
+
+            if (data[0] != Vector3.zero)
+            {
+                pool.spawn(1, data, (ResourceType)s);
+            }
+        }
     }
 }
 
