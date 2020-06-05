@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
     [SerializeField] private PlayerStats player = null;
+    [SerializeField] private GameObject[] mainUI = null;
     [SerializeField] private GameObject gameOverScreen = null;
+    
     [SerializeField] private GameObject winScreen = null;
     public string mainMenuPath;
     public string gameScenePath;
@@ -40,6 +42,10 @@ public class GameManager : MonoBehaviour
     void PlayerDie(bool isDie)
     {
         gameOverScreen.SetActive(true);
+        foreach(GameObject ui in mainUI)
+        {
+            ui.SetActive(false);
+        }
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         playerIsDead = true;
@@ -50,14 +56,12 @@ public class GameManager : MonoBehaviour
         if (boss == null && winScreen !=null)
         {
             winScreen.SetActive(true);
-            count--;   
-            if (count<1)LoadLevel(mainMenuPath);
-        }
-
-        if (playerIsDead)
-        {
-            count--;   
-            if (count<1)LoadLevel(mainMenuPath);
+            foreach(GameObject ui in mainUI)
+            {
+                ui.SetActive(false);
+            }
+            //count--;   
+            //if (count<1)LoadLevel(mainMenuPath);
         }
     }
 
