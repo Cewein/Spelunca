@@ -58,6 +58,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void RestoreLife(int hp)
     {
         heal?.Invoke(hp);
+        _HP = ( _HP+hp < _maxHP )?_HP+hp : _maxHP;
     }
     
     public void isPlayerDead(bool isDead)
