@@ -5,29 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ArtefactStock", menuName = "ScriptableObjects/Artefact/ArtefactStock", order = 1)]
 public class ArtefactStock : SingletonScriptableObject<ArtefactStock>
 {
-   [SerializeField] private Artefact defaultWeaponArtefact;
    private Artefact[] stock;
    public Artefact[] Stock{get => stock;}
+   public Action update;
 
    private ArtefactStock()
    {
       stock = new Artefact[4];
-      stock[0] = defaultWeaponArtefact;
    }
 
    public void TakeArtefact(Artefact a)
-   {
-      if (!a.name.Equals(defaultWeaponArtefact.name))
+   { 
+      for (int i = 0; i < stock.Length; i++) 
       {
-         for (int i = 1; i < stock.Length; i++) // first is ignore because it's the default one.
-         {
-            if (stock[i].name == a.name) stock[i] = null;
-         }
+         if (stock[i].name == a.name) stock[i] = null;
       }
-      else
-      {
-         Debug.Log("Cannot remove the default artefact ! "); //TODO : in game warning
-      }
+      
+      
    }
 
    public void SetArtefact(Artefact a)
@@ -37,6 +31,7 @@ public class ArtefactStock : SingletonScriptableObject<ArtefactStock>
       {
          Debug.Log("Stock is full, choose an artefact to throw away"); //TODO : in game choice
       }
+      update?.Invoke();
    }
    
    public int SlotNextEmptySocket()
@@ -58,6 +53,4 @@ public class ArtefactStock : SingletonScriptableObject<ArtefactStock>
       }
       return str;
    }
-
-   
 }

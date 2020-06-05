@@ -129,6 +129,7 @@ MonoBehaviour:
   amplitude: 0.1
   speed: 3
   prefab: {fileID: 652977199385629695, guid: 25f2cd1f772b25e4daaebb4af64c5a95, type: 3}
+  icon: {fileID: 21300000, guid: ce7cf6bc408479d4586f33b059869d04, type: 3}
 --- !u!65 &6837149452274051403
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -140,8 +141,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.2414253, y: 1.0594175, z: 1}
+  m_Center: {x: -0.7312852, y: 0.3246175, z: 0}
 --- !u!1 &7228550991911089017
 GameObject:
   m_ObjectHideFlags: 0
