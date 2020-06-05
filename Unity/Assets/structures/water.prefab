@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3063985493086886703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3117570065553639728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64301d05b98bc5b44b5cc16d744dd145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  quantity: 20
+  pv: 1
+--- !u!65 &1549883433570301302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3117570065553639728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.036828756, y: 0.03575688, z: 0.0052243443}
+  m_Center: {x: -0.00030995067, y: 0.0021351664, z: 0.0023284887}
 --- !u!1 &6361500002223971637
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5880462481873965240}
+  - component: {fileID: 1278198774269144252}
   m_Layer: 0
   m_Name: water
   m_TagString: Untagged
@@ -27,11 +56,26 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1507331992742962135}
   - {fileID: 2096580297173875491}
   - {fileID: 2189930702143534594}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1278198774269144252
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6361500002223971637}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8024591302708883217
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +105,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5880462481873965240}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &7546994591132875769
 Light:
@@ -169,7 +213,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: d1e9df8f03599e54697135f9048cdef4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d1e9df8f03599e54697135f9048cdef4,
         type: 3}
@@ -208,6 +252,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e9df8f03599e54697135f9048cdef4, type: 3}
+--- !u!1 &3117570065553639728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: d1e9df8f03599e54697135f9048cdef4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6368714819058012217}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2096580297173875491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: d1e9df8f03599e54697135f9048cdef4,

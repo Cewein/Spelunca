@@ -6,8 +6,6 @@ public class ResourceCollectible : MonoBehaviour, IPickable
    [SerializeField] private ResourceType type;
    [SerializeField] private float quantity;
    [SerializeField] private float pv;
-   [SerializeField] private GameObject gaugeLifePrefab;
-
    public Action<ResourceType,float> pick;
 
    public void Pickax(RaycastHit hit,float damage)
