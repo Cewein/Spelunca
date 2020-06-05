@@ -1028,18 +1028,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96938d5bfebc60447b292326846c0c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1091786031 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4908962831358623288, guid: c7f4ea9f3479a324292c7f522d40fb63,
-    type: 3}
-  m_PrefabInstance: {fileID: 711560069903080095}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 572af0d38aff0c34cae56373e37560c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1108912678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,6 +1972,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 81504776824179483, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 4960815634682092115}
+    - target: {fileID: 81504776824179483, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: pixelPerHP
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 391447267075063111, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2762,6 +2760,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7901881817532348810, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901881817532348810, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901881817532348810, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8073892672998829328, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: gunMagazine
@@ -3288,11 +3301,16 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 1091786031}
+      objectReference: {fileID: 0}
     - target: {fileID: 8499784402384746599, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: _maxHP
-      value: 5
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499784402384746599, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: _HP
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
