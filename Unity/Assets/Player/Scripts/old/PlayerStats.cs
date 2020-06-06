@@ -35,7 +35,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         if (invincible)
         {
-         //   Debug.Log("Player can die");
+            Debug.Log("Player can't die");
             invincibleImage.enabled = true;
         }
         else
@@ -51,6 +51,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         if (!invincible)
         {
             hurt?.Invoke(damage, direction, damageType);
+            _HP -= damage;
         }  
         if (_HP <= 0 && !invincible) isPlayerDead(true);
     }
@@ -69,6 +70,5 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
     {
         SetDamage((int) damage, Vector3.forward ,type);
-
     }
 }
