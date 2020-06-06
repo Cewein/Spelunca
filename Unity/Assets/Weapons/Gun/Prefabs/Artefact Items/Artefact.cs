@@ -8,7 +8,6 @@ public class Artefact : MonoBehaviour, ICollectible
     [SerializeField] private float speed = 3;
     [SerializeField] private GameObject prefab = null;
     [SerializeField] private Sprite icon = null;
-    private Transform socket;
     public GameObject Prefab{get => prefab;}
     public Sprite Icon{get => icon;}
     private float y;
@@ -16,7 +15,6 @@ public class Artefact : MonoBehaviour, ICollectible
     private void Start()
     {
         y = transform.position.y;
-        socket = GameObject.FindGameObjectsWithTag("ArtefactSocket")[0].transform;
     }
 
     private void Update()
@@ -27,8 +25,8 @@ public class Artefact : MonoBehaviour, ICollectible
     public void Equip()
     {
         if (prefab == null) return;
-        Destroy(socket.GetChild(0).gameObject);
-        Instantiate(prefab,socket);
+        Destroy(GameObject.FindGameObjectsWithTag("ArtefactSocket")[0].transform.GetChild(0).gameObject);
+        Instantiate(prefab,GameObject.FindGameObjectsWithTag("ArtefactSocket")[0].transform);
         ArtefactStock.Instance.alreadyEquipedArtefact = this;
     }
 
