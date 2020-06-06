@@ -149,6 +149,7 @@ MonoBehaviour:
   reloadInputName: Reload
   crouchInputName: Crouch
   switchWeaponInputName: SelectPickaxe
+  switchWeaponInputName2: 
   cameraSensitivity: 50
 --- !u!114 &2474185556268879231
 MonoBehaviour:
@@ -172,7 +173,7 @@ MonoBehaviour:
   weaponsAimingPosition: {fileID: 1685177218082241092}
   weaponParent: {fileID: 8275482314681205312}
   aimingAcceleration: 25
-  jumpForce: 50
+  jumpForce: 40
   weight: 75
   groundLayer:
     serializedVersion: 2
