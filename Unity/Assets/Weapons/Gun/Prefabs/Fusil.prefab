@@ -143,10 +143,11 @@ MonoBehaviour:
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 8914564469236426507}
+  damage: 5
   shootMode: 0
   firingRate: 0.7
-  bulletSpreadAngle: 10
-  bulletsPerShot: 1
+  bulletSpreadAngle: 1
+  bulletsPerShot: 5
   recoil: 1.2
   reloadCooldown: 35
   aimFovRatio: 0.8

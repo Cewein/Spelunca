@@ -245,6 +245,11 @@ PrefabInstance:
       propertyPath: zoomSpeed
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: bulletsPerShot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4447914795741383104, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_LocalPosition.x
