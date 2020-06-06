@@ -97,7 +97,6 @@ public class GunLoader : MonoBehaviour
     {
         reload?.Invoke(isReloading, newResource, quantity);
         if (isReloading && (currentResourceQuantity < capacity)) currentResourceQuantity += quantity;
-        Debug.Log("quantity reload in gun loader : " + quantity);
     }
     
     private void isLoaderEmpty(bool isGaugeEmpty)

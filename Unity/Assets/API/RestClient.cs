@@ -1,6 +1,4 @@
 using System.Collections;
-using UnityEditor.PackageManager;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -58,7 +56,7 @@ public class RestClient : MonoBehaviour
             yield return www.SendWebRequest();
             if (www.isNetworkError || www.isHttpError)
             {
-                Debug.LogError(www.error);
+                Debug.Log(www.error);
                 callBack(www.responseCode, null);
             }
             else
