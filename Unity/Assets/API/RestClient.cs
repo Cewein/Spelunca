@@ -2,9 +2,42 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
+public enum EnvironmentMode {Local,PreProd,Prod}
+
+public struct LoginInfo
+{
+    public string username;
+    public string password;
+} 
+ 
+public struct ScoreInfo
+{
+    public string player;
+    public string time;
+    public string enemies;
+    public string damage_taken;
+} 
+public struct PlayerData
+{
+    public string id;
+    public string username;
+    public string email;
+} 
 public class RestClient : MonoBehaviour
 {
     private static RestClient _instance;
+
+    private EnvironmentMode environmentMode = EnvironmentMode.Prod;
+    private string localUrl = "http://localhost:8000/";
+    private string preprodUrl = "http://13.80.137.233:8000/";
+    private string prodUrl = "http://13.80.137.233/";
+
+    private struct KEY
+    {
+        internal static readonly string URL_GET_USER = "api/get_user/";
+        internal static readonly string URL_SAVE_SCORE = "api/save_score/";
+        internal static readonly string URL_REGISTER = "register/";
+    }
 
     public static RestClient Instance
     {
@@ -24,30 +57,24 @@ public class RestClient : MonoBehaviour
             return _instance;
         }
     }
-/*
-    public IEnumerator Get(string url)
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(url))
-        {
-            yield return www.SendWebRequest();
-            if (www.isNetworkError)
-            {
-                Debug.LogError(www.error);
-            }
-            else
-            {
-                if (www.isDone)
-                {
-                    string jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
-                    Debug.Log(jsonResult);
-                }
-            }
-        }
-    }*/
     
-    public IEnumerator login(string url,LoginInfo loginInfo, System.Action<long,string> callBack)
+    public IEnumerator login(LoginInfo loginInfo, System.Action<long,string> callBack)
     {
+        string url = getServerUrl() + KEY.URL_GET_USER;
         var jsonData = JsonUtility.ToJson(loginInfo);
+        yield return Post(url, jsonData, callBack);
+    }
+    
+    
+    public IEnumerator saveScore(ScoreInfo score, System.Action<long,string> callBack)
+    {
+        string url = getServerUrl() + KEY.URL_GET_USER;
+        var jsonData = JsonUtility.ToJson(score);
+        yield return Post(url, jsonData, callBack);
+    }
+
+    private IEnumerator Post(string url,string jsonData, System.Action<long,string> callBack)
+    {
         using (UnityWebRequest www = UnityWebRequest.Post(url,jsonData))
         {
             www.SetRequestHeader("content-type", "application/json");
@@ -56,7 +83,7 @@ public class RestClient : MonoBehaviour
             yield return www.SendWebRequest();
             if (www.isNetworkError || www.isHttpError)
             {
-                Debug.Log(www.error);
+                //Debug.Log(www.error);
                 callBack(www.responseCode, null);
             }
             else
@@ -64,10 +91,29 @@ public class RestClient : MonoBehaviour
                 if (www.isDone)
                 {
                     string jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
-                    Debug.Log(jsonResult);
+                    //Debug.Log(jsonResult);
                     callBack(www.responseCode,jsonResult);
                 }
             }
+        }
+    }
+
+    public string getRegisterPageUrl()
+    {
+        return getServerUrl() + KEY.URL_REGISTER;
+    }
+    public string getServerUrl()
+    {
+        switch (environmentMode)
+        {
+            case EnvironmentMode.Local:
+                return localUrl;
+            case EnvironmentMode.Prod:
+                return prodUrl;
+            case EnvironmentMode.PreProd:
+                return preprodUrl;
+            default:
+                return "";
         }
     }
 }
