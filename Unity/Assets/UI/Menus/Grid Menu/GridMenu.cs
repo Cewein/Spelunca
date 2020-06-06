@@ -12,8 +12,8 @@ public class GridMenu : MonoBehaviour
 
     private void Start()
     {
-        UpdateSlots();
         ArtefactStock.Instance.update += UpdateSlots;
+        UpdateSlots();
     }
 
     private void UpdateSlots()
