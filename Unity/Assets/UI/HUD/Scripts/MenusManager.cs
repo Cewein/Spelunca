@@ -10,6 +10,7 @@ public class MenusManager : MonoBehaviour
 
     [Header("Inputs")] 
     [Tooltip("The input to display resource magazine selection menu.")][SerializeField]
+    [InputName]
     private string resourceLoaderSelectionInput = "ResourceSelection";
 
     [Header("Objects linked")]

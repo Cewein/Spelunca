@@ -246,7 +246,8 @@ public class GunArtefact : MonoBehaviour
         {
             Vector3 shotDirection = SpreadBullet(muzzle); 
             Instantiate(CurrentAmmo, muzzle.position, Quaternion.LookRotation(shotDirection));
-            magazine.isConsuming(true, 1);
+            if(!ai){ magazine.isConsuming(true, 1);}
+            
         }
 
         // muzzle flash

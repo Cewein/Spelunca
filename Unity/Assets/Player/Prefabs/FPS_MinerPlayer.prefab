@@ -219,7 +219,6 @@ MonoBehaviour:
   _maxHP: 50
   invincibleImage: {fileID: 0}
   _HP: 0
-  healthBar: {fileID: 0}
   invincible: 1
 --- !u!82 &6919873961139871782
 AudioSource:
@@ -967,11 +966,6 @@ PrefabInstance:
       propertyPath: inputHandler
       value: 
       objectReference: {fileID: 2465613268572783777}
-    - target: {fileID: 4895481979858790706, guid: c64ee70d7595dae438d3c883ed3aa4f7,
-        type: 3}
-      propertyPath: crosshair.scope
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 4950132954975597236, guid: c64ee70d7595dae438d3c883ed3aa4f7,
         type: 3}
       propertyPath: m_Name
