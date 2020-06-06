@@ -13,9 +13,9 @@ public struct LoginInfo
 public struct ScoreInfo
 {
     public string player;
-    public string time;
-    public string enemies;
-    public string damage_taken;
+    public double time;
+    public int enemies;
+    public float damage_taken;
 } 
 public struct PlayerData
 {
@@ -31,7 +31,7 @@ public class RestClient : MonoBehaviour
     private string localUrl = "http://localhost:8000/";
     private string preprodUrl = "http://13.80.137.233:8000/";
     private string prodUrl = "http://13.80.137.233/";
-
+    public bool isLoggedIn = false;
     private struct KEY
     {
         internal static readonly string URL_GET_USER = "api/get_user/";
@@ -64,7 +64,12 @@ public class RestClient : MonoBehaviour
         var jsonData = JsonUtility.ToJson(loginInfo);
         yield return Post(url, jsonData, callBack);
     }
-    
+
+    public void logout()
+    {
+        isLoggedIn = false;
+        PlayerPrefs.DeleteKey("player");
+    }
     
     public IEnumerator saveScore(ScoreInfo score, System.Action<long,string> callBack)
     {

@@ -31,8 +31,6 @@ using System.Collections.Generic;
      public InputField passwordInput;
      public Animator[] loginInputFieldAnimators;
 
-     private bool loggedIn = false;
-     
      public void quit()
      {
          Application.Quit();
@@ -49,7 +47,7 @@ using System.Collections.Generic;
      
      private void refresh()
      {
-         if (loggedIn)
+         if (RestClient.Instance.isLoggedIn)
          {
              loginSubview.SetActive(false);
              loggedInSubview.SetActive(true);
@@ -107,8 +105,7 @@ using System.Collections.Generic;
      }
      public void logout()
      {
-         loggedIn = false;
-         PlayerPrefs.DeleteKey("player");
+         RestClient.Instance.logout();
          refresh();
      }
 
@@ -118,7 +115,7 @@ using System.Collections.Generic;
          {
              PlayerPrefs.SetString("player",jsonResult);
              PlayerPrefs.Save();
-             loggedIn = true;
+             RestClient.Instance.isLoggedIn = true;
              loginMessageText.gameObject.SetActive(true);
              loginMessageText.color = loginSuccessColor;
              loginMessageText.text = loginSuccessText;

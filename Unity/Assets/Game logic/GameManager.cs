@@ -65,6 +65,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public ScoreInfo getFinalScore()
+    {
+        //todo : un timer, un compteur à araignées et un compteur à pv perdu
+        ScoreInfo score = new ScoreInfo();
+        score.time = 1758.15473;
+        score.enemies = 42;
+        score.damage_taken = 145.2f;
+        return score;
+    }
     void LoadLevel(string path)
     {          
         SceneManager.LoadScene(path);
