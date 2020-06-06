@@ -2645,6 +2645,11 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 4960815634682092117}
+    - target: {fileID: 4044138981031538331, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4111911755260470128, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3294,7 +3299,7 @@ PrefabInstance:
     - target: {fileID: 2092891907812641260, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2142796783819228743, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -3490,6 +3495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: pt_Reticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128760785365650194, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_TagString
+      value: ArtefactSocket
       objectReference: {fileID: 0}
     - target: {fileID: 7015592363743400258, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}

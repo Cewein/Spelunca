@@ -22,7 +22,6 @@ public class MenusManager : MonoBehaviour
     [Tooltip("The gun magazine.")] [SerializeField]
     private GunLoader gunMagazine;
     public Resource[] list;
-
     private void Start()
     {
         resourceLoaderSelectionMenu.callback += (type,artefact) =>
@@ -31,7 +30,9 @@ public class MenusManager : MonoBehaviour
         };
         artefactSelectionMenu.callback += (type,artefact) =>
         {
-            if(artefact!=null) Debug.Log(artefact.name + "is selected");
+            if (artefact == null) return;
+            Debug.Log(artefact.name + "is selected");
+            artefact.Equipe();
         };
     }
 

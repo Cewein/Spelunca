@@ -1369,6 +1369,26 @@ PrefabInstance:
       propertyPath: gunMagazine
       value: 
       objectReference: {fileID: 79913858}
+    - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7f4ea9f3479a324292c7f522d40fb63, type: 3}
 --- !u!1 &696846403 stripped
