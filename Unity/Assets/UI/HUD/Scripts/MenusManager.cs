@@ -33,7 +33,7 @@ public class MenusManager : MonoBehaviour
             if (artefact == null) return;
             artefact.Equip();
         };
-            ArtefactStock.Instance.Stock[0] = ArtefactStock.Instance.alreadyEquipedArtefact;
+        ArtefactStock.Instance.Stock[0] = ArtefactStock.Instance.alreadyEquipedArtefact;
 
     }
 

@@ -1378,9 +1378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabb46372da39924ea00fc5642ae2eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  increment: 
-  decrement: 
-  use: 
+  increment: Consumable+
+  decrement: Consumable-
+  use: Interact
   slotsNumber: 3
   slotPrefab: {fileID: 3405439542573945460, guid: de0e066713a25554fa3df4b178fa2214,
     type: 3}

@@ -2180,21 +2180,6 @@ PrefabInstance:
       propertyPath: miner
       value: 
       objectReference: {fileID: 1019905854}
-    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: increment
-      value: Consumable+
-      objectReference: {fileID: 0}
-    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: decrement
-      value: Consumable-
-      objectReference: {fileID: 0}
-    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: use
-      value: UseConsumable
-      objectReference: {fileID: 0}
     - target: {fileID: 1594803654027213803, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_IsActive
@@ -3000,6 +2985,16 @@ PrefabInstance:
         type: 3}
       propertyPath: fireInputName
       value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: switchWeaponInputName2
+      value: Consumable-
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: switchWeaponInputName
+      value: Consumable+
       objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
