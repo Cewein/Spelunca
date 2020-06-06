@@ -3001,6 +3001,11 @@ PrefabInstance:
       propertyPath: fireInputName
       value: Fire
       objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: switchWeaponInputName2
+      value: SelectPickaxe
+      objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: hook

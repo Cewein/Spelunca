@@ -56,9 +56,13 @@ public class MinerInputHandler : MonoBehaviour
     [InputName]
     private string crouchInputName ;
     
+    [Tooltip("The switch weapon  input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
+    [InputName]
+    private string switchWeaponInputName; 
+    
     [Tooltip("The switch weapon input name as it defined in Edit > Project Settings > Inputs Manager.")] [SerializeField]
     [InputName]
-    private string switchWeaponInputName;
+    private string switchWeaponInputName2;
     
     [Header("Parameters")]
     
@@ -196,9 +200,9 @@ public class MinerInputHandler : MonoBehaviour
     public int isSwitchingWeapon()
     {
         if (!GetIfPlayerCanPlay()) return 0;
-        if (Input.GetAxis(switchWeaponInputName) > 0f)
+        if (Input.GetButtonDown(switchWeaponInputName) )
             return -1;
-        if (Input.GetAxis(switchWeaponInputName) < 0f)
+        if (Input.GetButtonDown(switchWeaponInputName2) )
             return 1;
         return 0;
     }

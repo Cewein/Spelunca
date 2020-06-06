@@ -39,7 +39,8 @@ public class Artefact : MonoBehaviour, ICollectible
     { 
         ArtefactStock.Instance.SetArtefact(this);
         gameObject.SetActive(false);
-    }
+        Debug.Log("is collected");
+    }    
 
     public void Emphase(bool isEmphased)
     {
