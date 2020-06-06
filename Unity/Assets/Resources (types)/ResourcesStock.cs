@@ -10,15 +10,14 @@ public class ResourcesStock : SingletonScriptableObject<ResourcesStock>
 {
     private  Dictionary<ResourceType, float> stock;
     public  Dictionary<ResourceType, float> Stock{get => stock;}
+    public int capacity = 100;
     
-    
-
     private ResourcesStock()
     {
         stock = new Dictionary<ResourceType, float>();
         foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
         {
-            if(resourceType != ResourceType.normal) stock.Add(resourceType, 54 );
+            if(resourceType != ResourceType.normal) stock.Add(resourceType, capacity );
         }
     }
 

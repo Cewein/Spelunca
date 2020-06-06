@@ -2560,11 +2560,6 @@ PrefabInstance:
       propertyPath: gunMagazine
       value: 
       objectReference: {fileID: 1230041646}
-    - target: {fileID: 8073892672998829328, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: artefactSelectionInput
-      value: ArtefactSelection
-      objectReference: {fileID: 0}
     - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
