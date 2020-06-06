@@ -13,7 +13,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
     
     [Tooltip("Player life amount.")][SerializeField]private int _HP;
 
-    public HealthBar healthBar;
 
     public int Life { 
         get => _HP;
@@ -36,7 +35,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         if (invincible)
         {
-         //   Debug.Log("Player can die");
+            Debug.Log("Player can't die");
             invincibleImage.enabled = true;
         }
         else
@@ -51,8 +50,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         if (!invincible)
         {
-            healthBar.removeHP(damage);
             hurt?.Invoke(damage, direction, damageType);
+            _HP -= damage;
         }  
         if (_HP <= 0 && !invincible) isPlayerDead(true);
     }
@@ -60,7 +59,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void RestoreLife(int hp)
     {
         heal?.Invoke(hp);
-        healthBar.addHP(hp);
+        _HP = ( _HP+hp < _maxHP )?_HP+hp : _maxHP;
     }
     
     public void isPlayerDead(bool isDead)
@@ -71,6 +70,5 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
     {
         SetDamage((int) damage, Vector3.forward ,type);
-
     }
 }

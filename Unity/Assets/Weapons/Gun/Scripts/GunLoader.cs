@@ -77,8 +77,7 @@ public class GunLoader : MonoBehaviour
         gun.trigger += (down,held,up) =>
         {
             if (!(down || held || up)) return;
-            isCurrentResourceConsuming(down || held || up, 10);
-            if (printDebug) Debug.Log(this);
+          //  isCurrentResourceConsuming(down || held || up, 10); 
         };
         gun.reload += isGunReloading =>
         {
@@ -109,7 +108,7 @@ public class GunLoader : MonoBehaviour
         }
     }
 
-    private void isCurrentResourceConsuming(bool isResourceConsuming, float quantity)
+    public void isCurrentResourceConsuming(bool isResourceConsuming, float quantity)
     {
         isConsuming?.Invoke(isResourceConsuming, quantity);
         if (currentResourceQuantity <= 0) isLoaderEmpty(true);

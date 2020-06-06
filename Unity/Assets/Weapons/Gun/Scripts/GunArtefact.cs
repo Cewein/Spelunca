@@ -53,8 +53,11 @@ public class GunArtefact : MonoBehaviour
     private Ammo normalResourceAmmo = null;
     [Tooltip("Resource type projectile prefab tab")][SerializeField]
     private Ammo[] AmmoType = null;
-    [Tooltip("Point transform where muzzle flash will be spawned.")][SerializeField]
+
+    [Tooltip("Point transform where muzzle flash will be spawned.")] [SerializeField]
     private Transform muzzle = null;
+    [Tooltip("Hit point caused by this artefact.")]
+    public int damage = 5;
 
 
     [Header("Shoot Parameters")] 
@@ -243,6 +246,8 @@ public class GunArtefact : MonoBehaviour
         {
             Vector3 shotDirection = SpreadBullet(muzzle); 
             Instantiate(CurrentAmmo, muzzle.position, Quaternion.LookRotation(shotDirection));
+            if(!ai){ magazine.isConsuming(true, 1);}
+            
         }
 
         // muzzle flash
@@ -257,7 +262,7 @@ public class GunArtefact : MonoBehaviour
                controller.Hit.transform.gameObject.GetComponent<IDamageable>()
                                                   .setDamage( controller.Hit, 
                                                               CurrentAmmo.DamageEffect,
-                                                      5, magazine.CurrentResource.Type
+                                                      damage, magazine.CurrentResource.Type
                                                   );
         }
         catch (NullReferenceException e){}

@@ -1336,14 +1336,16 @@ MonoBehaviour:
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 6277167662263690120}
+  damage: 5
   shootMode: 1
   firingRate: 0.1
   bulletSpreadAngle: 0
   bulletsPerShot: 1
   recoil: 0.03
+  reloadCooldown: 30
   aimFovRatio: 1
   zoomSpeed: 10
-  ia: 1
+  ai: 1
 --- !u!1 &2669543393682583254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,14 +1799,16 @@ MonoBehaviour:
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 6277167662263690120}
+  damage: 5
   shootMode: 0
   firingRate: 0.1
   bulletSpreadAngle: 0
   bulletsPerShot: 1
   recoil: 1.26
+  reloadCooldown: 30
   aimFovRatio: 1
   zoomSpeed: 10
-  ia: 0
+  ai: 0
 --- !u!1 &3755787701137637119
 GameObject:
   m_ObjectHideFlags: 0
@@ -2477,6 +2481,10 @@ MonoBehaviour:
   IA: 1
   iaInputHandler: {fileID: 2173078109135552580}
   raycastReticle: {fileID: 7065545751540375164}
+  foreEndTransform: {fileID: 0}
+  maxPulledPosition: {fileID: 0}
+  minPullPosition: {fileID: 0}
+  reloadAnimationTime: 50
 --- !u!114 &3940946767982835455
 MonoBehaviour:
   m_ObjectHideFlags: 0

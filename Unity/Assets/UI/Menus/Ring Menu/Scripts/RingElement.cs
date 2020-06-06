@@ -9,6 +9,7 @@ namespace UI.Menu.RingMenu
     {
         public ResourceType Type;
         public Sprite Icon;
+        public Artefact Artefact;
     }
 }
 
