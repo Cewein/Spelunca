@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArtefactSelectionMenu
   m_EditorClassIdentifier: 
   Elements:
-  - {fileID: 11400000, guid: 1eb502bf511b81b4ab78ade84072d489, type: 2}
-  - {fileID: 11400000, guid: 6933490f32aa2e14ebe61d5707d58e15, type: 2}
   - {fileID: 11400000, guid: 8d63973b77738a84abfe11e7ae11a485, type: 2}
-  - {fileID: 11400000, guid: 8d63973b77738a84abfe11e7ae11a485, type: 2}
+  - {fileID: 11400000, guid: dac9e1c2b94b1f34e980acef948c97a8, type: 2}
+  - {fileID: 11400000, guid: 35d70c39cfd48264c9eb8840c99b8139, type: 2}
+  - {fileID: 11400000, guid: 11a797e2d6f4f0344968016d7373f047, type: 2}
