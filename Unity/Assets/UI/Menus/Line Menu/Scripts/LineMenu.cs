@@ -42,7 +42,7 @@ public class LineMenu : MonoBehaviour
    private void Update()
    {
      if (Input.GetButtonDown(increment)) activeElement = (activeElement+1)%ConsumableStock.Instance.Stock.Count;
-      else if (Input.GetButtonDown(decrement)) activeElement = (activeElement-1)%ConsumableStock.Instance.Stock.Count;
+      else if (Input.GetButtonDown(decrement) && activeElement > 0) activeElement = (activeElement-1)%ConsumableStock.Instance.Stock.Count;
       else if (Input.GetButtonDown(use))
       {
          if (ConsumableStock.Instance.Stock.Count > 0) ConsumableStock.Instance.Stock.ElementAt(activeElement).Value[0].Use();

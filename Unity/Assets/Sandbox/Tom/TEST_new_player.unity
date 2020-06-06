@@ -2180,21 +2180,6 @@ PrefabInstance:
       propertyPath: miner
       value: 
       objectReference: {fileID: 1019905854}
-    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: increment
-      value: Consumable+
-      objectReference: {fileID: 0}
-    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: decrement
-      value: Consumable-
-      objectReference: {fileID: 0}
-    - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
-        type: 3}
-      propertyPath: use
-      value: UseConsumable
-      objectReference: {fileID: 0}
     - target: {fileID: 1594803654027213803, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_IsActive
