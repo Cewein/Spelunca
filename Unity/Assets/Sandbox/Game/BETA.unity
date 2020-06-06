@@ -198,7 +198,12 @@ PrefabInstance:
     - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: switchWeaponInputName2
-      value: Horizontal
+      value: Consumable-
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465613268572783777, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: switchWeaponInputName
+      value: Consumable+
       objectReference: {fileID: 0}
     - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -751,7 +756,7 @@ PrefabInstance:
     - target: {fileID: 1232647389980847859, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: use
-      value: UseConsumable
+      value: Interact
       objectReference: {fileID: 0}
     - target: {fileID: 2330168044778571998, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}

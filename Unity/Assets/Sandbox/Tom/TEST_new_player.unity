@@ -3026,11 +3026,6 @@ PrefabInstance:
       propertyPath: footstep.Array.data[7]
       value: 
       objectReference: {fileID: 8300000, guid: 20666bdee10e92c459afc0514c98e2df, type: 3}
-    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: jumpForce
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: raycastReticle
