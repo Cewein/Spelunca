@@ -526,7 +526,7 @@ MonoBehaviour:
   resourceLoaderSelectionMenu: {fileID: 7529840501223345295}
   artefactSelectionMenu: {fileID: 2394690840218994510}
   resourceLoaderSelectionInput: ResourceSelection
-  artefactSelectionInput: Horizontal
+  artefactSelectionInput: ArtefactSelection
   gunMagazine: {fileID: 0}
   list:
   - {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef, type: 2}
