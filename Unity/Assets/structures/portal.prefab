@@ -647,4 +647,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc79606a5c9eb06448250a1edb759fde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpShader: {fileID: 2100000, guid: 260f347de898b1544a38b0c781f14f04, type: 2}
+  popUpShader: {fileID: 0}
