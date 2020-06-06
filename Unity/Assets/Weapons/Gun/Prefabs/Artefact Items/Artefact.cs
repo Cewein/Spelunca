@@ -24,10 +24,12 @@ public class Artefact : MonoBehaviour, ICollectible
         transform.position = new Vector3(transform.position.x, y + amplitude * Mathf.Sin(speed * Time.time),transform.position.z);
     }
 
-    public void Equipe()
+    public void Equip()
     {
+        if (prefab == null) return;
         Destroy(socket.GetChild(0).gameObject);
         Instantiate(prefab,socket);
+        ArtefactStock.Instance.alreadyEquipedArtefact = this;
     }
 
     public bool IsReachable(Ray ray, float distance)

@@ -32,8 +32,10 @@ public class MenusManager : MonoBehaviour
         {
             if (artefact == null) return;
             Debug.Log(artefact.name + "is selected");
-            artefact.Equipe();
+            artefact.Equip();
         };
+            ArtefactStock.Instance.Stock[0] = ArtefactStock.Instance.alreadyEquipedArtefact;
+
     }
 
 

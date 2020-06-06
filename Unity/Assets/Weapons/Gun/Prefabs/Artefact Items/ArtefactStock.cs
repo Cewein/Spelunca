@@ -8,6 +8,7 @@ public class ArtefactStock : SingletonScriptableObject<ArtefactStock>
    private Artefact[] stock;
    public Artefact[] Stock{get => stock;}
    public Action update;
+   public Artefact alreadyEquipedArtefact;
 
    private ArtefactStock()
    {
