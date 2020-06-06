@@ -41,7 +41,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         else
         {
          //   Debug.Log("Player can die");
-            invincibleImage.enabled = false;
+            //invincibleImage.enabled = false;
         }
     }
 

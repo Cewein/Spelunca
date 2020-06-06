@@ -92,6 +92,19 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!65 &3991123515964427898
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701087378586291128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.055857483, y: 0.054396134, z: 0.02362669}
+  m_Center: {x: 0.0017203931, y: 0.00010728839, z: 0.009416761}
 --- !u!114 &4312168254796153900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,19 +120,6 @@ MonoBehaviour:
   type: 3
   quantity: 20
   pv: 1
---- !u!65 &3991123515964427898
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2701087378586291128}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.055857483, y: 0.054396134, z: 0.02362669}
-  m_Center: {x: 0.0017203931, y: 0.00010728839, z: 0.009416761}
 --- !u!1 &4627741173994672451
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
