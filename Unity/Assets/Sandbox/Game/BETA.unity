@@ -2271,6 +2271,9 @@ MonoBehaviour:
   - gameObject: {fileID: 4627741173994672451, guid: 872e34af141fa4147bbb9a1e2f2d7270,
       type: 3}
     area: {x: -1, y: 1}
+  - gameObject: {fileID: 6361500002223971637, guid: 6666f89a7cace3846a669caaa37a8e20,
+      type: 3}
+    area: {x: -1, y: 1}
   ratioOfFluff: 0.5
   maxNumberOfFluffPerChunk: 5
   Fluffs:
@@ -2289,6 +2292,14 @@ MonoBehaviour:
   - gameObject: {fileID: 6656094920142475523, guid: f5fb442cb33b0184ba9342ffb41677cb,
       type: 3}
     area: {x: -1, y: -0.9}
+  ratioOfRareStruct: 0.9
+  rare:
+  - gameObject: {fileID: 4283985125228380485, guid: 9634c51fb7e9456408140f12bd050703,
+      type: 3}
+    area: {x: 0.9, y: 1}
+  - gameObject: {fileID: 1467640872501019802, guid: a5800f736a4a8074197ad153e0162610,
+      type: 3}
+    area: {x: 0.9, y: 1}
   boss: {fileID: 1573004006}
 --- !u!4 &1869160575
 Transform:
