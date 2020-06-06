@@ -2611,6 +2611,11 @@ PrefabInstance:
       propertyPath: use
       value: UseConsumable
       objectReference: {fileID: 0}
+    - target: {fileID: 1594803654027213803, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1826506711064823952, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2690,6 +2695,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2644656616793918821, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_Name
+      value: RessourcesMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2788343811018467949, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
@@ -2963,8 +2973,28 @@ PrefabInstance:
       objectReference: {fileID: 1230041646}
     - target: {fileID: 8073892672998829328, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: artefactSelectionInput
+      value: ArtefactSelection
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142316900249547504, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8467893727963411886, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
@@ -3307,21 +3337,6 @@ PrefabInstance:
       propertyPath: p2
       value: 
       objectReference: {fileID: 914285790}
-    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: crosshair.scope
-      value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: pickaxeDamage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 187769175264259214, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: damage
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 979589123072772401, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_IsActive

@@ -10,7 +10,7 @@ public class RingMenu : MonoBehaviour
    public Ring Data;
    public RingPiece RingCakePiecePrefab;
    public float GapWidthDegree = 1f;
-   public Action<ResourceType> callback;
+   public Action<ResourceType,Artefact> callback;
    private RingPiece[] Pieces;
    private RingMenu Parent;
    private int activeElement;
@@ -51,9 +51,9 @@ public class RingMenu : MonoBehaviour
    public void SetActive(bool isActive)
    {
        gameObject.SetActive(isActive);
-       Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+      // Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
        if (!isActive) return;
-        callback?.Invoke(Pieces[activeElement].Data.Type);
+        callback?.Invoke(Pieces[activeElement].Data.Type,Pieces[activeElement].Data.Artefact);
         run = isActive;
     }
     private void Update()
