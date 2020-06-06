@@ -131,9 +131,14 @@ public class GunArtefact : MonoBehaviour
         miner = GetComponentInParent<MinerController>();
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
         if (controller == null){ controller = GetComponentInParent<GunController>(); }
-        controller.trigger += (down, held, up)=>Trigger(down,held,down);
+        controller.trigger += adaptTrigger;
         if (!ai) controller.aim += Aim;
         forceReload = false;
+    }
+
+    private void adaptTrigger(bool down,bool  held, bool up)
+    {
+        Trigger(down, held, down);
     }
 
     private void Aim(bool isAiming)
@@ -224,7 +229,7 @@ public class GunArtefact : MonoBehaviour
               
                 }
                 catch (NullReferenceException e)
-                {
+                { 
                     controller.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick += CollectResource;
                 }
             }
@@ -293,5 +298,10 @@ public class GunArtefact : MonoBehaviour
         if (timer >= 0) return;
         controller.isReloading(true);
         forceReload = false;
+    }
+
+    private void OnDestroy()
+    {
+        controller.trigger -= adaptTrigger;
     }
 }

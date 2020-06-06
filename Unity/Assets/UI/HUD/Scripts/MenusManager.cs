@@ -31,7 +31,6 @@ public class MenusManager : MonoBehaviour
         artefactSelectionMenu.callback += (type,artefact) =>
         {
             if (artefact == null) return;
-            Debug.Log(artefact.name + "is selected");
             artefact.Equip();
         };
             ArtefactStock.Instance.Stock[0] = ArtefactStock.Instance.alreadyEquipedArtefact;

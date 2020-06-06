@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3908eb90bd9116745a62b7afd83451d0, type: 3}
   m_Name: ArtefactStock
   m_EditorClassIdentifier: 
-  alreadyEquipedArtefact: {fileID: 7457950600132287885, guid: a5800f736a4a8074197ad153e0162610,
+  alreadyEquipedArtefact: {fileID: 3662637675384139166, guid: e2a1223c0a53c0e428eb708127360b7f,
     type: 3}
