@@ -40,9 +40,9 @@ MonoBehaviour:
     _Version: 2
     _FreeList: -1
     _FreeCount: 0
-  selectConsumablePositive: Consumable+
-  selectConsumableNegative: Consumable-
-  useConsumable: Interact
+  selectConsumablePositive: switchConsumable+
+  selectConsumableNegative: switchConsumable-
+  useConsumable: UseConsumable
   artifactStock:
   - {fileID: 0}
   - {fileID: 0}

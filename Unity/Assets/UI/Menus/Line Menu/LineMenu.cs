@@ -9,7 +9,7 @@ public class LineMenu : MonoBehaviour
 
   private void Awake()
   {
-    Inventory.Instance.updateConsomableStock += Display;
+    Inventory.Instance.updateConsumableStock += Display;
   }
 
   private void Display()
