@@ -52,6 +52,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         {
             hurt?.Invoke(damage, direction, damageType);
             _HP -= damage;
+            GameManager.Instance.HPLost(damage);
         }  
         if (_HP <= 0 && !invincible) isPlayerDead(true);
     }

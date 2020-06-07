@@ -110,6 +110,7 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         {
             if (HP <= 0)//mort de l'araignée
             {
+                GameManager.Instance.EnemyKilled();
                 state = EnemyBehaviourState.Disabled;
                 loot.lootItems();
             }

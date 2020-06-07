@@ -12,7 +12,7 @@ public struct LoginInfo
  
 public struct ScoreInfo
 {
-    public string player;
+    public int player;
     public double time;
     public int enemies;
     public float damage_taken;
@@ -27,7 +27,7 @@ public class RestClient : MonoBehaviour
 {
     private static RestClient _instance;
 
-    private EnvironmentMode environmentMode = EnvironmentMode.Prod;
+    public EnvironmentMode environmentMode = EnvironmentMode.Prod;
     private string localUrl = "http://localhost:8000/";
     private string preprodUrl = "http://13.80.137.233:8000/";
     private string prodUrl = "http://13.80.137.233/";
@@ -73,8 +73,9 @@ public class RestClient : MonoBehaviour
     
     public IEnumerator saveScore(ScoreInfo score, System.Action<long,string> callBack)
     {
-        string url = getServerUrl() + KEY.URL_GET_USER;
+        string url = getServerUrl() + KEY.URL_SAVE_SCORE;
         var jsonData = JsonUtility.ToJson(score);
+        Debug.Log("Saving score to database as JSON : " + jsonData);
         yield return Post(url, jsonData, callBack);
     }
 
@@ -86,19 +87,21 @@ public class RestClient : MonoBehaviour
             www.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(jsonData));
             www.uploadHandler.contentType = "application/json";
             yield return www.SendWebRequest();
-            if (www.isNetworkError || www.isHttpError)
+            if (www.isNetworkError)
             {
                 //Debug.Log(www.error);
                 callBack(www.responseCode, null);
             }
-            else
+            else if (www.isHttpError)
             {
-                if (www.isDone)
-                {
-                    string jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
-                    //Debug.Log(jsonResult);
-                    callBack(www.responseCode,jsonResult);
-                }
+                string jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
+                //Debug.Log(jsonResult);
+                callBack(www.responseCode,jsonResult);
+            }else if (www.isDone)
+            {
+                string jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
+                //Debug.Log(jsonResult);
+                callBack(www.responseCode,jsonResult);
             }
         }
     }
