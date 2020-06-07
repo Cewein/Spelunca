@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private ConsumableStock consumableStock;
 
-    public static GameManager instance = null;
+
     [SerializeField] private PlayerStats player = null;
     [SerializeField] private GameObject[] mainUI = null;
     [SerializeField] private GameObject gameOverScreen = null;
@@ -22,6 +22,28 @@ public class GameManager : MonoBehaviour
     private bool playerIsDead = false;
     private int count = 300;
     public bossScript boss;
+
+    private static GameManager _instance;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameManager>();
+                if (_instance == null)
+                {
+                    GameObject go =  new GameObject();
+                    go.name = typeof(RestClient).Name;
+                    _instance = go.AddComponent<GameManager>();
+                    DontDestroyOnLoad(go);
+                }
+            }
+            return _instance;
+        }
+    }
+    
     void Awake()
     {
         DebugResourcesStockNotLoading();
@@ -33,8 +55,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator DebugResourcesStockNotLoading()
     {
         yield return new WaitForEndOfFrame();
-        if (instance == null) instance = this;
-        else if (instance != this) Destroy(gameObject);
+        if (_instance == null) _instance = this;
+        else if (_instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
         //  initRun();
     }
@@ -65,6 +87,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public ScoreInfo getFinalScore()
+    {
+        //todo : un timer, un compteur à araignées et un compteur à pv perdu
+        ScoreInfo score = new ScoreInfo();
+        score.time = 1758.15473;
+        score.enemies = 42;
+        score.damage_taken = 145.2f;
+        return score;
+    }
     void LoadLevel(string path)
     {          
         SceneManager.LoadScene(path);
@@ -75,5 +106,10 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         LoadLevel(gameScenePath);
+    }
+
+    public void startNewScore()
+    {
+        
     }
 }
