@@ -11,9 +11,6 @@ public class Loader : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = GetComponent<GameManager>();
-        if (GameManager.instance == null) Instantiate(gameManager);
-        
-      
+        gameManager = GameManager.Instance;
     }
 }
