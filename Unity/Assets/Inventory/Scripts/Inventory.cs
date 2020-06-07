@@ -96,14 +96,17 @@ public class Inventory : SingletonScriptableObject<Inventory>
   #endregion ===========================================================================================================
 
   #region Consumables ====================================================================================================
-  
+
+  public void NotifyConsomableStockUpdate()
+  {
+    updateConsomableStock?.Invoke();
+  }
   public void AddConsumable(Consumable item)
   {
      // Check if the item slot is full
      if ( consumableStock[item] < ConsumableSlotCapacity) consumableStock[item]++;
      // full slot notification.
      else Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
-    
   }
   
   public void TakeConsumable(Consumable item)

@@ -19,6 +19,7 @@ public class LifePotion : MonoBehaviour, ICollectible
    {
       Inventory.Instance.AddConsumable(scriptableObject);
       Destroy(gameObject);
+      Inventory.Instance.NotifyConsomableStockUpdate();
    }
 
    public void Emphase(bool isEmphased)
