@@ -218,17 +218,17 @@ PrefabInstance:
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_SpotAngle
-      value: 90
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_Range
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -249,6 +249,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
