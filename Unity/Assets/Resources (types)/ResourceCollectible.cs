@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Transforms;
 using UnityEngine;
 
 public class ResourceCollectible : MonoBehaviour, IPickable
@@ -6,8 +7,6 @@ public class ResourceCollectible : MonoBehaviour, IPickable
    [SerializeField] private ResourceType type;
    [SerializeField] private float quantity;
    [SerializeField] private float pv;
-   [SerializeField] private GameObject gaugeLifePrefab;
-
    public Action<ResourceType,float> pick;
 
    public void Pickax(RaycastHit hit,float damage)
@@ -18,6 +17,7 @@ public class ResourceCollectible : MonoBehaviour, IPickable
    private void Pick()
    {
       pick?.Invoke(type , quantity);
-      Destroy(gameObject);
+      ResourcesStock.Instance.setResource(type, quantity);
+      Destroy(transform.parent.gameObject);
    }
 }

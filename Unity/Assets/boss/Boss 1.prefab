@@ -1019,6 +1019,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98d4bb04afa4de40ad0e9a367996d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 588.60004
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  seekGroundScope: 0.05
+  seekGroundScopeAir: 0.07
+  acceleration: 15
+  maxSpeedInAir: 10
+  velocity: {x: 0, y: 0, z: 0}
+  miner: {fileID: 0}
 --- !u!1 &2190616550914166342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1326,13 +1336,16 @@ MonoBehaviour:
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 6277167662263690120}
+  damage: 5
   shootMode: 1
   firingRate: 0.1
   bulletSpreadAngle: 0
   bulletsPerShot: 1
-  recoil: 1
+  recoil: 0.03
+  reloadCooldown: 30
   aimFovRatio: 1
-  aimOffset: {x: 0, y: 0, z: 0}
+  zoomSpeed: 10
+  ai: 1
 --- !u!1 &2669543393682583254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,13 +1799,16 @@ MonoBehaviour:
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 6277167662263690120}
+  damage: 5
   shootMode: 0
   firingRate: 0.1
   bulletSpreadAngle: 0
   bulletsPerShot: 1
   recoil: 1.26
+  reloadCooldown: 30
   aimFovRatio: 1
-  aimOffset: {x: 0, y: 0, z: 0}
+  zoomSpeed: 10
+  ai: 0
 --- !u!1 &3755787701137637119
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,6 +2481,10 @@ MonoBehaviour:
   IA: 1
   iaInputHandler: {fileID: 2173078109135552580}
   raycastReticle: {fileID: 7065545751540375164}
+  foreEndTransform: {fileID: 0}
+  maxPulledPosition: {fileID: 0}
+  minPullPosition: {fileID: 0}
+  reloadAnimationTime: 50
 --- !u!114 &3940946767982835455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2479,6 +2499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capacity: 500
   normalResource: {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef, type: 2}
+  currentResource: {fileID: 0}
   printDebug: 0
 --- !u!1 &4394783689671763900
 GameObject:

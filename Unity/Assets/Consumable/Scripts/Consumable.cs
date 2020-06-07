@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Consumable : MonoBehaviour, ICollectible
 {
@@ -12,7 +13,7 @@ public class Consumable : MonoBehaviour, ICollectible
     private Sprite icon = null;
     [Tooltip("Description to help the player")] [SerializeField]
     private string description;
-    
+    public UnityEvent callback;
     
     public string Name => name;
 
@@ -27,9 +28,8 @@ public class Consumable : MonoBehaviour, ICollectible
     public void Collect()
     {
          ConsumableStock.Instance.SetConsumable(this);
-         gameObject.SetActive(false);
-      //   Debug.Log( ConsumableStock.Instance);
-         
+        // Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void Emphase(bool isEmphased)
@@ -39,7 +39,8 @@ public class Consumable : MonoBehaviour, ICollectible
 
     public void Use()
     {
-        Debug.Log("consomable consumed !");
+        callback.Invoke();
+        ConsumableStock.Instance.TakeConsumable(this);
     }
     
     

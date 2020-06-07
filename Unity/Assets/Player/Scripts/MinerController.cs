@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -85,6 +86,15 @@ public class MinerController : MonoBehaviour
     private float crouchingHeight = 0.7f;
     [Tooltip("Crouching smooth transition speed.")][SerializeField]
     private float crouchingAcceleration = 10f;
+    
+    [Header("Audio")]
+    [Tooltip("Audio source")]
+    public AudioSource audioSource;
+    [Tooltip("Footsteps sounds FX")]
+    public List<AudioClip> footstep;
+    [Tooltip("Footstep sound frequency while moving one meter.")]
+    public float footstepFrequency = 1f;
+ 
    
     #endregion
     
@@ -121,8 +131,15 @@ public class MinerController : MonoBehaviour
     private Vector3 weaponNewPosition; 
     private bool previousGrappingInput = false;//The grappling hook's input during the previous state
     public Action<GameObject> switchWeapon;
+    
+    // -- Audio
+    float m_footstepDistanceCounter;
+    private int footstepIndex = 0;
+
 
     public GameObject CurrentWeapon  => weapons[weaponIndex];
+
+    public Transform WeaponParent => weaponParent;
 
     #endregion
 
@@ -163,28 +180,17 @@ public class MinerController : MonoBehaviour
     {
         SwitchWeapon();
         Aim();
-        Reload();
         GrapplingHook();
     }
 
     private void Aim()
     {
-        if(weaponIndex != 0 ) return; // TODO : this trick force the gun to be in first position of the list...
-        weaponNewPosition = minerInputs.isAiming(true) ?
-                                                 weaponsAimingPosition.position : weaponDefaultPosition.position;
+        if(weaponIndex != 0 ) return; // TODO : Be aware because this trick force the gun to be in first position of the list...
+        weaponNewPosition = minerInputs.isAiming(true)
+                            && !weapons[weaponIndex].GetComponent<GunController>().TriggerReloadAnimation?
+                            weaponsAimingPosition.position : weaponDefaultPosition.position;
         weaponParent.position = Vector3.Slerp(weaponParent.position, weaponNewPosition, aimingAcceleration * Time.deltaTime);
     }
-
-    private void Reload()
-    {
-        //TODO : use an animator later ( after alpha )
-        bool isReloading = minerInputs.isReloading();
-        if(!isReloading) return;
-        minerInputs.isAiming(isReloading);
-        weaponParent.position = Vector3.Slerp(weaponParent.position,transform.position*0.92f, 0.2f*aimingAcceleration * Time.deltaTime);
-
-    }
-   
 
     private void SwitchWeapon()
     {
@@ -280,6 +286,18 @@ public class MinerController : MonoBehaviour
             if (IsCrouching){ newVelocity *= CrouchSpeedFactor; }
             newVelocity = SlideOnSlope(newVelocity.normalized, normal) * newVelocity.magnitude;
             velocity = Vector3.Lerp(velocity, newVelocity, acceleration * Time.deltaTime);
+            
+            // footsteps sound------------------------------------------------------------------------------------------------------------------------------------------------------
+            float chosenFootstepSFXFrequency = (IsRunning ? footstepFrequency*sprintFactor : footstepFrequency);
+            if (m_footstepDistanceCounter >= 1f / chosenFootstepSFXFrequency)
+            {
+                m_footstepDistanceCounter = 0f;
+               audioSource.PlayOneShot(footstep[footstepIndex]);
+               footstepIndex = (footstepIndex + 1) % footstep.Count;
+            }
+
+            // keep track of distance traveled for footsteps sound
+            m_footstepDistanceCounter += velocity.magnitude * Time.deltaTime;
         }
         else{AirControl();}
 

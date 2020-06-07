@@ -10,7 +10,7 @@ public class RingMenu : MonoBehaviour
    public Ring Data;
    public RingPiece RingCakePiecePrefab;
    public float GapWidthDegree = 1f;
-   public Action<ResourceType> callback;
+   public Action<ResourceType,Artefact> callback;
    private RingPiece[] Pieces;
    private RingMenu Parent;
    private int activeElement;
@@ -38,22 +38,35 @@ public class RingMenu : MonoBehaviour
             Pieces[i].CakePiece.color = new Color(1f, 1f, 1f, 0.5f);
 
             //set icon
-            Pieces[i].Icon.transform.localPosition = Pieces[i].CakePiece.transform.localPosition + Quaternion.AngleAxis(i * stepLength, Vector3.forward) * Vector3.up * iconDist;
+            Pieces[i].Icon.transform.localPosition = Pieces[i].CakePiece.transform.localPosition +
+                                                     Quaternion.AngleAxis(i * stepLength, Vector3.forward) *
+                                                     Vector3.up * iconDist;
             Pieces[i].Icon.sprite = Data.Elements[i].Icon;
+            
             
             //set data
             Pieces[i].Data = Data.Elements[i];
         }
     }
 
-  
+   private void UpdateIconAndData()
+   {
+       for (int i = 0; i < Data.Elements.Length; i++)
+       {
+          
+           Pieces[i].Icon.sprite = Data.Elements[i].Icon;
+           Pieces[i].Icon.color = (Pieces[i].Icon.sprite == null) ? new Color(Pieces[i].Icon.color.r,Pieces[i].Icon.color.g,Pieces[i].Icon.color.b,0): new Color(Pieces[i].Icon.color.r,Pieces[i].Icon.color.g,Pieces[i].Icon.color.b,1);
+           Pieces[i].Data = Data.Elements[i];
+       }
+   }
 
    public void SetActive(bool isActive)
    {
        gameObject.SetActive(isActive);
-       Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+      // Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+       UpdateIconAndData();
        if (!isActive) return;
-        callback?.Invoke(Pieces[activeElement].Data.Type);
+        callback?.Invoke(Pieces[activeElement].Data.Type,Pieces[activeElement].Data.Artefact);
         run = isActive;
     }
     private void Update()

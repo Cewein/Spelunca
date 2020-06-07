@@ -128,27 +128,31 @@ MonoBehaviour:
   magazine: {fileID: 0}
   controller: {fileID: 0}
   isPickaxe: 0
-  pickaxeDamage: 5
-  name: Fusil
+  pickaxeDamage: 0
+  name: Shotgun
   icon: {fileID: 21300000, guid: 0731b10435924fe419a2342a08bcca29, type: 3}
   crosshair:
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    size: 100
-    color: {r: 0, g: 0, b: 0, a: 0}
+    size: 20
+    color: {r: 0.8584906, g: 0.8544411, b: 0.8544411, a: 1}
+    scope: 65
   normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
     type: 3}
   AmmoType:
   - {fileID: 526571972454017004, guid: 69643c5a51cfe0541a3d330935ce419b, type: 3}
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
-  muzzle: {fileID: 0}
+  muzzle: {fileID: 8914564469236426507}
+  damage: 25
   shootMode: 0
-  firingRate: 0.1
-  bulletSpreadAngle: 0
-  bulletsPerShot: 1
-  recoil: 1.26
-  aimFovRatio: 1
-  aimOffset: {x: 0, y: 0, z: 0}
+  firingRate: 0.7
+  bulletSpreadAngle: 1
+  bulletsPerShot: 5
+  recoil: 1.2
+  reloadCooldown: 35
+  aimFovRatio: 0.8
+  zoomSpeed: 10
+  ai: 0
 --- !u!1 &5025520209143609595
 GameObject:
   m_ObjectHideFlags: 0

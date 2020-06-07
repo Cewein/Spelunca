@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GraphicsManager : MonoBehaviour
 {
-    [SerializeField] private Color fogColor;
-    [SerializeField] private float startFogDistance;
-    [SerializeField] private float endFogDistance;
+    [SerializeField] private Color fogColor =  new Color(0.326f, 0.435f, 0.528f);
+    [SerializeField] private float startFogDistance = 50.0f;
+    [SerializeField] private float endFogDistance = 70.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +16,6 @@ public class GraphicsManager : MonoBehaviour
         RenderSettings.fogEndDistance = endFogDistance;
         RenderSettings.fogStartDistance = startFogDistance;
         Camera.main.backgroundColor = fogColor;
+        Camera.main.depthTextureMode = Camera.main.depthTextureMode | DepthTextureMode.Depth;
     }
 }

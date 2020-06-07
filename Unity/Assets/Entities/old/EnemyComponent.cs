@@ -20,6 +20,9 @@ public class EnemyComponent : MonoBehaviour, IDamageable
     public GameObject player;
     [HideInInspector]
     public EnemyBehaviourState state;
+
+    public ResourceType type;
+    
     private Vector3 target = Vector3.zero; 
     
     //LOOT
@@ -64,6 +67,17 @@ public class EnemyComponent : MonoBehaviour, IDamageable
     [Header("Attacking behaviour parameters")]
     [Tooltip("The probability for an entity to attack each frame.")] [SerializeField]
     public float attackProbability = 0.01f;
+    
+    //TYPES
+    
+    [Header("The entity's colors for types'")] 
+    [Tooltip("The material of to the fire type.")] [SerializeField]
+    private Material fireMat;
+    [Tooltip("The material of to the water type.")] [SerializeField]
+    private Material waterMat;
+    [Tooltip("The material of to the plant type.")] [SerializeField]
+    private Material plantMat;
+    
     //OTHER
     [Header("Other entity behaviour parameters")] 
     [Tooltip("The distance at which entities will begin to chase the player.")] [SerializeField]
@@ -96,6 +110,7 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         {
             if (HP <= 0)//mort de l'araignée
             {
+                GameManager.Instance.EnemyKilled();
                 state = EnemyBehaviourState.Disabled;
                 loot.lootItems();
             }
@@ -266,6 +281,19 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         return avoidanceMove;
     }
 
+    public void refreshMaterial()
+    {
+        if (type == ResourceType.fire)
+        {
+            meshRenderer.material = fireMat;
+        }else if (type == ResourceType.water)
+        {
+            meshRenderer.material = waterMat;
+        }else if (type == ResourceType.plant)
+        {
+            meshRenderer.material = plantMat;
+        }
+    }
     
     
     private void OnDrawGizmosSelected()
@@ -276,16 +304,18 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         Gizmos.DrawRay(transform.position,movingDirection);
         Vector3 playerPos = player.transform.position;
         float distance = Math.Abs((this.transform.position - playerPos).magnitude);
-        Debug.Log("distance from entity to player " + distance);
+        //Debug.Log("distance from entity to player " + distance);
         if (distance > this.proximityOffset - this.proximityPrecision && distance < this.proximityOffset + this.proximityPrecision)
         {
-            Debug.Log("ASK FOR ATTACK ");
+            //Debug.Log("ASK FOR ATTACK ");
         }
     }
 
     public void setDamage(RaycastHit hit, ParticleSystem damageEffect, float damage, ResourceType type)
     {
-        HP -= damage; 
+        float finalDamages = damage;
+        //changer finalDamage en fonction des ressources
+        HP -= finalDamages; 
         ParticleSystem d = Instantiate(damageEffect, hit.point, Quaternion.identity);
         d.Play();
     }
