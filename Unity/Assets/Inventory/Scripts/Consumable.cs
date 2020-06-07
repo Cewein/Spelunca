@@ -15,8 +15,5 @@ public class Consumable : ScriptableObject
     public GameObject Prefab => prefab;
     
     public void Use()
-    {
-        callback.Invoke();
-        ConsumableStock.Instance.TakeConsumable(this);
-    }
+    {callback.Invoke();}
 }

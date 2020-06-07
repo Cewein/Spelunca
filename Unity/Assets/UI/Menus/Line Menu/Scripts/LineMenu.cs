@@ -18,18 +18,18 @@ public class LineMenu : MonoBehaviour
 
    private void Awake()
    {
-      ConsumableStock.Instance.update += UpdateSlots;
+    //  ConsumableStock.Instance.update += UpdateSlots;
    }
    private void UpdateSlots()
    {
       Clear();
-      foreach (List<Consumable> slot in ConsumableStock.Instance.Stock.Values)
+     /* foreach (List<Consumable> slot in ConsumableStock.Instance.Stock.Values)
       {
          Instantiate(slotPrefab, transform);
          slotPrefab.GetComponent<LinePiece>().icon.sprite = slot[0].Icon;
          slotPrefab.GetComponent<LinePiece>().SetQuantity(ConsumableStock.Instance.SlotNextEmptySocket(slot));
          slotPrefab.GetComponent<LinePiece>().Name = slot[0].Name;
-      }
+      }*/
    }
 
    private void Clear()
@@ -39,14 +39,14 @@ public class LineMenu : MonoBehaviour
       }
    }
 
-   private void Update()
+ /*  private void Update()
    {
       if (ConsumableStock.Instance.Stock.Count < 1) return;
       if (Input.GetButtonDown(increment)) activeElement = (activeElement+1)%ConsumableStock.Instance.Stock.Count;
       else if (Input.GetButtonDown(decrement) ) activeElement = (activeElement-1)%ConsumableStock.Instance.Stock.Count;
       else if (Input.GetButtonDown(use))
       {
-  //       ConsumableStock.Instance.Stock.ElementAt(activeElement).Value[0].Use();
+         ConsumableStock.Instance.Stock.ElementAt(activeElement).Value[0].Use();
       }
-   }
+   }*/
 }
