@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+  
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory/Inventory", order = 1)]
 public class Inventory : SingletonScriptableObject<Inventory>
@@ -67,6 +68,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   }
   private void InitConsumablesStock()
   {
+    indexConsumable = 0;
     consumableStock = new Consumable_Stock();
     foreach (Consumable c in ItemDataBase.Instance.consumables) 
       ConsumableStock.Add(c, 0 );
@@ -106,7 +108,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
 
   public void NotifyConsomableStockUpdate()
   {
-    updateConsomableStock?.Invoke();
+    updateConsumableStock?.Invoke();
   }
   public void AddConsumable(Consumable item)
   {
@@ -119,6 +121,11 @@ public class Inventory : SingletonScriptableObject<Inventory>
   public void TakeConsumable(Consumable item)
   {
     if ( consumableStock[item] > 0) consumableStock[item]--;
+  }
+
+  private int CountNotEmptyConsumableSlot()
+  {
+    return consumableStock.Values.Count(quantity => quantity > 0);
   }
 
   public string ConsumablesStockToString()
@@ -158,15 +165,17 @@ public class Inventory : SingletonScriptableObject<Inventory>
    * Used in :
    *  - Line Menu
    */
-  public Action updateConsomableStock;
+  public Action updateConsumableStock;
   
 
   #endregion ===========================================================================================================
   public void InputHandler()
   {
-    if (Input.GetButton(selectConsumableNegative)) indexConsumable--;
-    if (Input.GetButton(selectConsumablePositive)) indexConsumable++;
-    if (Input.GetButton(useConsumable)) TakeConsumable(consumableStock.ElementAt(indexConsumable).Key);
+    int notEmptySlot = CountNotEmptyConsumableSlot();
+    if(notEmptySlot < 1) return;
+    if (Input.GetButtonDown(selectConsumableNegative))indexConsumable = Mathf.Abs(indexConsumable-1)%notEmptySlot;
+    if (Input.GetButtonDown(selectConsumablePositive)) indexConsumable = (indexConsumable+1)%notEmptySlot;
+    if (Input.GetButtonDown(useConsumable)) TakeConsumable(consumableStock.ElementAt(indexConsumable).Key);
   }
   
   public override string ToString()
@@ -176,4 +185,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
            + ConsumablesStockToString()
            + ArtifactsStockToString();
   }
+  
+  float nfmod(float a,float b)
+  {return a - b* Mathf.Floor(a / b);}
 }

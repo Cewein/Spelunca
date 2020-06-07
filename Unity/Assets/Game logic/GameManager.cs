@@ -3,12 +3,13 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
 
-
+    public UnityEvent update;
 
     [SerializeField] private PlayerStats player = null;
     [SerializeField] private GameObject[] mainUI = null;
@@ -91,6 +92,8 @@ public class GameManager : MonoBehaviour
             //count--;   
             //if (count<1)LoadLevel(mainMenuPath);
         }
+        
+        update?.Invoke();
     }
 
     
