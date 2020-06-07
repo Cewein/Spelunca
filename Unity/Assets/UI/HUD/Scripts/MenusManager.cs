@@ -28,12 +28,6 @@ public class MenusManager : MonoBehaviour
         {
             gunMagazine.CurrentResource = (type == ResourceType.normal) ? gunMagazine.NormalResource : list.First(item => item.Type == type);
         };
-        artefactSelectionMenu.callback += (type,artefact) =>
-        {
-            if (artefact == null) return;
-            artefact.Equip();
-        };
-//        ArtefactStock.Instance.Stock[0] = ArtefactStock.Instance.alreadyEquipedArtefact;
 
     }
 

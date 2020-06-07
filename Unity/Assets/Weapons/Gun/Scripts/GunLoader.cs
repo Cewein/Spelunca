@@ -47,9 +47,9 @@ public class GunLoader : MonoBehaviour
           }
           else
           {
-              if (old.Type != ResourceType.normal) ResourcesStock.Instance.setResource(old.Type,currentResourceQuantity);
+              if (old.Type != ResourceType.normal) Inventory.Instance.AddResource(old.Type,currentResourceQuantity);
               currentResourceQuantity = 0;
-              isReloading(true, currentResource, ResourcesStock.Instance.takeResource(currentResource.Type, capacity));
+              isReloading(true, currentResource, Inventory.Instance.TakeResource(currentResource.Type, capacity));
           }
       } 
   }
@@ -86,7 +86,7 @@ public class GunLoader : MonoBehaviour
             {
                 if (currentResource.Type == ResourceType.normal)
                     isReloading(isGunReloading, currentResource, 5);
-                else isReloading(isGunReloading, currentResource, ResourcesStock.Instance.takeResource(currentResource.Type, capacity));
+                else isReloading(isGunReloading, currentResource, Inventory.Instance.TakeResource(currentResource.Type, capacity));
 
             }
             if (printDebug) Debug.Log(this);
@@ -102,7 +102,7 @@ public class GunLoader : MonoBehaviour
     private void isLoaderEmpty(bool isGaugeEmpty)
     {
         isEmpty?.Invoke(isGaugeEmpty);
-        if (currentResource.Type != ResourceType.normal && (ResourcesStock.Instance.Stock[currentResource.Type] <= 0))
+        if (currentResource.Type != ResourceType.normal && (Inventory.Instance.ResourceStock[currentResource.Type] <= 0))
         {
             isReloading(true,normalResource,0);
         }
@@ -128,7 +128,7 @@ public class GunLoader : MonoBehaviour
         str += "    - Resources quantity in loader : "+currentResourceQuantity+"\n";
         str += "    - Loader capacity : "+capacity+"\n";
 
-        str += ResourcesStock.Instance;
+        str += Inventory.Instance.ResourceStockToString();
         return str;  
     }
 }

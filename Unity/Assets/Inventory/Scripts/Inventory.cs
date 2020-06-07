@@ -7,7 +7,7 @@ using UnityEngine;
 public class Inventory : SingletonScriptableObject<Inventory>
 {
   [Serializable] public class Resource_Stock : SerializableDictionary<ResourceType, float>{}
-  [Serializable] public class Consumable_Stock  : SerializableDictionary<Consumable, float>{}
+  [Serializable] public class Consumable_Stock  : SerializableDictionary<Consumable, int>{}
   
   #region Fields =======================================================================================================
 
@@ -142,6 +142,16 @@ public class Inventory : SingletonScriptableObject<Inventory>
 
   #endregion ===========================================================================================================
 
+  #region Notification =================================================================================================
+  
+  /*
+   * Used in :
+   *  - Line Menu
+   */
+  public Action updateConsomableStock;
+  
+
+  #endregion ===========================================================================================================
   public override string ToString()
   {
     return "======= INVENTORY DEBUG =======\n"

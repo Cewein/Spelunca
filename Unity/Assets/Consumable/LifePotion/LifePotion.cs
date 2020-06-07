@@ -4,7 +4,7 @@ using UnityEngine;
 public class LifePotion : MonoBehaviour, ICollectible
 {
    [SerializeField] private int healPoints = 1;
-
+   [SerializeField] private Consumable scriptableObject = null;
    public void callback()
    {
       FindObjectOfType<PlayerStats>().RestoreLife(healPoints); // TODO : not very good to use findObjectOfType
@@ -17,6 +17,7 @@ public class LifePotion : MonoBehaviour, ICollectible
 
    public void Collect()
    {
+      Inventory.Instance.AddConsumable(scriptableObject);
       Destroy(gameObject);
    }
 

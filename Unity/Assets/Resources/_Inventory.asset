@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -26,18 +26,15 @@ MonoBehaviour:
     _Version: 3
     _FreeList: -1
     _FreeCount: 0
-  ConsumableSlotCapacity: 5
+  ConsumableSlotCapacity: 6
   consumableStock:
     _Keys:
-    - {fileID: 3699461167203985520, guid: 0c46f9ead737fed4cbfbfd42ec02293e, type: 3}
+    - {fileID: 11400000, guid: 9af37f7112300f749897b76e9c3e121a, type: 2}
     - {fileID: 0}
     - {fileID: 0}
-    _Values:
-    - 0
-    - 0
-    - 0
+    _Values: 000000000000000000000000
     _Buckets: 00000000ffffffffffffffff
-    _HashCodes: 284400000000000000000000
+    _HashCodes: f284ff7f0000000000000000
     _Next: ffffffff0000000000000000
     _Count: 1
     _Version: 1

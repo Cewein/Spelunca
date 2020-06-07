@@ -17,7 +17,7 @@ public class ResourceCollectible : MonoBehaviour, IPickable
    private void Pick()
    {
       pick?.Invoke(type , quantity);
-      ResourcesStock.Instance.setResource(type, quantity);
+      Inventory.Instance.AddResource(type, quantity);
       Destroy(transform.parent.gameObject);
    }
 }

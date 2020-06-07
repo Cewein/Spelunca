@@ -241,7 +241,7 @@ public class GunArtefact : MonoBehaviour
 
     private void CollectResource(ResourceType type, float quantity)
     {
-        ResourcesStock.Instance.setResource(type,quantity);
+        Inventory.Instance.AddResource(type,quantity);
     }
 
     private bool Shoot()
