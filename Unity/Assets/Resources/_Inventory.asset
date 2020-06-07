@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4efab321bb44ab54787390cd60bcc1f2, type: 3}
-  m_Name: Inventory
+  m_Name: _Inventory
   m_EditorClassIdentifier: 
   ResourceStockCapacity: 100
   resourceStock:
@@ -44,7 +44,7 @@ MonoBehaviour:
     _FreeList: -1
     _FreeCount: 0
   artifactStock:
-  - {fileID: 7457950600132287885, guid: a5800f736a4a8074197ad153e0162610, type: 3}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f98375feab1ae934a83b885b216428ab, type: 3}
-  m_Name: ItemDatabase
+  m_Name: _ItemDatabase
   m_EditorClassIdentifier: 
   consumables:
   - {fileID: 3699461167203985520, guid: 0c46f9ead737fed4cbfbfd42ec02293e, type: 3}
   artifacts:
   - {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  - {fileID: 11400000, guid: 2beb2f2d3efe66348a5f3c85c7dc8e9f, type: 2}
+  - {fileID: 11400000, guid: d735923849a0c2a42b3c29b8b629e7f3, type: 2}
+  - {fileID: 11400000, guid: b32b67df0707c424e8f4386db569cc47, type: 2}
   resources:
   - {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef, type: 2}
   - {fileID: 11400000, guid: 854650abbbea3844a8772f2184e14a01, type: 2}

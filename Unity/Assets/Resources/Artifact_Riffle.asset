@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99a8da0934bfdba418f467f532cf458f, type: 3}
-  m_Name: Normal
+  m_Script: {fileID: 11500000, guid: 0ac9b0fe0e9dfef4fb1b369cd1ea5191, type: 3}
+  m_Name: Artifact_Riffle
   m_EditorClassIdentifier: 
-  type: 0
-  color: {r: 0.8000001, g: 0.8000001, b: 1, a: 1}
-  gaugeIcon: {fileID: 0}
-  inventoryIcon: {fileID: 0}
+  name: Riffle
+  icon: {fileID: 21300000, guid: ce7cf6bc408479d4586f33b059869d04, type: 3}
+  prefab: {fileID: 652977199385629695, guid: 25f2cd1f772b25e4daaebb4af64c5a95, type: 3}
