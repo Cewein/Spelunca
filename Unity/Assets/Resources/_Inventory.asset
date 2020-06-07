@@ -27,8 +27,6 @@ MonoBehaviour:
     _FreeList: -1
     _FreeCount: 0
   ConsumableSlotCapacity: 6
-  consumableMenu: {fileID: 603448997105961871, guid: 4ce397e8dbba7a54f915afe082ae6d98,
-    type: 3}
   consumableStock:
     _Keys:
     - {fileID: 11400000, guid: 9af37f7112300f749897b76e9c3e121a, type: 2}
@@ -42,6 +40,9 @@ MonoBehaviour:
     _Version: 2
     _FreeList: -1
     _FreeCount: 0
+  selectConsumablePositive: Consumable+
+  selectConsumableNegative: Consumable-
+  useConsumable: Interact
   artifactStock:
   - {fileID: 0}
   - {fileID: 0}

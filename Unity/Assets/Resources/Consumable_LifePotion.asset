@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Consumable_LifePotion
   m_EditorClassIdentifier: 
   name: Life Potion
-  icon: {fileID: 21300000, guid: 1e7a6e7c7c342814fa96bba4e156ce88, type: 3}
+  icon: {fileID: 21300000, guid: 0731b10435924fe419a2342a08bcca29, type: 3}
   description: Open and drink it to regain life.
   prefab: {fileID: 4645125752613040503, guid: 0c46f9ead737fed4cbfbfd42ec02293e, type: 3}
   callback:

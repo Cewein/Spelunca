@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,15 +18,20 @@ public class Inventory : SingletonScriptableObject<Inventory>
   private Resource_Stock resourceStock;
   public Resource_Stock ResourceStock => resourceStock;
   
-  
   [Header("Consumables stock")]
   [Tooltip("Max item quantity per slot.")]
   [SerializeField]
   private int ConsumableSlotCapacity = 6;
-
   [SerializeField]
   private Consumable_Stock consumableStock;
   public Consumable_Stock ConsumableStock => consumableStock;
+  [SerializeField] [InputName]
+  private string selectConsumablePositive;
+  [SerializeField] [InputName]
+  private string selectConsumableNegative;
+  [SerializeField] [InputName]
+  private string useConsumable;
+  private int indexConsumable;
 
   [Header("Artifacts stock")] 
   [SerializeField]
@@ -97,6 +103,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
 
   #region Consumables ====================================================================================================
 
+
   public void NotifyConsomableStockUpdate()
   {
     updateConsomableStock?.Invoke();
@@ -155,6 +162,13 @@ public class Inventory : SingletonScriptableObject<Inventory>
   
 
   #endregion ===========================================================================================================
+  public void InputHandler()
+  {
+    if (Input.GetButton(selectConsumableNegative)) indexConsumable--;
+    if (Input.GetButton(selectConsumablePositive)) indexConsumable++;
+    if (Input.GetButton(useConsumable)) TakeConsumable(consumableStock.ElementAt(indexConsumable).Key);
+  }
+  
   public override string ToString()
   {
     return "======= INVENTORY DEBUG =======\n"
