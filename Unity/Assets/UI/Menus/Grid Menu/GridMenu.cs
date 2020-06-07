@@ -16,6 +16,8 @@ public class GridMenu : MonoBehaviour
         UpdateSlots();
     }
 
+   
+
     private void UpdateSlots()
     { 
        Artefact current;
