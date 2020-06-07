@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 32
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -30,14 +30,14 @@ MonoBehaviour:
   consumableStock:
     _Keys:
     - {fileID: 11400000, guid: 9af37f7112300f749897b76e9c3e121a, type: 2}
-    - {fileID: 0}
+    - {fileID: 11400000, guid: cbe556c9ac524d540b9511c9e5f7c9a1, type: 2}
     - {fileID: 0}
     _Values: 000000000000000000000000
-    _Buckets: 00000000ffffffffffffffff
-    _HashCodes: f284ff7f0000000000000000
-    _Next: ffffffff0000000000000000
-    _Count: 1
-    _Version: 1
+    _Buckets: 0000000001000000ffffffff
+    _HashCodes: f284ff7fbc1cff7f00000000
+    _Next: ffffffffffffffff00000000
+    _Count: 2
+    _Version: 2
     _FreeList: -1
     _FreeCount: 0
   artifactStock:

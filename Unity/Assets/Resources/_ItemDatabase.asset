@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   consumables:
   - {fileID: 11400000, guid: 9af37f7112300f749897b76e9c3e121a, type: 2}
+  - {fileID: 11400000, guid: cbe556c9ac524d540b9511c9e5f7c9a1, type: 2}
   artifacts:
   - {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
   - {fileID: 11400000, guid: 2beb2f2d3efe66348a5f3c85c7dc8e9f, type: 2}
