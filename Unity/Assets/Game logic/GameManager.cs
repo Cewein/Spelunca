@@ -7,10 +7,7 @@ using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private ResourcesStock resourcesStock;
-    [SerializeField]
-    private ConsumableStock consumableStock;
+
 
 
     [SerializeField] private PlayerStats player = null;
@@ -66,7 +63,6 @@ public class GameManager : MonoBehaviour
         if (_instance == null) _instance = this;
         else if (_instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-        //  initRun();
     }
 
     void PlayerDie(bool isDie)

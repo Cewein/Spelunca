@@ -10,7 +10,7 @@ public class RingMenu : MonoBehaviour
    public Ring Data;
    public RingPiece RingCakePiecePrefab;
    public float GapWidthDegree = 1f;
-   public Action<ResourceType,Artefact> callback;
+   public Action<ResourceType,Artifact> callback;
    private RingPiece[] Pieces;
    private RingMenu Parent;
    private int activeElement;
