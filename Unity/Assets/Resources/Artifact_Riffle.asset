@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3908eb90bd9116745a62b7afd83451d0, type: 3}
-  m_Name: ArtefactStock
+  m_Script: {fileID: 11500000, guid: 0ac9b0fe0e9dfef4fb1b369cd1ea5191, type: 3}
+  m_Name: Artifact_Riffle
   m_EditorClassIdentifier: 
-  alreadyEquipedArtefact: {fileID: 3662637675384139166, guid: e2a1223c0a53c0e428eb708127360b7f,
-    type: 3}
+  name: Riffle
+  icon: {fileID: 21300000, guid: ce7cf6bc408479d4586f33b059869d04, type: 3}
+  prefab: {fileID: 652977199385629695, guid: 25f2cd1f772b25e4daaebb4af64c5a95, type: 3}

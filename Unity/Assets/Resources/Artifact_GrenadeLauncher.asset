@@ -2,14 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 32
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89e560131a3446c4687f1e13c5600c01, type: 3}
-  m_Name: ConsumableStock
+  m_Script: {fileID: 11500000, guid: 0ac9b0fe0e9dfef4fb1b369cd1ea5191, type: 3}
+  m_Name: Artifact_GrenadeLauncher
   m_EditorClassIdentifier: 
-  slotCapacity: 10
+  name: Grenade launcher
+  icon: {fileID: 0}
+  prefab: {fileID: 0}

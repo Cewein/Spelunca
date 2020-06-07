@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99a8da0934bfdba418f467f532cf458f, type: 3}
-  m_Name: Water
+  m_Name: Resource_Normal
   m_EditorClassIdentifier: 
-  type: 2
-  color: {r: 0.43867922, g: 0.71603775, b: 1, a: 1}
-  icon: {fileID: 21300000, guid: 51db83c75d00d8a46bbd5e1152f16617, type: 3}
-  prefab: {fileID: 6361500002223971637, guid: 6666f89a7cace3846a669caaa37a8e20, type: 3}
+  type: 0
+  color: {r: 0.8000001, g: 0.8000001, b: 1, a: 1}
+  icon: {fileID: 0}
+  prefab: {fileID: 0}

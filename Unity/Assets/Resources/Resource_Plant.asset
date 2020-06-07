@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99a8da0934bfdba418f467f532cf458f, type: 3}
-  m_Name: Plant
+  m_Name: Resource_Plant
   m_EditorClassIdentifier: 
   type: 3
   color: {r: 0.3252047, g: 0.7924528, b: 0.5241765, a: 1}
