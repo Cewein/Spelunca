@@ -80,7 +80,7 @@ using System.Collections.Generic;
          PlayerData player = JsonUtility.FromJson<PlayerData>(playerData);
          if (player.id != "")
          {
-             score.player = player.id;
+             score.player = int.Parse(player.id);
              StartCoroutine(RestClient.Instance.saveScore(score, scoreCallBack));  
          }
          
@@ -93,7 +93,8 @@ using System.Collections.Generic;
              Debug.Log("Score saved in database !");
          }else if (responseCode == 400)
          {
-             Debug.Log("Oops... An error occured...");
+             Debug.Log("Error : " + jsonResult);
+             
          }
      }
  }

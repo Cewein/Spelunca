@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 7945044194382705995}
   - component: {fileID: 201245905197565914}
   m_Layer: 5
-  m_Name: HealthBar 1
+  m_Name: HealthGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
-  pixelPerHP: 2
+  pixelPerHP: 6
   healthBar: {fileID: 8424420645650956866}
   healthBarContent: {fileID: 8399111887952723837}
   speed: 6
