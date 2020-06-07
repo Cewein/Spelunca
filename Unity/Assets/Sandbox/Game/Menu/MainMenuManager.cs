@@ -31,6 +31,17 @@ using System.Collections.Generic;
      public InputField passwordInput;
      public Animator[] loginInputFieldAnimators;
 
+     public void Start()
+     {
+         string data = PlayerPrefs.GetString("player");
+         PlayerData player = JsonUtility.FromJson<PlayerData>(data);
+         if (player.id != "")
+         {
+             RestClient.Instance.isLoggedIn = true;
+             refresh();
+         }
+     }
+
      public void quit()
      {
          Application.Quit();

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -19,6 +20,12 @@ public class GameManager : MonoBehaviour
     private bool playerIsDead = false;
     private int count = 300;
     public bossScript boss;
+    
+    //Score
+
+    private ScoreInfo score;
+    private float startTime;
+    private bool scoreHasStarted = false;
 
     private static GameManager _instance;
 
@@ -43,6 +50,7 @@ public class GameManager : MonoBehaviour
     
     void Awake()
     {
+        score = new ScoreInfo();
         DebugResourcesStockNotLoading();
 
         if (player != null) player.die += PlayerDie;
@@ -78,20 +86,14 @@ public class GameManager : MonoBehaviour
             {
                 ui.SetActive(false);
             }
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             //count--;   
             //if (count<1)LoadLevel(mainMenuPath);
         }
     }
 
-    public ScoreInfo getFinalScore()
-    {
-        //todo : un timer, un compteur à araignées et un compteur à pv perdu
-        ScoreInfo score = new ScoreInfo();
-        score.time = 1758.15473;
-        score.enemies = 42;
-        score.damage_taken = 145.2f;
-        return score;
-    }
+    
     void LoadLevel(string path)
     {          
         SceneManager.LoadScene(path);
@@ -104,8 +106,26 @@ public class GameManager : MonoBehaviour
         LoadLevel(gameScenePath);
     }
 
-    public void startNewScore()
+    public void StartNewScore()
     {
-        
+        scoreHasStarted = true;
+        startTime = Time.time;
+        score = new ScoreInfo();
+    }
+
+    public void EnemyKilled()
+    {
+        if(scoreHasStarted)score.enemies += 1;
+    }
+    public void HPLost(float hpLost)
+    {
+        if(scoreHasStarted)score.damage_taken += hpLost;
+    }
+    public ScoreInfo getFinalScore()
+    {
+        scoreHasStarted = false;
+        float now = Time.time;
+        score.time = now - startTime;
+        return score;
     }
 }
