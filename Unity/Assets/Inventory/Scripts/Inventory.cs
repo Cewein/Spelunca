@@ -118,9 +118,11 @@ public class Inventory : SingletonScriptableObject<Inventory>
      else Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
   }
   
-  public void TakeConsumable(Consumable item)
+  private void TakeConsumable(Consumable item)
   {
-    if ( consumableStock[item] > 0) consumableStock[item]--;
+    if (consumableStock[item] < 1) return;
+    consumableStock[item]--;
+    item.Use();
   }
 
   private int CountNotEmptyConsumableSlot()
