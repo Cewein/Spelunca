@@ -6,13 +6,13 @@ using UnityEngine;
 public class ItemDataBase :  SingletonScriptableObject<ItemDataBase>
 {
     public List<Consumable> consumables; 
-    public List<Artefact> artifacts;
+    public List<Artifact> artifacts;
     public List<Resource> resources;
 
     public ItemDataBase()
     {
         consumables = new List<Consumable>();
-        artifacts   = new List<Artefact>();
+        artifacts   = new List<Artifact>();
         resources   = new List<Resource>();
     }
 }

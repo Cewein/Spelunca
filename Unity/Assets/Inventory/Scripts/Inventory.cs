@@ -29,8 +29,8 @@ public class Inventory : SingletonScriptableObject<Inventory>
 
   [Header("Artifacts stock")] 
   [SerializeField]
-  private List<Artefact> artifactStock;
-  public List<Artefact> ArtifactStock => artifactStock;
+  private List<Artifact> artifactStock;
+  public List<Artifact> ArtifactStock => artifactStock;
   private int ArtifactStockCapacity = 4;
 
   #endregion ===========================================================================================================
@@ -41,7 +41,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     resourceStock = new Resource_Stock();
     consumableStock = new Consumable_Stock();
-    artifactStock = new List<Artefact>();
+    artifactStock = new List<Artifact>();
 
   }
 
@@ -67,7 +67,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   }
   private void InitArtifactsStock()
   {
-    artifactStock = Enumerable.Repeat<Artefact>(null, ArtifactStockCapacity).ToList();
+    artifactStock = Enumerable.Repeat<Artifact>(null, ArtifactStockCapacity).ToList();
   }
 
   #endregion ===========================================================================================================
@@ -121,7 +121,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
 
   #region Artifacts ====================================================================================================
   
-  public void AddArtifact(Artefact a)
+  public void AddArtifact(Artifact a)
   {
     // Check if the artifacts stock is full
     if(artifactStock.Count < ArtifactStockCapacity)
@@ -131,7 +131,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
       Debug.Log("Stock is full, choose an artifact to throw away"); //TODO : event here !
   }
   
-  public void TakeArtifact(Artefact a)
+  public void TakeArtifact(Artifact a)
   { artifactStock.Remove(a); }
   
   public string ArtifactsStockToString()

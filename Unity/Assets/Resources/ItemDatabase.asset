@@ -15,7 +15,7 @@ MonoBehaviour:
   consumables:
   - {fileID: 3699461167203985520, guid: 0c46f9ead737fed4cbfbfd42ec02293e, type: 3}
   artifacts:
-  - {fileID: 7457950600132287885, guid: a5800f736a4a8074197ad153e0162610, type: 3}
+  - {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
   resources:
   - {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef, type: 2}
   - {fileID: 11400000, guid: 854650abbbea3844a8772f2184e14a01, type: 2}
