@@ -6,6 +6,6 @@ public class ScoreManager : MonoBehaviour
 {
     public void Start()
     {
-        GameManager.Instance.startNewScore();
+        GameManager.Instance.StartNewScore();
     }
 }
