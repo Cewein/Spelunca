@@ -10,27 +10,9 @@ using System.Collections.Generic;
  using UnityEngine.UIElements;
 
 
- public struct LoginInfo
- {
-     public string username;
-     public string password;
- } 
- public struct PlayerData
- {
-     public string id;
-     public string username;
-     public string email;
- } 
  
  public class MainMenuManager : MonoBehaviour
  {
-     
-     private enum EnvironmentMode {Local,PreProd,Prod}
-     private struct KEY
-     {
-         internal static readonly string URL_GET_USER = "api/get_user/";
-     }
-     
      public GameObject mainLayout;
      
      public GameObject loginLayout;
@@ -49,25 +31,23 @@ using System.Collections.Generic;
      public InputField passwordInput;
      public Animator[] loginInputFieldAnimators;
 
-     [SerializeField] private EnvironmentMode environmentMode = EnvironmentMode.Local;
-     private string localUrl = "http://localhost:8000/";
-     private string preprodUrl = "http://13.80.137.233:8000/";
-     private string prodUrl = "http://13.80.137.233/";
-
-     private bool loggedIn = false;
-     
      public void quit()
      {
          Application.Quit();
      }
      public void openLeaderboard()
      {
-         Application.OpenURL(getServerUrl());
+         Application.OpenURL(RestClient.Instance.getServerUrl());
      }
 
+     public void register()
+     {
+         Application.OpenURL(RestClient.Instance.getRegisterPageUrl());
+     }
+     
      private void refresh()
      {
-         if (loggedIn)
+         if (RestClient.Instance.isLoggedIn)
          {
              loginSubview.SetActive(false);
              loggedInSubview.SetActive(true);
@@ -121,12 +101,11 @@ using System.Collections.Generic;
          LoginInfo loginInfo = new LoginInfo();
          loginInfo.username = usernameInput.text;
          loginInfo.password = passwordInput.text;
-         StartCoroutine(RestClient.Instance.login(getServerUrl() + KEY.URL_GET_USER, loginInfo, loginCallBack));
+         StartCoroutine(RestClient.Instance.login(loginInfo, loginCallBack));
      }
      public void logout()
      {
-         loggedIn = false;
-         PlayerPrefs.DeleteKey("player");
+         RestClient.Instance.logout();
          refresh();
      }
 
@@ -136,7 +115,7 @@ using System.Collections.Generic;
          {
              PlayerPrefs.SetString("player",jsonResult);
              PlayerPrefs.Save();
-             loggedIn = true;
+             RestClient.Instance.isLoggedIn = true;
              loginMessageText.gameObject.SetActive(true);
              loginMessageText.color = loginSuccessColor;
              loginMessageText.text = loginSuccessText;
@@ -151,69 +130,6 @@ using System.Collections.Generic;
              {
                  animator.SetTrigger("error");
              }
-         }
-         
-         //PlayerData playerData = JsonUtility.FromJson<PlayerData>(jsonResult);
-         
-     }
-/*
-     private IEnumerator login(LoginInfo loginInfo)
-     {
-         WWWForm form = new WWWForm();
-         form.AddField("username", loginInfo.username);
-         form.AddField("password", loginInfo.password);
-         //var postData = JsonUtility.ToJson(loginInfo);
-         //Debug.Log("data " + postData);
-         UnityWebRequest www = UnityWebRequest.Post(getAPIUrl() + KEY.URL_GET_USER, form);
-         www.uploadHandler.contentType = "application/json";
-         
-         //byte[] bytes = Encoding.Unicode.GetBytes(postData);
-         //www.uploadHandler. = bytes;
-         yield return www.SendWebRequest();
-
-         if (www.isNetworkError || www.isHttpError)
-         {
-             Debug.Log(www.error);
-         }
-         else
-         {
-             Debug.Log("Form upload complete!");
-             Debug.Log("Recieved : " + www.downloadHandler.text);
-             
-         }
-     }*/
-
-     /*var request = UnityWebRequest.Post(getAPIUrl() + KEY.URL_GET_USER, postData);
-         var handler = request.SendWebRequest();
-         while(!handler.isDone){
-             yield return null;
-         }
-
-         switch (handler.webRequest.responseCode)
-         {
-             case 400:
-                 errorLoginView();
-                 break;
-             case 201:
-                 Debug.Log(request.downloadHandler.text);
-                 break;
-             case 500:
-                 Debug.LogError("API call to '" + KEY.URL_GET_USER + "' : GET request prohibited.");
-                 break;
-         }*/
-     
-     private string getServerUrl()
-     {
-         switch (environmentMode)
-         {
-             case EnvironmentMode.Local:
-                 return localUrl;
-             case EnvironmentMode.Prod:
-                 return prodUrl;
-             case EnvironmentMode.PreProd:
-                 return preprodUrl;
-             default:
-                 return "";
          }
      }
  }
