@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   color: {r: 0.3252047, g: 0.7924528, b: 0.5241765, a: 1}
-  gaugeIcon: {fileID: 0}
-  inventoryIcon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7b72d9a29bba25c43b3f98af6b8eafa3, type: 3}
+  prefab: {fileID: 4627741173994672451, guid: 872e34af141fa4147bbb9a1e2f2d7270, type: 3}
