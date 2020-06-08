@@ -8,7 +8,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory/Inventory", order = 1)]
 public class Inventory : SingletonScriptableObject<Inventory>
 {
-  public Transform artifactSocket;
   [Serializable] public class Resource_Stock : SerializableDictionary<ResourceType, float>{}
   [Serializable] public class Consumable_Stock  : SerializableDictionary<Consumable, int>{}
   
@@ -36,6 +35,8 @@ public class Inventory : SingletonScriptableObject<Inventory>
   private int indexConsumable;
 
   [Header("Artifacts stock")] 
+  [Tooltip("Transform of the point where artifact are placed on the player.")]
+  public Transform artifactSocket;
   [SerializeField]
   private List<Artifact> artifactStock;
   public List<Artifact> ArtifactStock => artifactStock;
@@ -50,7 +51,6 @@ public class Inventory : SingletonScriptableObject<Inventory>
     resourceStock = new Resource_Stock();
     consumableStock = new Consumable_Stock();
     artifactStock = new List<Artifact>();
-
   }
 
   private void OnEnable()

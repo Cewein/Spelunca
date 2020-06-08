@@ -12,6 +12,8 @@ public class GunArtifact : MonoBehaviour, ICollectible
     private Artifact scriptableObject; 
     private bool isEquipped => transform.parent != null;
 
+    public Artifact ScriptableObject => scriptableObject;
+
     public bool IsReachable(Ray ray, float distance)
     {
         if (isEquipped) return false;
