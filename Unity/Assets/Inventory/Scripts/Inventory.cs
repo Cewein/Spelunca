@@ -139,7 +139,11 @@ public class Inventory : SingletonScriptableObject<Inventory>
   #endregion ===========================================================================================================
 
   #region Artifacts ====================================================================================================
-  
+
+  public void NotifyArtifactStockUpdate()
+  {
+    updateArtifactStock?.Invoke();
+  }
   public void AddArtifact(Artifact a)
   {
     // Check if the artifacts stock is full
@@ -168,6 +172,11 @@ public class Inventory : SingletonScriptableObject<Inventory>
    *  - Line Menu
    */
   public Action updateConsumableStock;
+  /*
+   * Used in :
+   *  - Grid Menu
+   */
+  public Action updateArtifactStock;
   
 
   #endregion ===========================================================================================================
@@ -187,7 +196,4 @@ public class Inventory : SingletonScriptableObject<Inventory>
            + ConsumablesStockToString()
            + ArtifactsStockToString();
   }
-  
-  float nfmod(float a,float b)
-  {return a - b* Mathf.Floor(a / b);}
 }

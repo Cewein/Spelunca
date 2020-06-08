@@ -90,6 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3371648697353894460}
   - component: {fileID: 1442571915609982077}
+  - component: {fileID: 148954504098557863}
   m_Layer: 11
   m_Name: Fusil
   m_TagString: Untagged
@@ -127,6 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magazine: {fileID: 0}
   controller: {fileID: 0}
+  isEquipped: 0
+  scriptableObject: {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
   isPickaxe: 0
   pickaxeDamage: 0
   name: Shotgun
@@ -153,6 +156,19 @@ MonoBehaviour:
   aimFovRatio: 0.8
   zoomSpeed: 10
   ai: 0
+--- !u!65 &148954504098557863
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947296168385012162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5168333, y: 0.4996426, z: 1}
+  m_Center: {x: -1.5287852, y: 0.60913956, z: 0}
 --- !u!1 &5025520209143609595
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@ public struct Crosshair
     public float scope;
 }
 
-public class GunArtefact : MonoBehaviour
+public class GunArtefact : MonoBehaviour, ICollectible
 {
     #region SerializedField ============================================================================================
     
@@ -33,6 +33,10 @@ public class GunArtefact : MonoBehaviour
     private GunLoader magazine;
     [Tooltip("The gun magazine that stock ammo.")][SerializeField]
     private GunController controller;
+
+    public bool isEquipped;
+
+    [SerializeField] private Artifact scriptableObject;
     
     [Header("Pickaxe only")]
     [Tooltip("Is that the miner pickaxe ? ")][SerializeField]
@@ -127,6 +131,7 @@ public class GunArtefact : MonoBehaviour
 
     private void Start()
     {
+        if (!isEquipped) return;
         normalFOV = Camera.main.fieldOfView;
         miner = GetComponentInParent<MinerController>();
         if (magazine == null && !isPickaxe){ magazine = GetComponentInParent<GunLoader>(); }
@@ -134,15 +139,17 @@ public class GunArtefact : MonoBehaviour
         controller.trigger += adaptTrigger;
         if (!ai) controller.aim += Aim;
         forceReload = false;
+
     }
 
     private void adaptTrigger(bool down,bool  held, bool up)
     {
-        Trigger(down, held, down);
+        if (isEquipped) Trigger(down, held, down);
     }
 
     private void Aim(bool isAiming)
     {
+        if (!isEquipped) return;
         float targetFOV = isAiming && !controller.TriggerReloadAnimation  ? normalFOV * aimFovRatio : normalFOV;
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
     }
@@ -187,7 +194,7 @@ public class GunArtefact : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (forceReload && !isPickaxe) ForceReload();
+        if (isEquipped && forceReload && !isPickaxe) ForceReload();
     }
 
     private bool TryShoot()
@@ -302,6 +309,26 @@ public class GunArtefact : MonoBehaviour
 
     private void OnDestroy()
     {
+        if(!isEquipped) return;
         controller.trigger -= adaptTrigger;
+    }
+
+    public bool IsReachable(Ray ray, float distance)
+    {
+        if (isEquipped) return false;
+        return Vector3.Distance(ray.origin, transform.position) < distance;
+    }
+
+    public void Collect()
+    {
+        if (isEquipped) return;
+        Inventory.Instance.AddArtifact(scriptableObject);
+        Destroy(gameObject);
+        Inventory.Instance.NotifyArtifactStockUpdate();
+    }
+
+    public void Emphase(bool isEmphased)
+    {
+        if (isEquipped) return;
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 536745189333772141}
   - component: {fileID: 3295108081359485748}
+  - component: {fileID: 1143675735830888976}
   m_Layer: 11
   m_Name: Rifle
   m_TagString: Untagged
@@ -47,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magazine: {fileID: 0}
   controller: {fileID: 0}
+  isEquipped: 0
+  scriptableObject: {fileID: 11400000, guid: 2beb2f2d3efe66348a5f3c85c7dc8e9f, type: 2}
   isPickaxe: 0
   pickaxeDamage: 5
   name: Rifle
@@ -63,6 +66,7 @@ MonoBehaviour:
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 9026062855705136695}
+  damage: 5
   shootMode: 1
   firingRate: 0.1
   bulletSpreadAngle: 0
@@ -72,6 +76,19 @@ MonoBehaviour:
   aimFovRatio: 0.8
   zoomSpeed: 10
   ai: 0
+--- !u!65 &1143675735830888976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652977199385629695}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4957466, y: 0.4315493, z: 0.5470742}
+  m_Center: {x: -1.2695794, y: 0.48731124, z: -0.011664331}
 --- !u!1 &4743559943885876923
 GameObject:
   m_ObjectHideFlags: 0
