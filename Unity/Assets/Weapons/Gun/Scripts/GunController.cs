@@ -112,12 +112,12 @@ public class GunController : MonoBehaviour
 
     private void Trigger(bool down, bool held, bool up)
     {
-        GunArtefact artefact = GetComponentInChildren<GunArtefact>();
+        /*GunArtefact artefact = GetComponentInChildren<GunArtefact>();
         if (((artefact.ShootMode != ShootingMode.AUTO) || !held) &&
             ((artefact.ShootMode != ShootingMode.MANUAL) || !down) &&
             (((artefact.ShootMode != ShootingMode.CHARGE) || !up) || !canAttack)) return;
         try { raycastReticle.PerformRaycast(); }
-        catch (NullReferenceException e){}
+        catch (NullReferenceException e){}*/
 
     }
 

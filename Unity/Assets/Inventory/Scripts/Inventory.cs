@@ -8,6 +8,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory/Inventory", order = 1)]
 public class Inventory : SingletonScriptableObject<Inventory>
 {
+  public Transform artifactSocket;
   [Serializable] public class Resource_Stock : SerializableDictionary<ResourceType, float>{}
   [Serializable] public class Consumable_Stock  : SerializableDictionary<Consumable, int>{}
   
@@ -75,7 +76,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   }
   private void InitArtifactsStock()
   {
-    artifactStock = Enumerable.Repeat<Artifact>(null, ArtifactStockCapacity).ToList();
+    artifactStock = new List<Artifact>();
   }
 
   #endregion ===========================================================================================================
@@ -110,12 +111,17 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     updateConsumableStock?.Invoke();
   }
-  public void AddConsumable(Consumable item)
+  public bool AddConsumable(Consumable item)
   {
      // Check if the item slot is full
-     if ( consumableStock[item] < ConsumableSlotCapacity) consumableStock[item]++;
+     if (consumableStock[item] < ConsumableSlotCapacity)
+     {
+       consumableStock[item]++;
+       return true;
+     }
      // full slot notification.
-     else Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
+     Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
+     return false;
   }
   
   private void TakeConsumable(Consumable item)
@@ -144,14 +150,21 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     updateArtifactStock?.Invoke();
   }
-  public void AddArtifact(Artifact a)
+  
+  private int CountNotEmptyArtifactSlot()
+  {
+    return artifactStock.Count(slotContent => slotContent != null);
+  }
+  public bool AddArtifact(Artifact a)
   {
     // Check if the artifacts stock is full
-    if(artifactStock.Count < ArtifactStockCapacity)
+    if (CountNotEmptyArtifactSlot() < ArtifactStockCapacity)
+    {
       artifactStock.Add(a);
-    else
-      // send a notification to the player.
-      Debug.Log("Stock is full, choose an artifact to throw away"); //TODO : event here !
+      return true;
+    }
+    Debug.Log("Stock is full, choose an artifact to throw away"); //TODO : event here !
+    return false;
   }
   
   public void TakeArtifact(Artifact a)

@@ -8,7 +8,7 @@ using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
-
+    public Transform artifactSocket;
     public UnityEvent update;
 
     [SerializeField] private PlayerStats player = null;
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
         if (player != null) player.die += PlayerDie;
         if (gameOverScreen != null) gameOverScreen.SetActive(false);
+        Inventory.Instance.artifactSocket = artifactSocket;
 
     }
     private IEnumerator DebugResourcesStockNotLoading()

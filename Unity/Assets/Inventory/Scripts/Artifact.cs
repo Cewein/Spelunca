@@ -10,5 +10,15 @@ public class Artifact : ScriptableObject
     public GameObject Prefab => prefab;
     public Sprite Sprite     => icon;
     public string Name       => name;
-    
+
+    public void Equipped(Transform parent)
+    { 
+        Destroy(parent.GetChild(0).gameObject);
+        Instantiate(prefab, parent);
+    }
+
+    public void Throw()
+    {
+        Inventory.Instance.TakeArtifact(this); //TODO : the prefab must appear on the map again
+    }
 }

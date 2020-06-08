@@ -23,7 +23,7 @@ public struct Crosshair
     [Tooltip("Distance the raycast can be perform")][SerializeField]
     public float scope;
 }
-
+/*
 public class GunArtefact : MonoBehaviour, ICollectible
 {
     #region SerializedField ============================================================================================
@@ -92,7 +92,7 @@ public class GunArtefact : MonoBehaviour, ICollectible
     private bool shootOnMaxEnergy;
     [Tooltip("Time needed to reach max energy charged")][SerializeField]
     private float chargeTime = 2f;*/
-
+/*
    [Header("AI")] 
    [Tooltip("Is the miner controller an Artificial Intelligence ?")][SerializeField] 
    private bool ai = false;
@@ -187,7 +187,7 @@ public class GunArtefact : MonoBehaviour, ICollectible
                 }
                 return false;*/
 
-            default:
+  /*          default:
                 return false;
         }
     }
@@ -332,3 +332,4 @@ public class GunArtefact : MonoBehaviour, ICollectible
         if (isEquipped) return;
     }
 }
+*/

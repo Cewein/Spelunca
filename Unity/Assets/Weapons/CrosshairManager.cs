@@ -57,13 +57,13 @@ public class CrosshairManager : MonoBehaviour
         {
             try
             {
-                currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtefact>().Crosshair;
+              //  currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtefact>().Crosshair;
             }
             catch (NullReferenceException e)
             {
-                try
+               /* try
                 {currentWeaponCrosshair = currentWeapon.GetComponent<GunArtefact>().Crosshair;}
-                catch (NullReferenceException ex){}
+                catch (NullReferenceException ex){}*/
             }
             raycaster.scope  = currentWeaponCrosshair.scope;
             crossHair.sprite = currentWeaponCrosshair.sprite;
