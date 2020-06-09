@@ -12,7 +12,8 @@ public class Artifact : ScriptableObject
 
     public void Equipped(Transform parent)
     { 
-        Destroy(parent.GetChild(0).gameObject);
+        try{Destroy(parent.GetChild(0).gameObject);}
+        catch(UnityException){}
         Instantiate(prefab, parent);
     }
 

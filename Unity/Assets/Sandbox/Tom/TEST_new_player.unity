@@ -401,7 +401,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b277ba612a1ca4a46aa67a80d24f29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
+  magazine: {fileID: 0}
+  controller: {fileID: 0}
   scriptableObject: {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  crosshair:
+    sprite: {fileID: 0}
+    size: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
+    scope: 0
+  shootingMode: 0
+  firingRate: 0.5
+  bulletSpreadAngle: 0
+  bulletsPerShot: 1
+  recoil: 1
+  reloadCooldown: 30
+  aimFovRatio: 0.8
+  zoomSpeed: 10
+  normalResourceAmmo: {fileID: 0}
+  AmmoType: []
+  muzzle: {fileID: 0}
 --- !u!1 &237514786
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +540,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b277ba612a1ca4a46aa67a80d24f29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
+  magazine: {fileID: 0}
+  controller: {fileID: 0}
   scriptableObject: {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  crosshair:
+    sprite: {fileID: 0}
+    size: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
+    scope: 0
+  shootingMode: 0
+  firingRate: 0.5
+  bulletSpreadAngle: 0
+  bulletsPerShot: 1
+  recoil: 1
+  reloadCooldown: 30
+  aimFovRatio: 0.8
+  zoomSpeed: 10
+  normalResourceAmmo: {fileID: 0}
+  AmmoType: []
+  muzzle: {fileID: 0}
 --- !u!1001 &420482316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -629,7 +667,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b277ba612a1ca4a46aa67a80d24f29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
+  magazine: {fileID: 0}
+  controller: {fileID: 0}
   scriptableObject: {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  crosshair:
+    sprite: {fileID: 0}
+    size: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
+    scope: 0
+  shootingMode: 0
+  firingRate: 0.5
+  bulletSpreadAngle: 0
+  bulletsPerShot: 1
+  recoil: 1
+  reloadCooldown: 30
+  aimFovRatio: 0.8
+  zoomSpeed: 10
+  normalResourceAmmo: {fileID: 0}
+  AmmoType: []
+  muzzle: {fileID: 0}
 --- !u!1001 &437866102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1254,7 +1311,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b277ba612a1ca4a46aa67a80d24f29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
+  magazine: {fileID: 0}
+  controller: {fileID: 0}
   scriptableObject: {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  crosshair:
+    sprite: {fileID: 0}
+    size: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
+    scope: 0
+  shootingMode: 0
+  firingRate: 0.5
+  bulletSpreadAngle: 0
+  bulletsPerShot: 1
+  recoil: 1
+  reloadCooldown: 30
+  aimFovRatio: 0.8
+  zoomSpeed: 10
+  normalResourceAmmo: {fileID: 0}
+  AmmoType: []
+  muzzle: {fileID: 0}
 --- !u!114 &1019905854 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
@@ -1395,6 +1471,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849588733829599157, guid: fd56325d815faa34fb034900a07d524e,
+        type: 3}
+      propertyPath: crosshair.sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a236bc108fbb2354f9ebaf37770a4c78,
+        type: 3}
+    - target: {fileID: 1849588733829599157, guid: fd56325d815faa34fb034900a07d524e,
+        type: 3}
+      propertyPath: crosshair.color.r
+      value: 0.9939729
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849588733829599157, guid: fd56325d815faa34fb034900a07d524e,
+        type: 3}
+      propertyPath: crosshair.color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849588733829599157, guid: fd56325d815faa34fb034900a07d524e,
+        type: 3}
+      propertyPath: crosshair.color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849588733829599157, guid: fd56325d815faa34fb034900a07d524e,
+        type: 3}
+      propertyPath: crosshair.scope
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849588733829599157, guid: fd56325d815faa34fb034900a07d524e,
+        type: 3}
+      propertyPath: crosshair.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1947296168385012162, guid: fd56325d815faa34fb034900a07d524e,
         type: 3}
@@ -2201,7 +2308,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b277ba612a1ca4a46aa67a80d24f29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
+  magazine: {fileID: 0}
+  controller: {fileID: 0}
   scriptableObject: {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  crosshair:
+    sprite: {fileID: 0}
+    size: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
+    scope: 0
+  shootingMode: 0
+  firingRate: 0.5
+  bulletSpreadAngle: 0
+  bulletsPerShot: 1
+  recoil: 1
+  reloadCooldown: 30
+  aimFovRatio: 0.8
+  zoomSpeed: 10
+  normalResourceAmmo: {fileID: 0}
+  AmmoType: []
+  muzzle: {fileID: 0}
 --- !u!1 &1979148099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,6 +2950,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1476937047}
+    - target: {fileID: 711560071311288066, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: showRaycast
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 711560071497611911, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3781,6 +3912,11 @@ PrefabInstance:
       propertyPath: footstep.Array.data[7]
       value: 
       objectReference: {fileID: 8300000, guid: 20666bdee10e92c459afc0514c98e2df, type: 3}
+    - target: {fileID: 2474185556268879231, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: artifactSocket
+      value: 
+      objectReference: {fileID: 584236803}
     - target: {fileID: 3038336425372666891, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: raycastReticle
@@ -3936,7 +4072,8 @@ PrefabInstance:
       propertyPath: _HP
       value: 50
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03e5fa6798ff274469d7558ea0d50d23, type: 3}
 --- !u!114 &4960815634682092115 stripped
 MonoBehaviour:

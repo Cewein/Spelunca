@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efab321bb44ab54787390cd60bcc1f2, type: 3}
   m_Name: _Inventory
   m_EditorClassIdentifier: 
-  artifactSocket: {fileID: 0}
   ResourceStockCapacity: 100
   resourceStock:
     _Keys: 010000000200000003000000
@@ -44,8 +43,5 @@ MonoBehaviour:
   selectConsumablePositive: switchConsumable+
   selectConsumableNegative: switchConsumable-
   useConsumable: UseConsumable
-  artifactStock:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  artifactSocket: {fileID: 0}
+  artifactStock: []

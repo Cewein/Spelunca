@@ -9,6 +9,7 @@ using UnityEngine;
 /// Semi-auto : need to press input each time to trigger but no need to reload if the magazine isn't empty (ex : sniper)
 /// Charge : held input to charge energy and trigger when release (ex : plasma canon )
 /// </summary>
+/*
 public enum ShootingMode{ MANUAL , AUTO, SEMI, CHARGE }
 
 [System.Serializable]
@@ -22,7 +23,7 @@ public struct Crosshair
     public Color color;
     [Tooltip("Distance the raycast can be perform")][SerializeField]
     public float scope;
-}
+}*/
 /*
 public class GunArtefact : MonoBehaviour, ICollectible
 {
@@ -67,7 +68,7 @@ public class GunArtefact : MonoBehaviour, ICollectible
     [Header("Shoot Parameters")] 
     
     [Tooltip("How the the trigger ammo when we trigger it.")][SerializeField]
-    private ShootingMode shootMode;
+    private ShootingMode shootingMode;
     [Tooltip("Delay between two shot")][SerializeField]
     private float firingRate = 0.5f;
     [Tooltip("Cone angle where the bullet will spread while shooting.")][SerializeField]
@@ -113,7 +114,7 @@ public class GunArtefact : MonoBehaviour, ICollectible
     {
         get
         {
-            if (isPickaxe) return normalResourceAmmo;
+           // if (isPickaxe) return normalResourceAmmo;
             if (currentAmmo == null || !currentAmmo.Type.Equals(magazine.CurrentResource.Type))
                 currentAmmo = magazine.CurrentResource.Type.Equals(ResourceType.normal) ?
                                                             normalResourceAmmo : 

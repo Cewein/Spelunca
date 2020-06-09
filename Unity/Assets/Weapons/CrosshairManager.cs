@@ -54,16 +54,16 @@ public class CrosshairManager : MonoBehaviour
     private void OnSwitchingWeapon(GameObject currentWeapon)
     {
         if(currentWeapon && !pointOnCollectible)
-        {
+        {  
             try
             {
-              //  currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtefact>().Crosshair;
+                currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtifact>().Crosshair;
             }
             catch (NullReferenceException e)
             {
-               /* try
-                {currentWeaponCrosshair = currentWeapon.GetComponent<GunArtefact>().Crosshair;}
-                catch (NullReferenceException ex){}*/
+                try
+                {currentWeaponCrosshair = currentWeapon.GetComponent<GunArtifact>().Crosshair;}
+                catch (NullReferenceException ex){}
             }
             raycaster.scope  = currentWeaponCrosshair.scope;
             crossHair.sprite = currentWeaponCrosshair.sprite;

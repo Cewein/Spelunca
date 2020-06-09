@@ -195,6 +195,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   #endregion ===========================================================================================================
   public void InputHandler()
   {
+    if(Input.GetKeyDown(KeyCode.AltGr)) artifactStock[0].Equipped(artifactSocket);
     int notEmptySlot = CountNotEmptyConsumableSlot();
     if(notEmptySlot < 1) return;
     if (Input.GetButtonDown(selectConsumableNegative))indexConsumable = Mathf.Abs(indexConsumable-1)%notEmptySlot;
