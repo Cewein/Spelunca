@@ -27,22 +27,21 @@ public struct Crosshair
 public class GunArtifact : MonoBehaviour, ICollectible
 {
     #region Fields =====================================================================================================
-
-    [Tooltip("Hit point caused by this artifact (without type scaling).")]
-    public int damage = 5;
     
     [Header("Linked objects")]
     [Tooltip("The gun magazine that stock ammo.")][SerializeField]
     private GunLoader magazine;
-    [Tooltip("The gun magazine that stock ammo.")][SerializeField]
+    [Tooltip("The gun controller.")][SerializeField]
     private GunController controller;
-    [Tooltip("The artifact scriptable object linked with")][SerializeField]
+    [Tooltip("The artifact scriptable object wich represent this artifact.")][SerializeField]
     private Artifact scriptableObject;
     
     [Header("Shoot Parameters")] 
+    [Tooltip("Hit point caused by this artifact (without type scaling).")]
+    public int damage = 5;
     [Tooltip("Crosshair parameters")][SerializeField]
     private Crosshair crosshair;
-    [Tooltip("How the the trigger ammo when we trigger it.")][SerializeField]
+    [Tooltip("Weapon reloading mode.")][SerializeField]
     private ShootingMode shootingMode;
     [Tooltip("Delay between two shot")][SerializeField]
     private float firingRate = 0.5f;
@@ -57,6 +56,8 @@ public class GunArtifact : MonoBehaviour, ICollectible
     private int reloadCooldown = 30;
     
     [Header("Aiming Parameters")]
+    [Tooltip("Default field of view, when it isn't aiming.")][SerializeField]
+    private float normalFOV = 75;
     [Tooltip("Ratio of the default FOV that this weapon applies while aiming")][SerializeField]
     [Range(0f, 1f)]
     private float aimFovRatio = 0.8f;
@@ -79,7 +80,6 @@ public class GunArtifact : MonoBehaviour, ICollectible
     
     private int timer;
     private bool forceReload;
-    private float normalFOV;
     private float lastTimeFiring;
     private Vector3 target;
 
@@ -127,14 +127,19 @@ public class GunArtifact : MonoBehaviour, ICollectible
 
     private void Start()
     {
-        if (!isEquipped) return;
-        magazine = GetComponentInParent<GunLoader>();
+        if (!isEquipped)
+        {
+            gameObject.layer =  LayerMask.NameToLayer("Default");
+            return;
+        }
+        magazine   = GetComponentInParent<GunLoader>();
         controller = GetComponentInParent<GunController>();
-        normalFOV = Camera.main.fieldOfView;
         controller.trigger += adaptTrigger;
         forceReload = false;
+        controller.aim += Aim;
         controller.GetComponentInParent<MinerController>().NotifyArtifactEquipped();
         Destroy(GetComponent<BoxCollider>());
+        gameObject.layer =  LayerMask.NameToLayer("AvoidClipping");
     }
     
     private void adaptTrigger(bool down,bool  held, bool up)
@@ -239,8 +244,15 @@ public class GunArtifact : MonoBehaviour, ICollectible
     {
         if(!isEquipped) return;
         controller.trigger -= adaptTrigger;
+        controller.aim -= Aim;
     }
-
-
+    
+    private void Aim(bool isAiming)
+    {
+        if (!isEquipped) return;
+        float targetFOV = isAiming && !controller.TriggerReloadAnimation  ? normalFOV * aimFovRatio : normalFOV;
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
+    }
+    
   #endregion
 }

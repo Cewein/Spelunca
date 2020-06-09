@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3020534051949613628}
   - component: {fileID: 3587908525729364780}
   - component: {fileID: 8560199004182921591}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: artefact fusil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 3371648697353894460}
   - component: {fileID: 148954504098557863}
   - component: {fileID: 1849588733829599157}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Fusil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,10 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b277ba612a1ca4a46aa67a80d24f29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
   magazine: {fileID: 0}
   controller: {fileID: 0}
   scriptableObject: {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  damage: 33
   crosshair:
     sprite: {fileID: 21300000, guid: a236bc108fbb2354f9ebaf37770a4c78, type: 3}
     size: 50
@@ -154,6 +154,7 @@ MonoBehaviour:
   bulletsPerShot: 1
   recoil: 1
   reloadCooldown: 30
+  normalFOV: 75
   aimFovRatio: 0.8
   zoomSpeed: 10
   normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
@@ -172,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8914564469236426507}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: pt_muzzleFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

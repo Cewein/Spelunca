@@ -21,6 +21,8 @@ public class CrosshairManager : MonoBehaviour
     private Sprite noAmmo;
     [Tooltip("Crosser when player point on a collectible")][SerializeField]
     private Crosshair collectible;
+    [Tooltip("Crosser when there is no artifact on weapon")][SerializeField]
+    private Crosshair noArtifact;
     
     #endregion
     
@@ -55,15 +57,11 @@ public class CrosshairManager : MonoBehaviour
     {
         if(currentWeapon && !pointOnCollectible)
         {  
-            try
-            {
-                currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtifact>().Crosshair;
-            }
+            try{currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtifact>().Crosshair;}
             catch (NullReferenceException e)
             {
-                try
-                {currentWeaponCrosshair = currentWeapon.GetComponent<GunArtifact>().Crosshair;}
-                catch (NullReferenceException ex){}
+                try{currentWeaponCrosshair = currentWeapon.GetComponent<GunArtifact>().Crosshair;}
+                catch (NullReferenceException ex){currentWeaponCrosshair = noArtifact;}
             }
             raycaster.scope  = currentWeaponCrosshair.scope;
             crossHair.sprite = currentWeaponCrosshair.sprite;
