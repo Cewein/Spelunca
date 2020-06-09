@@ -53,14 +53,16 @@ public class CrosshairManager : MonoBehaviour
         inputHandler = minerController.gameObject.GetComponent<MinerInputHandler>();
     }
     
+    
     private void OnSwitchingWeapon(GameObject currentWeapon)
     {
         if(currentWeapon && !pointOnCollectible)
         {  
+          
             try{currentWeaponCrosshair = currentWeapon.GetComponentInChildren<GunArtifact>().Crosshair;}
             catch (NullReferenceException e)
             {
-                try{currentWeaponCrosshair = currentWeapon.GetComponent<GunArtifact>().Crosshair;}
+                try{currentWeaponCrosshair = currentWeapon.GetComponent<Pickaxe>().Crosshair;}
                 catch (NullReferenceException ex){currentWeaponCrosshair = noArtifact;}
             }
             raycaster.scope  = currentWeaponCrosshair.scope;
