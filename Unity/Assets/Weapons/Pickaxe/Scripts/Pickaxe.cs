@@ -25,40 +25,32 @@ public class Pickaxe : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-
     private void Update()
     {
         animator.SetBool("isPicking", controller.isFiringDown());
+        if (controller.isFiringDown()) Pick();
     }
     
-    private void Pick(bool isShooting)
+    private void Pick()
     {
-        isShooting = controller.isFiringDown();
-        if (!isShooting || !GetComponent<Animator>().GetBool("canAttack")) return;
+        raycastReticle.PerformRaycast();
+        if (!GetComponent<Animator>().GetBool("canAttack")) return;
         try
         {
             if (raycastReticle.Hit.transform != null)
             {
                        
-                try
-                {
-                    raycastReticle.Hit.transform.gameObject.GetComponent<IPickable>().Pickax(raycastReticle.Hit, damage);
-                }
+                try{raycastReticle.Hit.transform.gameObject.GetComponent<IPickable>().Pickax(raycastReticle.Hit, damage);}
                 catch (NullReferenceException e){}
 
                 try
                 {
                     if (raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick.GetInvocationList()
                             .Length > 1)
-                    {
-                        raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick -= CollectResource;
-                    }
-              
+                    {raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick -= CollectResource;}
                 }
                 catch (NullReferenceException e)
-                { 
-                    raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick += CollectResource;
-                }
+                {raycastReticle.Hit.transform.gameObject.GetComponent<ResourceCollectible>().pick += CollectResource;}
             }
         }
         catch (NullReferenceException e){}

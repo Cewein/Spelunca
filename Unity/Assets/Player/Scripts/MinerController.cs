@@ -202,8 +202,9 @@ public class MinerController : MonoBehaviour
     public void NotifyArtifactEquipped()
     {
         switchWeapon?.Invoke(artifactSocket.GetChild(0).gameObject);
-
     }
+
+   
     private void switcher()
     {
         weapons[ Mathf.Abs( (weaponIndex - 1) % weapons.Length ) ].gameObject.SetActive(false);
