@@ -151,7 +151,7 @@ MonoBehaviour:
   shootingMode: 0
   firingRate: 0.5
   bulletSpreadAngle: 0
-  bulletsPerShot: 1
+  bulletsPerShot: 10
   recoil: 1
   reloadCooldown: 30
   normalFOV: 75

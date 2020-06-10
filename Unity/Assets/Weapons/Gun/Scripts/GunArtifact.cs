@@ -30,7 +30,7 @@ public class GunArtifact : MonoBehaviour, ICollectible
     
     [Header("Linked objects")]
     [Tooltip("The gun magazine that stock ammo.")][SerializeField]
-    private GunLoader magazine;
+    private GunMagazine magazine;
     [Tooltip("The gun controller.")][SerializeField]
     private GunController controller;
     [Tooltip("The artifact scriptable object wich represent this artifact.")][SerializeField]
@@ -132,7 +132,7 @@ public class GunArtifact : MonoBehaviour, ICollectible
             gameObject.layer =  LayerMask.NameToLayer("Default");
             return;
         }
-        magazine   = GetComponentInParent<GunLoader>();
+        magazine   = GetComponentInParent<GunMagazine>();
         controller = GetComponentInParent<GunController>();
         controller.trigger += adaptTrigger;
         forceReload = false;
@@ -196,7 +196,7 @@ public class GunArtifact : MonoBehaviour, ICollectible
         {
             Vector3 shotDirection = SpreadBullet(muzzle); 
             Instantiate(CurrentAmmo, muzzle.position, Quaternion.LookRotation(shotDirection));
-            magazine.isConsuming(true, 1);
+            magazine.isCurrentResourceConsuming(true, 1);
         }
 
         // muzzle flash

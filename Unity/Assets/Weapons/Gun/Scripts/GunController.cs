@@ -121,12 +121,6 @@ public class GunController : MonoBehaviour
         catch (NullReferenceException e){}
 
     }
-
-    private void onIdle()
-    {
-        canAttack = true;
-    }
-
     private void ReloadAnimation()
     {
         if (triggerReloadAnimation && reloadTimer > reloadAnimationTime/2)

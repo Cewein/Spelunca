@@ -20,13 +20,13 @@ public class MenusManager : MonoBehaviour
 
     [Header("Objects linked")]
     [Tooltip("The gun magazine.")] [SerializeField]
-    private GunLoader gunMagazine;
+    private GunMagazine gunMagazine;
     public Resource[] list;
     private void Start()
     {
         resourceLoaderSelectionMenu.callback += (type,artefact) =>
         {
-            gunMagazine.CurrentResource = (type == ResourceType.normal) ? gunMagazine.NormalResource : list.First(item => item.Type == type);
+            gunMagazine.CurrentResource = list.First(item => item.Type == type);
         };
 
     }

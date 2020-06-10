@@ -1978,6 +1978,11 @@ PrefabInstance:
       propertyPath: miner
       value: 
       objectReference: {fileID: 1019905854}
+    - target: {fileID: 574667680223950126, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: magazine
+      value: 
+      objectReference: {fileID: 1230041646}
     - target: {fileID: 643364180761707264, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_Type
@@ -3119,6 +3124,12 @@ PrefabInstance:
       propertyPath: p2
       value: 
       objectReference: {fileID: 914285790}
+    - target: {fileID: 642419920189178195, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: defaultResource
+      value: 
+      objectReference: {fileID: 11400000, guid: b9a302f78ec85c7438d436fa398ed0ef,
+        type: 2}
     - target: {fileID: 979589123072772401, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_IsActive

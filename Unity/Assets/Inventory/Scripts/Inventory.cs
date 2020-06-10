@@ -64,8 +64,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     resourceStock = new Resource_Stock();
     foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
-      if(resourceType != ResourceType.normal)
-        ResourceStock.Add(resourceType, ResourceStockCapacity );
+      ResourceStock.Add(resourceType, ResourceStockCapacity );
   }
   private void InitConsumablesStock()
   {
@@ -85,13 +84,15 @@ public class Inventory : SingletonScriptableObject<Inventory>
 
   public float TakeResource(ResourceType resource, float quantity)
   {
-    float resourceTaken = ((resourceStock[resource] - quantity )> 0) ? quantity  : resourceStock[resource];
+    if (resource == ResourceType.normal) return quantity;
+    float resourceTaken = ((resourceStock[resource] - quantity ) > 0) ? quantity  : resourceStock[resource];
     resourceStock[resource] -= resourceTaken;
     return resourceTaken;
   }
   
   public void AddResource(ResourceType resource, float quantity)
   {
+    if(resource == ResourceType.normal) return;
     float sum = resourceStock[resource] + quantity;
     resourceStock[resource] = (sum < ResourceStockCapacity)? sum : ResourceStockCapacity;
   }
