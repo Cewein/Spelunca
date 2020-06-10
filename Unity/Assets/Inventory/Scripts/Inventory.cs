@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
-  
+using UnityEngine.Events;
+
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory/Inventory", order = 1)]
 public class Inventory : SingletonScriptableObject<Inventory>
@@ -26,21 +28,34 @@ public class Inventory : SingletonScriptableObject<Inventory>
   [SerializeField]
   private Consumable_Stock consumableStock;
   public Consumable_Stock ConsumableStock => consumableStock;
-  [SerializeField] [InputName]
-  private string selectConsumablePositive;
-  [SerializeField] [InputName]
-  private string selectConsumableNegative;
-  [SerializeField] [InputName]
-  private string useConsumable;
   private int indexConsumable;
 
   [Header("Artifacts stock")] 
   [Tooltip("Transform of the point where artifact are placed on the player.")]
   public Transform artifactSocket;
   [SerializeField]
-  private List<Artifact> artifactStock;
+  private List<Artifact> artifactStock; 
   public List<Artifact> ArtifactStock => artifactStock;
-  private int ArtifactStockCapacity = 4;
+  [SerializeField] private int ArtifactStockCapacity = 4;
+
+  [Header("User Interfaces")]
+  [Header("Menu Callbacks")]
+  [SerializeField] private UnityEvent openResourceMenu;
+  [SerializeField] private UnityEvent closeResourceMenu;
+  [SerializeField] private UnityEvent openArtifactMenu;
+  [SerializeField] private UnityEvent closeArtifactMenu;
+
+  [Header("Inputs")]
+  [SerializeField] [InputName]
+  private string selectConsumablePositive;
+  [SerializeField] [InputName]
+  private string selectConsumableNegative;
+  [SerializeField] [InputName]
+  private string useConsumable;
+  [SerializeField] [InputName]
+  private string displayResourceMenu;
+  [SerializeField] [InputName]
+  private string displayArtifactMenu;
 
   #endregion ===========================================================================================================
 
@@ -197,6 +212,13 @@ public class Inventory : SingletonScriptableObject<Inventory>
   public void InputHandler()
   {
     if(Input.GetKeyDown(KeyCode.AltGr)) artifactStock[0].Equipped(artifactSocket);
+
+    if (Input.GetButtonDown(displayResourceMenu))openResourceMenu?.Invoke();
+
+    if (Input.GetButtonUp(displayResourceMenu))closeResourceMenu?.Invoke();
+    if (Input.GetButtonDown(displayArtifactMenu)) openArtifactMenu?.Invoke();
+    if (Input.GetButtonUp(displayArtifactMenu)) closeArtifactMenu?.Invoke();
+    
     int notEmptySlot = CountNotEmptyConsumableSlot();
     if(notEmptySlot < 1) return;
     if (Input.GetButtonDown(selectConsumableNegative))indexConsumable = Mathf.Abs(indexConsumable-1)%notEmptySlot;

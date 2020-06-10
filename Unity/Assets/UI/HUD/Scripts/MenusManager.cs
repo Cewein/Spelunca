@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using UI.Menu.RingMenu;
-using UnityEngine;
-
+﻿/*
 public class MenusManager : MonoBehaviour
 {
     [Header("Menus")]
@@ -39,3 +36,4 @@ public class MenusManager : MonoBehaviour
         Cursor.lockState = (artefactSelectionMenu.isActiveAndEnabled || resourceLoaderSelectionMenu.isActiveAndEnabled) ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
+*/

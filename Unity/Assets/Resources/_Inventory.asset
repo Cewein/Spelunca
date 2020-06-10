@@ -14,16 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResourceStockCapacity: 100
   resourceStock:
-    _Keys: 010000000200000003000000
+    _Keys: 00000000010000000200000003000000000000000000000000000000
     _Values:
     - 100
     - 100
     - 100
-    _Buckets: 020000000000000001000000
-    _HashCodes: 010000000200000003000000
-    _Next: ffffffffffffffffffffffff
-    _Count: 3
-    _Version: 3
+    - 100
+    - 0
+    - 0
+    - 0
+    _Buckets: 00000000010000000200000003000000ffffffffffffffffffffffff
+    _HashCodes: 00000000010000000200000003000000000000000000000000000000
+    _Next: ffffffffffffffffffffffffffffffff000000000000000000000000
+    _Count: 4
+    _Version: 4
     _FreeList: -1
     _FreeCount: 0
   ConsumableSlotCapacity: 6
@@ -34,14 +38,53 @@ MonoBehaviour:
     - {fileID: 0}
     _Values: 000000000000000000000000
     _Buckets: ffffffff0100000000000000
-    _HashCodes: 764300007843000000000000
+    _HashCodes: 5e4300006043000000000000
     _Next: ffffffffffffffff00000000
     _Count: 2
     _Version: 2
     _FreeList: -1
     _FreeCount: 0
+  artifactSocket: {fileID: 0}
+  artifactStock: []
+  ArtifactStockCapacity: 4
+  openResourceMenu:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4024397274007428127, guid: 0bd5fe01caeded542a3a0108d47707e2,
+          type: 3}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  closeResourceMenu:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4024397274007428127, guid: 0bd5fe01caeded542a3a0108d47707e2,
+          type: 3}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  openArtifactMenu:
+    m_PersistentCalls:
+      m_Calls: []
+  closeArtifactMenu:
+    m_PersistentCalls:
+      m_Calls: []
   selectConsumablePositive: switchConsumable+
   selectConsumableNegative: switchConsumable-
   useConsumable: UseConsumable
-  artifactSocket: {fileID: 0}
-  artifactStock: []
+  displayResourceMenu: ResourceSelection
+  displayArtifactMenu: ArtefactSelection
