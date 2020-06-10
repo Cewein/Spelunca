@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class RingMenu : MonoBehaviour
 {
+    [Header("Back-end")]
+    [SerializeField] private GunMagazine magazine;
     [Header("Images")]
     [SerializeField] private Sprite ring;
     [SerializeField] private GameObject element;
 
     [Header("Content")]
-    [SerializeField] private List<ScriptableObject> content;
+    [SerializeField] private string content = "Resources";
     
     [Header("Format")]
     [SerializeField] private float gap = 0f;
@@ -22,33 +27,38 @@ public class RingMenu : MonoBehaviour
     private int activeElement;
     private float NormalizeAngle(float a) => (a + 360f) % 360f;
     private GameObject[] items;
-
+    private int contentLength;
 
     private void Awake()
     {
-        stepLength = 360f/content.Count;
-        GetComponent<Image>().sprite = ring;
-        items = new GameObject[content.Count];
+        Inventory.Instance.openResourceMenu += Open;
+        Inventory.Instance.closeResourceMenu += Close;
+        contentLength = (content == "Resources") ? ItemDataBase.Instance.resources.Count : 3;
+        stepLength = 360f/contentLength;
+        GetComponentInChildren<Image>(true).sprite = ring;
+        items = new GameObject[contentLength];
         if (normalScale.Equals(Vector3.zero)) normalScale = transform.localScale;
         if (emphaseScale.Equals(Vector3.zero)) emphaseScale = transform.localScale*.7f;
-
-        for (int i = 0; i < content.Count; i++)
-        {
-            GameObject item = Instantiate(element, transform);
-            items[i] = item;
-            item.transform.localPosition = Vector3.zero;
-            item.transform.localPosition = item.transform.localPosition
-                                           + Quaternion.AngleAxis(i * stepLength, Vector3.forward)
-                                           * Vector3.up * iconDist;
-            item.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            item.transform.localRotation = Quaternion.Euler(0, 0, gap + i*stepLength);
-        }
     }
-    
-    public void Open()
+
+    private void Update()
     {
-        gameObject.SetActive(true);
-        Debug.Log("erhgzfehhj");
+        if (items[0] == null)
+        {
+            for (int i = 0; i < contentLength; i++)
+            {
+                GameObject item = Instantiate(element,   transform.GetChild(0).transform);
+                items[i] = item;
+                item.GetComponent<Image>().sprite = (content == "Resources") ? ItemDataBase.Instance.resources[i].Icon : ItemDataBase.Instance.artifacts[i].Icon;
+                
+                item.transform.localPosition = Vector3.zero;
+                item.transform.localPosition = item.transform.localPosition
+                                               + Quaternion.AngleAxis(i * stepLength, Vector3.forward)
+                                               * Vector3.up * iconDist;
+                item.transform.localRotation = Quaternion.Euler(0, 0, 0);
+           //     item.transform.localRotation = Quaternion.Euler(0, 0, gap + i*stepLength);
+            }
+        }
         var mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - transform.position, Vector3.forward) + stepLength / 2f);
         activeElement = (int)(mouseAngle / stepLength);
         for (int i = 0; i < items.Length; i++)
@@ -57,9 +67,21 @@ public class RingMenu : MonoBehaviour
         }
     }
 
-    public void Close()
+  
+    public void Open()
     {
-        gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
 
+    public void Close()
+    {       
+        transform.GetChild(0).gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        // callback
+        if (content == "Resources")
+        {
+            magazine.CurrentResource = ItemDataBase.Instance.resources[activeElement];
+        }
     }
 }

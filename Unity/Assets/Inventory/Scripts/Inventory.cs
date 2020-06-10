@@ -39,11 +39,10 @@ public class Inventory : SingletonScriptableObject<Inventory>
   [SerializeField] private int ArtifactStockCapacity = 4;
 
   [Header("User Interfaces")]
-  [Header("Menu Callbacks")]
-  [SerializeField] private UnityEvent openResourceMenu;
-  [SerializeField] private UnityEvent closeResourceMenu;
-  [SerializeField] private UnityEvent openArtifactMenu;
-  [SerializeField] private UnityEvent closeArtifactMenu;
+  public Action openResourceMenu;
+  public Action closeResourceMenu;
+  public Action openArtifactMenu;
+  public Action closeArtifactMenu;
 
   [Header("Inputs")]
   [SerializeField] [InputName]
@@ -213,9 +212,9 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     if(Input.GetKeyDown(KeyCode.AltGr)) artifactStock[0].Equipped(artifactSocket);
 
-    if (Input.GetButtonDown(displayResourceMenu))openResourceMenu?.Invoke();
+    if (Input.GetButtonDown(displayResourceMenu)) openResourceMenu?.Invoke();
+    if (Input.GetButtonUp(displayResourceMenu)) closeResourceMenu?.Invoke();
 
-    if (Input.GetButtonUp(displayResourceMenu))closeResourceMenu?.Invoke();
     if (Input.GetButtonDown(displayArtifactMenu)) openArtifactMenu?.Invoke();
     if (Input.GetButtonUp(displayArtifactMenu)) closeArtifactMenu?.Invoke();
     

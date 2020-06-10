@@ -2506,6 +2506,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 719767241648773462, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 917323513451923352, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2644,7 +2649,7 @@ PrefabInstance:
     - target: {fileID: 2535092036016396088, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2644656616793918821, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
@@ -2886,6 +2891,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6542972826854272514, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542972826854272514, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6832814307639292844, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3066,6 +3081,22 @@ PrefabInstance:
       propertyPath: m_Alpha
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9220688633210305444, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: 06731ee754a3c224e84cf8a55a719eba,
+        type: 2}
+    - target: {fileID: 9220688633210305444, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: content
+      value: Resources
+      objectReference: {fileID: 0}
+    - target: {fileID: 9220688633210305444, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: magazine
+      value: 
+      objectReference: {fileID: 1230041646}
     m_RemovedComponents:
     - {fileID: 8073892672998829328, guid: c7f4ea9f3479a324292c7f522d40fb63, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c7f4ea9f3479a324292c7f522d40fb63, type: 3}

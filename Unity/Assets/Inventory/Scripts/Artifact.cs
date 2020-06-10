@@ -7,7 +7,7 @@ public class Artifact : ScriptableObject
     [SerializeField] private Sprite icon;
     [SerializeField] private GameObject prefab;
     public GameObject Prefab => prefab;
-    public Sprite Sprite     => icon;
+    public Sprite Icon     => icon;
     public string Name       => name;
 
     public void Equipped(Transform parent)
