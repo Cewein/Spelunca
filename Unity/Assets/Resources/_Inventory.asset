@@ -33,8 +33,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cbe556c9ac524d540b9511c9e5f7c9a1, type: 2}
     - {fileID: 0}
     _Values: 000000000000000000000000
-    _Buckets: 0000000001000000ffffffff
-    _HashCodes: f284ff7fbc1cff7f00000000
+    _Buckets: ffffffff0100000000000000
+    _HashCodes: 764300007843000000000000
     _Next: ffffffffffffffff00000000
     _Count: 2
     _Version: 2
@@ -43,8 +43,5 @@ MonoBehaviour:
   selectConsumablePositive: switchConsumable+
   selectConsumableNegative: switchConsumable-
   useConsumable: UseConsumable
-  artifactStock:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  artifactSocket: {fileID: 0}
+  artifactStock: []

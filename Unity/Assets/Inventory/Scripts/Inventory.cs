@@ -35,6 +35,8 @@ public class Inventory : SingletonScriptableObject<Inventory>
   private int indexConsumable;
 
   [Header("Artifacts stock")] 
+  [Tooltip("Transform of the point where artifact are placed on the player.")]
+  public Transform artifactSocket;
   [SerializeField]
   private List<Artifact> artifactStock;
   public List<Artifact> ArtifactStock => artifactStock;
@@ -49,7 +51,6 @@ public class Inventory : SingletonScriptableObject<Inventory>
     resourceStock = new Resource_Stock();
     consumableStock = new Consumable_Stock();
     artifactStock = new List<Artifact>();
-
   }
 
   private void OnEnable()
@@ -63,8 +64,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     resourceStock = new Resource_Stock();
     foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
-      if(resourceType != ResourceType.normal)
-        ResourceStock.Add(resourceType, ResourceStockCapacity );
+      ResourceStock.Add(resourceType, ResourceStockCapacity );
   }
   private void InitConsumablesStock()
   {
@@ -75,7 +75,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   }
   private void InitArtifactsStock()
   {
-    artifactStock = Enumerable.Repeat<Artifact>(null, ArtifactStockCapacity).ToList();
+    artifactStock = new List<Artifact>();
   }
 
   #endregion ===========================================================================================================
@@ -84,13 +84,15 @@ public class Inventory : SingletonScriptableObject<Inventory>
 
   public float TakeResource(ResourceType resource, float quantity)
   {
-    float resourceTaken = ((resourceStock[resource] - quantity )> 0) ? quantity  : resourceStock[resource];
+    if (resource == ResourceType.normal) return quantity;
+    float resourceTaken = ((resourceStock[resource] - quantity ) > 0) ? quantity  : resourceStock[resource];
     resourceStock[resource] -= resourceTaken;
     return resourceTaken;
   }
   
   public void AddResource(ResourceType resource, float quantity)
   {
+    if(resource == ResourceType.normal) return;
     float sum = resourceStock[resource] + quantity;
     resourceStock[resource] = (sum < ResourceStockCapacity)? sum : ResourceStockCapacity;
   }
@@ -110,12 +112,17 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     updateConsumableStock?.Invoke();
   }
-  public void AddConsumable(Consumable item)
+  public bool AddConsumable(Consumable item)
   {
      // Check if the item slot is full
-     if ( consumableStock[item] < ConsumableSlotCapacity) consumableStock[item]++;
+     if (consumableStock[item] < ConsumableSlotCapacity)
+     {
+       consumableStock[item]++;
+       return true;
+     }
      // full slot notification.
-     else Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
+     Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
+     return false;
   }
   
   private void TakeConsumable(Consumable item)
@@ -139,15 +146,26 @@ public class Inventory : SingletonScriptableObject<Inventory>
   #endregion ===========================================================================================================
 
   #region Artifacts ====================================================================================================
+
+  public void NotifyArtifactStockUpdate()
+  {
+    updateArtifactStock?.Invoke();
+  }
   
-  public void AddArtifact(Artifact a)
+  private int CountNotEmptyArtifactSlot()
+  {
+    return artifactStock.Count(slotContent => slotContent != null);
+  }
+  public bool AddArtifact(Artifact a)
   {
     // Check if the artifacts stock is full
-    if(artifactStock.Count < ArtifactStockCapacity)
+    if (CountNotEmptyArtifactSlot() < ArtifactStockCapacity)
+    {
       artifactStock.Add(a);
-    else
-      // send a notification to the player.
-      Debug.Log("Stock is full, choose an artifact to throw away"); //TODO : event here !
+      return true;
+    }
+    Debug.Log("Stock is full, choose an artifact to throw away"); //TODO : event here !
+    return false;
   }
   
   public void TakeArtifact(Artifact a)
@@ -168,11 +186,17 @@ public class Inventory : SingletonScriptableObject<Inventory>
    *  - Line Menu
    */
   public Action updateConsumableStock;
+  /*
+   * Used in :
+   *  - Grid Menu
+   */
+  public Action updateArtifactStock;
   
 
   #endregion ===========================================================================================================
   public void InputHandler()
   {
+    if(Input.GetKeyDown(KeyCode.AltGr)) artifactStock[0].Equipped(artifactSocket);
     int notEmptySlot = CountNotEmptyConsumableSlot();
     if(notEmptySlot < 1) return;
     if (Input.GetButtonDown(selectConsumableNegative))indexConsumable = Mathf.Abs(indexConsumable-1)%notEmptySlot;
@@ -187,7 +211,4 @@ public class Inventory : SingletonScriptableObject<Inventory>
            + ConsumablesStockToString()
            + ArtifactsStockToString();
   }
-  
-  float nfmod(float a,float b)
-  {return a - b* Mathf.Floor(a / b);}
 }

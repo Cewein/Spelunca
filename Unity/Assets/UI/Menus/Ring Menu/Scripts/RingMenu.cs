@@ -66,8 +66,9 @@ public class RingMenu : MonoBehaviour
       // Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
        UpdateIconAndData();
        if (!isActive) return;
-        callback?.Invoke(Pieces[activeElement].Data.Type,Pieces[activeElement].Data.Artefact);
-        run = isActive;
+       // call in menuManager
+       callback?.Invoke(Pieces[activeElement].Data.Type,Pieces[activeElement].Data.Artefact);
+       run = isActive;
     }
     private void Update()
     {

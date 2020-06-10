@@ -112,20 +112,15 @@ public class GunController : MonoBehaviour
 
     private void Trigger(bool down, bool held, bool up)
     {
-        GunArtefact artefact = GetComponentInChildren<GunArtefact>();
-        if (((artefact.ShootMode != ShootingMode.AUTO) || !held) &&
-            ((artefact.ShootMode != ShootingMode.MANUAL) || !down) &&
-            (((artefact.ShootMode != ShootingMode.CHARGE) || !up) || !canAttack)) return;
-        try { raycastReticle.PerformRaycast(); }
+        GunArtifact artefact = GetComponentInChildren<GunArtifact>();
+        if (artefact == null) return;
+        if (((artefact.ShootingMode != ShootingMode.AUTO) || !held) &&
+            ((artefact.ShootingMode != ShootingMode.MANUAL) || !down) &&
+            (((artefact.ShootingMode != ShootingMode.CHARGE) || !up) || !canAttack)) return;
+        try { raycastReticle.PerformRaycast();}
         catch (NullReferenceException e){}
 
     }
-
-    private void onIdle()
-    {
-        canAttack = true;
-    }
-
     private void ReloadAnimation()
     {
         if (triggerReloadAnimation && reloadTimer > reloadAnimationTime/2)
