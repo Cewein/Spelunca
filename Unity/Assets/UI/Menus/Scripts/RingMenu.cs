@@ -31,8 +31,18 @@ public class RingMenu : MonoBehaviour
 
     private void Awake()
     {
-        Inventory.Instance.openResourceMenu += Open;
-        Inventory.Instance.closeResourceMenu += Close;
+        if (content == "Resources")
+        {
+            Inventory.Instance.openResourceMenu += Open;
+            Inventory.Instance.closeResourceMenu += Close;
+        }
+        else
+        {
+            Inventory.Instance.openArtifactMenu += Open;
+            Inventory.Instance.closeArtifactMenu += Close;
+        }
+
+     
         contentLength = (content == "Resources") ? ItemDataBase.Instance.resources.Count : 3;
         stepLength = 360f/contentLength;
         GetComponentInChildren<Image>(true).sprite = ring;
@@ -49,7 +59,17 @@ public class RingMenu : MonoBehaviour
             {
                 GameObject item = Instantiate(element,   transform.GetChild(0).transform);
                 items[i] = item;
-                item.GetComponent<Image>().sprite = (content == "Resources") ? ItemDataBase.Instance.resources[i].Icon : ItemDataBase.Instance.artifacts[i].Icon;
+                if  (content == "Resources")
+                {
+                    item.GetComponent<Image>().sprite = ItemDataBase.Instance.resources[i].Icon;
+                }
+                else
+                {
+                    try{item.GetComponent<Image>().sprite = Inventory.Instance.ArtifactStock[i].Icon;}
+                    catch (Exception e){}
+                 
+                }
+              
                 
                 item.transform.localPosition = Vector3.zero;
                 item.transform.localPosition = item.transform.localPosition
@@ -64,7 +84,13 @@ public class RingMenu : MonoBehaviour
         for (int i = 0; i < items.Length; i++)
         {
             items[i].transform.localScale = (i == activeElement)  ? emphaseScale : normalScale;
-            items[i].GetComponentInChildren<Text>().text = Inventory.Instance.ResourceStock.ElementAt(i).Value.ToString();
+            if(content == "Resources"){ items[i].GetComponentInChildren<Text>().text = Inventory.Instance.ResourceStock.ElementAt(i).Value.ToString();}
+            else
+            {
+                try{ items[i].GetComponent<Image>().sprite = Inventory.Instance.ArtifactStock[i].Icon;}
+                catch (Exception e){}
+            }
+        
         }
     }
 
@@ -83,6 +109,10 @@ public class RingMenu : MonoBehaviour
         if (content == "Resources")
         {
             magazine.CurrentResource = ItemDataBase.Instance.resources[activeElement];
+        }
+        else
+        {
+            Inventory.Instance.EquipArtifact(activeElement);
         }
     }
 }

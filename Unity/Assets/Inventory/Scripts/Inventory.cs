@@ -165,6 +165,16 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     updateArtifactStock?.Invoke();
   }
+
+  public void EquipArtifact(int index)
+  {
+    try
+    {
+      artifactStock[index].Equipped(artifactSocket);
+    }
+    catch (Exception e){}
+   
+  }
   
   private int CountNotEmptyArtifactSlot()
   {
@@ -210,8 +220,6 @@ public class Inventory : SingletonScriptableObject<Inventory>
   #endregion ===========================================================================================================
   public void InputHandler()
   {
-    if(Input.GetKeyDown(KeyCode.AltGr)) artifactStock[0].Equipped(artifactSocket);
-
     if (Input.GetButtonDown(displayResourceMenu)) openResourceMenu?.Invoke();
     if (Input.GetButtonUp(displayResourceMenu)) closeResourceMenu?.Invoke();
 
