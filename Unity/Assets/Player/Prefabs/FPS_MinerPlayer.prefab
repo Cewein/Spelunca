@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96938d5bfebc60447b292326846c0c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artifactSocket: {fileID: 0}
-  playerCamera: {fileID: 0}
+  artifactSocket: {fileID: 9022982878203977301}
+  playerCamera: {fileID: 4027019231142951144}
   hook: {fileID: 0}
   launchGrapplingHook: 0
   weapons:
@@ -1049,6 +1049,12 @@ GameObject:
 --- !u!4 &3711554981447025947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8280218019109568679, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4713907604574422460}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9022982878203977301 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4346882809951706089, guid: c64ee70d7595dae438d3c883ed3aa4f7,
     type: 3}
   m_PrefabInstance: {fileID: 4713907604574422460}
   m_PrefabAsset: {fileID: 0}
