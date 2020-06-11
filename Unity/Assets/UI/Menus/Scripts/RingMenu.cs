@@ -64,6 +64,7 @@ public class RingMenu : MonoBehaviour
         for (int i = 0; i < items.Length; i++)
         {
             items[i].transform.localScale = (i == activeElement)  ? emphaseScale : normalScale;
+            items[i].GetComponentInChildren<Text>().text = Inventory.Instance.ResourceStock.ElementAt(i).Value.ToString();
         }
     }
 
