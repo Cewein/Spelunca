@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
-using UnityEngine.Events;
-
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory/Inventory", order = 1)]
 public class Inventory : SingletonScriptableObject<Inventory>
@@ -29,6 +25,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   private Consumable_Stock consumableStock;
   public Consumable_Stock ConsumableStock => consumableStock;
   private int indexConsumable;
+  public int IndexConsumable => indexConsumable;
 
   [Header("Artifacts stock")] 
   [Tooltip("Transform of the point where artifact are placed on the player.")]
@@ -43,6 +40,7 @@ public class Inventory : SingletonScriptableObject<Inventory>
   public Action closeResourceMenu;
   public Action openArtifactMenu;
   public Action closeArtifactMenu;
+  public Action selectConsumable;
 
   [Header("Inputs")]
   [SerializeField] [InputName]
@@ -126,12 +124,23 @@ public class Inventory : SingletonScriptableObject<Inventory>
   {
     updateConsumableStock?.Invoke();
   }
+
+  private void RestIndexConsumable()
+  {
+    int old = indexConsumable;
+    int notEmpty = CountNotEmptyConsumableSlot();
+    if (notEmpty < 1) indexConsumable = 0;
+    else
+      while ((indexConsumable = Mathf.Abs(indexConsumable-1)%notEmpty) != old )
+      {if (consumableStock.ElementAt(indexConsumable).Value > 0) break;}
+  }
   public bool AddConsumable(Consumable item)
   {
      // Check if the item slot is full
      if (consumableStock[item] < ConsumableSlotCapacity)
      {
        consumableStock[item]++;
+       selectConsumable?.Invoke();
        return true;
      }
      // full slot notification.
@@ -228,9 +237,26 @@ public class Inventory : SingletonScriptableObject<Inventory>
     
     int notEmptySlot = CountNotEmptyConsumableSlot();
     if(notEmptySlot < 1) return;
-    if (Input.GetButtonDown(selectConsumableNegative))indexConsumable = Mathf.Abs(indexConsumable-1)%notEmptySlot;
-    if (Input.GetButtonDown(selectConsumablePositive)) indexConsumable = (indexConsumable+1)%notEmptySlot;
-    if (Input.GetButtonDown(useConsumable)) TakeConsumable(consumableStock.ElementAt(indexConsumable).Key);
+    if (Input.GetButtonDown(selectConsumableNegative))
+    {
+      indexConsumable = Mathf.Abs(indexConsumable-1)%notEmptySlot;
+      selectConsumable?.Invoke();
+    }
+
+    if (Input.GetButtonDown(selectConsumablePositive))
+    {
+      indexConsumable = (indexConsumable+1)%notEmptySlot;
+      selectConsumable?.Invoke();
+    }
+
+    if (Input.GetButtonDown(useConsumable))
+    {
+      
+      TakeConsumable(consumableStock.ElementAt(indexConsumable).Key);
+      if (consumableStock.ElementAt(indexConsumable).Value < 1) 
+        RestIndexConsumable();
+      selectConsumable?.Invoke();
+    }
   }
   
   public override string ToString()

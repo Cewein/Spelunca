@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Consumable_Molotov
   m_EditorClassIdentifier: 
   name: Molotov
-  icon: {fileID: 21300000, guid: ea321be7d94726f479d6ca3ac3722258, type: 3}
+  icon: {fileID: 21300000, guid: d7345aab16eb1034b856941118f627aa, type: 3}
   description: A flask with a tissue and a flammable fluid to throw on ennemies
   prefab: {fileID: 704591926552459651, guid: 02f6d8f75e0af04488e6a6692a4e039f, type: 3}
   callback:
