@@ -37,15 +37,17 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cbe556c9ac524d540b9511c9e5f7c9a1, type: 2}
     - {fileID: 0}
     _Values: 000000000000000000000000
-    _Buckets: ffffffff0100000000000000
-    _HashCodes: 5e4300006043000000000000
+    _Buckets: 00000000ffffffff01000000
+    _HashCodes: 744300007643000000000000
     _Next: ffffffffffffffff00000000
     _Count: 2
     _Version: 2
     _FreeList: -1
     _FreeCount: 0
   artifactSocket: {fileID: 0}
-  artifactStock: []
+  artifactStock:
+  - {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  - {fileID: 11400000, guid: 2beb2f2d3efe66348a5f3c85c7dc8e9f, type: 2}
   ArtifactStockCapacity: 4
   selectConsumablePositive: switchConsumable+
   selectConsumableNegative: switchConsumable-
