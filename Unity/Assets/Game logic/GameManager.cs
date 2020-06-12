@@ -3,15 +3,13 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private ResourcesStock resourcesStock;
-    [SerializeField]
-    private ConsumableStock consumableStock;
-
+    public Transform artifactSocket;
+    public UnityEvent update;
 
     [SerializeField] private PlayerStats player = null;
     [SerializeField] private GameObject[] mainUI = null;
@@ -58,6 +56,7 @@ public class GameManager : MonoBehaviour
 
         if (player != null) player.die += PlayerDie;
         if (gameOverScreen != null) gameOverScreen.SetActive(false);
+        Inventory.Instance.artifactSocket = artifactSocket;
 
     }
     private IEnumerator DebugResourcesStockNotLoading()
@@ -66,7 +65,6 @@ public class GameManager : MonoBehaviour
         if (_instance == null) _instance = this;
         else if (_instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-        //  initRun();
     }
 
     void PlayerDie(bool isDie)
@@ -95,6 +93,8 @@ public class GameManager : MonoBehaviour
             //count--;   
             //if (count<1)LoadLevel(mainMenuPath);
         }
+        
+        update?.Invoke();
     }
 
     
