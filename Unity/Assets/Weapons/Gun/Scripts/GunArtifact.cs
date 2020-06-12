@@ -140,6 +140,10 @@ public class GunArtifact : MonoBehaviour, ICollectible
         controller.GetComponentInParent<MinerController>().NotifyArtifactEquipped();
         Destroy(GetComponent<BoxCollider>());
         gameObject.layer =  LayerMask.NameToLayer("AvoidClipping");
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.gameObject.layer =  LayerMask.NameToLayer("AvoidClipping");
+        }
     }
     
     private void adaptTrigger(bool down,bool  held, bool up)
