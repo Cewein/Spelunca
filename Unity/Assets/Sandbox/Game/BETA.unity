@@ -225,17 +225,17 @@ PrefabInstance:
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_SpotAngle
-      value: 110
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_Range
-      value: 50
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -256,11 +256,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3633487304296966160, guid: 03e5fa6798ff274469d7558ea0d50d23,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4160822492724355367, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
@@ -1036,12 +1031,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 546137114}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &641041953 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7101294780022987784, guid: c7f4ea9f3479a324292c7f522d40fb63,
-    type: 3}
-  m_PrefabInstance: {fileID: 546137114}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &698100469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7882999222218506232, guid: 03e5fa6798ff274469d7558ea0d50d23,
@@ -1226,7 +1215,7 @@ MonoBehaviour:
   playerControls: {fileID: 134861555}
   maxMessage: 25
   chat: {fileID: 541107188}
-  chatContent: {fileID: 641041953}
+  chatContent: {fileID: 2015608757}
   chatBox: {fileID: 2015608759}
   chatScrollbar: {fileID: 871712906}
   chatTextPrefab: {fileID: 4099402577975005489, guid: 2dbef538a9e69df49b1f9c650d2bec0b,
@@ -2209,13 +2198,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2015608757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7101294780328511108, guid: c7f4ea9f3479a324292c7f522d40fb63,
+    type: 3}
+  m_PrefabInstance: {fileID: 546137114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2015608759 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7101294780328511130, guid: c7f4ea9f3479a324292c7f522d40fb63,
     type: 3}
   m_PrefabInstance: {fileID: 546137114}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2015608757}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
