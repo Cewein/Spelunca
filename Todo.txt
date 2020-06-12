@@ -1,22 +1,35 @@
-==== for release ===
+===== LATE =====
 
 World generation :
-
-- fix small bug than impact gameplay
+- biomes
 - world construction and destruction
-- wold save
+- spawn of ores inside the cave system
+- better spawn
+- better ends zone
+- portals ??? (maybe)
+
+Graphics :
+- sonar model and shader
+- UI for direction
 
 Entities:
-
-- fix small bug than impact gameplay
 - Attacking jump
 - Death effects
 - Wall jumping to exit local minimum
 
+===== FOR BETA RELEASE ======
+
 GAMEPLAY :
 
-- fix small bug than impact gameplay
+- consumable callback to use it
+- can switch artefact
+- artefacts menu HUD
+- add a grenade launcher artefact
+- better consumable menu HUD
 - boss state machin and IA 
 - cinematic when the player enter the boss area
+- debug gauge life
 - precistent inventory between each party
+- loose inventory if the player die
 - safe zone to chose equipement before the next party
+- menu "continue game" callback to continue with the same inventory 

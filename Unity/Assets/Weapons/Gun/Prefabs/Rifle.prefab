@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 536745189333772141}
   - component: {fileID: 1143675735830888976}
   - component: {fileID: 262059696100113489}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 212586737753659771}
   - component: {fileID: 3385770928459680610}
   - component: {fileID: 3813918882793845741}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: artefact rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9026062855705136695}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: pt_muzzleFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
