@@ -3334,6 +3334,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 89435936021007946, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: fear
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 89435936021007946, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: maxHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 89435936021007946, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: minHeight
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 105404077034488235, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: raycastReticle
