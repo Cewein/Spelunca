@@ -322,6 +322,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5327523152939819936, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 134861555}
+    - target: {fileID: 5327523152939819936, guid: 03e5fa6798ff274469d7558ea0d50d23,
+        type: 3}
+      propertyPath: raycastReticle
+      value: 
+      objectReference: {fileID: 245182747}
     - target: {fileID: 6128760785365650194, guid: 03e5fa6798ff274469d7558ea0d50d23,
         type: 3}
       propertyPath: m_TagString
@@ -973,6 +983,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: -17
       objectReference: {fileID: 0}
+    - target: {fileID: 7530958500356910088, guid: c7f4ea9f3479a324292c7f522d40fb63,
+        type: 3}
+      propertyPath: miner
+      value: 
+      objectReference: {fileID: 134861554}
     - target: {fileID: 7590190632693571085, guid: c7f4ea9f3479a324292c7f522d40fb63,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1766,6 +1781,11 @@ PrefabInstance:
       propertyPath: origin
       value: 
       objectReference: {fileID: 698100469}
+    - target: {fileID: 8669081980456443542, guid: b2d288cece5922049a8cac9ad28b969f,
+        type: 3}
+      propertyPath: retractSpeed
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2d288cece5922049a8cac9ad28b969f, type: 3}
 --- !u!1 &1405054361
