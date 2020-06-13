@@ -450,10 +450,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 0}
-  fear: 0.131
-  health: 1
+  fear: 1.3
   minHeight: 0.8
-  maxHeight: 0.69
+  maxHeight: 1
 --- !u!1 &2756053813625259436
 GameObject:
   m_ObjectHideFlags: 0
