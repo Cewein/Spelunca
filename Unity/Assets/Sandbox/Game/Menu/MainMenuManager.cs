@@ -26,6 +26,7 @@ using System.Collections.Generic;
      public Color loginErrorColor = Color.red;
      
      public GameObject creditsLayout;
+     public GameObject optionLayout;
      
      public InputField usernameInput;
      public InputField passwordInput;
@@ -100,11 +101,23 @@ using System.Collections.Generic;
          mainLayout.SetActive(false);
          creditsLayout.SetActive(true);
      }
+     public void showOptionView()
+     {
+         mainLayout.SetActive(false);
+         optionLayout.SetActive(true);
+     }
      
      public void hideCreditsView()
      {
          mainLayout.SetActive(true);
          creditsLayout.SetActive(false);
+     }
+
+     
+     public void hideOptionView()
+     {
+         mainLayout.SetActive(true);
+         optionLayout.SetActive(false);
      }
 
      public void login()
