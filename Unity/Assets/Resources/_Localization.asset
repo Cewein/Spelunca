@@ -67,5 +67,5 @@ MonoBehaviour:
     - Sie haben verloren
     - Sie haben gewonnen
     - 'erfolgreich einloggen '
-  currentLanguage: 2
-  wordsCount: 0
+  currentLanguage: 1
+  wordsCount: 16

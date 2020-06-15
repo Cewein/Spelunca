@@ -19,6 +19,8 @@ public class LocalizationSystem : SingletonScriptableObject<LocalizationSystem>
 
         public List<string> Words => words;
 
+        public string Language => language;
+
     }
 
     private void Awake()
