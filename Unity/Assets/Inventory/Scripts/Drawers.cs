@@ -5,3 +5,5 @@ public class ResourceStockDrawer : DictionaryDrawer<ResourceType, float> { }
 
 [CustomPropertyDrawer(typeof(Inventory.Consumable_Stock))]
 public class ConsumableStockDrawer : DictionaryDrawer<Consumable, int> { }
+
+

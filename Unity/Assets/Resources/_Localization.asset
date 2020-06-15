@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a871310e07b0ea74791b2d3af7588e6b, type: 3}
+  m_Name: _Localization
+  m_EditorClassIdentifier: 
+  languages:
+  - language: English
+    words:
+    - Continue
+    - Start new game
+    - Leaderboard
+    - Credits
+    - Quit game
+    - Login
+    - Log out
+    - Register
+    - Username
+    - Passeword
+    - Wrong connexion identifiant
+    - Back
+    - Main menu
+    - You lose
+    - You win
+    - Successfuly logged in !
+  - language: "Fran\xE7ais"
+    words:
+    - Continuer
+    - Nouvelle Partie
+    - Classement
+    - "Cr\xE9dits"
+    - Quitter
+    - Connection
+    - "D\xE9connection"
+    - S'enregistrer
+    - Pseudonyme
+    - Mot de passe
+    - Mauvais identifiant de connexion
+    - "Pr\xE9c\xE9dent"
+    - Menu principal
+    - Vous avez perdu
+    - "Vous avez gagn\xE9"
+    - "Connexion r\xE9ussi !"
+  - language: Deutsh
+    words:
+    - Spiel laden
+    - Neues Spiel
+    - Rangliste
+    - Credits
+    - Spiel beenden
+    - Einloggen
+    - Ausloggen
+    - Sich anmelden
+    - Pseudonym
+    - Passwort
+    - Falsche Login-ID
+    - "Z\xFCr\xFCck"
+    - "Hauptmen\xFC"
+    - Sie haben verloren
+    - Sie haben gewonnen
+    - 'erfolgreich einloggen '
+  currentLanguage: 2
+  wordsCount: 0
