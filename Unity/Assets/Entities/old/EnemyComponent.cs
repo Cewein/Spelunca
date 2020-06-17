@@ -110,6 +110,7 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         {
             if (HP <= 0)//mort de l'araignée
             {
+                GameManager.Instance.EnemyKilled();
                 state = EnemyBehaviourState.Disabled;
                 loot.lootItems();
             }
@@ -303,10 +304,10 @@ public class EnemyComponent : MonoBehaviour, IDamageable
         Gizmos.DrawRay(transform.position,movingDirection);
         Vector3 playerPos = player.transform.position;
         float distance = Math.Abs((this.transform.position - playerPos).magnitude);
-        Debug.Log("distance from entity to player " + distance);
+        //Debug.Log("distance from entity to player " + distance);
         if (distance > this.proximityOffset - this.proximityPrecision && distance < this.proximityOffset + this.proximityPrecision)
         {
-            Debug.Log("ASK FOR ATTACK ");
+            //Debug.Log("ASK FOR ATTACK ");
         }
     }
 

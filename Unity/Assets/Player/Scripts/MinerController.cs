@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -7,6 +8,7 @@ public class MinerController : MonoBehaviour
 {
     #region SerializedFields ============================================================================================
 
+    public Transform artifactSocket; 
     [Header("Linked objects")]
     [Tooltip("Player view camera, if it's null, it will be the main camera.")][SerializeField]
     private Camera playerCamera;
@@ -85,6 +87,15 @@ public class MinerController : MonoBehaviour
     private float crouchingHeight = 0.7f;
     [Tooltip("Crouching smooth transition speed.")][SerializeField]
     private float crouchingAcceleration = 10f;
+    
+    [Header("Audio")]
+    [Tooltip("Audio source")]
+    public AudioSource audioSource;
+    [Tooltip("Footsteps sounds FX")]
+    public List<AudioClip> footstep;
+    [Tooltip("Footstep sound frequency while moving one meter.")]
+    public float footstepFrequency = 1f;
+ 
    
     #endregion
     
@@ -121,6 +132,11 @@ public class MinerController : MonoBehaviour
     private Vector3 weaponNewPosition; 
     private bool previousGrappingInput = false;//The grappling hook's input during the previous state
     public Action<GameObject> switchWeapon;
+    
+    // -- Audio
+    float m_footstepDistanceCounter;
+    private int footstepIndex = 0;
+
 
     public GameObject CurrentWeapon  => weapons[weaponIndex];
 
@@ -128,12 +144,6 @@ public class MinerController : MonoBehaviour
 
     #endregion
 
-    private bool grapplingControl
-    {
-        get{return launchGrapplingHook || minerInputs.isGrappling();}
-    } 
-    
-    
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -188,7 +198,13 @@ public class MinerController : MonoBehaviour
         weaponIndex = Mathf.Abs( (weaponIndex - minerInputs.isSwitchingWeapon() ) % weapons.Length );
         switcher();
     }
-    
+
+    public void NotifyArtifactEquipped()
+    {
+        switchWeapon?.Invoke(artifactSocket.GetChild(0).gameObject);
+    }
+
+   
     private void switcher()
     {
         weapons[ Mathf.Abs( (weaponIndex - 1) % weapons.Length ) ].gameObject.SetActive(false);
@@ -239,7 +255,7 @@ public class MinerController : MonoBehaviour
 
     private void Jump()
     {
-        if (!grapplingControl || !isOnGround || !minerInputs.isJumping()) return;
+        if (!isOnGround || !minerInputs.isJumping()) return;
         if (Crouch(false))
         {
             velocity.y = 0f;
@@ -253,19 +269,12 @@ public class MinerController : MonoBehaviour
 
     private void AirControl()
     {
-        if (!grapplingControl)
-        {
-            velocity +=  transform.TransformVector(minerInputs.Movement) * accelerationInAir * Time.deltaTime;
-            Vector3 horizontalVelocity = Vector3.ProjectOnPlane(velocity, Vector3.up);
-            horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeedInAir * speedFactor);
-            velocity = horizontalVelocity + (Vector3.up * velocity.y);
-            // apply the weight to the velocity
-            velocity += Vector3.down * weight * Time.deltaTime;
-        }
-        else
-        {
-            velocity += Vector3.down * weight * Time.deltaTime;
-        }
+        velocity +=  transform.TransformVector(minerInputs.Movement) * accelerationInAir * Time.deltaTime;
+        Vector3 horizontalVelocity = Vector3.ProjectOnPlane(velocity, Vector3.up);
+        horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeedInAir * speedFactor);
+        velocity = horizontalVelocity + (Vector3.up * velocity.y);
+        // apply the weight to the velocity
+        velocity += Vector3.down * weight * Time.deltaTime;
     }
 
     private void Run()
@@ -284,6 +293,18 @@ public class MinerController : MonoBehaviour
             if (IsCrouching){ newVelocity *= CrouchSpeedFactor; }
             newVelocity = SlideOnSlope(newVelocity.normalized, normal) * newVelocity.magnitude;
             velocity = Vector3.Lerp(velocity, newVelocity, acceleration * Time.deltaTime);
+            
+            // footsteps sound------------------------------------------------------------------------------------------------------------------------------------------------------
+            float chosenFootstepSFXFrequency = (IsRunning ? footstepFrequency*sprintFactor : footstepFrequency);
+            if (m_footstepDistanceCounter >= 1f / chosenFootstepSFXFrequency)
+            {
+                m_footstepDistanceCounter = 0f;
+               audioSource.PlayOneShot(footstep[footstepIndex]);
+               footstepIndex = (footstepIndex + 1) % footstep.Count;
+            }
+
+            // keep track of distance traveled for footsteps sound
+            m_footstepDistanceCounter += velocity.magnitude * Time.deltaTime;
         }
         else{AirControl();}
 
@@ -347,6 +368,7 @@ public class MinerController : MonoBehaviour
     
     private bool GrapplingHook()
     {
+        bool grapplingControl = launchGrapplingHook || minerInputs.isGrappling(); //FIXME: Will be removed
         if (previousGrappingInput && grapplingControl == false)//Le joueur a relaché la touche, on doit arreter le grappin
         {
             hook.state = GrapplingHookState.RETRACING;

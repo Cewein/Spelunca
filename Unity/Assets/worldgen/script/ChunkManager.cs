@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
-    public GameObject resourceFirePrefab;
     //compute shader
     [Header("Compute shader file")]
     public ComputeShader densityShader;
@@ -37,21 +36,33 @@ public class ChunkManager : MonoBehaviour
     public float bossSize = 50.0f;
     public float tunnelSize = 9.0f;
 
+    [Header("Mob Setting")]
+    public Pool pool;
+    public float ratioOfSpawnSpider = 0.97f;
+    public int maxNumberOfSpiderPerChunk = 50;
+
     [Header("Structures setting")]
     [Range(0,1)]
     public float ratioOfSpawn = 0.97f;
     public int maxNumberOfStructPerChunk = 200;
     public structure[] structures;
-    [Space(10)]
+
+    [Header("Fluff setting")]
     public float ratioOfFluff = 0.90f;
     public int maxNumberOfFluffPerChunk = 200;
     public structure[] Fluffs;
+
+    [Header("Rare spawn setting")]
+    public float ratioOfRareStruct = 0.90f;
+    public structure[] rare;
 
     //chunks 
     private Vector3 playerChunk;
     private GameObject[,,] chunks;
     private Dictionary<Vector3, ChunkData> chunkDictionary;
 
+    [HideInInspector]
+    public static Transform playerPos;
     //zone of spawn
     private Vector3 playerSpawn;
     [Header("Boss position")]
@@ -79,6 +90,8 @@ public class ChunkManager : MonoBehaviour
         DensityGenerator.tunnelSize = tunnelSize;
         DensityGenerator.seed = seed;
         DensityGenerator.precision = precision;
+
+        portal.spawnCoord = playerSpawn;
     }
 
     void Start()
@@ -90,11 +103,14 @@ public class ChunkManager : MonoBehaviour
         
         //create chunk (see function below)
         generateChunks(playerChunk);
-        
+
+        playerPos = player;
     }
 
     void Update()
     {
+        playerPos = player;
+
         StartCoroutine(updateChunks());
 
         cheat();
@@ -164,11 +180,8 @@ public class ChunkManager : MonoBehaviour
                     //Two compute shader are pass
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunks[x, y, z].GetComponent<chunk>().chunkData.lastPlayerPos = playerChunk;
-                    float ckHash = hash(chunks[x, y, z].transform.position);
-                    if (ckHash > ratioOfSpawn)
-                        spawnStructures(chunks[x, y, z], structures, maxNumberOfStructPerChunk);
-                    if (ckHash > ratioOfFluff)
-                        spawnStructures(chunks[x, y, z], Fluffs, maxNumberOfFluffPerChunk, true);
+
+                    spawnStructures(chunks[x, y, z]);
 
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
@@ -209,14 +222,18 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().chunkData.toggle(false);
                     chunk.transform.position += direction * chunkSize;
                     chunk.GetComponent<chunk>().chunkData = tempData;
-                    chunk.GetComponent<chunk>().chunkData.toggle(true);
                     chunk.GetComponent<chunk>().makeMeshFromChunkData();
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
+
                 }
             }
+            chunk.GetComponent<chunk>().chunkData.toggle(true);
 
         }
 
+        //there is a corouting in that chunk but it's need, it's spread out
+        //the computation on time, it compute on chunk per frame so normally
+        //60 chunks per second (or more if you have a powerfull cpu + gpu)
         foreach (var chunk in chunks)
         {
             chunkPos = chunk.transform.position / chunkSize;
@@ -227,7 +244,6 @@ public class ChunkManager : MonoBehaviour
             temp.y = Mathf.Floor(player.position.y / chunkSize);
             temp.z = Mathf.Floor(player.position.z / chunkSize);
 
-            chunk.GetComponent<chunk>().chunkData.toggle(false);
             if (chunkPlayerPos != temp)
             {
                 ChunkData tempData;
@@ -240,21 +256,30 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
 
-                    float ckHash = hash(chunk.transform.position);
-                    if (ckHash > ratioOfSpawn )
-                        spawnStructures(chunk, structures, maxNumberOfStructPerChunk);
-
-                    if (ckHash > ratioOfFluff)
-                        spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
+                    spawnStructures(chunk);
 
                     chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
+                    chunk.GetComponent<chunk>().chunkData.toggle(true);
                 }
                 yield return null;
             }
-            chunk.GetComponent<chunk>().chunkData.toggle(true);
         }
     }
 
+    void spawnStructures(GameObject chunk)
+    {
+        float ckHash = hash(chunk.transform.position);
+        if (ckHash > ratioOfSpawn)
+            spawnStructures(chunk, structures, maxNumberOfStructPerChunk);
+        if (ckHash > ratioOfFluff)
+            spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
+        if (ckHash > ratioOfSpawnSpider)
+            spawnSpiders(chunk, maxNumberOfSpiderPerChunk);
+        if (ckHash > ratioOfRareStruct)
+            spawnStructures(chunk, rare, 1);
+    }
+
+    // when doing view frustum culling this function let a 3x3 chunks box around the player
     bool aroundMiddle(int x, int y, int z)
     {
         int half = (int)viewRange / 2;
@@ -282,7 +307,6 @@ public class ChunkManager : MonoBehaviour
     }
 
     //return a array, first value is the position and the second is the rotation !
-
     Vector3[] getPositionOnChunks(GameObject chunk)
     {
         Vector3[] rez = new Vector3[2];
@@ -305,6 +329,7 @@ public class ChunkManager : MonoBehaviour
         return  rez;
     }
 
+    //spawn a structre on a chunk with the given structure array and number of maximum object in that chunk 
     void spawnStructures(GameObject ck, structure[] strct, int mnspc, bool fluff = false)
     {
         int size = strct.Length;
@@ -336,6 +361,22 @@ public class ChunkManager : MonoBehaviour
         else ck.GetComponent<chunk>().chunkData.mineralDictionary = dico;
             
         ck.GetComponent<chunk>().chunkData.hasSpawnResources = true; 
+    }
+
+    void spawnSpiders(GameObject ck, int mnspc)
+    {
+        int size = Enum.GetNames(typeof(ResourceType)).Length;
+        int s = UnityEngine.Random.Range(1, size);
+        for (int i = 0; i < mnspc; i++)
+        {
+
+            Vector3[] data = getPositionOnChunks(ck);
+
+            if (data[0] != Vector3.zero)
+            {
+                pool.spawn(1, data, (ResourceType)s);
+            }
+        }
     }
 }
 

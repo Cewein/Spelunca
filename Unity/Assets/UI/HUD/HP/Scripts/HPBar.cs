@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HPBar : MonoBehaviour
 {
     [SerializeField] private PlayerStats stats;
-    public float pixelPerHP;
+    [SerializeField] private float pixelPerHP;
     [SerializeField] private RectTransform healthBar;
     [SerializeField] private Image healthBarContent;
     [SerializeField] private float speed;
 
+    private void Start()
+    {
+        if (stats == null) stats = FindObjectOfType<PlayerStats>();
+    }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float currentSizeX = healthBar.rect.width;

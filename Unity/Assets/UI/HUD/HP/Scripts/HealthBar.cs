@@ -58,7 +58,6 @@ public class HealthBar : MonoBehaviour
     {
         
         int toRemove = amount;
-        Debug.Log("hit : toRemove = "+toRemove);
         while (toRemove > 0)
         {
             if (player.Life - 1 < player.MaxLife)
