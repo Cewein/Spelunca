@@ -15,23 +15,8 @@ public class debugScreenMaster : MonoBehaviour
     public Text rigthArea;
     public Text leftArea;
 
-    //data node
-    private float  fps;
-    private float  msBetweenFrame;
-    private int    totalMB;
-    private string procType;
-    private string GraphName;
-    private string GraphVersion;
-
-    // Update is called once per frame
-
-    private void Awake()
-    {
-        totalMB = SystemInfo.systemMemorySize;
-        procType = SystemInfo.processorType;
-        GraphName = SystemInfo.graphicsDeviceName;
-        GraphVersion = SystemInfo.graphicsDeviceVersion;
-    }
+    private float[] fpsStat;
+    private float[] renderStat;
 
     void Update()
     {
