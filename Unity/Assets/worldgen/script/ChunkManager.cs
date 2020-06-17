@@ -38,23 +38,30 @@ public class ChunkManager : MonoBehaviour
 
     [Header("Mob Setting")]
     public Pool pool;
-    public float ratioOfSpawnSpider = 0.97f;
-    public int maxNumberOfSpiderPerChunk = 50;
+    [Range(0, 1)]
+    [Tooltip("ratio of rejection of chunks, less mean more chunk are selected ")]
+    public float ratioOfRejectionForSpider = 0.97f;
+    public int maxSpiderPerChunk = 50;
 
-    [Header("Structures setting")]
-    [Range(0,1)]
-    public float ratioOfSpawn = 0.97f;
-    public int maxNumberOfStructPerChunk = 200;
-    public structure[] structures;
+    [Header("Minerals setting")]
+    [Range(0, 1)]
+    [Tooltip("ratio of rejection of chunks, less mean more chunk are selected ")]
+    public float ratioOfRejectionForMineral = 0.97f;
+    public int maxMineralPerChunk = 200;
+    public Structure[] minerals;
 
     [Header("Fluff setting")]
-    public float ratioOfFluff = 0.90f;
-    public int maxNumberOfFluffPerChunk = 200;
-    public structure[] Fluffs;
+    [Range(0, 1)]
+    [Tooltip("ratio of rejection of chunks, less mean more chunk are selected ")]
+    public float ratioOfRejectionForFluff = 0.90f;
+    public int maxFluffPerChunk = 200;
+    public Structure[] Fluffs;
 
     [Header("Rare spawn setting")]
-    public float ratioOfRareStruct = 0.90f;
-    public structure[] rare;
+    [Range(0, 1)]
+    [Tooltip("ratio of rejection of chunks, less mean more chunk are selected ")]
+    public float ratioOfRejectionForRareStruct = 0.90f;
+    public Structure[] rare;
 
     //chunks 
     [HideInInspector]
@@ -117,14 +124,13 @@ public class ChunkManager : MonoBehaviour
         playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
         playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
 
-        StartCoroutine(updateChunks());
+        StartCoroutine(UpdateChunks());
 
         cheat();
 
         frustumCulling();
     }
 
-    //cheat for moving faster
     void cheat()
     {
         if (true)
@@ -141,9 +147,12 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    //with a AABB plane we can see if a mesh
-    //is inside the view frustum, if it not inside
-    //it's not rendered
+    /// <summary>
+    /// 
+    ///with a AABB plane we can see if a mesh
+    ///is inside the view frustum, if it not inside
+    ///it's not rendered
+    /// </summary>
     void frustumCulling()
     {
         planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
@@ -159,7 +168,7 @@ public class ChunkManager : MonoBehaviour
                     //the maximum distance is one chunk, if both test fails it hide the chunk
                     if (GeometryUtility.TestPlanesAABB(planes, chunks[x, y, z].GetComponent<Collider>().bounds))
                         chunks[x, y, z].GetComponent<MeshRenderer>().enabled = true;
-                    else if (aroundMiddle(x, y, z))
+                    else if (AroundMiddle(x, y, z))
                         chunks[x, y, z].GetComponent<MeshRenderer>().enabled = true;
                     else
                         chunks[x, y, z].GetComponent<MeshRenderer>().enabled = false;
@@ -168,9 +177,13 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    //this generate the chunks
-    //for genertating chunk during runtime
-    //see updateChunks function
+
+    /// <summary>
+    ///this generate the chunks
+    ///<para />
+    ///for genertating chunk during runtime
+    ///see updateChunks function
+    /// </summary>
     void generateChunks(Vector3 playerChunk)
     {
         int half = (int)viewRange / 2;
@@ -187,7 +200,7 @@ public class ChunkManager : MonoBehaviour
                     chunks[x, y, z].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunks[x, y, z].GetComponent<chunk>().chunkData.lastPlayerPos = playerChunk;
 
-                    spawnStructures(chunks[x, y, z]);
+                    SpawnStructures(chunks[x, y, z]);
 
                     chunkDictionary.Add(arr + playerChunk, chunks[x, y, z].GetComponent<chunk>().chunkData);
                 }
@@ -195,11 +208,13 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    //update the chunk during runtime, create new
-    //chunk if they are not inside the dictionnary
-    //
-    //gen update is done everyframe
-    IEnumerator updateChunks()
+    /// <summary>
+    ///update the chunk during runtime, create new
+    ///chunk if they are not inside the dictionnary
+    ///<para />
+    ///gen update is done everyframe
+    /// </summary>
+    IEnumerator UpdateChunks()
     {
         Vector3 chunkPos;
         Vector3 chunkPlayerPos;
@@ -262,7 +277,7 @@ public class ChunkManager : MonoBehaviour
                     chunk.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunk.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
 
-                    spawnStructures(chunk);
+                    SpawnStructures(chunk);
 
                     chunkDictionary.Add(chunk.transform.position / chunkSize, chunk.GetComponent<chunk>().chunkData);
                     chunk.GetComponent<chunk>().chunkData.toggle(true);
@@ -272,21 +287,21 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    void spawnStructures(GameObject chunk)
+    void SpawnStructures(GameObject chunk)
     {
-        float ckHash = hash(chunk.transform.position);
-        if (ckHash > ratioOfSpawn)
-            spawnStructures(chunk, structures, maxNumberOfStructPerChunk);
-        if (ckHash > ratioOfFluff)
-            spawnStructures(chunk, Fluffs, maxNumberOfFluffPerChunk, true);
-        if (ckHash > ratioOfSpawnSpider)
-            spawnSpiders(chunk, maxNumberOfSpiderPerChunk);
-        if (ckHash > ratioOfRareStruct)
-            spawnStructures(chunk, rare, 1);
+        float ckHash = Hash(chunk.transform.position);
+        if (ckHash > ratioOfRejectionForMineral)
+            SpawnStructures(chunk, minerals, maxMineralPerChunk);
+        if (ckHash > ratioOfRejectionForFluff)
+            SpawnStructures(chunk, Fluffs, maxFluffPerChunk, true);
+        if (ckHash > ratioOfRejectionForSpider)
+            SpawnSpiders(chunk, maxSpiderPerChunk);
+        if (ckHash > ratioOfRejectionForRareStruct)
+            SpawnStructures(chunk, rare, 1);
     }
 
-    // when doing view frustum culling this function let a 3x3 chunks box around the player
-    bool aroundMiddle(int x, int y, int z)
+    /// <summary> when doing view frustum culling this function let a 3x3 chunks box around the player </summary>
+    bool AroundMiddle(int x, int y, int z)
     {
         int half = (int)viewRange / 2;
 
@@ -302,18 +317,22 @@ public class ChunkManager : MonoBehaviour
         return false;
     }
 
-    //hash function, warning might collide a lot not tested properly
-    //because it the not the goal of the function we just need 
-    //value between zero and one
-    // TODO move function into static class
-    float hash(Vector3 vec)
+    /// <summary>
+    /// hash function, warning might collide a lot not tested properly
+    /// because it the not the goal of the function we just need 
+    /// value between zero and one
+    /// </summary>
+    float Hash(Vector3 vec)
     {
         double val = (1299689.0f * Math.Abs(vec.x) + 611953.0f * Math.Abs(vec.y)) / 898067 * Math.Abs(vec.z);
         return (float)(val - Math.Truncate(val));
     }
 
-    //return a array, first value is the position and the second is the rotation !
-    Vector3[] getPositionOnChunks(GameObject chunk)
+
+    /// <summary>
+    /// return a array, first value is the position and the second is the rotation !
+    /// </summary>
+    Vector3[] GetPositionOnChunks(GameObject chunk)
     {
         Vector3[] rez = new Vector3[2];
 
@@ -335,23 +354,25 @@ public class ChunkManager : MonoBehaviour
         return  rez;
     }
 
-    //spawn a structre on a chunk with the given structure array and number of maximum object in that chunk 
-    void spawnStructures(GameObject ck, structure[] strct, int mnspc, bool fluff = false)
+    /// <summary>
+    /// spawn a structre on a chunk with the given structure array and number of maximum object in that chunk 
+    /// </summary>
+    void SpawnStructures(GameObject ck, Structure[] strct, int maxStruct, bool isFluff = false)
     {
         int size = strct.Length;
         int s = UnityEngine.Random.Range(0, size);
         Dictionary<Vector3, GameObject> dico = new Dictionary<Vector3, GameObject>();
 
-        for (int i = 0; i < mnspc && size > 0; i++)
+        for (int i = 0; i < maxStruct && size > 0; i++)
         {
 
-            Vector3[] data = getPositionOnChunks(ck);
+            Vector3[] data = GetPositionOnChunks(ck);
 
             if (!dico.ContainsKey(data[0]))
             {
                 float angle = Vector3.Dot(data[1], Vector3.up);
 
-                if (fluff) s = UnityEngine.Random.Range(0, size);
+                if (isFluff) s = UnityEngine.Random.Range(0, size);
 
                 Vector3 area = strct[s].area;
 
@@ -363,20 +384,20 @@ public class ChunkManager : MonoBehaviour
             }
         }
 
-        if (fluff) ck.GetComponent<chunk>().chunkData.flufflDictionary = dico;
+        if (isFluff) ck.GetComponent<chunk>().chunkData.flufflDictionary = dico;
         else ck.GetComponent<chunk>().chunkData.mineralDictionary = dico;
             
         ck.GetComponent<chunk>().chunkData.hasSpawnResources = true; 
     }
 
-    void spawnSpiders(GameObject ck, int mnspc)
+    void SpawnSpiders(GameObject ck, int maxStruct)
     {
         int size = Enum.GetNames(typeof(ResourceType)).Length;
         int s = UnityEngine.Random.Range(1, size);
-        for (int i = 0; i < mnspc; i++)
+        for (int i = 0; i < maxStruct; i++)
         {
 
-            Vector3[] data = getPositionOnChunks(ck);
+            Vector3[] data = GetPositionOnChunks(ck);
 
             if (data[0] != Vector3.zero)
             {
@@ -387,7 +408,7 @@ public class ChunkManager : MonoBehaviour
 }
 
 [System.Serializable]
-public struct structure
+public struct Structure
 {
     //the gameobject we want to spawn
     public GameObject gameObject;
