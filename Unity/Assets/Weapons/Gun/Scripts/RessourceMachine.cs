@@ -6,7 +6,7 @@ using UnityEngine;
 public class RessourceMachine : MonoBehaviour
 {
 
-    public GunLoader gl;
+    public GunMagazine gl;
     
     private float angle;
     private float baseAngle;
@@ -20,6 +20,7 @@ public class RessourceMachine : MonoBehaviour
 
     void Update()
     {
+        if(gl.currentResource == null) return;
         if (gl.currentResource.Type == ResourceType.fire)
         {
             currentAngle = baseAngle;

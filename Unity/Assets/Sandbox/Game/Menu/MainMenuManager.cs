@@ -7,44 +7,93 @@ using System.Collections.Generic;
  using UnityEngine.Networking;
  using UnityEngine.SocialPlatforms;
  using UnityEngine.UI;
+ using UnityEngine.UIElements;
 
+
+ 
  public class MainMenuManager : MonoBehaviour
  {
-     
-     private enum EnvironmentMode {Local,PreProd,Prod}
-     private struct KEY
-     {
-         internal static readonly string URL_GET_USER = "get_user/";
-     }
-     private struct LoginInfo
-     {
-         public string username;
-         public string password;
-     }
-     
      public GameObject mainLayout;
+     
      public GameObject loginLayout;
+     public GameObject loginSubview;
+     public GameObject loggedInSubview;
+     public Text usernameText;
+     public Text loginMessageText;
+     public string loginSuccessText = "Successfully logged in !";
+     public Color loginSuccessColor = Color.green;
+     public string loginErrorText = "Please enter a correct username and password.";
+     public Color loginErrorColor = Color.red;
+     
      public GameObject creditsLayout;
      
      public InputField usernameInput;
      public InputField passwordInput;
      public Animator[] loginInputFieldAnimators;
 
-     [SerializeField] private EnvironmentMode environmentMode = EnvironmentMode.Local;
-     private string localUrl = "localhost:8000/api/";
-     private string preprodUrl = "13.80.137.233:8000/api/";
-     private string prodUrl = "13.80.137.233/api/";
+     public void Start()
+     {
+         string data = PlayerPrefs.GetString("player");
+         PlayerData player = JsonUtility.FromJson<PlayerData>(data);
+         if (player.id != "")
+         {
+             RestClient.Instance.isLoggedIn = true;
+             refresh();
+         }
+     }
 
+     public void quit()
+     {
+         Application.Quit();
+     }
+     public void openLeaderboard()
+     {
+         Application.OpenURL(RestClient.Instance.getServerUrl());
+     }
+
+     public void register()
+     {
+         Application.OpenURL(RestClient.Instance.getRegisterPageUrl());
+     }
+     
+     private void refresh()
+     {
+         if (RestClient.Instance.isLoggedIn)
+         {
+             loginSubview.SetActive(false);
+             loggedInSubview.SetActive(true);
+             
+             string jsonPlayer = PlayerPrefs.GetString("player");
+             if (jsonPlayer != "")
+             {
+                 PlayerData player = JsonUtility.FromJson<PlayerData>(jsonPlayer);
+                 usernameText.text = player.username;
+             }else
+             {
+                 usernameText.text = "Error";
+             }
+
+         }else
+         {
+             loginSubview.SetActive(true);
+             loggedInSubview.SetActive(false); 
+         }
+     }
+     
      public void showLoginView()
      {
          mainLayout.SetActive(false);
          loginLayout.SetActive(true);
      }
      
+     
+     
      public void hideLoginView()
      {
+         loginMessageText.gameObject.SetActive(false);
          mainLayout.SetActive(true);
          loginLayout.SetActive(false);
+         refresh();
      }
      public void showCreditsView()
      {
@@ -58,79 +107,40 @@ using System.Collections.Generic;
          creditsLayout.SetActive(false);
      }
 
-     public void startLogin()
+     public void login()
      {
          LoginInfo loginInfo = new LoginInfo();
          loginInfo.username = usernameInput.text;
          loginInfo.password = passwordInput.text;
-         //Debug.Log(loginInfo.username + " " + loginInfo.password);
-         StartCoroutine(login(loginInfo));
+         StartCoroutine(RestClient.Instance.login(loginInfo, loginCallBack));
+     }
+     public void logout()
+     {
+         RestClient.Instance.logout();
+         refresh();
      }
 
-     private IEnumerator login(LoginInfo loginInfo)
+     private void loginCallBack(long responseCode, string jsonResult)
      {
-         WWWForm form = new WWWForm();
-         form.AddField("username", loginInfo.username);
-         form.AddField("password", loginInfo.password);
-         //var postData = JsonUtility.ToJson(loginInfo);
-         //Debug.Log("data " + postData);
-         UnityWebRequest www = UnityWebRequest.Post(getAPIUrl() + KEY.URL_GET_USER, form);
-         www.uploadHandler.contentType = "application/json";
-         
-         //byte[] bytes = Encoding.Unicode.GetBytes(postData);
-         //www.uploadHandler. = bytes;
-         yield return www.SendWebRequest();
+         if (responseCode == 201)
+         {
+             PlayerPrefs.SetString("player",jsonResult);
+             PlayerPrefs.Save();
+             RestClient.Instance.isLoggedIn = true;
+             loginMessageText.gameObject.SetActive(true);
+             loginMessageText.color = loginSuccessColor;
+             loginMessageText.text = loginSuccessText;
+             refresh();
 
-         if (www.isNetworkError || www.isHttpError)
+         }else if (responseCode == 400)
          {
-             Debug.Log(www.error);
-         }
-         else
-         {
-             Debug.Log("Form upload complete!");
-             Debug.Log("Recieved : " + www.downloadHandler.text);
-             
-         }
-     }
-     /*var request = UnityWebRequest.Post(getAPIUrl() + KEY.URL_GET_USER, postData);
-         var handler = request.SendWebRequest();
-         while(!handler.isDone){
-             yield return null;
-         }
-
-         switch (handler.webRequest.responseCode)
-         {
-             case 400:
-                 errorLoginView();
-                 break;
-             case 201:
-                 Debug.Log(request.downloadHandler.text);
-                 break;
-             case 500:
-                 Debug.LogError("API call to '" + KEY.URL_GET_USER + "' : GET request prohibited.");
-                 break;
-         }*/
-     
-     private void errorLoginView()
-     {
-         foreach (Animator animator in loginInputFieldAnimators)
-         {
-             animator.SetTrigger("error");
-         }
-     }
-
-     private string getAPIUrl()
-     {
-         switch (environmentMode)
-         {
-             case EnvironmentMode.Local:
-                 return localUrl;
-             case EnvironmentMode.Prod:
-                 return prodUrl;
-             case EnvironmentMode.PreProd:
-                 return preprodUrl;
-             default:
-                 return "";
+             loginMessageText.gameObject.SetActive(true);
+             loginMessageText.color = loginErrorColor;
+             loginMessageText.text = loginErrorText;
+             foreach (Animator animator in loginInputFieldAnimators)
+             {
+                 animator.SetTrigger("error");
+             }
          }
      }
  }

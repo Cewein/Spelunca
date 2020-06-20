@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Transforms;
 using UnityEngine;
 
 public class ResourceCollectible : MonoBehaviour, IPickable
@@ -16,6 +17,7 @@ public class ResourceCollectible : MonoBehaviour, IPickable
    private void Pick()
    {
       pick?.Invoke(type , quantity);
-      Destroy(gameObject);
+      Inventory.Instance.AddResource(type, quantity);
+      Destroy(transform.parent.gameObject);
    }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -7,6 +8,7 @@ public class MinerController : MonoBehaviour
 {
     #region SerializedFields ============================================================================================
 
+    public Transform artifactSocket; 
     [Header("Linked objects")]
     [Tooltip("Player view camera, if it's null, it will be the main camera.")][SerializeField]
     private Camera playerCamera;
@@ -85,6 +87,15 @@ public class MinerController : MonoBehaviour
     private float crouchingHeight = 0.7f;
     [Tooltip("Crouching smooth transition speed.")][SerializeField]
     private float crouchingAcceleration = 10f;
+    
+    [Header("Audio")]
+    [Tooltip("Audio source")]
+    public AudioSource audioSource;
+    [Tooltip("Footsteps sounds FX")]
+    public List<AudioClip> footstep;
+    [Tooltip("Footstep sound frequency while moving one meter.")]
+    public float footstepFrequency = 1f;
+ 
    
     #endregion
     
@@ -121,6 +132,11 @@ public class MinerController : MonoBehaviour
     private Vector3 weaponNewPosition; 
     private bool previousGrappingInput = false;//The grappling hook's input during the previous state
     public Action<GameObject> switchWeapon;
+    
+    // -- Audio
+    float m_footstepDistanceCounter;
+    private int footstepIndex = 0;
+
 
     public GameObject CurrentWeapon  => weapons[weaponIndex];
 
@@ -182,7 +198,13 @@ public class MinerController : MonoBehaviour
         weaponIndex = Mathf.Abs( (weaponIndex - minerInputs.isSwitchingWeapon() ) % weapons.Length );
         switcher();
     }
-    
+
+    public void NotifyArtifactEquipped()
+    {
+        switchWeapon?.Invoke(artifactSocket.GetChild(0).gameObject);
+    }
+
+   
     private void switcher()
     {
         weapons[ Mathf.Abs( (weaponIndex - 1) % weapons.Length ) ].gameObject.SetActive(false);
@@ -271,6 +293,18 @@ public class MinerController : MonoBehaviour
             if (IsCrouching){ newVelocity *= CrouchSpeedFactor; }
             newVelocity = SlideOnSlope(newVelocity.normalized, normal) * newVelocity.magnitude;
             velocity = Vector3.Lerp(velocity, newVelocity, acceleration * Time.deltaTime);
+            
+            // footsteps sound------------------------------------------------------------------------------------------------------------------------------------------------------
+            float chosenFootstepSFXFrequency = (IsRunning ? footstepFrequency*sprintFactor : footstepFrequency);
+            if (m_footstepDistanceCounter >= 1f / chosenFootstepSFXFrequency)
+            {
+                m_footstepDistanceCounter = 0f;
+               audioSource.PlayOneShot(footstep[footstepIndex]);
+               footstepIndex = (footstepIndex + 1) % footstep.Count;
+            }
+
+            // keep track of distance traveled for footsteps sound
+            m_footstepDistanceCounter += velocity.magnitude * Time.deltaTime;
         }
         else{AirControl();}
 
