@@ -2292,7 +2292,7 @@ MonoBehaviour:
   ratioOfRejectionForSpider: 0.967
   maxSpiderPerChunk: 0
   ratioOfRejectionForMineral: 0.97
-  maxMineralPerChunk: 20
+  maxMineralPerChunk: 5
   minerals:
   - gameObject: {fileID: 4333270871201857030, guid: e0c7ac8a115253144940848ca8ee8e46,
       type: 3}
