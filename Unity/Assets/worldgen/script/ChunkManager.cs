@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class ChunkManager : MonoBehaviour
 {
@@ -73,7 +74,8 @@ public class ChunkManager : MonoBehaviour
     [HideInInspector]
     public static Transform playerPos;
     //zone of spawn
-    private Vector3 playerSpawn;
+    [HideInInspector]
+    public Vector3 playerSpawn;
     [Header("Boss position")]
     //end zone
     public Transform boss;
@@ -83,9 +85,12 @@ public class ChunkManager : MonoBehaviour
 
     private void Awake()
     {
+       
         //init data for runtime
         chunks = new GameObject[viewRange,viewRange,viewRange];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
+
+        
 
         //set static variable for the density generator
         DensityGenerator.isoLevel = isoLevel;
@@ -129,6 +134,20 @@ public class ChunkManager : MonoBehaviour
         cheat();
 
         frustumCulling();
+    }
+
+    void Save()
+    {
+        Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
+        File.WriteAllText("C:\\ProgramData\\spelunca\\world.json", JsonUtility.ToJson(this));
+    }
+
+    public static ChunkManager Load(ChunkManager chunkMan)
+    {
+        Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
+        if (File.Exists("C:\\ProgramData\\spelunca\\world.json"))
+             return JsonUtility.FromJson<ChunkManager>("C:\\ProgramData\\spelunca\\world.json");
+        return chunkMan;
     }
 
     void cheat()
@@ -206,6 +225,8 @@ public class ChunkManager : MonoBehaviour
                 }
             }
         }
+
+        Save();
     }
 
     /// <summary>
