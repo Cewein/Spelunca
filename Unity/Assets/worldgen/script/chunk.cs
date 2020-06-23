@@ -173,6 +173,11 @@ public struct ChunkData
 
         toRemove.Clear();
 
+        foreach (var mineral in mineralDictionary)
+        {
+            mineral.Value.SetActive(val);
+        }
+
         foreach (var fluff in flufflDictionary)
         {
             fluff.Value.SetActive(val);

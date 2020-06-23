@@ -28,6 +28,7 @@ public class ChunkManager : MonoBehaviour
     [Range(0, 1)]
     public float persistence = 0.5f;
     public float seed = 0;
+    public static bool randomSeed = true;
 
     [Range(0, 1)]
     public float isoLevel = 0f;
@@ -86,13 +87,14 @@ public class ChunkManager : MonoBehaviour
 
     private void Awake()
     {
-       
+        if(randomSeed)
+        {
+            seed = UnityEngine.Random.Range(-20f, 20f);
+        }
         //init data for runtime
         arraySize = viewRange * viewRange * viewRange;
         chunks = new GameObject[arraySize];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
-
-        
 
         //set static variable for the density generator
         DensityGenerator.isoLevel = isoLevel;
@@ -240,7 +242,7 @@ public class ChunkManager : MonoBehaviour
     {
         Vector3 chunkPos;
         Vector3 chunkPlayerPos;
-        
+        Queue<GameObject> toGen = new Queue<GameObject>();
 
         Vector3 temp = new Vector3();
         temp = new Vector3();
@@ -269,6 +271,10 @@ public class ChunkManager : MonoBehaviour
                     chunks[x].GetComponent<chunk>().chunkData.lastPlayerPos = temp;
 
                 }
+                else
+                {
+                    toGen.Enqueue(chunks[x]);
+                }
             }
             chunks[x].GetComponent<chunk>().chunkData.toggle(true);
 
@@ -277,10 +283,10 @@ public class ChunkManager : MonoBehaviour
         //there is a corouting in that chunk but it's need, it's spread out
         //the computation on time, it compute on chunk per frame so normally
         //60 chunks per second (or more if you have a powerfull cpu + gpu)
-        for (int x = 0; x < arraySize; x++)
+        foreach(var ch in toGen)
         {
-            chunkPos = chunks[x].transform.position / chunkSize;
-            chunkPlayerPos = chunks[x].GetComponent<chunk>().chunkData.lastPlayerPos;
+            chunkPos = ch.transform.position / chunkSize;
+            chunkPlayerPos = ch.GetComponent<chunk>().chunkData.lastPlayerPos;
 
             temp = new Vector3();
             temp.x = Mathf.Floor(player.position.x / chunkSize);
@@ -294,15 +300,15 @@ public class ChunkManager : MonoBehaviour
 
                 if (!chunkDictionary.TryGetValue(chunkPos + direction, out tempData))
                 {
-                    chunks[x].GetComponent<chunk>().chunkData.toggle(false);
-                    chunks[x].transform.position += direction * chunkSize;
-                    chunks[x].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
-                    chunks[x].GetComponent<chunk>().chunkData.lastPlayerPos = temp;
+                    ch.GetComponent<chunk>().chunkData.toggle(false);
+                    ch.transform.position += direction * chunkSize;
+                    ch.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
+                    ch.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
 
-                    SpawnStructures(chunks[x]);
+                    SpawnStructures(ch);
 
-                    chunkDictionary.Add(chunks[x].transform.position / chunkSize, chunks[x].GetComponent<chunk>().chunkData);
-                    chunks[x].GetComponent<chunk>().chunkData.toggle(true);
+                    chunkDictionary.Add(ch.transform.position / chunkSize, ch.GetComponent<chunk>().chunkData);
+                    ch.GetComponent<chunk>().chunkData.toggle(true);
                 }
                 yield return null;
             }
@@ -399,8 +405,8 @@ public class ChunkManager : MonoBehaviour
             }
         }
 
-        if (isFluff) ck.GetComponent<chunk>().chunkData.flufflDictionary = dico;
-        else ck.GetComponent<chunk>().chunkData.mineralDictionary = dico;
+        if (isFluff) Spelunca.Utils.AddRange(ck.GetComponent<chunk>().chunkData.flufflDictionary, dico);
+        else Spelunca.Utils.AddRange(ck.GetComponent<chunk>().chunkData.mineralDictionary, dico);
             
         ck.GetComponent<chunk>().chunkData.hasSpawnResources = true; 
     }
