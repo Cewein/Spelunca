@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
 
     public void StartNewGame()
     {
+        ChunkManager.randomSeed = true;
         LoadLevel(gameScenePath);
     }
 

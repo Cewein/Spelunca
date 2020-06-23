@@ -28,6 +28,8 @@ public class ChunkManager : MonoBehaviour
     [Range(0, 1)]
     public float persistence = 0.5f;
     public float seed = 0;
+
+    //this variable is the stat of if we are in continue mode or new game mode
     public static bool randomSeed = true;
 
     [Range(0, 1)]
@@ -70,10 +72,10 @@ public class ChunkManager : MonoBehaviour
     public Vector3 playerChunk;
     private int arraySize;
     private GameObject[] chunks;
+    private DensityGenerator densityGenerator;
     [HideInInspector]
     public Dictionary<Vector3, ChunkData> chunkDictionary;
 
-    [HideInInspector]
     public static Transform playerPos;
     //zone of spawn
     [HideInInspector]
@@ -87,27 +89,44 @@ public class ChunkManager : MonoBehaviour
 
     private void Awake()
     {
-        if(randomSeed)
+        densityGenerator = new DensityGenerator();
+
+        if (randomSeed)
         {
             seed = UnityEngine.Random.Range(-20f, 20f);
+
+            //set variable for the density generator
+            SetDensityValue();
         }
+        else if (Load())
+        {
+            isoLevel = densityGenerator.isoLevel;
+            boss.position = densityGenerator.endZone;
+            playerSpawn = player.position = densityGenerator.playerSpawn;
+            lacunarity = densityGenerator.lacunarity;
+            octave = densityGenerator.octave;
+            persistence = densityGenerator.persistence;
+            spawnSize = densityGenerator.spawnSize;
+            bossSize = densityGenerator.bossSize;
+            tunnelSize = densityGenerator.tunnelSize;
+            seed = densityGenerator.seed;
+            precision = densityGenerator.precision;
+            chunkSize = densityGenerator.size;
+        }
+        else
+        {
+            SetDensityValue();
+        }
+
         //init data for runtime
         arraySize = viewRange * viewRange * viewRange;
         chunks = new GameObject[arraySize];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
 
+
+
         //set static variable for the density generator
-        DensityGenerator.isoLevel = isoLevel;
-        DensityGenerator.endZone = boss.position;
-        DensityGenerator.playerSpawn = playerSpawn = player.position;
-        DensityGenerator.lacunarity = lacunarity;
-        DensityGenerator.octave = octave;
-        DensityGenerator.persistence = persistence;
-        DensityGenerator.spawnSize = spawnSize;
-        DensityGenerator.bossSize = bossSize;
-        DensityGenerator.tunnelSize = tunnelSize;
-        DensityGenerator.seed = seed;
-        DensityGenerator.precision = precision;
+
 
         portal.spawnCoord = playerSpawn;
     }
@@ -143,15 +162,34 @@ public class ChunkManager : MonoBehaviour
     void Save()
     {
         Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
-        File.WriteAllText("C:\\ProgramData\\spelunca\\world.json", JsonUtility.ToJson(this));
+        File.WriteAllBytes("C:\\ProgramData\\spelunca\\world.json", System.Text.Encoding.ASCII.GetBytes(JsonUtility.ToJson(densityGenerator, true)));
     }
 
-    public static ChunkManager Load(ChunkManager chunkMan)
+    public bool Load()
     {
         Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
         if (File.Exists("C:\\ProgramData\\spelunca\\world.json"))
-             return JsonUtility.FromJson<ChunkManager>("C:\\ProgramData\\spelunca\\world.json");
-        return chunkMan;
+        {
+            densityGenerator = JsonUtility.FromJson<DensityGenerator>("C:\\ProgramData\\spelunca\\world.json");
+            return true;
+        }
+        return false;
+    }
+
+    void SetDensityValue()
+    {
+        densityGenerator.isoLevel = isoLevel;
+        densityGenerator.endZone = boss.position;
+        densityGenerator.playerSpawn = playerSpawn = player.position;
+        densityGenerator.lacunarity = lacunarity;
+        densityGenerator.octave = octave;
+        densityGenerator.persistence = persistence;
+        densityGenerator.spawnSize = spawnSize;
+        densityGenerator.bossSize = bossSize;
+        densityGenerator.tunnelSize = tunnelSize;
+        densityGenerator.seed = seed;
+        densityGenerator.precision = precision;
+        densityGenerator.size = chunkSize;
     }
 
     void cheat()
@@ -219,7 +257,7 @@ public class ChunkManager : MonoBehaviour
                     Vector3 arr = new Vector3(x - half, y - half, z - half);
                     chunks[Fatten(x, y, z)] = Instantiate(chunk, (arr + playerChunk) * chunkSize, new Quaternion());
                     //Two compute shader are pass
-                    chunks[Fatten(x, y, z)].GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
+                    chunks[Fatten(x, y, z)].GetComponent<chunk>().createMarchingBlock(densityGenerator, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     chunks[Fatten(x, y, z)].GetComponent<chunk>().chunkData.lastPlayerPos = playerChunk;
 
                     SpawnStructures(chunks[Fatten(x, y, z)]);
@@ -302,7 +340,7 @@ public class ChunkManager : MonoBehaviour
                 {
                     ch.GetComponent<chunk>().chunkData.toggle(false);
                     ch.transform.position += direction * chunkSize;
-                    ch.GetComponent<chunk>().createMarchingBlock(chunkSize, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
+                    ch.GetComponent<chunk>().createMarchingBlock(densityGenerator, playerSpawn, densityShader, MeshGeneratorShader, useDefaultNormal);
                     ch.GetComponent<chunk>().chunkData.lastPlayerPos = temp;
 
                     SpawnStructures(ch);
