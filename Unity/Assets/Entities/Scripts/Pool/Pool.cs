@@ -48,7 +48,18 @@ public class Pool:MonoBehaviour
         }
     }
 
-  
+    /// <summary>
+    /// return a int[2] first is attacking, second is disabled
+    /// </summary>
+    public int[] GetSize()
+    {
+        int[] size = new int[2];
+
+        size[0] = attacking.Count;
+        size[1] = disabled.Count;
+
+        return size;
+    }
 
     private void Update()
     {
