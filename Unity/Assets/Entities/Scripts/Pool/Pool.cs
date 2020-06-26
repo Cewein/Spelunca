@@ -37,6 +37,8 @@ public class Pool:MonoBehaviour
     private EnemyComponent[] pool; //the entities on the map
     private Dictionary<int,bool> disabled;
     private Dictionary<int,bool> attacking;
+
+    [SerializeField] private int amountSpawned;
     void Start()
     {
         pool = new EnemyComponent[poolSize];
@@ -89,8 +91,9 @@ public class Pool:MonoBehaviour
                     EntityAttackRequest(i);
                 }
             }
-            
         }
+
+        amountSpawned = pool.Length;
     }
 
     public bool EntityAttackRequest(int index)//Allow an entity to ask if it can attack the player

@@ -125,7 +125,11 @@ public class ChatManager : MonoBehaviour
         chatScrollbar.value = value;
 
     }
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="type"></param>
+/// <returns></returns>
     private Color MessageTypeColor(Message.Type type)
     {
          Color color = playerMessageColor;
