@@ -3,24 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class DensityGenerator
 {
-    public static int octave;
-    public static float lacunarity;
-    public static float persistence;
-    public static float isoLevel;
-    public static float spawnSize;
-    public static float bossSize;
-    public static float tunnelSize;
-    public static Vector3 endZone;
-    public static Vector3 playerSpawn;
-    public static float seed;
-    public static float precision;
+    public int octave;
+    public float lacunarity;
+    public float persistence;
+    public float isoLevel;
+    public float spawnSize;
+    public float bossSize;
+    public float tunnelSize;
+    public int size;
+    public Vector3 endZone;
+    public Vector3 playerSpawn;
+    public float seed;
+    public float precision;
 
     //use a compute buffer and un compute shader to generate the 
     //density array for the world gen
     //it's done on the gpu (see shader/densityShader.copute)
-    public static void find(ComputeBuffer pointsBuffer, int size, Vector3 chunkPos, ComputeShader densityShader)
+    public void find(ComputeBuffer pointsBuffer, int size, Vector3 chunkPos, ComputeShader densityShader)
     {
         int numThreadEachAxis = Mathf.CeilToInt(size / 8.0f);
 

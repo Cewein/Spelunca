@@ -20,26 +20,26 @@ public class chunk : MonoBehaviour
     Vector4[] dataArray;
 
     //Create a the chunk with a given size
-    public void createMarchingBlock(int size, Vector3 playerSpawn, ComputeShader densityShader, ComputeShader marchShader, bool defaultNormal)
+    public void createMarchingBlock(DensityGenerator densityGenerator, Vector3 playerSpawn, ComputeShader densityShader, ComputeShader marchShader, bool defaultNormal)
     {
         //init
         Vector3 pos = GetComponent<Transform>().position;
         bufferList = new List<ComputeBuffer>();
 
-        size = (int)(size / DensityGenerator.precision);
+        int size = (int)(densityGenerator.size / densityGenerator.precision);
 
         //create the 3 buffer needed for the GPU gen
         createBuffer(size);
 
         //get the number of gpu group thread to run 
         //at the same time
-        int numThreadEachAxis = Mathf.CeilToInt((size-1) / 8.0f);
+        int numThreadEachAxis = Mathf.CeilToInt((size - 1) / 8.0f);
 
         //create denstiy on the gpu
         //the data stay on the gpu with the compute buffer
 
         Vector3 chunkPos = pos - Vector3.one;
-        DensityGenerator.find(pointsBuffer,size + 3, pos - Vector3.one, densityShader);
+        densityGenerator.find(pointsBuffer, size + 3, pos - Vector3.one, densityShader);
 
         pointsBuffer.GetData(dataArray);
 
@@ -51,8 +51,8 @@ public class chunk : MonoBehaviour
         marchShader.SetBuffer(0, "points", pointsBuffer);
         marchShader.SetBuffer(0, "triangles", triangleBuffer);
         marchShader.SetInt("size", size + 3);
-        marchShader.SetFloat("isoLevel", DensityGenerator.isoLevel);
-        marchShader.SetFloat("precision", DensityGenerator.precision);
+        marchShader.SetFloat("isoLevel", densityGenerator.isoLevel);
+        marchShader.SetFloat("precision", densityGenerator.precision);
 
         //lauch the compute shader on each threadGroup
         marchShader.Dispatch(0, numThreadEachAxis, numThreadEachAxis, numThreadEachAxis);
@@ -172,6 +172,11 @@ public struct ChunkData
         }
 
         toRemove.Clear();
+
+        foreach (var mineral in mineralDictionary)
+        {
+            mineral.Value.SetActive(val);
+        }
 
         foreach (var fluff in flufflDictionary)
         {
