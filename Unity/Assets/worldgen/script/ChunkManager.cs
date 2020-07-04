@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Xml.Linq;
 
 public class ChunkManager : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class ChunkManager : MonoBehaviour
     public float seed = 0;
 
     //this variable is the stat of if we are in continue mode or new game mode
-    public static bool randomSeed = true;
+    public static bool randomSeed = false;
 
     [Range(0, 1)]
     public float isoLevel = 0f;
@@ -102,7 +103,7 @@ public class ChunkManager : MonoBehaviour
         {
             isoLevel = densityGenerator.isoLevel;
             boss.position = densityGenerator.endZone;
-            playerSpawn = player.position = densityGenerator.playerSpawn;
+            playerSpawn = densityGenerator.playerSpawn;
             lacunarity = densityGenerator.lacunarity;
             octave = densityGenerator.octave;
             persistence = densityGenerator.persistence;
@@ -112,6 +113,7 @@ public class ChunkManager : MonoBehaviour
             seed = densityGenerator.seed;
             precision = densityGenerator.precision;
             chunkSize = densityGenerator.size;
+            player.position = densityGenerator.playerPos;
         }
         else
         {
@@ -123,11 +125,7 @@ public class ChunkManager : MonoBehaviour
         chunks = new GameObject[arraySize];
         chunkDictionary = new Dictionary<Vector3, ChunkData>();
 
-
-
         //set static variable for the density generator
-
-
         portal.spawnCoord = playerSpawn;
     }
 
@@ -147,6 +145,7 @@ public class ChunkManager : MonoBehaviour
     void Update()
     {
         playerPos = player;
+        densityGenerator.playerPos = player.transform.position;
 
         playerChunk.x = Mathf.Floor(player.position.x / chunkSize);
         playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
@@ -163,17 +162,50 @@ public class ChunkManager : MonoBehaviour
     {
         Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
         File.WriteAllBytes("C:\\ProgramData\\spelunca\\world.json", System.Text.Encoding.ASCII.GetBytes(JsonUtility.ToJson(densityGenerator, true)));
+        new XDocument(
+            new XElement("world",
+                new XAttribute("isoLevel", densityGenerator.isoLevel),
+                new XAttribute("endZone", densityGenerator.endZone),
+                new XAttribute("playerSpawn", densityGenerator.playerSpawn),
+                new XAttribute("playerPos", densityGenerator.playerPos),
+                new XAttribute("lacunarity", densityGenerator.lacunarity),
+                new XAttribute("octave", densityGenerator.octave),
+                new XAttribute("persistence", densityGenerator.persistence),
+                new XAttribute("spawnSize", densityGenerator.spawnSize),
+                new XAttribute("bossSize", densityGenerator.bossSize),
+                new XAttribute("tunnelSize", densityGenerator.tunnelSize),
+                new XAttribute("seed", densityGenerator.seed),
+                new XAttribute("precision", densityGenerator.precision),
+                new XAttribute("size", densityGenerator.size)
+            )
+        )
+        .Save("C:\\ProgramData\\spelunca\\world.xml");
     }
 
     public bool Load()
     {
         Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
-        if (File.Exists("C:\\ProgramData\\spelunca\\world.json"))
+        if (File.Exists("C:\\ProgramData\\spelunca\\world.xml"))
         {
-            densityGenerator = JsonUtility.FromJson<DensityGenerator>("C:\\ProgramData\\spelunca\\world.json");
+            densityGenerator = new DensityGenerator();
+            XDocument doc = XDocument.Load("C:\\ProgramData\\spelunca\\world.xml");
+            XElement world =  doc.Element("world");
+            densityGenerator.isoLevel = float.Parse(world.Attribute("isoLevel").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            densityGenerator.endZone = Spelunca.Utils.StringToVector3(world.Attribute("endZone").Value);
+            densityGenerator.playerSpawn = Spelunca.Utils.StringToVector3(world.Attribute("playerSpawn").Value);
+            densityGenerator.playerPos = Spelunca.Utils.StringToVector3(world.Attribute("playerPos").Value);
+            densityGenerator.lacunarity = float.Parse(world.Attribute("lacunarity").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            densityGenerator.octave = int.Parse(world.Attribute("octave").Value);
+            densityGenerator.persistence = float.Parse(world.Attribute("persistence").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            densityGenerator.spawnSize = float.Parse(world.Attribute("spawnSize").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            densityGenerator.bossSize = float.Parse(world.Attribute("bossSize").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            densityGenerator.tunnelSize = float.Parse(world.Attribute("tunnelSize").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            densityGenerator.precision = float.Parse(world.Attribute("precision").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            densityGenerator.size = int.Parse(world.Attribute("size").Value);
+            densityGenerator.seed = float.Parse(world.Attribute("seed").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
             return true;
         }
-        return false;
+        return false;  
     }
 
     void SetDensityValue()
@@ -204,6 +236,11 @@ public class ChunkManager : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.F2))
             {
                 player.position = new Vector3(boss.position.x, boss.position.y + 30, boss.position.z);
+            }
+
+            if (Input.GetKeyUp(KeyCode.F4))
+            {
+                Save();
             }
         }
     }
@@ -266,8 +303,6 @@ public class ChunkManager : MonoBehaviour
                 }
             }
         }
-
-        Save();
     }
 
     /// <summary>
