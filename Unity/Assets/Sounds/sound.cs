@@ -8,6 +8,8 @@ public class sound : MonoBehaviour
     public AudioSource uiClick;
     public AudioSource[] gameMusic;
 
+    private int musicCount;
+
     [Header("Config")]
     [Range(0, 1)]
     public float igVolume= 0.2f;
@@ -25,22 +27,26 @@ public class sound : MonoBehaviour
         selectedMusic = Random.Range(0, gameMusic.Length);
         gameMusic[selectedMusic].volume = igVolume;
         gameMusic[selectedMusic].Play();
+        musicCount = gameMusic.Length;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!gameMusic[selectedMusic].isPlaying)
+        if (musicCount != 0)
         {
-            int temp = selectedMusic;
-            while(temp == selectedMusic)
+            if (!gameMusic[selectedMusic].isPlaying)
             {
-                temp = Random.Range(0, gameMusic.Length);
+                int temp = selectedMusic;
+                while (temp == selectedMusic)
+                {
+                    temp = Random.Range(0, gameMusic.Length);
+                }
+                selectedMusic = temp;
+
+                gameMusic[selectedMusic].Play();
             }
-            selectedMusic = temp;
-            
-            gameMusic[selectedMusic].Play();
+            gameMusic[selectedMusic].volume = igVolume;
         }
-        gameMusic[selectedMusic].volume = igVolume;
     }
 }

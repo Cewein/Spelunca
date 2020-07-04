@@ -86,8 +86,6 @@ using System.Collections.Generic;
          loginLayout.SetActive(true);
      }
      
-     
-     
      public void hideLoginView()
      {
          loginMessageText.gameObject.SetActive(false);
