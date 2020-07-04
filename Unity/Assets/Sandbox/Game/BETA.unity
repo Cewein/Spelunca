@@ -1586,6 +1586,7 @@ MonoBehaviour:
   - {fileID: 734280921}
   - {fileID: 734280920}
   - {fileID: 734280919}
+  igVolume: 0.2
 --- !u!4 &734280925
 Transform:
   m_ObjectHideFlags: 0
