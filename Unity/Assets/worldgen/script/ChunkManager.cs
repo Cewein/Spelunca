@@ -32,6 +32,7 @@ public class ChunkManager : MonoBehaviour
 
     //this variable is the stat of if we are in continue mode or new game mode
     public static bool randomSeed = false;
+    public static bool useDefaultConfig = true;
 
     [Range(0, 1)]
     public float isoLevel = 0f;
@@ -95,6 +96,11 @@ public class ChunkManager : MonoBehaviour
         if (randomSeed)
         {
             seed = UnityEngine.Random.Range(-20f, 20f);
+
+            if(!useDefaultConfig)
+            {
+                loadConfig();
+            }
 
             //set variable for the density generator
             SetDensityValue();
@@ -206,6 +212,26 @@ public class ChunkManager : MonoBehaviour
             return true;
         }
         return false;  
+    }
+
+    public bool loadConfig()
+    {
+        Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
+        if (File.Exists("C:\\ProgramData\\spelunca\\world.xml"))
+        {
+            densityGenerator = new DensityGenerator();
+            XDocument doc = XDocument.Load("C:\\ProgramData\\spelunca\\config.xml");
+            XElement config = doc.Element("config");
+            isoLevel = float.Parse(config.Attribute("isoLevel").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            lacunarity = float.Parse(config.Attribute("lacunarity").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            octave = int.Parse(config.Attribute("octave").Value);
+            persistence = float.Parse(config.Attribute("persistence").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            precision = float.Parse(config.Attribute("precision").Value, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+            chunkSize = int.Parse(config.Attribute("size").Value);
+            viewRange = int.Parse(config.Attribute("viewDistance").Value);
+            return true;
+        }
+        return false;
     }
 
     void SetDensityValue()

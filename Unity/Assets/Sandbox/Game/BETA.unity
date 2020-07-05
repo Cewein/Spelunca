@@ -1906,6 +1906,7 @@ MonoBehaviour:
   fogColor: {r: 0.13333334, g: 0.14509805, b: 0.19215687, a: 0}
   startFogDistance: 50
   endFogDistance: 70
+  CKM: {fileID: 1869160574}
 --- !u!4 &826256055
 Transform:
   m_ObjectHideFlags: 0
