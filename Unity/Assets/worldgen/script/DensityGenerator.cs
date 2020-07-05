@@ -16,6 +16,7 @@ public class DensityGenerator
     public int size;
     public Vector3 endZone;
     public Vector3 playerSpawn;
+    public Vector3 playerPos; //not use only for data saving
     public float seed;
     public float precision;
 

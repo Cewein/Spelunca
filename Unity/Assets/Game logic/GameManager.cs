@@ -5,6 +5,7 @@ using System.Timers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -109,6 +110,16 @@ public class GameManager : MonoBehaviour
     {
         ChunkManager.randomSeed = true;
         LoadLevel(gameScenePath);
+    }
+
+    public void ContinueGame()
+    {
+        Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
+        if (File.Exists("C:\\ProgramData\\spelunca\\world.xml"))
+        {
+            ChunkManager.randomSeed = false;
+            LoadLevel(gameScenePath);
+        }
     }
 
     public void StartNewScore()
