@@ -41,6 +41,14 @@ public class debugScreenMaster : MonoBehaviour
         if(Input.GetKeyDown(display))
         {
             showing = !showing;
+            if (showing)
+            {
+                Debug.Log("Show Debugger");
+            }
+            else
+            {
+                Debug.Log("Hide Debugger");
+            }
         }
         
         if (showing)
