@@ -149,7 +149,7 @@ MonoBehaviour:
   reloadInputName: Reload
   crouchInputName: Crouch
   switchWeaponInputName: SelectPickaxe
-  switchWeaponInputName2: 
+  switchWeaponInputName2: Horizontal
   cameraSensitivity: 50
 --- !u!114 &2474185556268879231
 MonoBehaviour:
@@ -163,7 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96938d5bfebc60447b292326846c0c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
+  artifactSocket: {fileID: 9022982878203977301}
+  playerCamera: {fileID: 4027019231142951144}
   hook: {fileID: 0}
   launchGrapplingHook: 0
   weapons:
@@ -359,6 +360,7 @@ GameObject:
   - component: {fileID: 4359365164128686354}
   - component: {fileID: 4027019231142951144}
   - component: {fileID: 4960815634591792199}
+  - component: {fileID: 89435936021007946}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -435,6 +437,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2563191609042716782}
   m_Enabled: 1
+--- !u!114 &89435936021007946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2563191609042716782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cccf291d0798914cb848090d9da0d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputHandler: {fileID: 0}
+  fear: 1.3
+  minHeight: 0.8
+  maxHeight: 1
 --- !u!1 &2756053813625259436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1066,12 @@ GameObject:
 --- !u!4 &3711554981447025947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8280218019109568679, guid: c64ee70d7595dae438d3c883ed3aa4f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4713907604574422460}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9022982878203977301 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4346882809951706089, guid: c64ee70d7595dae438d3c883ed3aa4f7,
     type: 3}
   m_PrefabInstance: {fileID: 4713907604574422460}
   m_PrefabAsset: {fileID: 0}

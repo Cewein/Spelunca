@@ -88,10 +88,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6902260913601319817}
-  - component: {fileID: 1265291895204945581}
   - component: {fileID: 8093034665770292783}
-  - component: {fileID: 985337230899952790}
-  - component: {fileID: 3128893638381751823}
+  - component: {fileID: 8152377707078474567}
   m_Layer: 11
   m_Name: BlackElysian
   m_TagString: Untagged
@@ -114,19 +112,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1265291895204945581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6902260913601319816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9de5c5eb989fd464a8bc7cc319ef5d49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 8093034665770292783}
 --- !u!95 &8093034665770292783
 Animator:
   serializedVersion: 3
@@ -146,7 +131,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &985337230899952790
+--- !u!114 &8152377707078474567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,43 +140,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6902260913601319816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
+  m_Script: {fileID: 11500000, guid: a9ca10d25bbdb7e4d8a3709c86331d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magazine: {fileID: 0}
-  controller: {fileID: 3128893638381751823}
-  isPickaxe: 1
-  pickaxeDamage: 20
-  name: Goliath
-  icon: {fileID: 21300000, guid: 167efa908efb5254383b7c63760ed987, type: 3}
+  raycastReticle: {fileID: 0}
+  damage: 5
   crosshair:
     sprite: {fileID: 21300000, guid: 167efa908efb5254383b7c63760ed987, type: 3}
-    size: 50
-    color: {r: 0, g: 1, b: 0, a: 1}
-    scope: 2
-  normalResourceAmmo: {fileID: 0}
-  AmmoType: []
-  muzzle: {fileID: 0}
-  shootMode: 0
-  firingRate: 1
-  bulletSpreadAngle: 0
-  bulletsPerShot: 1
-  recoil: 1
-  aimFovRatio: 1
-  zoomSpeed: 10
---- !u!114 &3128893638381751823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6902260913601319816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5809aa5aeb938b74280a7fa906e35daf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputHandler: {fileID: 0}
-  IA: 0
-  iaInputHandler: {fileID: 0}
-  raycastReticle: {fileID: 0}
+    size: 30
+    color: {r: 0, g: 0.9811321, b: 0.03784851, a: 1}
+    scope: 10

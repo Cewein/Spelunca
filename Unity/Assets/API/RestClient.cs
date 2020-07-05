@@ -2,6 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
 public enum EnvironmentMode {Local,PreProd,Prod}
 
 public struct LoginInfo
@@ -57,9 +61,26 @@ public class RestClient : MonoBehaviour
             return _instance;
         }
     }
-    
+
+    private static string GetHash(HashAlgorithm hashAlgorithm, string input)
+    {
+        byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+        var sBuilder = new StringBuilder();
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            sBuilder.Append(data[i].ToString("x2"));
+        }
+
+        return sBuilder.ToString();
+    }
+
     public IEnumerator login(LoginInfo loginInfo, System.Action<long,string> callBack)
     {
+        SHA256 sha256Hash = SHA256.Create();
+        loginInfo.password = GetHash(sha256Hash, loginInfo.password);
+
         string url = getServerUrl() + KEY.URL_GET_USER;
         var jsonData = JsonUtility.ToJson(loginInfo);
         yield return Post(url, jsonData, callBack);

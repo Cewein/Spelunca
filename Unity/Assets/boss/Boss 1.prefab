@@ -1282,7 +1282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3255284513589119698}
-  - component: {fileID: 568981547921675915}
+  - component: {fileID: 102599512291730167}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -1304,9 +1304,9 @@ Transform:
   - {fileID: 2930924584484533444}
   - {fileID: 6277167662263690120}
   m_Father: {fileID: 4855804710400190969}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &568981547921675915
+--- !u!114 &102599512291730167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1315,20 +1315,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2544579620618092096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
+  m_Script: {fileID: 11500000, guid: b277ba612a1ca4a46aa67a80d24f29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magazine: {fileID: 3940946767982835455}
-  controller: {fileID: 4552334123100878343}
-  isPickaxe: 0
-  pickaxeDamage: 0
-  name: Rifle
-  icon: {fileID: 21300000, guid: a236bc108fbb2354f9ebaf37770a4c78, type: 3}
+  magazine: {fileID: 0}
+  controller: {fileID: 0}
+  scriptableObject: {fileID: 11400000, guid: 2beb2f2d3efe66348a5f3c85c7dc8e9f, type: 2}
+  damage: 5
   crosshair:
     sprite: {fileID: 21300000, guid: a236bc108fbb2354f9ebaf37770a4c78, type: 3}
-    size: 60
-    color: {r: 0.8893349, g: 0.9622642, b: 0, a: 1}
+    size: 30
+    color: {r: 0, g: 0.9596045, b: 1, a: 1}
     scope: 100
+  shootingMode: 1
+  firingRate: 0.5
+  bulletSpreadAngle: 0
+  bulletsPerShot: 1
+  recoil: 1
+  reloadCooldown: 30
+  normalFOV: 75
+  aimFovRatio: 0.8
+  zoomSpeed: 10
   normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
     type: 3}
   AmmoType:
@@ -1336,16 +1343,6 @@ MonoBehaviour:
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 6277167662263690120}
-  damage: 5
-  shootMode: 1
-  firingRate: 0.1
-  bulletSpreadAngle: 0
-  bulletsPerShot: 1
-  recoil: 0.03
-  reloadCooldown: 30
-  aimFovRatio: 1
-  zoomSpeed: 10
-  ai: 1
 --- !u!1 &2669543393682583254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,86 +1460,6 @@ Transform:
   m_Father: {fileID: 279629205196209772}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2886311984322647592
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 85094031670889827}
-  - component: {fileID: 1805812532437574771}
-  - component: {fileID: 6777539785514524200}
-  m_Layer: 0
-  m_Name: artefact fusil
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &85094031670889827
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2886311984322647592}
-  m_LocalRotation: {x: -0.7071068, y: -0.000000029802319, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_Children: []
-  m_Father: {fileID: 436787063820232035}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1805812532437574771
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2886311984322647592}
-  m_Mesh: {fileID: -7487703072444178386, guid: 7dd21a3d493413941acc8690d8a16af2, type: 3}
---- !u!23 &6777539785514524200
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2886311984322647592}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 5337791293956459085, guid: 7dd21a3d493413941acc8690d8a16af2, type: 3}
-  - {fileID: -4791275291853029351, guid: 7dd21a3d493413941acc8690d8a16af2, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1 &3030811573425363658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,79 +1653,6 @@ Transform:
   m_Father: {fileID: 997912494149120695}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3729939991741283997
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 436787063820232035}
-  - component: {fileID: 4377583117757651746}
-  m_Layer: 0
-  m_Name: Fusil
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &436787063820232035
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3729939991741283997}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 85094031670889827}
-  - {fileID: 6013328057219528788}
-  m_Father: {fileID: 4855804710400190969}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4377583117757651746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3729939991741283997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magazine: {fileID: 3940946767982835455}
-  controller: {fileID: 4552334123100878343}
-  isPickaxe: 0
-  pickaxeDamage: 5
-  name: Fusil
-  icon: {fileID: 21300000, guid: 0731b10435924fe419a2342a08bcca29, type: 3}
-  crosshair:
-    sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    size: 20
-    color: {r: 0.8584906, g: 0.8544411, b: 0.8544411, a: 1}
-    scope: 60
-  normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
-    type: 3}
-  AmmoType:
-  - {fileID: 526571972454017004, guid: 69643c5a51cfe0541a3d330935ce419b, type: 3}
-  - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
-  - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
-  muzzle: {fileID: 6277167662263690120}
-  damage: 5
-  shootMode: 0
-  firingRate: 0.1
-  bulletSpreadAngle: 0
-  bulletsPerShot: 1
-  recoil: 1.26
-  reloadCooldown: 30
-  aimFovRatio: 1
-  zoomSpeed: 10
-  ai: 0
 --- !u!1 &3755787701137637119
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,7 +3482,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 436787063820232035}
   - {fileID: 3255284513589119698}
   m_Father: {fileID: 997912494149120695}
   m_RootOrder: 1
@@ -3722,36 +3565,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &7889034573963552676
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6013328057219528788}
-  m_Layer: 0
-  m_Name: pt_muzzleFX
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6013328057219528788
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7889034573963552676}
-  m_LocalRotation: {x: -0.7071068, y: -0.000000029802319, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -2.88, y: 0.59, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_Children: []
-  m_Father: {fileID: 436787063820232035}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8181681211110542262
 GameObject:
   m_ObjectHideFlags: 0

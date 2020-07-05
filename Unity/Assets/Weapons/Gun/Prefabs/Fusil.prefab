@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3020534051949613628}
   - component: {fileID: 3587908525729364780}
   - component: {fileID: 8560199004182921591}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: artefact fusil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,8 +89,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3371648697353894460}
-  - component: {fileID: 1442571915609982077}
-  m_Layer: 11
+  - component: {fileID: 148954504098557863}
+  - component: {fileID: 1849588733829599157}
+  m_Layer: 0
   m_Name: Fusil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +114,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1442571915609982077
+--- !u!65 &148954504098557863
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947296168385012162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5168333, y: 0.4996426, z: 1}
+  m_Center: {x: -1.5287852, y: 0.60913956, z: 0}
+--- !u!114 &1849588733829599157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,20 +136,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1947296168385012162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d210408a1449728418b4a4f2ecd99cc2, type: 3}
+  m_Script: {fileID: 11500000, guid: b277ba612a1ca4a46aa67a80d24f29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   magazine: {fileID: 0}
   controller: {fileID: 0}
-  isPickaxe: 0
-  pickaxeDamage: 0
-  name: Shotgun
-  icon: {fileID: 21300000, guid: 0731b10435924fe419a2342a08bcca29, type: 3}
+  scriptableObject: {fileID: 11400000, guid: b43af431e61cceb45836b71d1cc8a796, type: 2}
+  damage: 33
   crosshair:
-    sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    size: 20
-    color: {r: 0.8584906, g: 0.8544411, b: 0.8544411, a: 1}
-    scope: 65
+    sprite: {fileID: 21300000, guid: a236bc108fbb2354f9ebaf37770a4c78, type: 3}
+    size: 50
+    color: {r: 0.92265, g: 1, b: 0, a: 1}
+    scope: 200
+  shootingMode: 0
+  firingRate: 0.5
+  bulletSpreadAngle: 0
+  bulletsPerShot: 10
+  recoil: 1
+  reloadCooldown: 30
+  normalFOV: 75
+  aimFovRatio: 0.8
+  zoomSpeed: 10
   normalResourceAmmo: {fileID: 526571972454017004, guid: 72d8bac5b80be164694da9038890cdb7,
     type: 3}
   AmmoType:
@@ -143,16 +164,6 @@ MonoBehaviour:
   - {fileID: 526571972454017004, guid: 3bae9bddd21cb9b4db0e5968a20312a6, type: 3}
   - {fileID: 526571972454017004, guid: 7eefdc8753011a14ab1c163207bc8aaa, type: 3}
   muzzle: {fileID: 8914564469236426507}
-  damage: 25
-  shootMode: 0
-  firingRate: 0.7
-  bulletSpreadAngle: 1
-  bulletsPerShot: 5
-  recoil: 1.2
-  reloadCooldown: 35
-  aimFovRatio: 0.8
-  zoomSpeed: 10
-  ai: 0
 --- !u!1 &5025520209143609595
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8914564469236426507}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: pt_muzzleFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
