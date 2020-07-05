@@ -574,7 +574,7 @@ MonoBehaviour:
   - name: {fileID: 1342170112331793385}
     value: {fileID: 1342170112331793384}
     slider: {fileID: 1342170112331793383}
-    defaultValue: 0
+    defaultValue: 0.3
   - name: {fileID: 1342170112331793382}
     value: {fileID: 1342170112331793381}
     slider: {fileID: 1342170112331793380}
@@ -582,11 +582,11 @@ MonoBehaviour:
   - name: {fileID: 1342170112331793379}
     value: {fileID: 1342170112331793378}
     slider: {fileID: 1342170112331793377}
-    defaultValue: 2
+    defaultValue: 4
   - name: {fileID: 1342170112331793376}
     value: {fileID: 1342170112331793375}
     slider: {fileID: 1342170112331793374}
-    defaultValue: 0.5
+    defaultValue: 0.141
   - name: {fileID: 1342170112331793373}
     value: {fileID: 1342170112331793372}
     slider: {fileID: 1342170112331793371}
@@ -598,7 +598,7 @@ MonoBehaviour:
   - name: {fileID: 1342170112331793367}
     value: {fileID: 1342170112331793366}
     slider: {fileID: 1342170112331793365}
-    defaultValue: 5
+    defaultValue: 10
 --- !u!1 &1406892951 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5286809895444758891, guid: 2ed9664645478a84db71a31aeb574fd3,
@@ -1003,7 +1003,7 @@ PrefabInstance:
     - target: {fileID: 1342170111817451526, guid: 97700b4ca75c88542937c5ce767fa7d7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1342170111817451526, guid: 97700b4ca75c88542937c5ce767fa7d7,
         type: 3}
@@ -1014,11 +1014,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1176374581}
+      objectReference: {fileID: 1176374582}
     - target: {fileID: 1342170111817451526, guid: 97700b4ca75c88542937c5ce767fa7d7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: playButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342170111817451526, guid: 97700b4ca75c88542937c5ce767fa7d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: setCustomWorldGen
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342170111817451526, guid: 97700b4ca75c88542937c5ce767fa7d7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1342170111875086013, guid: 97700b4ca75c88542937c5ce767fa7d7,
         type: 3}
