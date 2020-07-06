@@ -7,9 +7,12 @@ public class GraphicsManager : MonoBehaviour
     [SerializeField] private Color fogColor =  new Color(0.326f, 0.435f, 0.528f);
     [SerializeField] private float startFogDistance = 50.0f;
     [SerializeField] private float endFogDistance = 70.0f;
+    public ChunkManager CKM;
     // Start is called before the first frame update
     void Start()
     {
+        startFogDistance = CKM.viewRange * 5;
+        endFogDistance = CKM.viewRange * 7;
         RenderSettings.fog = true;
         RenderSettings.fogMode = FogMode.Linear;
         RenderSettings.fogColor = fogColor;
