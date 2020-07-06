@@ -32,9 +32,7 @@ using System.Collections.Generic;
      public InputField passwordInput;
      public Animator[] loginInputFieldAnimators;
 
-    public InputField usernameInput;
-    public InputField passwordInput;
-    public Animator[] loginInputFieldAnimators;
+    
 
     public void Start()
     {
@@ -105,39 +103,14 @@ using System.Collections.Generic;
          mainLayout.SetActive(false);
          creditsLayout.SetActive(true);
      }
-     public void showOptionView()
-     {
-         mainLayout.SetActive(false);
-         optionLayout.SetActive(true);
-     }
-     
+
      public void hideCreditsView()
      {
          mainLayout.SetActive(true);
          creditsLayout.SetActive(false);
      }
 
-     
-     public void hideOptionView()
-     {
-         mainLayout.SetActive(true);
-         optionLayout.SetActive(false);
-     }
-
-     public void login()
-     {
-         LoginInfo loginInfo = new LoginInfo();
-         loginInfo.username = usernameInput.text;
-         loginInfo.password = passwordInput.text;
-         StartCoroutine(RestClient.Instance.login(loginInfo, loginCallBack));
-     }
-     public void logout()
-     {
-         RestClient.Instance.logout();
-         refresh();
-     }
-
-    public void showOptionView()
+     public void showOptionView()
     {
         mainLayout.SetActive(false);
         optionLayout.SetActive(true);
