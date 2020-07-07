@@ -57,9 +57,11 @@ public class ChunkManager : MonoBehaviour
     public structure[] rare;
 
     //chunks 
-    private Vector3 playerChunk;
+    [HideInInspector]
+    public Vector3 playerChunk;
     private GameObject[,,] chunks;
-    private Dictionary<Vector3, ChunkData> chunkDictionary;
+    [HideInInspector]
+    public Dictionary<Vector3, ChunkData> chunkDictionary;
 
     [HideInInspector]
     public static Transform playerPos;
@@ -110,6 +112,10 @@ public class ChunkManager : MonoBehaviour
     void Update()
     {
         playerPos = player;
+
+        playerChunk.x = Mathf.Floor(player.position.x / chunkSize);
+        playerChunk.y = Mathf.Floor(player.position.y / chunkSize);
+        playerChunk.z = Mathf.Floor(player.position.z / chunkSize);
 
         StartCoroutine(updateChunks());
 

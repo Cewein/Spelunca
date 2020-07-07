@@ -16,8 +16,8 @@ public class debugScreenMaster : MonoBehaviour
     public Text leftArea;
 
     //data node
-    private float fps;
-    private float msBetweenFrame;
+    private float  fps;
+    private float  msBetweenFrame;
     private int    totalMB;
     private string procType;
     private string GraphName;
@@ -35,10 +35,17 @@ public class debugScreenMaster : MonoBehaviour
 
     void Update()
     {
-        rigthArea.text = "Mem: " + (GC.GetTotalMemory(false) / 1024 / 1024).ToString() + " / " + SystemInfo.systemMemorySize + "MB"  + "\n\n"
+        rigthArea.text = "Mem: " + (GC.GetTotalMemory(false) / 1024 / 1024).ToString() + " / " + SystemInfo.systemMemorySize + "MB\n\n"
             + SystemInfo.processorType + "\n\n"
             + "Display: " + Screen.currentResolution + "\n"
             + SystemInfo.graphicsDeviceName + "\n"
-            + SystemInfo.graphicsDeviceVersion + "\n";
+            + SystemInfo.graphicsDeviceVersion;
+
+        leftArea.text = "Fps: " + (int)(1f / Time.smoothDeltaTime) + "\n"
+            + "Rending: " + (int)(Time.deltaTime * 1000) + "ms\n\n"
+            + "Pos: " + ChunkManager.playerPos.position + "\n"
+            + "Chunk: " + CKM.playerChunk + "\n"
+            + "Cached chunk: " + CKM.chunkDictionary.Count + "\n\n"
+            + "Pool size: " + pl.poolSize;
     }
 }
