@@ -13,14 +13,14 @@ public class ChooseLanguage : MonoBehaviour
     private void Refresh()
     {
         GetComponent<Text>().text = LocalizationSystem.Instance
-                                    .Languages[LocalizationSystem.Instance.currentLanguage]
+                                    .languages[LocalizationSystem.Instance.currentLanguage]
                                     .Language;
     }
 
     public void OnClick()
     {
         LocalizationSystem.Instance.currentLanguage = (LocalizationSystem.Instance.currentLanguage + 1) %
-                                                      LocalizationSystem.Instance.Languages.Count;
+                                                      LocalizationSystem.Instance.languages.Count;
         
         Refresh();
     }

@@ -21,12 +21,12 @@ public class LocalizedWordDrawer : PropertyDrawer
     
     private List<string> GetEnglishWord()
     {
-        return LocalizationSystem.Instance.Languages[0].Words;
+        return LocalizationSystem.Instance.languages[0].Words;
     }
 
     private int getWordIndex(string w)
     {
-        return LocalizationSystem.Instance.Languages[0].Words.IndexOf(w);
+        return LocalizationSystem.Instance.languages[0].Words.IndexOf(w);
     }
     
     private int getIndex(string s, string[] tab)
