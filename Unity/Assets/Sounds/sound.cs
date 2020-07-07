@@ -24,10 +24,13 @@ public class sound : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectedMusic = Random.Range(0, gameMusic.Length);
-        gameMusic[selectedMusic].volume = igVolume;
-        gameMusic[selectedMusic].Play();
         musicCount = gameMusic.Length;
+        if (musicCount != 0)
+        {
+            selectedMusic = Random.Range(0, gameMusic.Length);
+            gameMusic[selectedMusic].volume = igVolume;
+            gameMusic[selectedMusic].Play();
+        }
     }
 
     // Update is called once per frame
