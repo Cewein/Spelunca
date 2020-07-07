@@ -2665,8 +2665,8 @@ MonoBehaviour:
   bossSize: 50
   tunnelSize: 9
   pool: {fileID: 899804502}
-  ratioOfRejectionForSpider: 0.967
-  maxSpiderPerChunk: 10
+  ratioOfRejectionForSpider: 0.97
+  maxSpiderPerChunk: 30
   ratioOfRejectionForMineral: 0.97
   maxMineralPerChunk: 5
   minerals:
@@ -2679,7 +2679,7 @@ MonoBehaviour:
   - gameObject: {fileID: 6361500002223971637, guid: 6666f89a7cace3846a669caaa37a8e20,
       type: 3}
     area: {x: -1, y: 1}
-  ratioOfRejectionForFluff: 0.8
+  ratioOfRejectionForFluff: 0.9
   maxFluffPerChunk: 5
   Fluffs:
   - gameObject: {fileID: 8732615353163473822, guid: 96b834eb204b9fc4abbeec3014449f00,
@@ -2844,8 +2844,13 @@ PrefabInstance:
     - target: {fileID: 2363389207486039821, guid: e35d20e361e200147b7c38e0dead91b0,
         type: 3}
       propertyPath: display
-      value: 284
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2363389207486039821, guid: e35d20e361e200147b7c38e0dead91b0,
+        type: 3}
+      propertyPath: rigthArea
+      value: 
+      objectReference: {fileID: 1695402560901683371}
     - target: {fileID: 3267182635181585845, guid: e35d20e361e200147b7c38e0dead91b0,
         type: 3}
       propertyPath: m_Name
@@ -2933,3 +2938,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e35d20e361e200147b7c38e0dead91b0, type: 3}
+--- !u!114 &1695402560901683371 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8920725197608033746, guid: e35d20e361e200147b7c38e0dead91b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1695402560901683370}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
