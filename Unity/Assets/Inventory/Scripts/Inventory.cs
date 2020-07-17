@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory", order = 1)]
-
+[CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory/Inventory", order = 1)]
 public class Inventory : SingletonScriptableObject<Inventory>
 {
+  [Serializable] public class Resource_Stock : SerializableDictionary<ResourceType, float>{}
+  [Serializable] public class Consumable_Stock  : SerializableDictionary<Consumable, float>{}
+  
   #region Fields =======================================================================================================
 
   [Header("Resources stock")]
   public int ResourceStockCapacity = 100;
   [SerializeField]
-  private Dictionary<ResourceType, float> resourceStock;
-  public Dictionary<ResourceType, float> ResourceStock => resourceStock;
+  private Resource_Stock resourceStock;
+  public Resource_Stock ResourceStock => resourceStock;
   
   
   [Header("Consumables stock")]
@@ -22,14 +24,14 @@ public class Inventory : SingletonScriptableObject<Inventory>
   private int ConsumableSlotCapacity = 6;
 
   [SerializeField]
-  private Dictionary<string, List<Consumable>> consumablesStock;
-  public Dictionary<string, List<Consumable>> ConsumablesStock => consumablesStock;
+  private Consumable_Stock consumableStock;
+  public Consumable_Stock ConsumableStock => consumableStock;
 
   [Header("Artifacts stock")] 
   [SerializeField]
-  private List<Artefact> artifactsStock;
-  public List<Artefact> ArtifactsStock => artifactsStock;
-  private int ArtifactsStockCapacity = 4;
+  private List<Artefact> artifactStock;
+  public List<Artefact> ArtifactStock => artifactStock;
+  private int ArtifactStockCapacity = 4;
 
   #endregion ===========================================================================================================
 
@@ -37,26 +39,35 @@ public class Inventory : SingletonScriptableObject<Inventory>
   
   public Inventory()
   {
+    resourceStock = new Resource_Stock();
+    consumableStock = new Consumable_Stock();
+    artifactStock = new List<Artefact>();
+
+  }
+
+  private void OnEnable()
+  {
     InitResourcesStock();
     InitConsumablesStock();
     InitArtifactsStock();
   }
+
   private void InitResourcesStock()
   {
-    resourceStock = new Dictionary<ResourceType, float>();
+    resourceStock = new Resource_Stock();
     foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
-    {
       if(resourceType != ResourceType.normal)
         ResourceStock.Add(resourceType, ResourceStockCapacity );
-    }
   }
   private void InitConsumablesStock()
   {
-    consumablesStock = new Dictionary<string,List<Consumable>>();
+    consumableStock = new Consumable_Stock();
+    foreach (Consumable c in ItemDataBase.Instance.consumables) 
+      ConsumableStock.Add(c, 0 );
   }
   private void InitArtifactsStock()
   {
-    artifactsStock = Enumerable.Repeat<Artefact>(null, ArtifactsStockCapacity).ToList();
+    artifactStock = Enumerable.Repeat<Artefact>(null, ArtifactStockCapacity).ToList();
   }
 
   #endregion ===========================================================================================================
@@ -88,53 +99,22 @@ public class Inventory : SingletonScriptableObject<Inventory>
   
   public void AddConsumable(Consumable item)
   {
-    // if there is no slot assigned to this item yet.
-    if (!consumablesStock.ContainsKey(item.Name))
-    {
-      // create a new slot filled with null item.
-      List<Consumable> slot = Enumerable.Repeat<Consumable>(null, ConsumableSlotCapacity).ToList(); 
-      // set the item in this slot first socket. 
-      slot[0] = item;
-      // add this slot to the consumables stock
-      consumablesStock.Add(item.Name, slot);
-    }
-    // if a slot is already assigned to this item.
-    else
-    {
-      // find the first empty socket index of the item slot.
-      int index = ConsumableNextEmptySocket(consumablesStock[item.Name]);
-      if ( index < ConsumableSlotCapacity) 
-        // stock an item in this empty slot.
-        consumablesStock[item.Name][index] = item;
-      else 
-        // full slot notification.
-        Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
-    }
+     // Check if the item slot is full
+     if ( consumableStock[item] < ConsumableSlotCapacity) consumableStock[item]++;
+     // full slot notification.
+     else Debug.Log("you already have to lot of " + item.Name); //TODO : event here !
+    
   }
   
   public void TakeConsumable(Consumable item)
   {
-    if (!consumablesStock.ContainsKey(item.Name)) return;
-    consumablesStock[item.Name].RemoveAt(0);
+    if ( consumableStock[item] > 0) consumableStock[item]--;
+  }
 
-    if (ConsumableNextEmptySocket(consumablesStock[item.Name]) <= 0) consumablesStock.Remove(item.Name);
-  }
-  
-  private int ConsumableNextEmptySocket(List<Consumable> slot)
-  {
-    int counter = 0;
-    foreach (Consumable item in slot)
-    {
-      if (item != null) counter++;
-      else return counter;
-    }
-    return counter;
-  }
-  
   public string ConsumablesStockToString()
   {
-    return consumablesStock.Aggregate(" ------------------- Consumables Stock -------------------\n",
-      (current, element) => current + (element.Key + " : " + ConsumableNextEmptySocket(element.Value) +"\n"));
+    return consumableStock.Aggregate(" ------------------- Consumables Stock -------------------\n",
+      (current, element) => current + (element.Key + " : " + element.Value +"\n"));
   }
 
   #endregion ===========================================================================================================
@@ -144,19 +124,19 @@ public class Inventory : SingletonScriptableObject<Inventory>
   public void AddArtifact(Artefact a)
   {
     // Check if the artifacts stock is full
-    if(artifactsStock.Count < ArtifactsStockCapacity)
-      artifactsStock.Add(a);
+    if(artifactStock.Count < ArtifactStockCapacity)
+      artifactStock.Add(a);
     else
       // send a notification to the player.
       Debug.Log("Stock is full, choose an artifact to throw away"); //TODO : event here !
   }
   
   public void TakeArtifact(Artefact a)
-  { artifactsStock.Remove(a); }
+  { artifactStock.Remove(a); }
   
   public string ArtifactsStockToString()
   {
-    return artifactsStock.Aggregate(" ------------------- Artifacts Stock -------------------\n",
+    return artifactStock.Aggregate(" ------------------- Artifacts Stock -------------------\n",
     (current, element) => current + ("- "+element.name+"\n"));
   }
 
