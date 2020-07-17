@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using UnityEngine;
 
 public class Artefact : MonoBehaviour, ICollectible
@@ -24,7 +24,10 @@ public class Artefact : MonoBehaviour, ICollectible
 
     public void Equip()
     {
-       Debug.Log("equipped");
+        if (prefab == null) return;
+        Destroy(GameObject.FindGameObjectsWithTag("ArtefactSocket")[0].transform.GetChild(0).gameObject);
+        Instantiate(prefab,GameObject.FindGameObjectsWithTag("ArtefactSocket")[0].transform);
+        ArtefactStock.Instance.alreadyEquipedArtefact = this;
     }
 
     public bool IsReachable(Ray ray, float distance)
@@ -34,8 +37,9 @@ public class Artefact : MonoBehaviour, ICollectible
 
     public void Collect()
     { 
-        Inventory.Instance.AddArtifact(this);
-        Destroy(gameObject);
+        ArtefactStock.Instance.SetArtefact(this);
+        gameObject.SetActive(false);
+        Debug.Log("is collected");
     }    
 
     public void Emphase(bool isEmphased)
@@ -43,4 +47,3 @@ public class Artefact : MonoBehaviour, ICollectible
        //TODO
     }
 }
-*/

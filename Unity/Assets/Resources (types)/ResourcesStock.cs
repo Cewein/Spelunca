@@ -1,4 +1,4 @@
-﻿/*using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -40,4 +40,4 @@ public class ResourcesStock : SingletonScriptableObject<ResourcesStock>
                               (current, element) => current + (element.Key + " : " + element.Value +"\n"));
     }  
 
-}*/
+}

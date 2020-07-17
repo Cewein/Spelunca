@@ -1,14 +1,7 @@
 GAMEPLAY :
 
-- consumable callback to use it
-- can switch artefact
-- artefacts menu HUD
-- add a grenade launcher artefact
-- better consumable menu HUD
+- fix small bug than impact gameplay
 - boss state machin and IA 
 - cinematic when the player enter the boss area
-- debug gauge life
 - precistent inventory between each party
-- loose inventory if the player die
 - safe zone to chose equipement before the next party
-- menu "continue game" callback to continue with the same inventory 

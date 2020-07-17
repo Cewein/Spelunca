@@ -1,4 +1,7 @@
-﻿/*
+﻿using System.Linq;
+using UI.Menu.RingMenu;
+using UnityEngine;
+
 public class MenusManager : MonoBehaviour
 {
     [Header("Menus")]
@@ -17,14 +20,20 @@ public class MenusManager : MonoBehaviour
 
     [Header("Objects linked")]
     [Tooltip("The gun magazine.")] [SerializeField]
-    private GunMagazine gunMagazine;
+    private GunLoader gunMagazine;
     public Resource[] list;
     private void Start()
     {
         resourceLoaderSelectionMenu.callback += (type,artefact) =>
         {
-            gunMagazine.CurrentResource = list.First(item => item.Type == type);
+            gunMagazine.CurrentResource = (type == ResourceType.normal) ? gunMagazine.NormalResource : list.First(item => item.Type == type);
         };
+        artefactSelectionMenu.callback += (type,artefact) =>
+        {
+            if (artefact == null) return;
+            artefact.Equip();
+        };
+        ArtefactStock.Instance.Stock[0] = ArtefactStock.Instance.alreadyEquipedArtefact;
 
     }
 
@@ -36,4 +45,3 @@ public class MenusManager : MonoBehaviour
         Cursor.lockState = (artefactSelectionMenu.isActiveAndEnabled || resourceLoaderSelectionMenu.isActiveAndEnabled) ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
-*/

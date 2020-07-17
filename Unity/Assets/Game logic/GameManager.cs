@@ -3,14 +3,15 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Timers;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
-using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform artifactSocket;
-    public UnityEvent update;
+    [SerializeField]
+    private ResourcesStock resourcesStock;
+    [SerializeField]
+    private ConsumableStock consumableStock;
+
 
     [SerializeField] private PlayerStats player = null;
     [SerializeField] private GameObject[] mainUI = null;
@@ -57,7 +58,6 @@ public class GameManager : MonoBehaviour
 
         if (player != null) player.die += PlayerDie;
         if (gameOverScreen != null) gameOverScreen.SetActive(false);
-        Inventory.Instance.artifactSocket = artifactSocket;
 
     }
     private IEnumerator DebugResourcesStockNotLoading()
@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         if (_instance == null) _instance = this;
         else if (_instance != this) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+        //  initRun();
     }
 
     void PlayerDie(bool isDie)
@@ -94,8 +95,6 @@ public class GameManager : MonoBehaviour
             //count--;   
             //if (count<1)LoadLevel(mainMenuPath);
         }
-        
-        update?.Invoke();
     }
 
     
@@ -108,18 +107,7 @@ public class GameManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        ChunkManager.randomSeed = true;
         LoadLevel(gameScenePath);
-    }
-
-    public void ContinueGame()
-    {
-        Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
-        if (File.Exists("C:\\ProgramData\\spelunca\\world.xml"))
-        {
-            ChunkManager.randomSeed = false;
-            LoadLevel(gameScenePath);
-        }
     }
 
     public void StartNewScore()

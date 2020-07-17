@@ -8,7 +8,6 @@ public class MinerController : MonoBehaviour
 {
     #region SerializedFields ============================================================================================
 
-    public Transform artifactSocket; 
     [Header("Linked objects")]
     [Tooltip("Player view camera, if it's null, it will be the main camera.")][SerializeField]
     private Camera playerCamera;
@@ -198,13 +197,7 @@ public class MinerController : MonoBehaviour
         weaponIndex = Mathf.Abs( (weaponIndex - minerInputs.isSwitchingWeapon() ) % weapons.Length );
         switcher();
     }
-
-    public void NotifyArtifactEquipped()
-    {
-        switchWeapon?.Invoke(artifactSocket.GetChild(0).gameObject);
-    }
-
-   
+    
     private void switcher()
     {
         weapons[ Mathf.Abs( (weaponIndex - 1) % weapons.Length ) ].gameObject.SetActive(false);

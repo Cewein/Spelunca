@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1247ff52454b03a428b07271769e02c2, type: 3}
+  m_Name: ArtefactSelectionMenu
+  m_EditorClassIdentifier: 
+  Elements:
+  - {fileID: 11400000, guid: 8d63973b77738a84abfe11e7ae11a485, type: 2}
+  - {fileID: 11400000, guid: dac9e1c2b94b1f34e980acef948c97a8, type: 2}
+  - {fileID: 11400000, guid: 35d70c39cfd48264c9eb8840c99b8139, type: 2}
+  - {fileID: 11400000, guid: 11a797e2d6f4f0344968016d7373f047, type: 2}

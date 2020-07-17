@@ -1,0 +1,4 @@
+- spider spawn and die to fast
+- no fog in the build
+- artefact can be picked up infinitly
+- portal bug sometime
