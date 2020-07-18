@@ -1,8 +1,8 @@
-﻿/*using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ConsumableOLD : MonoBehaviour, ICollectible
+public class Consumable : MonoBehaviour, ICollectible
 {
     #region SerializedField ============================================================================================
 
@@ -45,4 +45,3 @@ public class ConsumableOLD : MonoBehaviour, ICollectible
     
     
 }
-*/

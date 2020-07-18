@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ac9b0fe0e9dfef4fb1b369cd1ea5191, type: 3}
-  m_Name: Artifact_Shotgun
+  m_Script: {fileID: 11500000, guid: 99a8da0934bfdba418f467f532cf458f, type: 3}
+  m_Name: Normal
   m_EditorClassIdentifier: 
-  name: Shotgun
-  icon: {fileID: 21300000, guid: 99c97480ff22c544db3606d772a95565, type: 3}
-  prefab: {fileID: 1947296168385012162, guid: fd56325d815faa34fb034900a07d524e, type: 3}
+  type: 0
+  color: {r: 0.8000001, g: 0.8000001, b: 1, a: 1}
+  gaugeIcon: {fileID: 0}
+  inventoryIcon: {fileID: 0}

@@ -164,7 +164,7 @@ public class ChunkManager : MonoBehaviour
         frustumCulling();
     }
 
-    public void Save()
+    void Save()
     {
         Directory.CreateDirectory("C:\\ProgramData\\spelunca\\");
         File.WriteAllBytes("C:\\ProgramData\\spelunca\\world.json", System.Text.Encoding.ASCII.GetBytes(JsonUtility.ToJson(densityGenerator, true)));

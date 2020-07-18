@@ -2,17 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99a8da0934bfdba418f467f532cf458f, type: 3}
-  m_Name: Resource_Normal
+  m_Script: {fileID: 11500000, guid: 89e560131a3446c4687f1e13c5600c01, type: 3}
+  m_Name: ConsumableStock
   m_EditorClassIdentifier: 
-  type: 0
-  color: {r: 0.8000001, g: 0.8000001, b: 1, a: 1}
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
+  slotCapacity: 10

@@ -1,5 +1,4 @@
-﻿using Unity.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public enum ResourceType
@@ -20,14 +19,14 @@ public class Resource: ScriptableObject
         [Tooltip("The resource color displayed on gauge ui and gun ammo.")][SerializeField]
         private Color color = Color.black;
         [Tooltip("The resource icon displayed on gauge ui.")][SerializeField]
-        private Sprite icon = null;
-        [Tooltip("The resource prefab instantiate in game.")][SerializeField]
-        private GameObject prefab;
+        private Image gaugeIcon = null;
+        [Tooltip("The resource icon displayed on inventory.")][SerializeField]
+        private Image inventoryIcon = null;
 
         public ResourceType Type => type;
         public Color Color => color;
-        public Sprite Icon => icon;
-        public GameObject Prefab => prefab;
+        public Image GaugeIcon => gaugeIcon;
+        public Image InventoryIcon => inventoryIcon;
 
         public override string ToString()
         {
