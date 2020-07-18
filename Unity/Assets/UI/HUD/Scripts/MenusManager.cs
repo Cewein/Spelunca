@@ -10,6 +10,10 @@ public class MenusManager : MonoBehaviour
     [Tooltip("The artefact selection menu.")][SerializeField]
     private RingMenu artefactSelectionMenu;
 
+    public GameObject winScreen;
+    public GameObject LooseScreen;
+    public GameObject PauseScreen;
+
     [Header("Inputs")] 
     [Tooltip("The input to display resource magazine selection menu.")][SerializeField]
     [InputName]
@@ -42,6 +46,8 @@ public class MenusManager : MonoBehaviour
     {
         resourceLoaderSelectionMenu.SetActive(Input.GetButton(resourceLoaderSelectionInput) && !Input.GetButton(artefactSelectionInput));
         artefactSelectionMenu.SetActive(Input.GetButton(artefactSelectionInput) && !Input.GetButton(resourceLoaderSelectionInput));
-        Cursor.lockState = (artefactSelectionMenu.isActiveAndEnabled || resourceLoaderSelectionMenu.isActiveAndEnabled) ? CursorLockMode.None : CursorLockMode.Locked;
+
+        //we should not handle runtime mouse like that, but anyway...
+        Cursor.lockState = (artefactSelectionMenu.isActiveAndEnabled || resourceLoaderSelectionMenu.isActiveAndEnabled || winScreen.active || LooseScreen.active || PauseScreen.active) ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
