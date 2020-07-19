@@ -11,6 +11,11 @@ public class BossArena : MonoBehaviour
     public Camera[] otherCameras;
     public float cinematicLengthMilliseconds = 3000f;
     public float totalRotation = 720f;
+    public AnimationCurve speedModifierCurve;
+    public AnimationCurve radiusOverTime;
+    public float minHeight;
+    public float maxHeight;
+    public AnimationCurve heightOverTime;
     
     private Vector3 cinematicStartPosition;
     private float radius;
@@ -26,14 +31,8 @@ public class BossArena : MonoBehaviour
             float progress = getProgress();
             if (progress <= 1)
             {
-                           //   V      this will be to allow the camera to end at the player's position
-                float radian = Mathf.PI + startRadian + ((1-progress) * totalRotation * Mathf.Deg2Rad);
-                float cos = Mathf.Cos(radian);
-                float sin = Mathf.Sin(radian);
-                float x = cos * radius;
-                float z = sin * radius;
-                Vector3 newCameraPosition = new Vector3(x,0,z) +  transform.position;
-                Debug.Log("progress: " + progress + " radian :" + radian + " new pos : " + newCameraPosition);
+                float newProgress = speedModifierCurve.Evaluate(progress);//allows to speed up the camera at the beginning and brake the camera at the end
+                Vector3 newCameraPosition = getPositionForCamera(newProgress);
                 cinematicCamera.transform.position = newCameraPosition;
                 cinematicCamera.transform.LookAt(transform.position);
             }
@@ -95,6 +94,19 @@ public class BossArena : MonoBehaviour
     private float getProgress()
     {
         return sw.ElapsedMilliseconds / cinematicLengthMilliseconds;
+    }
+    
+
+    private Vector3 getPositionForCamera(float progress)
+    {
+        float radian = Mathf.PI + startRadian + ((1-progress) * totalRotation * Mathf.Deg2Rad);
+        float cos = Mathf.Cos(radian);
+        float sin = Mathf.Sin(radian);
+        float newRadius = radiusOverTime.Evaluate(progress)*radius;
+        float x = cos * newRadius;
+        float y = heightOverTime.Evaluate(progress) * (maxHeight - minHeight) + minHeight;
+        float z = sin * newRadius;
+        return new Vector3(x,y,z) +  transform.position;
     }
 
     private void OnDrawGizmos()
