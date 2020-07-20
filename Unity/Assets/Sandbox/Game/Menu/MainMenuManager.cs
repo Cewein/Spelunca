@@ -25,12 +25,14 @@ using System.Collections.Generic;
     public string loginErrorText = "Please enter a correct username and password.";
     public Color loginErrorColor = Color.red;
      
-    public GameObject creditsLayout;
-    public GameObject optionLayout;
+     public GameObject creditsLayout;
+     public GameObject optionLayout;
+     
+     public InputField usernameInput;
+     public InputField passwordInput;
+     public Animator[] loginInputFieldAnimators;
 
-    public InputField usernameInput;
-    public InputField passwordInput;
-    public Animator[] loginInputFieldAnimators;
+    
 
     public void Start()
     {
@@ -87,26 +89,28 @@ using System.Collections.Generic;
         loginLayout.SetActive(true);
     }
      
-    public void hideLoginView()
-    {
-        loginMessageText.gameObject.SetActive(false);
-        mainLayout.SetActive(true);
-        loginLayout.SetActive(false);
-        refresh();
-    }
-    public void showCreditsView()
-    {
-        mainLayout.SetActive(false);
-        creditsLayout.SetActive(true);
-    }
+     
+     
+     public void hideLoginView()
+     {
+         loginMessageText.gameObject.SetActive(false);
+         mainLayout.SetActive(true);
+         loginLayout.SetActive(false);
+         refresh();
+     }
+     public void showCreditsView()
+     {
+         mainLayout.SetActive(false);
+         creditsLayout.SetActive(true);
+     }
 
-    public void hideCreditsView()
-    {
-        mainLayout.SetActive(true);
-        creditsLayout.SetActive(false);
-    }
+     public void hideCreditsView()
+     {
+         mainLayout.SetActive(true);
+         creditsLayout.SetActive(false);
+     }
 
-    public void showOptionView()
+     public void showOptionView()
     {
         mainLayout.SetActive(false);
         optionLayout.SetActive(true);
