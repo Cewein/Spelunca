@@ -879,11 +879,6 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 1984644567}
-    - target: {fileID: 7912643241979410805, guid: c0b8226eb7431854c85213ee5d5b8491,
-        type: 3}
-      propertyPath: cinematicLengthMilliseconds
-      value: 10000
-      objectReference: {fileID: 0}
     - target: {fileID: 7912643241979410807, guid: c0b8226eb7431854c85213ee5d5b8491,
         type: 3}
       propertyPath: m_Name

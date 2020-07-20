@@ -9,10 +9,11 @@ public class BossCinematic : MonoBehaviour
 {
     
     public float detectionDistance;
+    public float baseFOV = 60;
     public Camera cinematicCamera;
     public Camera mainCamera;
-    public MinerController controller;
     public Camera[] otherCameras;
+    public MinerController controller;
     public float cinematicLengthMilliseconds = 3000f;
     public float totalRotation = 720f;
     public AnimationCurve speedModifierCurve;
@@ -46,6 +47,8 @@ public class BossCinematic : MonoBehaviour
                     lerpCoef);
                 cinematicCamera.transform.position = newPos;
                 cinematicCamera.transform.rotation = newRot;
+
+                cinematicCamera.fieldOfView = Mathf.Lerp(baseFOV, mainCamera.fieldOfView,speedModifierCurve.Evaluate(progress));
             }
             else
             {
