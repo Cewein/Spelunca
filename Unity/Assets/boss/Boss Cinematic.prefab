@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionDistance: 40
+  baseFOV: 60
   cinematicCamera: {fileID: 7912643243235802675}
   mainCamera: {fileID: 0}
-  controller: {fileID: 0}
   otherCameras: []
+  controller: {fileID: 0}
   cinematicLengthMilliseconds: 10000
   totalRotation: 360
   speedModifierCurve:
@@ -220,7 +221,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 14135
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
