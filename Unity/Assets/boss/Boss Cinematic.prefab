@@ -49,7 +49,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   controller: {fileID: 0}
   otherCameras: []
-  cinematicLengthMilliseconds: 2000
+  cinematicLengthMilliseconds: 10000
   totalRotation: 360
   speedModifierCurve:
     serializedVersion: 2
