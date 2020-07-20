@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemDatabase", menuName = "ScriptableObjects/Inventory/ItemDatabase", order = 1)]
 
-public class ItemDataBase :  SingletonScriptableObject<ItemDataBase>
+public class ItemDataBase :  MonoBehaviour
 {
+    private static ItemDataBase _singleton;
+    public static ItemDataBase Instance { get { return _singleton; } }
+
     public List<Consumable> consumables; 
     public List<Artifact> artifacts;
     public List<Resource> resources;
 
-    public ItemDataBase()
+    private void Awake()
     {
-        consumables = new List<Consumable>();
-        artifacts   = new List<Artifact>();
-        resources   = new List<Resource>();
+        _singleton = this;
     }
 }

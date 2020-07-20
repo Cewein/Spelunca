@@ -43,7 +43,8 @@ public class RingMenu : MonoBehaviour
         }
 
      
-        contentLength = (content == "Resources") ? ItemDataBase.Instance.resources.Count : 3;
+        contentLength = (content == "Resources") ? 4 : 3;
+
         stepLength = 360f/contentLength;
         GetComponentInChildren<Image>(true).sprite = ring;
         items = new GameObject[contentLength];
