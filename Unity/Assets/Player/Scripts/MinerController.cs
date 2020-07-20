@@ -94,7 +94,8 @@ public class MinerController : MonoBehaviour
     public List<AudioClip> footstep;
     [Tooltip("Footstep sound frequency while moving one meter.")]
     public float footstepFrequency = 1f;
- 
+
+    public bool canMove = true;
    
     #endregion
     
@@ -167,13 +168,16 @@ public class MinerController : MonoBehaviour
     
     private void Update()
     {
-        hasAlreadyJump = false;
-        SeekGround();
-        if (minerInputs.isCrouching()){Crouch(!IsCrouching);}
-        SetHeightSmoothly();
-        Rotate();
-        Move();
-        Jump();
+        if (canMove)
+        {
+            hasAlreadyJump = false;
+            SeekGround();
+            if (minerInputs.isCrouching()){Crouch(!IsCrouching);}
+            SetHeightSmoothly();
+            Rotate();
+            Move();
+            Jump();
+        }
     }
 
     private void LateUpdate()
