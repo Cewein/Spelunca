@@ -100,11 +100,6 @@ public class Pool:MonoBehaviour
         {
             if (attacking.Count < maxEntitiesAttacking && pool[index].state != EnemyBehaviourState.Fighting)//there is at least 1 spot left as an attacker
             {
-                //
-                //  VOIR DE DEBUG QUI POP TOUT LE TANT ME TRIGGER 
-                //                                      - Max :)
-                //
-                //Debug.Log("Entity n°" + index + " is ready to attack !");
                 attacking[index] = true;
                 pool[index].state = EnemyBehaviourState.Fighting;
                 return true;
@@ -118,11 +113,6 @@ public class Pool:MonoBehaviour
         pool[index].meshRenderer.enabled = false;
         
     }
-    
-    /*public void spawnAll()
-    {
-        spawn(poolSize,ResourceType.fire);
-    }*/
 
     public void spawn(int amount, Vector3[] spawnData, ResourceType type)
     {
@@ -131,25 +121,7 @@ public class Pool:MonoBehaviour
         {
             if (disabled.ContainsKey(i))
             {
-                if (pool[i] == null)
-                {
-                    pool[i] = Instantiate(enemy, spawnData[0] + spawnData[1] * spawnDistance, Quaternion.FromToRotation(Vector3.up, spawnData[1]));
-                    pool[i].name = name + i;
-                    pool[i].groundLayer = this.layerToSpawn;
-                }
-                else
-                {
-                    pool[i].transform.position = spawnData[0] + spawnData[1] * spawnDistance;
-                    pool[i].transform.localRotation = Quaternion.FromToRotation(Vector3.up, spawnData[1]);
-                    pool[i].meshRenderer.enabled = true;
-                }
-
-                pool[i].type = type;
-                pool[i].refreshMaterial();
-                pool[i].transform.up = spawnData[1];
-                pool[i].state = EnemyBehaviourState.Idle;
-                pool[i].player = player;
-                disabled.Remove(i);
+                spawnOnce(i, spawnData, type);
                 counter++;
                 //pool[i].target = target;
             }
@@ -157,86 +129,32 @@ public class Pool:MonoBehaviour
             if (counter >= amount)
                 break;
         }
-//        Debug.Log("Asked to spawn " + amount + " entities : " + counter + " entities spawned.");
     }
-    
-    /*
-     
-     
-
-    // Start is called before the first frame update
-    void Start()
+    public void respawn(int id, Vector3[] spawnData, ResourceType type)
     {
-        if (instantSpawn)
-        {
-            if (!progressiveSpawn)
-            {
-                //Debug.Log("Start spawning " + amount);
-                spawn(amount);
-            }
-        }
-        
+        spawnOnce(id,spawnData,type);
     }
 
-
-    public void StartSpawning()
+    private void spawnOnce(int id, Vector3[] spawnData, ResourceType type)
     {
-        if (spawnedAmount == 0)
+        if (pool[id] == null)
         {
-            if (!progressiveSpawn)
-            {
-                //Debug.Log("Start spawning " + amount);
-                spawn(amount);
-            }
-            else
-            {
-                float rate = 1/spawnedPerSeconds;
-                //Debug.Log("spawning rate : 1 for every " + rate + " seconds");
-                StartCoroutine(ProgressiveSpawning(rate));
-            }
+            pool[id] = Instantiate(enemy, spawnData[0] + spawnData[1] * spawnDistance, Quaternion.FromToRotation(Vector3.up, spawnData[1]));
+            pool[id].name = name + id;
+            pool[id].groundLayer = this.layerToSpawn;
         }
-        
-            foreach (var entity in pool)
-            {
-                if (entity.transform.position.y < -10)
-                {
-                    entity.enabled = false;
-                }
-            }
-        
-    }
-
-    IEnumerator ProgressiveSpawning(float rate)
-    {
-        WaitForSeconds wait = new WaitForSeconds(rate);
-        while (spawnedAmount < amount)
+        else
         {
-            //Debug.Log("spawning 1 every " + rate);
-            spawn(1);
-            yield return wait;
+            pool[id].transform.position = spawnData[0] + spawnData[1] * spawnDistance;
+            pool[id].transform.localRotation = Quaternion.FromToRotation(Vector3.up, spawnData[1]);
+            pool[id].meshRenderer.enabled = true;
         }
-    }
-    
-    private void FixedUpdate()
-    {
-        if (progressiveSpawn)
-        {
-            Debug.Log("amount - spawnedAmount = " + (amount - spawnedAmount));
-            if ( amount - spawnedAmount > 0)
-            {
-                int toSpawn = (int) (spawnedPerSeconds * Time.fixedDeltaTime);
-                print("gonna spawn " + toSpawn);
-                if (toSpawn > amount - spawnedAmount)
-                {
-                    toSpawn = amount - spawnedAmount;
-                }
 
-                Debug.Log("FixedUpdate spawning " + toSpawn);
-                spawn(toSpawn);
-            };
-        }
+        pool[id].type = type;
+        pool[id].refreshMaterial();
+        pool[id].transform.up = spawnData[1];
+        pool[id].state = EnemyBehaviourState.Idle;
+        pool[id].player = player;
+        disabled.Remove(id);
     }
-    */ 
-     
-
 }

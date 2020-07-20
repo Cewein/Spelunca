@@ -23,6 +23,8 @@ public class BossCinematic : MonoBehaviour
     public AnimationCurve heightOverTime;
     public AnimationCurve lerpToPlayerCamOverTime;
 
+    public ZoneSpawner spawner;
+
     private Vector3 cinematicStartPosition;
     private float radius;
     private float startRadian;
@@ -88,6 +90,7 @@ public class BossCinematic : MonoBehaviour
         sw.Restart();
         cinematicIsRunning = true;
         if(controller != null) controller.canMove = false;
+        spawner.BeginSpawning();
     }
     
     private void StopCinematic()
