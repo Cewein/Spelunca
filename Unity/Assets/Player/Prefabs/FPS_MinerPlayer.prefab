@@ -205,6 +205,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c9fbae3e650dc9146b059456ac657a5a, type: 3}
   - {fileID: 8300000, guid: 20666bdee10e92c459afc0514c98e2df, type: 3}
   footstepFrequency: 0.4
+  canMove: 1
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &8499784402384746599
 MonoBehaviour:

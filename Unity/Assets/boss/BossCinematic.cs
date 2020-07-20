@@ -5,9 +5,13 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public class BossArena : MonoBehaviour
+public class BossCinematic : MonoBehaviour
 {
+    
+    public float detectionDistance;
     public Camera cinematicCamera;
+    public Camera mainCamera;
+    public MinerController controller;
     public Camera[] otherCameras;
     public float cinematicLengthMilliseconds = 3000f;
     public float totalRotation = 720f;
@@ -16,7 +20,8 @@ public class BossArena : MonoBehaviour
     public float minHeight;
     public float maxHeight;
     public AnimationCurve heightOverTime;
-    
+    public AnimationCurve lerpToPlayerCamOverTime;
+
     private Vector3 cinematicStartPosition;
     private float radius;
     private float startRadian;
@@ -35,24 +40,32 @@ public class BossArena : MonoBehaviour
                 Vector3 newCameraPosition = getPositionForCamera(newProgress);
                 cinematicCamera.transform.position = newCameraPosition;
                 cinematicCamera.transform.LookAt(transform.position);
+                float lerpCoef = lerpToPlayerCamOverTime.Evaluate(progress);
+                Vector3 newPos = Vector3.Lerp(newCameraPosition,mainCamera.transform.position,lerpCoef);
+                Quaternion newRot = Quaternion.Lerp(cinematicCamera.transform.rotation, mainCamera.transform.rotation,
+                    lerpCoef);
+                cinematicCamera.transform.position = newPos;
+                cinematicCamera.transform.rotation = newRot;
             }
             else
             {
                 StopCinematic();
             }
-        } 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.attachedRigidbody.gameObject.layer == LayerMask.NameToLayer("Player") && !cinematicHasOccured)
+        }
+        else if(!cinematicHasOccured)
         {
-            cinematicStartPosition = other.attachedRigidbody.gameObject.transform.position;
-            SetupCinematic();
-            StartCinematic();
-            
+            float distance = (transform.position-controller.transform.position).magnitude;
+            Debug.Log("No cinematic yet. dist = " + distance);
+            if (distance <= detectionDistance)
+            {
+                Debug.Log("LETS GO BIATCH");
+                cinematicStartPosition = controller.transform.position;
+                SetupCinematic();
+                StartCinematic();
+            }
         }
     }
+
 
     private void SetupCinematic()
     {
@@ -71,20 +84,23 @@ public class BossArena : MonoBehaviour
         Debug.Log("Cinematic Started");
         sw.Restart();
         cinematicIsRunning = true;
+        if(controller != null) controller.canMove = false;
     }
     
     private void StopCinematic()
     {
-        Debug.Log("Cinematic Stoped");
+        Debug.Log("Cinematic Stopped");
         sw.Stop();
         sw.Reset();
         cinematicIsRunning = false;
         ToggleCameras();
         cinematicCamera.enabled = false;
+        if(controller != null) controller.canMove = true;
     }
     
     private void ToggleCameras()
     {
+        mainCamera.enabled = !mainCamera.enabled;
         foreach (var cam in otherCameras)
         {
             cam.enabled = !cam.enabled;
