@@ -1282,10 +1282,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7912643241979410805, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: otherCameras.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7912643241979410805, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 134861554}
+    - target: {fileID: 7912643241979410805, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: otherCameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 1681076393}
+    - target: {fileID: 7912643241979410805, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1154755157}
     - target: {fileID: 7912643241979410807, guid: c0b8226eb7431854c85213ee5d5b8491,
         type: 3}
       propertyPath: m_Name
       value: Boss Cinematic
+      objectReference: {fileID: 0}
+    - target: {fileID: 7912643243235802675, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7912643243235802675, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.14509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 7912643243235802675, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.19215687
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0b8226eb7431854c85213ee5d5b8491, type: 3}
@@ -3008,6 +3043,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88180f0298a0d64b8fbdd602898131a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1681076393 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6584729930517249014, guid: 03e5fa6798ff274469d7558ea0d50d23,
+    type: 3}
+  m_PrefabInstance: {fileID: 134861550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1683378906
 GameObject:
   m_ObjectHideFlags: 0
