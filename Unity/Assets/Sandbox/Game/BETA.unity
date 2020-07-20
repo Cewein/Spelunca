@@ -520,6 +520,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: 18
+--- !u!114 &532849538 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 789916668405196534, guid: c0b8226eb7431854c85213ee5d5b8491,
+    type: 3}
+  m_PrefabInstance: {fileID: 575356729}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302631d5277517f49b46dff245dc2df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &541107188 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7101294778364738969, guid: c7f4ea9f3479a324292c7f522d40fb63,
@@ -1227,6 +1239,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 295763519}
     m_Modifications:
+    - target: {fileID: 789916668405196534, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: pool
+      value: 
+      objectReference: {fileID: 899804502}
+    - target: {fileID: 789916668405196534, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: radius
+      value: 53.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 789916668405196534, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: amount
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158663040863532980, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7912643241979410804, guid: c0b8226eb7431854c85213ee5d5b8491,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1302,6 +1334,11 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1154755157}
+    - target: {fileID: 7912643241979410805, guid: c0b8226eb7431854c85213ee5d5b8491,
+        type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 532849538}
     - target: {fileID: 7912643241979410807, guid: c0b8226eb7431854c85213ee5d5b8491,
         type: 3}
       propertyPath: m_Name
@@ -2415,7 +2452,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 28a8441bd06b48e4698c6b7111debae6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.13
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2934,7 +2971,7 @@ PrefabInstance:
     - target: {fileID: 2173078109135552581, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4832739919458073294, guid: 6596093949ece3a45b48648d493ec967,
         type: 3}
@@ -3717,7 +3754,7 @@ PrefabInstance:
     - target: {fileID: 8196139215132936477, guid: e35d20e361e200147b7c38e0dead91b0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8196139215132936477, guid: e35d20e361e200147b7c38e0dead91b0,
         type: 3}

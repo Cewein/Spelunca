@@ -60,10 +60,8 @@ public class BossCinematic : MonoBehaviour
         else if(!cinematicHasOccured)
         {
             float distance = (transform.position-controller.transform.position).magnitude;
-            Debug.Log("No cinematic yet. dist = " + distance);
             if (distance <= detectionDistance)
             {
-                Debug.Log("LETS GO BIATCH");
                 cinematicStartPosition = controller.transform.position;
                 SetupCinematic();
                 StartCinematic();
@@ -86,7 +84,7 @@ public class BossCinematic : MonoBehaviour
     
     private void StartCinematic()
     {
-        Debug.Log("Cinematic Started");
+        //Debug.Log("Cinematic Started");
         sw.Restart();
         cinematicIsRunning = true;
         if(controller != null) controller.canMove = false;
@@ -95,7 +93,7 @@ public class BossCinematic : MonoBehaviour
     
     private void StopCinematic()
     {
-        Debug.Log("Cinematic Stopped");
+        //Debug.Log("Cinematic Stopped");
         sw.Stop();
         sw.Reset();
         cinematicIsRunning = false;
